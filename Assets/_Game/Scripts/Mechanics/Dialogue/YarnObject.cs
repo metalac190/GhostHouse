@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Playables;
+using Yarn.Unity;
 
 public class YarnObject : MonoBehaviour
 {
@@ -39,6 +40,7 @@ public class YarnObject : MonoBehaviour
     /// Activates requested instance and deactivates previous instance.
     /// </summary>
     /// <param name="newInstance"> The name of a child GameObject </param>
+    [YarnCommand("activate")]
     public void SetInstance(string newInstance)
     {
         // reset previously active instance
@@ -68,6 +70,7 @@ public class YarnObject : MonoBehaviour
     /// Play the requested timeline on the currently active instance
     /// </summary>
     /// <param name="timelineName"> The name of the requested timeline </param>
+    [YarnCommand("animate")]
     public void Animate(string timelineName)
     {
         if (!_instances.ContainsKey(ActiveInstance))
@@ -89,13 +92,9 @@ public class YarnObject : MonoBehaviour
     /// </summary>
     /// <param name="timelineName"></param>
     /// <param name="waitFlag"></param>
-    public IEnumerator Animate(string timelineName, string waitFlag)
+    [YarnCommand("locked_animate")]
+    public IEnumerator LockedAnimate(string timelineName)
     {
-        if (waitFlag != "wait")
-        {
-            throw new System.Exception("WaitFlag was not recognized. Make sure to pass \"wait\" as waitFlag");
-        }
-
         Animate(timelineName);
 
         PlayableDirector director = _instances[ActiveInstance].GetComponent<PlayableDirector>();

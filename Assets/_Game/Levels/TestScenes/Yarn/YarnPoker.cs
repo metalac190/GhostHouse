@@ -24,9 +24,10 @@ public class YarnPoker : MonoBehaviour
     void Poke()
     {
         yarnObj.SetInstance(_instanceName);
+        yarnObj.Animate(_timelineName);
 
         // this won't wait for the animation to finish (like intended),
         // but yarn spinner will and that's the purpose of the function.
-        StartCoroutine(yarnObj.Animate(_timelineName, "wait"));
+        //StartCoroutine(yarnObj.LockedAnimate(_timelineName));
     }
 }
