@@ -296,6 +296,7 @@ namespace Yarn.Unity
                 .SelectMany(type => type.GetMethods(AllMembers).Select(method => (Type: type, Method: method)))
                 .Where(m => m.Method.DeclaringType == m.Type); // don't register inherited methods
 
+            List<string> commandNames = new List<string>();
             foreach (var (_, method) in allMethods)
             {
                 // We only care about methods with a YarnCommand or YarnFunction
@@ -312,7 +313,8 @@ namespace Yarn.Unity
                         try
                         {
                             commands.Add(name, CreateCommandRunner(method, command, ref injectorCache));
-                            Debug.Log($"Registered command {name}");
+                            //Debug.Log($"Registered command {name}");
+                            commandNames.Add(name);
                         }
                         catch (ArgumentException)
                         {
@@ -337,6 +339,8 @@ namespace Yarn.Unity
                 }
 
             }
+
+            Debug.Log($"Registered Commands: [{string.Join(", ", commandNames.ToArray())}]");
         }
 
         /// <summary>
