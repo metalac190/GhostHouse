@@ -52,11 +52,12 @@ Would you like to read this book?
 title: key_from_book
 position: -482,-15
 ---
-Would you like to pick up this key?
+[interaction/][item_sprite="key"/][spirit_points=3/]Would you like to pick up this key?
 -> Yes
     <<locked_animate I_key pickup>>
     <<set $loc_key = "player">>
 -> No
+-> [cancel/]
 
 // requisite to
 <<if false>>
