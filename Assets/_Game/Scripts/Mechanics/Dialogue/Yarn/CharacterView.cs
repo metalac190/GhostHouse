@@ -131,6 +131,7 @@ public class CharacterView : Yarn.Unity.DialogueViewBase
     #region private variables
     Yarn.Unity.InterruptionFlag _interruptionFlag = new Yarn.Unity.InterruptionFlag();
     Yarn.Unity.LocalizedLine _currentLine = null;
+    Yarn.Markup.MarkupAttribute _markup;
     #endregion
 
     public void Start()
@@ -219,6 +220,18 @@ public class CharacterView : Yarn.Unity.DialogueViewBase
     {
         _currentLine = dialogueLine;
 
+        bool skipThisView = dialogueLine.Text.TryGetAttributeWithName("interaction", out _markup);
+        if (skipThisView)
+        {
+            // setting _canvasGroup.alpha to zero causes this view to show up for a single frame
+            // maybe try putting ui components under a single child empty gameobject that is disabled/enabled instead
+            transform.localScale = Vector3.zero;
+            onDialogueLineFinished();
+            StartCoroutine(ContinueNextFrame());
+            return;
+        }
+
+        transform.localScale = Vector3.one;
         lineText.gameObject.SetActive(true);
         canvasGroup.gameObject.SetActive(true);
 
@@ -293,6 +306,12 @@ public class CharacterView : Yarn.Unity.DialogueViewBase
                 onFinished();
             }
         }
+    }
+
+    IEnumerator ContinueNextFrame()
+    {
+        yield return null;
+        OnContinueClicked();
     }
 
     public void OnContinueClicked()
