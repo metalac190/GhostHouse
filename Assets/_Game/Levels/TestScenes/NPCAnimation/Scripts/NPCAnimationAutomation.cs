@@ -12,6 +12,7 @@ namespace NPC {
     {
 
         [SerializeField] private AnimatorOverrideController _animOverrideController = null;
+        [SerializeField] GameObject _cube = null;
 
         NPCBase _npcBase;
         Animator _animator;
@@ -38,6 +39,11 @@ namespace NPC {
             }
 
             _animOverrideController["Idle"] = _npcBase.IdleAnimation;
+        }
+
+        public void DropCube()
+        {
+            GameObject cube = Instantiate(_cube);
         }
     }
 }

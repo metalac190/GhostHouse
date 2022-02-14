@@ -32,6 +32,7 @@ namespace NPC {
         Rigidbody _rb;
         Collider _collider;
         AudioSource _audioSource;
+        Animator _animator;
 
         public AnimationClip IdleAnimation => _idleAnimation;
         public AnimationClip SurprisedAnimation => _surprisedAnimation;
@@ -49,6 +50,7 @@ namespace NPC {
             _rb = GetComponent<Rigidbody>();
             _collider = GetComponent<Collider>();
             _audioSource = GetComponent<AudioSource>();
+            _animator = GetComponent<Animator>();
         }
 
         #region Interaction
@@ -57,24 +59,28 @@ namespace NPC {
         public void OnHoverEnter()
         {
             //Debug.Log("Hovering over " + gameObject.name);
+            _animator.SetTrigger("TriggerAngry");
         }
 
         //This is when the mouse leaves the shape of the object.
         public void OnHoverExit()
         {
             //Debug.Log("No Longer Hovering over" + gameObject.name);
+            _animator.SetTrigger("TriggerSad");
         }
 
         //This is when the mouse left clicks on the object.
         public void OnLeftClick()
         {
             Debug.Log("Left Clicked On" + gameObject.name);
+            _animator.SetTrigger("TriggerHappy");
         }
 
         //This is when the mouse right clicks on an object.
         public void OnRightClick()
         {
             Debug.Log("Right Clicked On" + gameObject.name);
+            _animator.SetTrigger("TriggerSurprised");
         }
         #endregion
     }
