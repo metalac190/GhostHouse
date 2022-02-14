@@ -19,27 +19,29 @@ public class CharacterViewEditor : Editor
     SerializedProperty characterPortraitImageProperty;
     SerializedProperty characterNameInLineProperty;
     SerializedProperty continueButtonProperty;
+    SerializedProperty uiParentProperty;
 
     SerializedProperty continueActionTypeProperty;
     SerializedProperty continueActionKeyCodeProperty;
 
     public void OnEnable()
     {
-        useFadeEffectProperty = serializedObject.FindProperty("useFadeEffect");
-        fadeInTimeProperty = serializedObject.FindProperty("fadeInTime");
-        fadeOutTimeProperty = serializedObject.FindProperty("fadeOutTime");
+        useFadeEffectProperty = serializedObject.FindProperty("_useFadeEffect");
+        fadeInTimeProperty = serializedObject.FindProperty("_fadeInTime");
+        fadeOutTimeProperty = serializedObject.FindProperty("_fadeOutTime");
 
-        useTypewriterEffectProperty = serializedObject.FindProperty("useTypewriterEffect");
-        typewriterEffectSpeedProperty = serializedObject.FindProperty("typewriterEffectSpeed");
+        useTypewriterEffectProperty = serializedObject.FindProperty("_useTypewriterEffect");
+        typewriterEffectSpeedProperty = serializedObject.FindProperty("_typewriterEffectSpeed");
 
-        lineTextProperty = serializedObject.FindProperty("lineText");
-        characterPortraitImageProperty = serializedObject.FindProperty("characterPortraitImage");
-        characterNameTextProperty = serializedObject.FindProperty("characterNameText");
-        characterNameInLineProperty = serializedObject.FindProperty("characterNameInLine");
-        continueButtonProperty = serializedObject.FindProperty("continueButton");
+        lineTextProperty = serializedObject.FindProperty("_lineText");
+        characterPortraitImageProperty = serializedObject.FindProperty("_characterPortraitImage");
+        characterNameTextProperty = serializedObject.FindProperty("_characterNameText");
+        characterNameInLineProperty = serializedObject.FindProperty("_characterNameInLine");
+        continueButtonProperty = serializedObject.FindProperty("_continueButton");
+        uiParentProperty = serializedObject.FindProperty("_uiParent");
 
-        continueActionTypeProperty = serializedObject.FindProperty("continueActionType");
-        continueActionKeyCodeProperty = serializedObject.FindProperty("continueActionKeyCode");
+        continueActionTypeProperty = serializedObject.FindProperty("_continueActionType");
+        continueActionKeyCodeProperty = serializedObject.FindProperty("_continueActionKeyCode");
     }
 
     public override void OnInspectorGUI()
@@ -74,6 +76,7 @@ public class CharacterViewEditor : Editor
         }
 
         EditorGUILayout.PropertyField(continueButtonProperty);
+        EditorGUILayout.PropertyField(uiParentProperty);
 
         // continue mode
         EditorGUILayout.PropertyField(continueActionTypeProperty);

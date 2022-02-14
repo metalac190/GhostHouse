@@ -81,63 +81,67 @@ public class CharacterView : Yarn.Unity.DialogueViewBase
 
     public static event Action<string, int> OnCharacterTyped = null;
 
-    #region internal variables
+    #region serialized variables
     // CharacterViewEditor depends on serialized variable names
     [Header("Effects")]
     [SerializeField]
-    internal bool useFadeEffect = true;
+    bool _useFadeEffect = true;
 
     [SerializeField]
     [Min(0)]
-    internal float fadeInTime = 0.25f;
+    float _fadeInTime = 0.25f;
 
     [SerializeField]
     [Min(0)]
-    internal float fadeOutTime = 0.05f;
+    float _fadeOutTime = 0.05f;
 
     [SerializeField]
-    internal bool useTypewriterEffect = false;
+    bool _useTypewriterEffect = false;
 
     [SerializeField]
     [Min(0)]
-    internal float typewriterEffectSpeed = 120f;
+    [Tooltip("Typewrite effect speed in characters per second.")]
+    float _typewriterEffectSpeed = 120f;
 
     [Header("UI References")]
     [SerializeField]
-    internal TextMeshProUGUI lineText = null;
+    TextMeshProUGUI _lineText = null;
 
     [SerializeField]
-    internal Image characterPortraitImage = null;
+    Image _characterPortraitImage = null;
 
     [SerializeField]
-    internal TextMeshProUGUI characterNameText = null;
+    TextMeshProUGUI _characterNameText = null;
 
     [SerializeField]
-    internal bool characterNameInLine = false;
+    bool _characterNameInLine = false;
 
     [SerializeField]
-    internal GameObject continueButton = null;
+    GameObject _continueButton = null;
+
+    [SerializeField]
+    GameObject _uiParent = null;
 
     [Header("Continue Mode")]
     [SerializeField]
-    internal ContinueActionType continueActionType = ContinueActionType.None;
+    ContinueActionType _continueActionType = ContinueActionType.None;
 
     [SerializeField]
-    internal KeyCode continueActionKeyCode = KeyCode.Escape;
-
-    internal CanvasGroup canvasGroup;
+    KeyCode _continueActionKeyCode = KeyCode.Escape;
     #endregion
 
     #region private variables
     Yarn.Unity.InterruptionFlag _interruptionFlag = new Yarn.Unity.InterruptionFlag();
     Yarn.Unity.LocalizedLine _currentLine = null;
+
+    CanvasGroup _canvasGroup;
     Yarn.Markup.MarkupAttribute _markup;
     #endregion
 
     public void Start()
     {
-        canvasGroup = GetComponent<CanvasGroup>();
-        canvasGroup.alpha = 0;
+        _canvasGroup = GetComponent<CanvasGroup>();
+        HideView();
     }
 
     public void Update()
@@ -148,13 +152,13 @@ public class CharacterView : Yarn.Unity.DialogueViewBase
             
         // We need to be configured to use a keycode to interrupt/continue
         // lines.
-        if (continueActionType != ContinueActionType.KeyCode)
+        if (_continueActionType != ContinueActionType.KeyCode)
         {
             return;
         }
 
         // That keycode needs to have been pressed this frame.
-        if (!UnityEngine.Input.GetKeyDown(continueActionKeyCode))
+        if (!UnityEngine.Input.GetKeyDown(_continueActionKeyCode))
         {
             return;
         }
@@ -171,18 +175,15 @@ public class CharacterView : Yarn.Unity.DialogueViewBase
 
     public override void DismissLine(Action onDismissalComplete)
     {
-
         _currentLine = null;
 
-        if (useFadeEffect)
+        if (_useFadeEffect)
         {
-            StartCoroutine(Yarn.Unity.Effects.FadeAlpha(canvasGroup, 1, 0, fadeOutTime, onDismissalComplete));
+            StartCoroutine(Yarn.Unity.Effects.FadeAlpha(_canvasGroup, 1, 0, _fadeOutTime, onDismissalComplete));
         }
         else
         {
-            canvasGroup.interactable = false;
-            canvasGroup.alpha = 0;
-            canvasGroup.blocksRaycasts = false;
+            HideView();
             onDismissalComplete();
         }
     }
@@ -201,10 +202,10 @@ public class CharacterView : Yarn.Unity.DialogueViewBase
             case Yarn.Unity.LineStatus.FinishedPresenting:
                 // The line has finished being delivered by all views.
                 // Display the Continue button.
-                if (continueButton != null)
+                if (_continueButton != null)
                 {
-                    continueButton.SetActive(true);
-                    var selectable = continueButton.GetComponentInChildren<Selectable>();
+                    _continueButton.SetActive(true);
+                    var selectable = _continueButton.GetComponentInChildren<Selectable>();
                     if (selectable != null)
                     {
                         selectable.Select();
@@ -220,74 +221,91 @@ public class CharacterView : Yarn.Unity.DialogueViewBase
     {
         _currentLine = dialogueLine;
 
+        #region MARKUP: [interaction/]
         bool skipThisView = dialogueLine.Text.TryGetAttributeWithName("interaction", out _markup);
         if (skipThisView)
         {
-            // setting _canvasGroup.alpha to zero causes this view to show up for a single frame
-            // maybe try putting ui components under a single child empty gameobject that is disabled/enabled instead
-            transform.localScale = Vector3.zero;
+            HideView();
             onDialogueLineFinished();
             StartCoroutine(ContinueNextFrame());
             return;
         }
+        #endregion
 
-        transform.localScale = Vector3.one;
-        lineText.gameObject.SetActive(true);
-        canvasGroup.gameObject.SetActive(true);
+        ShowView();
 
-        if (continueButton != null)
+        #region MARKUP: [sprite=str/]
+        if (_characterPortraitImage != null)
         {
-            continueButton.SetActive(false);
+            //    SOCharacter character = CharacterManager.Instance.GetCharacter(_currentLine.CharacterName);
+            //    if (character == null)
+            //    {
+            //        Debug.LogError($"Unable to find the character \"{_currentLine.CharacterName}\"");
+            //    }
+            //    else
+            //    {
+            //        Sprite characterSprite;
+            //        if (dialogueLine.Text.TryGetAttributeWithName("sprite", out _markup))
+            //        {
+            //            characterSprite = character.GetSprite(_markup.Properties["sprite"].StringValue);
+            //        }
+            //        else
+            //        {
+            //            characterSprite = character.GetSprite("default");
+            //        }
+            //        if (characterSprite)
+            //    }
+        }
+        #endregion
+
+        if (_continueButton != null)
+        {
+            _continueButton.SetActive(false);
         }
 
         _interruptionFlag.Clear();
 
-        if (characterNameText == null)
+        if (_characterNameText == null)
         {
-            if (characterNameInLine)
+            if (_characterNameInLine)
             {
-                lineText.text = dialogueLine.Text.Text;
+                _lineText.text = dialogueLine.Text.Text;
             }
             else
             {
-                lineText.text = dialogueLine.TextWithoutCharacterName.Text;
+                _lineText.text = dialogueLine.TextWithoutCharacterName.Text;
             }
         }
         else
         {
-            characterNameText.text = dialogueLine.CharacterName;
-            lineText.text = dialogueLine.TextWithoutCharacterName.Text;
+            _characterNameText.text = dialogueLine.CharacterName;
+            _lineText.text = dialogueLine.TextWithoutCharacterName.Text;
         }
 
-        if (useFadeEffect)
+        if (_useFadeEffect)
         {
-            if (useTypewriterEffect)
+            if (_useTypewriterEffect)
             {
                 // If we're also using a typewriter effect, ensure that
                 // there are no visible characters so that we don't
                 // fade in on the text fully visible
-                lineText.maxVisibleCharacters = 0;
+                _lineText.maxVisibleCharacters = 0;
             }
             else
             {
                 // Ensure that the max visible characters is effectively unlimited.
-                lineText.maxVisibleCharacters = int.MaxValue;
+                _lineText.maxVisibleCharacters = int.MaxValue;
             }
 
             // Fade up and then call FadeComplete when done
-            StartCoroutine(Yarn.Unity.Effects.FadeAlpha(canvasGroup, 0, 1, fadeInTime, () => FadeComplete(onDialogueLineFinished), _interruptionFlag));
+            StartCoroutine(Yarn.Unity.Effects.FadeAlpha(_canvasGroup, 0, 1, _fadeInTime, () => FadeComplete(onDialogueLineFinished), _interruptionFlag));
         }
         else
         {
-            // Immediately appear 
-            canvasGroup.interactable = true;
-            canvasGroup.alpha = 1;
-            canvasGroup.blocksRaycasts = true;
-
-            if (useTypewriterEffect)
+            if (_useTypewriterEffect)
             {
                 // Start the typewriter
-                StartCoroutine(TextEffects.Typewriter(lineText, typewriterEffectSpeed, CharacterView.OnCharacterTyped, onDialogueLineFinished, _interruptionFlag));
+                StartCoroutine(TextEffects.Typewriter(_lineText, _typewriterEffectSpeed, CharacterView.OnCharacterTyped, onDialogueLineFinished, _interruptionFlag));
             }
             else
             {
@@ -297,9 +315,9 @@ public class CharacterView : Yarn.Unity.DialogueViewBase
 
         void FadeComplete(Action onFinished)
         {
-            if (useTypewriterEffect)
+            if (_useTypewriterEffect)
             {
-                StartCoroutine(TextEffects.Typewriter(lineText, typewriterEffectSpeed, CharacterView.OnCharacterTyped, onFinished, _interruptionFlag));
+                StartCoroutine(TextEffects.Typewriter(_lineText, _typewriterEffectSpeed, CharacterView.OnCharacterTyped, onFinished, _interruptionFlag));
             }
             else
             {
@@ -308,6 +326,9 @@ public class CharacterView : Yarn.Unity.DialogueViewBase
         }
     }
 
+    /// <summary>
+    /// Waits till the next frame to call <see cref="OnContinueClicked"/>
+    /// </summary>
     IEnumerator ContinueNextFrame()
     {
         yield return null;
@@ -322,5 +343,35 @@ public class CharacterView : Yarn.Unity.DialogueViewBase
             return;
         }
         ReadyForNextLine();
+    }
+
+    /// <summary>
+    /// Hides UI references in scene
+    /// </summary>
+    void HideView()
+    {
+        _canvasGroup.interactable = false;
+        _canvasGroup.alpha = 0;
+        _canvasGroup.blocksRaycasts = false;
+
+        if (_uiParent != null)
+        {
+            _uiParent.SetActive(false);
+        }
+    }
+
+    /// <summary>
+    /// Shows UI references in scene
+    /// </summary>
+    void ShowView()
+    {
+        _canvasGroup.interactable = true;
+        _canvasGroup.alpha = 1;
+        _canvasGroup.blocksRaycasts = true;
+
+        if (_uiParent != null)
+        {
+            _uiParent.SetActive(true);
+        }
     }
 }
