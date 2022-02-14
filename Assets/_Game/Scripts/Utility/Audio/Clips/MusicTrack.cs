@@ -11,10 +11,11 @@ namespace Utility.Audio.Clips
     {
         [Header("Music Track Settings")]
         [SerializeField] private AudioClip _track = null;
-        [SerializeField] private AudioMixerGroup _mixerGroup = null;
-        [SerializeField] private SfxPriorityLevel _priority = SfxPriorityLevel.Highest;
+        [SerializeField] private AudioClip _trackWhenPaused = null;
 
         [Header("Volume Settings")]
+        [SerializeField] private AudioMixerGroup _mixerGroup = null;
+        [SerializeField] private SfxPriorityLevel _priority = SfxPriorityLevel.Highest;
         [SerializeField, Range(0, 1)] private float _volume = 1;
 
         [Header("Fade Settings")]

@@ -1,5 +1,4 @@
-﻿/*
-#if UNITY_EDITOR
+﻿#if UNITY_EDITOR
 using UnityEditor;
 using UnityEngine;
 using Utility.Audio.Clips;
@@ -33,5 +32,3 @@ public class MusicTrackEditor : Editor
     }
 }
 #endif
-*/
-

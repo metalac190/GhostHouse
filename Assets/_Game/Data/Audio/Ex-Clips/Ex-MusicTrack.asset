@@ -12,19 +12,60 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dbe7d203e0a14a14b85528454d25ed70, type: 3}
   m_Name: Ex-MusicTrack
   m_EditorClassIdentifier: 
-  _clip:
-    UseConstant: 1
-    Clip: {fileID: 0}
-    Base: {fileID: 0}
+  _track: {fileID: 0}
+  _trackWhenPaused: {fileID: 0}
   _mixerGroup: {fileID: 0}
-  _priority: 128
+  _priority: 0
   _volume: 1
-  _pitch: 1
-  _stereoPan: 0
-  _reverbZoneMix: 1
-  _spatialBlend: 0
-  _rolloffMode: 0
-  _minDistance: 0.1
-  _maxDistance: 50
-  _spread: 0
-  _dopplerLevel: 1
+  _totalClipTime: 0
+  _fadeInTime: 0
+  _fadeIn:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 1
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 1
+      value: 1
+      inSlope: 1
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  _fadeOutTime: 0
+  _crossFadeInOverlap: 0
+  _fadeOut:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: -1
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: -1
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4

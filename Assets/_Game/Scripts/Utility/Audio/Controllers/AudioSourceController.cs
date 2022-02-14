@@ -6,7 +6,7 @@ namespace Utility.Audio.Controllers
 {
     public class AudioSourceController : ASC_Base
     {
-        [SerializeField] private SfxReference _sfx = null;
+        [SerializeField] private SfxReference _sfx = new SfxReference();
         [SerializeField] private bool _playOnStart = true;
         [SerializeField] private bool _looping = true;
 
