@@ -9,9 +9,9 @@ namespace Yarn.Unity
     {
         [SerializeField] CanvasGroup canvasGroup;
 
-        [SerializeField] OptionView optionViewPrefab;
+        [SerializeField] OptionView optionViewPrefab = null;
 
-        [SerializeField] TextMeshProUGUI lastLineText;
+        [SerializeField] TextMeshProUGUI lastLineText = null;
 
         [SerializeField] float fadeTime = 0.1f;
 

@@ -15,7 +15,7 @@ namespace Yarn.Unity
 
         [SerializeField] Color defaultColor = Color.white;
 
-        [SerializeField] CharacterColorData[] colorData;
+        [SerializeField] CharacterColorData[] colorData = new CharacterColorData[0];
 
         [SerializeField] List<TMPro.TextMeshProUGUI> lineTexts = new List<TMPro.TextMeshProUGUI>();
 

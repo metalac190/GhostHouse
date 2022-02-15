@@ -511,7 +511,7 @@ namespace Yarn.Unity.Editor
         // into.
         [System.Serializable]
         private class AssemblyDefinition {
-            public string name;
+            public string name = "";
         }
 
         /// <summary>
