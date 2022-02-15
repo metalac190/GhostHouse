@@ -2242,6 +2242,75 @@ Mesh:
     offset: 0
     size: 0
     path: 
+--- !u!1001 &967410231
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 2093455465846776987, guid: efbc86618f6d20f44a6a4a30a4380a36,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2093455465846776987, guid: efbc86618f6d20f44a6a4a30a4380a36,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2093455465846776987, guid: efbc86618f6d20f44a6a4a30a4380a36,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2093455465846776987, guid: efbc86618f6d20f44a6a4a30a4380a36,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2093455465846776987, guid: efbc86618f6d20f44a6a4a30a4380a36,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2093455465846776987, guid: efbc86618f6d20f44a6a4a30a4380a36,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2093455465846776987, guid: efbc86618f6d20f44a6a4a30a4380a36,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2093455465846776987, guid: efbc86618f6d20f44a6a4a30a4380a36,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 2093455465846776987, guid: efbc86618f6d20f44a6a4a30a4380a36,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2093455465846776987, guid: efbc86618f6d20f44a6a4a30a4380a36,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2093455465846776987, guid: efbc86618f6d20f44a6a4a30a4380a36,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2093455465846776989, guid: efbc86618f6d20f44a6a4a30a4380a36,
+        type: 3}
+      propertyPath: m_Name
+      value: SoundManager
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: efbc86618f6d20f44a6a4a30a4380a36, type: 3}
 --- !u!43 &1010510116
 Mesh:
   m_ObjectHideFlags: 0
@@ -3593,6 +3662,51 @@ Mesh:
     offset: 0
     size: 0
     path: 
+--- !u!1 &1405453166
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1405453168}
+  - component: {fileID: 1405453167}
+  m_Layer: 0
+  m_Name: MusicTrigger
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1405453167
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1405453166}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 83790dbe8d73bf9419f19ae7f9f86481, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _music: {fileID: 0}
+  _playOnStart: 1
+--- !u!4 &1405453168
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1405453166}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 10
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!43 &1482372305
 Mesh:
   m_ObjectHideFlags: 0
@@ -5230,6 +5344,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 705507994, guid: 8454b37b77e34fa4e9cd48ceab55fb42, type: 3}
+      propertyPath: m_BoundingSphereOverride.y
+      value: 8.548e-42
+      objectReference: {fileID: 0}
+    - target: {fileID: 705507994, guid: 8454b37b77e34fa4e9cd48ceab55fb42, type: 3}
+      propertyPath: m_BoundingSphereOverride.w
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2840559043295437352, guid: 8454b37b77e34fa4e9cd48ceab55fb42,
         type: 3}
       propertyPath: m_LocalPosition.x
