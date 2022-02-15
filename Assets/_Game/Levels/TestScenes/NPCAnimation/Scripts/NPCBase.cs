@@ -58,14 +58,14 @@ namespace NPC {
         //This is when the mouse first hovers over the object.
         public void OnHoverEnter()
         {
-            //Debug.Log("Hovering over " + gameObject.name);
+            Debug.Log("Hovering over " + gameObject.name);
             _animator.SetTrigger("TriggerAngry");
         }
 
         //This is when the mouse leaves the shape of the object.
         public void OnHoverExit()
         {
-            //Debug.Log("No Longer Hovering over" + gameObject.name);
+            Debug.Log("No Longer Hovering over " + gameObject.name);
             _animator.SetTrigger("TriggerSad");
         }
 

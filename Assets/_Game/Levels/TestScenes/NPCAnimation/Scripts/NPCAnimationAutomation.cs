@@ -26,7 +26,7 @@ namespace NPC {
 
         private void Start()
         {
-            OverrideCurrentAnimations();
+            //OverrideCurrentAnimations();
         }
 
         private void OverrideCurrentAnimations()
