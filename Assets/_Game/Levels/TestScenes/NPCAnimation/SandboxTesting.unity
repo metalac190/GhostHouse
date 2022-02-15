@@ -774,16 +774,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 1153265458}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3de087971c4a1c546a2df7e1d288ee57, type: 3}
+  m_Script: {fileID: 11500000, guid: efdacc618c59cf343825def7b92561e2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _mainCamera: {fileID: 2095673436}
-  _cameraMoveSpeed: 10
-  _cameraZoomSpeed: 5
-  _maxZoomInValue: 0.7
-  _maxZoomOutValue: 6.37
-  _enableSprintSpeed: 1
-  _cameraSprintSpeed: 20
+  _clickDistance: 100
+  _clickableLayerMask:
+    serializedVersion: 2
+    m_Bits: 512
 --- !u!114 &1153265460
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -793,13 +790,18 @@ MonoBehaviour:
   m_GameObject: {fileID: 1153265458}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 80820e1732ed83f4d92e98329d9d7a77, type: 3}
+  m_Script: {fileID: 11500000, guid: f3a6ebbdbf48c3c44847850e94f88e7e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _clickDistance: 100
-  _clickableLayerMask:
-    serializedVersion: 2
-    m_Bits: 513
+  _mainCamera: {fileID: 2095673436}
+  _rigidbody: {fileID: 0}
+  _cameraMoveSpeed: 10
+  _enableSlidingMovement: 0
+  _cameraZoomSpeed: 5
+  _maxZoomInValue: 0.7
+  _maxZoomOutValue: 6.37
+  _enableSprintSpeed: 1
+  _cameraSprintSpeed: 20
 --- !u!4 &1153265461
 Transform:
   m_ObjectHideFlags: 0
