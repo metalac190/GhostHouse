@@ -420,80 +420,6 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 0}
   text: {fileID: 6698937626362133363}
   showCharacterName: 0
---- !u!1 &5228450596453331009
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 5228450596453331008}
-  - component: {fileID: 5228450596453331010}
-  - component: {fileID: 5228450596453331011}
-  m_Layer: 5
-  m_Name: IMG_Item
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!224 &5228450596453331008
-RectTransform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5228450596453331009}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 5228450596855197912}
-  m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 175, y: 225}
-  m_Pivot: {x: 0.5, y: 0.5}
---- !u!222 &5228450596453331010
-CanvasRenderer:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5228450596453331009}
-  m_CullTransparentMesh: 0
---- !u!114 &5228450596453331011
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5228450596453331009}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_RaycastTarget: 1
-  m_Maskable: 1
-  m_OnCullStateChanged:
-    m_PersistentCalls:
-      m_Calls: []
-  m_Sprite: {fileID: 0}
-  m_Type: 0
-  m_PreserveAspect: 0
-  m_FillCenter: 1
-  m_FillMethod: 4
-  m_FillAmount: 1
-  m_FillClockwise: 1
-  m_FillOrigin: 0
-  m_UseSpriteMesh: 0
-  m_PixelsPerUnitMultiplier: 1
 --- !u!1 &5228450596855197913
 GameObject:
   m_ObjectHideFlags: 0
@@ -522,7 +448,6 @@ RectTransform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
-  - {fileID: 5228450596453331008}
   - {fileID: 5326567425595947979}
   - {fileID: 5228450597459770016}
   m_Father: {fileID: 5326567426095372216}
@@ -530,7 +455,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: -78.6}
+  m_AnchoredPosition: {x: 0, y: -190}
   m_SizeDelta: {x: 331.45, y: 590}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &5228450596855197915
@@ -587,7 +512,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 5228450596855197912}
-  m_RootOrder: 2
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -649,7 +574,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 5228450596855197912}
-  m_RootOrder: 1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -911,7 +836,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 600, y: 700}
+  m_SizeDelta: {x: 600, y: 400}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &5326567426095372218
 MonoBehaviour:
@@ -925,12 +850,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 45725f4396deb9b4a8510942a7faf4cb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _optionViewPrefab: {fileID: 7636192199972891165, guid: b4d15196473ff5144adde7948f0075ca,
+  _optionViewPrefab: {fileID: 7636192199972891165, guid: 80b926ab142db7f44905bcc05bce3fa8,
     type: 3}
   _optionViewParent: {fileID: 5228450597459770016}
   _lastLineText: {fileID: 5326567425595947976}
   _cancelButton: {fileID: 8325338111416489467}
-  _itemImage: {fileID: 5228450596453331011}
+  _itemImage: {fileID: 0}
   _costParent: {fileID: 5228450595794174380}
   _costPrefab: {fileID: 2543570214905682059, guid: 479e043a00e314c46b8389f38d48f67d,
     type: 3}
