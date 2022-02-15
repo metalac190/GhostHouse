@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class SaveData : MonoBehaviour
 {
+    public int level;
+    public int remainingSpiritPoints;
+
     [System.Serializable]
     public class Interaction
     {
