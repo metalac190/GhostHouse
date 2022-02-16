@@ -5,33 +5,26 @@ using UnityEngine;
 namespace NPC {
 
     [RequireComponent(typeof(Rigidbody))]
-    [RequireComponent(typeof(Collider))]
     [RequireComponent(typeof(AudioSource))]
-    public abstract class NPCBase : MonoBehaviour, IInteractable
+    public class NPCBase : MonoBehaviour, IInteractable
     {
         [Header("NPC Details")]
-        [SerializeField] protected string _name = string.Empty;
-        [SerializeField] protected int _age = 0;
+        [SerializeField] string _name = string.Empty;
+        [SerializeField] int _age = 0;
         [Tooltip("i.e. younger sister or grandmother")]
-        [SerializeField] protected string _placeInFamily = string.Empty;
+        [SerializeField] string _placeInFamily = string.Empty;
 
         [Header("Animations")]
-        [SerializeField] protected AnimationClip _angryAnimation = null;
-        [SerializeField] protected AnimationClip _happyAnimation = null;
-        [SerializeField] protected AnimationClip _idleAnimation = null;
-        [SerializeField] protected AnimationClip _sadAnimation = null;
-        [SerializeField] protected AnimationClip _surprisedAnimation = null;
+        [SerializeField] AnimationClip _angryAnimation = null;
+        [SerializeField] AnimationClip _happyAnimation = null;
+        [SerializeField] AnimationClip _idleAnimation = null;
+        [SerializeField] AnimationClip _sadAnimation = null;
+        [SerializeField] AnimationClip _surprisedAnimation = null;
 
-        [Tooltip("Can be used to insure where the NPC goes in between playthroughs and levels")]
-        [Header("Preset Locations")]
-        [SerializeField] protected Transform _levelPosition = null;
+        [Header("Animation Override Controller")]
+        [Header("Designers DO NOT TOUCH FOR NOW")]
+        [SerializeField] AnimatorOverrideController _animOverrideController = null;
 
-        [Header("Sounds")]
-        [SerializeField] protected AudioClip _sound1 = null;
-
-        Rigidbody _rb;
-        Collider _collider;
-        AudioSource _audioSource;
         Animator _animator;
 
         public AnimationClip IdleAnimation => _idleAnimation;
@@ -40,16 +33,8 @@ namespace NPC {
         public AnimationClip SadAnimation => _sadAnimation;
         public AnimationClip AngryAnimation => _angryAnimation;
 
-        public abstract void Idle();
-        public abstract void Talking();
-        public abstract void Reactions();
-        public abstract void Dialogue();
-
         private void Awake()
         {
-            _rb = GetComponent<Rigidbody>();
-            _collider = GetComponent<Collider>();
-            _audioSource = GetComponent<AudioSource>();
             _animator = GetComponent<Animator>();
         }
 
@@ -59,28 +44,28 @@ namespace NPC {
         public void OnHoverEnter()
         {
             Debug.Log("Hovering over " + gameObject.name);
-            _animator.SetTrigger("TriggerAngry");
+            _animator.SetTrigger("angry");
         }
 
         //This is when the mouse leaves the shape of the object.
         public void OnHoverExit()
         {
             Debug.Log("No Longer Hovering over " + gameObject.name);
-            _animator.SetTrigger("TriggerSad");
+            _animator.SetTrigger("sad");
         }
 
         //This is when the mouse left clicks on the object.
         public void OnLeftClick()
         {
             Debug.Log("Left Clicked On" + gameObject.name);
-            _animator.SetTrigger("TriggerHappy");
+            _animator.SetTrigger("happy");
         }
 
         //This is when the mouse right clicks on an object.
         public void OnRightClick()
         {
             Debug.Log("Right Clicked On" + gameObject.name);
-            _animator.SetTrigger("TriggerSurprised");
+            _animator.SetTrigger("surprised");
         }
         #endregion
     }
