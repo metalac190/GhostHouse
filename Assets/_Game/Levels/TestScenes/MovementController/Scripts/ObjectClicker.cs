@@ -16,7 +16,7 @@ public class ObjectClicker : MonoBehaviour
 
     /*This is the layermask value of the interactables. All interactables must inherit from the IInteractable Interface and be on the Interactables
      LayerMask.*/
-    [SerializeField] private LayerMask _clickableLayerMask;
+    [SerializeField] private LayerMask _clickableLayerMask = 0;
 
     //This is just a placeholder variable that I use to switch from OnHoverEnter to OnHoverExit
     private IInteractable _previousInteractable;

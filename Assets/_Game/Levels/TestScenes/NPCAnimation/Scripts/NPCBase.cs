@@ -10,7 +10,7 @@ namespace NPC {
     {
         [Header("NPC Details")]
         [SerializeField] string _name = string.Empty;
-        [SerializeField] int _age = 0;
+        [SerializeField] int _age;
         [Tooltip("i.e. younger sister or grandmother")]
         [SerializeField] string _placeInFamily = string.Empty;
 
@@ -23,7 +23,7 @@ namespace NPC {
 
         [Header("Animation Override Controller")]
         [Header("Designers DO NOT TOUCH FOR NOW")]
-        [SerializeField] AnimatorOverrideController _animOverrideController = null;
+        [SerializeField] AnimatorOverrideController _animOverrideController;
 
         Animator _animator;
 
