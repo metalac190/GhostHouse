@@ -63,7 +63,7 @@ public class DialogueAudio : MonoBehaviour
         SfxBase sfx = _speaker.GetAudio(token);
         if (sfx != null)
         {
-            Debug.Log(sfx.name);
+            sfx.Play();
         }
     }
 }
