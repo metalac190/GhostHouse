@@ -121,6 +121,18 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!114 &426752640 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3957389418250828023, guid: fe89e5d76fe51f64fb94c22f6b00bc9d,
+    type: 3}
+  m_PrefabInstance: {fileID: 1231934610}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 803ff58ec7909824a882433f8dba8a41, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &528516691
 GameObject:
   m_ObjectHideFlags: 0
@@ -151,7 +163,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _dialogueRunner: {fileID: 637606326}
-  _nodeName: key_from_book
+  _nodeName: parents_argue
   _yarnObj: {fileID: 0}
   _instanceName: 
   _timelineName: 
@@ -175,7 +187,7 @@ MonoBehaviour:
     type: 3}
   m_PrefabInstance: {fileID: 1231934610}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
+  m_GameObject: {fileID: 1231934611}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4bec29c0a230741bdac901dba8da47ee, type: 3}
@@ -505,6 +517,46 @@ PrefabInstance:
       propertyPath: m_SizeDelta.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6820131136519085333, guid: fe89e5d76fe51f64fb94c22f6b00bc9d,
+        type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6820131136519085333, guid: fe89e5d76fe51f64fb94c22f6b00bc9d,
+        type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6820131136519085333, guid: fe89e5d76fe51f64fb94c22f6b00bc9d,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6820131136519085333, guid: fe89e5d76fe51f64fb94c22f6b00bc9d,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6899811383728774270, guid: fe89e5d76fe51f64fb94c22f6b00bc9d,
+        type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6899811383728774270, guid: fe89e5d76fe51f64fb94c22f6b00bc9d,
+        type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6899811383728774270, guid: fe89e5d76fe51f64fb94c22f6b00bc9d,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6899811383728774270, guid: fe89e5d76fe51f64fb94c22f6b00bc9d,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8157348745884874395, guid: fe89e5d76fe51f64fb94c22f6b00bc9d,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -567,6 +619,27 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: fe89e5d76fe51f64fb94c22f6b00bc9d, type: 3}
+--- !u!1 &1231934611 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8876224229504648421, guid: fe89e5d76fe51f64fb94c22f6b00bc9d,
+    type: 3}
+  m_PrefabInstance: {fileID: 1231934610}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1231934612
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1231934611}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5b55028014c993b4287e41af4ec39d1b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _characterView: {fileID: 426752640}
+  _characterAudioPool: {fileID: 11400000, guid: 87dc281da5205154b82d49fd68954d5f,
+    type: 2}
 --- !u!1 &1290207586
 GameObject:
   m_ObjectHideFlags: 0
