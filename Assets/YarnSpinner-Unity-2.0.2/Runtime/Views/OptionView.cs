@@ -7,7 +7,7 @@ namespace Yarn.Unity
 {
     public class OptionView : UnityEngine.UI.Selectable, ISubmitHandler, IPointerClickHandler, IPointerEnterHandler
     {
-        [SerializeField] TextMeshProUGUI text;
+        [SerializeField] TextMeshProUGUI text = null;
         [SerializeField] bool showCharacterName = false;
 
         public Action<DialogueOption> OnOptionSelected;
