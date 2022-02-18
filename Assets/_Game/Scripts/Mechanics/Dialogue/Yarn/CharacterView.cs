@@ -6,7 +6,7 @@ using UnityEngine.UI;
 
 public static class TextEffects
 {
-    public static IEnumerator Typewriter(TextMeshProUGUI text, float lettersPerSecond, Action<string, int> onCharacterTyped = null, Action onComplete = null, Yarn.Unity.InterruptionFlag interruption = null)
+    public static IEnumerator Typewriter(TextMeshProUGUI text, float lettersPerSecond, Action<Yarn.Unity.LocalizedLine, int> onCharacterTyped = null, Yarn.Unity.LocalizedLine line = null, Action onComplete = null, Yarn.Unity.InterruptionFlag interruption = null)
     {
         // Start with everything invisible
         text.maxVisibleCharacters = 0;
@@ -49,7 +49,7 @@ public static class TextEffects
             while (accumulator >= secondsPerLetter)
             {
                 text.maxVisibleCharacters += 1;
-                onCharacterTyped?.Invoke(text.text, text.maxVisibleCharacters-1);
+                onCharacterTyped?.Invoke(line, text.maxVisibleCharacters-1);
                 accumulator -= secondsPerLetter;
             }
             accumulator += Time.deltaTime;
@@ -79,7 +79,11 @@ public class CharacterView : Yarn.Unity.DialogueViewBase
         KeyCode,
     }
 
-    public static event Action<string, int> OnCharacterTyped = null;
+    /// <summary>
+    /// OnCharacterTyped(string characterName, string line, int index).
+    /// Fires every time a character is typed when <see cref="_useTypewriterEffect"/> is true.
+    /// </summary>
+    public event Action<Yarn.Unity.LocalizedLine, int> OnCharacterTyped = null;
 
     #region serialized variables
     // CharacterViewEditor depends on serialized variable names
@@ -305,7 +309,7 @@ public class CharacterView : Yarn.Unity.DialogueViewBase
             if (_useTypewriterEffect)
             {
                 // Start the typewriter
-                StartCoroutine(TextEffects.Typewriter(_lineText, _typewriterEffectSpeed, CharacterView.OnCharacterTyped, onDialogueLineFinished, _interruptionFlag));
+                StartCoroutine(TextEffects.Typewriter(_lineText, _typewriterEffectSpeed, OnCharacterTyped, dialogueLine, onDialogueLineFinished, _interruptionFlag));
             }
             else
             {
@@ -317,7 +321,7 @@ public class CharacterView : Yarn.Unity.DialogueViewBase
         {
             if (_useTypewriterEffect)
             {
-                StartCoroutine(TextEffects.Typewriter(_lineText, _typewriterEffectSpeed, CharacterView.OnCharacterTyped, onFinished, _interruptionFlag));
+                StartCoroutine(TextEffects.Typewriter(_lineText, _typewriterEffectSpeed, OnCharacterTyped, dialogueLine, onFinished, _interruptionFlag));
             }
             else
             {
