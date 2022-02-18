@@ -17,7 +17,7 @@ public class SOCharacterAudioPool : ScriptableObject
     {
         foreach (SOCharacterAudio charAudio in Characters)
         {
-            if (charAudio.CharacterName == characterName)
+            if (charAudio.CharacterName.ToLower() == characterName.ToLower())
             {
                 return charAudio;
             }

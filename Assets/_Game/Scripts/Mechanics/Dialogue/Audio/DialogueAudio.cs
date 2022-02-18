@@ -28,7 +28,7 @@ public class DialogueAudio : MonoBehaviour
 
         if (_characterAudioPool == null)
         {
-            Debug.LogError($"\"{name}\" is unable to play dialogue audio. No SOCharacterAudioPool was provided to _characterAudioPool.");
+            Debug.LogWarning($"\"{name}\" is unable to play dialogue audio. No SOCharacterAudioPool was provided to _characterAudioPool.");
             this.enabled = false;
         }
     }
