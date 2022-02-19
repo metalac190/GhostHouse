@@ -1,7 +1,8 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using Mechanics.Feedback;
 using UnityEngine;
-using Utility.Audio.Clips.Base;
+using Utility.Audio.Managers;
 
 namespace Levels.TestScenes.HoverClickFeedback.Scripts
 {
@@ -9,7 +10,7 @@ namespace Levels.TestScenes.HoverClickFeedback.Scripts
     {
         [Header("Sfx On Click")]
         [SerializeField] private bool _sfxOnClick = false;
-        [SerializeField] private SfxBase _sfx = null;
+        [SerializeField] private SfxType _sfx = SfxType.None;
 
         [Header("Text On Hover")]
         [SerializeField] private bool _textOnHover = false;
@@ -28,13 +29,13 @@ namespace Levels.TestScenes.HoverClickFeedback.Scripts
 
         public void OnLeftClick() {
             if (_sfxOnClick) {
-                _sfx.Play();
+                SoundManager.Instance.PlaySfx(_sfx);
             }
         }
 
         public void OnRightClick() {
             if (_sfxOnClick) {
-                _sfx.Play();
+                SoundManager.Instance.PlaySfx(_sfx);
             }
         }
 
