@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using Mechanics.Feedback;
+using UnityEngine;
 using UnityEngine.Audio;
 using Utility.Audio.Controllers;
 using Utility.ObjectPooling;
@@ -20,6 +21,7 @@ namespace Utility.Audio.Managers
         [SerializeField] private AudioMixerGroup _musicGroup = null;
 
         [Header("Sfx")]
+        [SerializeField] private SfxCollection _collection = null;
         [SerializeField] private AudioMixerGroup _sfxGroup = null;
         [SerializeField] private Transform _poolParent;
         [SerializeField] private int _initialPoolSize = 5;
@@ -73,6 +75,10 @@ namespace Utility.Audio.Managers
                 _poolParent = pool;
             }
             _poolManager.BuildInitialPool(_poolParent, DefaultSfxPlayerName, _initialPoolSize);
+        }
+
+        public void PlaySfx(SfxType type) {
+            _collection.GetSfx(type).Play();
         }
 
         public SfxPoolAudioSource GetController() {

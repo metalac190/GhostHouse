@@ -15,7 +15,7 @@ namespace Utility.Audio.Helper
 
         // Default constructor
         public SfxReference() {
-            UseConstant = true;
+            UseConstant = false;
             Clip = null;
         }
 
