@@ -59,7 +59,9 @@ public class DialogueAudio : MonoBehaviour
         if (_speaker == null) { return; }
 
         // isolate token
-        string token = line.TextWithoutCharacterName.Text[index].ToString();
+        if (index >= line.TextWithoutCharacterName.Text.Length) { return; }
+
+        string token = line.TextWithoutCharacterName.Text[index].ToString().ToLower();
         SfxBase sfx = _speaker.GetAudio(token);
         if (sfx != null)
         {
