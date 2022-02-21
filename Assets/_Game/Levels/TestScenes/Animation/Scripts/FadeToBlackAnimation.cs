@@ -65,73 +65,87 @@ public class FadeToBlackAnimation : MonoBehaviour
         else
         {
             // fade in
-            _dialogueRunner.AddCommandHandler("fade_in", () =>
-            {
-                return FadeIn();
-            });
-            _dialogueRunner.AddCommandHandler("fade_in_unlocked", () =>
-            {
-                FadeIn();
-            });
+            _dialogueRunner.AddCommandHandler<float>("fade_in", FadeIn);
+            _dialogueRunner.AddCommandHandler<float>("fade_in_unlocked", FadeInUnlocked);
 
             // fade out
-            _dialogueRunner.AddCommandHandler("fade_out", () =>
-            {
-                return FadeOut();
-            });
-            _dialogueRunner.AddCommandHandler("fade_out_unlocked", () =>
-            {
-                FadeOut();
-            });
+            _dialogueRunner.AddCommandHandler<float>("fade_out", FadeOut);
+            _dialogueRunner.AddCommandHandler<float>("fade_out_unlocked", FadeOutUnlocked);
 
             // fade in and out
-            _dialogueRunner.AddCommandHandler("fade_in_out", () =>
-            {
-                return FadeInOut();
-            });
-            _dialogueRunner.AddCommandHandler("fade_in_out_unlocked", () =>
-            {
-                FadeInOut();
-            });
+            _dialogueRunner.AddCommandHandler<float, float>("fade_in_out", FadeInOut);
+            _dialogueRunner.AddCommandHandler<float, float>("fade_in_out_unlocked", FadeInOutUnlocked);
         }
     }
 
     #region animations
     /// <summary>
-    /// Begins the fade in animation of <see cref="_img"/>
+    /// Begins the fade in animation of <see cref="_img"/>. 
     /// </summary>
+    /// <param name="duration"> Length of fade in. If less than 0, <see cref="_fadeIn"/> will be used instead. </param>
     /// <returns></returns>
-    public Coroutine FadeIn()
+    public Coroutine FadeIn(float duration = -1)
     {
-        return StartCoroutine(LerpColor(_img, _initColor, _peakColor, _fadeIn));
+        return StartCoroutine(LerpColor(_img, _initColor, _peakColor, duration < 0 ? _fadeIn : duration));
+    }
+
+    /// <summary>
+    /// Wrapper of <see cref="FadeIn(float)"/>.
+    /// </summary>
+    /// <param name="duration"></param>
+    public void FadeInUnlocked(float duration = -1)
+    {
+        FadeIn(duration);
     }
 
     /// <summary>
     /// Begins the fade out animation of <see cref="_img"/>
     /// </summary>
+    /// <param name="duration"> Length of fade out. If less than 0, <see cref="_fadeOut"/> will be used instead. </param>
     /// <returns></returns>
-    public Coroutine FadeOut()
+    public Coroutine FadeOut(float duration = -1)
     {
-        return StartCoroutine(LerpColor(_img, _peakColor, _finlColor, _fadeOut));
+        return StartCoroutine(LerpColor(_img, _peakColor, _finlColor, duration < 0 ? _fadeOut : duration));
+    }
+
+    /// <summary>
+    /// Wrapper of <see cref="FadeOut(float)"/>
+    /// </summary>
+    /// <param name="duration"></param>
+    public void FadeOutUnlocked(float duration = -1)
+    {
+        FadeOut(duration);
     }
 
     /// <summary>
     /// Begins the <see cref="FadeIn"/> animation of <see cref="_img"/> followed by <see cref="FadeOut"/>
     /// </summary>
+    /// <param name="in"> Length of fade in. If less than 0, <see cref="_fadeIn"/> will be used instead. </param>
+    /// <param name="out"> Length of fade out. If less than 0, <see cref="_fadeOut"/> will be used instead. </param>
     /// <returns></returns>
-    public Coroutine FadeInOut()
+    public Coroutine FadeInOut(float @in = -1, float @out = -1)
     {
-        return StartCoroutine(FadeInOutCouroutine());
+        return StartCoroutine(FadeInOutCouroutine(@in < 0 ? _fadeIn : @in, @out < 0 ? _fadeOut : @out));
+    }
+
+    /// <summary>
+    /// Wrapper of <see cref="FadeInOut(float, float)"/>
+    /// </summary>
+    /// <param name="in"></param>
+    /// <param name="out"></param>
+    public void FadeInOutUnlocked(float @in = -1, float @out = -1)
+    {
+        FadeInOut(@in, @out);
     }
 
     /// <summary>
     /// Wrapper coroutine of <see cref="FadeIn"/> and <see cref="FadeOut"/>
     /// </summary>
     /// <returns></returns>
-    IEnumerator FadeInOutCouroutine()
+    IEnumerator FadeInOutCouroutine(float @in, float @out)
     {
-        yield return FadeIn();
-        yield return FadeOut();
+        yield return FadeIn(@in);
+        yield return FadeOut(@out);
     }
     #endregion
 
