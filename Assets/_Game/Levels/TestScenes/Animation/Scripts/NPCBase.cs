@@ -67,6 +67,10 @@ namespace NPC {
             Debug.Log("Right Clicked On" + gameObject.name);
             _animator.SetTrigger("surprised");
         }
+
+
         #endregion
+
+        
     }
 }

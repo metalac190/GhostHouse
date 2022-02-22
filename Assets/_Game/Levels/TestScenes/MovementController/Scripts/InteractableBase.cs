@@ -20,4 +20,6 @@ public abstract class InteractableBase : MonoBehaviour, IInteractable
     {
         
     }
+
+   
 }
