@@ -55,7 +55,7 @@ namespace Utility.Audio.Clips
             var referenceProperties = referenceSfx.GetSourceProperties();
 
             // Create Current Source Properties
-            var myProperties = new SfxProperties(_mixerGroup, (int)_priority, false, _volume.GetRandom(), _pitch.GetRandom(), _stereoPan.GetRandom(), _reverbZoneMix.GetRandom(),
+            var myProperties = new SfxProperties(_mixerGroup, (int)_priority, _volume.GetRandom(), _pitch.GetRandom(), _stereoPan.GetRandom(), _reverbZoneMix.GetRandom(), Vector3.zero,
                 _spatialBlend.GetRandom(), _rolloffMode, _minDistance.GetRandom(), _maxDistance.GetRandom(), Mathf.RoundToInt(_spread.GetRandom()), _dopplerLevel.GetRandom());
 
             // Add properties together and return

@@ -60,7 +60,7 @@ namespace Utility.Audio.Clips
             var referenceProperties = _clip.GetSourceProperties();
 
             // Create Current Source Properties
-            var myProperties = new SfxProperties(_mixerGroup, (int)_priority, false, _volume, _pitch, _stereoPan, _reverbZoneMix, _spatialBlend, _rolloffMode, _minDistance, _maxDistance, _spread, _dopplerLevel);
+            var myProperties = new SfxProperties(_mixerGroup, (int)_priority, _volume, _pitch, _stereoPan, _reverbZoneMix, Vector3.zero, _spatialBlend, _rolloffMode, _minDistance, _maxDistance, _spread, _dopplerLevel);
 
             // Add properties together and return
             return myProperties.AddProperties(referenceProperties);
