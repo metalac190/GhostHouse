@@ -18,7 +18,7 @@ namespace Yarn.Unity
 
         [SerializeField] public StringObjectDictionary stringsToViews = new StringObjectDictionary();
 
-        [SerializeField] bool _useTextMeshPro = default;
+        // [SerializeField] bool _useTextMeshPro = default;
 
         void Start()
         {
@@ -43,9 +43,6 @@ namespace Yarn.Unity
 
             foreach (var line in stringsToViews)
             {
-
-                throw new System.NotImplementedException("Not implemented yet");
-
                 // var localizedString =
                 // yarnProject.GetLocalizedString(line.Key);
 

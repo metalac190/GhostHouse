@@ -11,7 +11,7 @@ namespace Utility.Audio.Clips
     {
         [Header("Music Track Settings")]
         [SerializeField] private AudioClip _track = null;
-        [SerializeField] private AudioClip _trackWhenPaused = null;
+        [SerializeField] private AudioClip _trackWhenPaused;
 
         [Header("Volume Settings")]
         [SerializeField] private AudioMixerGroup _mixerGroup = null;
