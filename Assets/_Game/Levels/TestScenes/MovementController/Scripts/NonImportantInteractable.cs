@@ -8,10 +8,10 @@ public class NonImportantInteractable : InteractableBase
 
     
 
-    public override void OnLeftClick()
+    public override void OnLeftClick(Vector3 mousePosition)
     {
-        Instantiate(_particleEffect, Camera.main.ScreenToWorldPoint(Input.mousePosition), Quaternion.identity);
-        Debug.Log("Left Clicked On: " + gameObject.name + " and Location at: " + (Camera.main.ScreenToWorldPoint(Input.mousePosition)));
+        Instantiate(_particleEffect, mousePosition, Quaternion.identity);
+        Debug.Log("Left Clicked On: " + gameObject.name + " and Location at: " + (mousePosition));
         
     }
 }

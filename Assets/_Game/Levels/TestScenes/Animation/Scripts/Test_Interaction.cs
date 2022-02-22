@@ -26,5 +26,18 @@ public class Test_Interaction : MonoBehaviour, IInteractable
         //do nothing
     }
 
-   
+    #region Satisfying Interface
+
+    public virtual void OnLeftClick(Vector3 mousePoint)
+    {
+        // do nothing
+    }
+    public virtual void OnRightClick(Vector3 mousePoint)
+    {
+        //do nothing
+    }
+
+    #endregion
+
+
 }

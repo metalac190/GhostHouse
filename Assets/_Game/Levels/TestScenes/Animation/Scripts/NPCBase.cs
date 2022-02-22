@@ -71,6 +71,21 @@ namespace NPC {
 
         #endregion
 
-        
+        #region Satisfying Interface
+
+        public void OnLeftClick(Vector3 mousePoint)
+        {
+            
+        }
+
+        //This is when the mouse right clicks on an object.
+        public void OnRightClick(Vector3 mousePoint)
+        {
+           
+        }
+
+        #endregion
+
+
     }
 }

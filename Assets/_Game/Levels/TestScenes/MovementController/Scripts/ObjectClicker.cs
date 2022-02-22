@@ -96,7 +96,7 @@ public class ObjectClicker : MonoBehaviour
                 IInteractable interactable = hitClick.transform.GetComponent<IInteractable>();
                 if (interactable != null)
                 {
-                    interactable.OnLeftClick();
+                    interactable.OnLeftClick(hitClick.point);
                 }
             }
         }
@@ -118,7 +118,7 @@ public class ObjectClicker : MonoBehaviour
                 IInteractable interactable = hitClick.transform.GetComponent<IInteractable>();
                 if (interactable != null)
                 {
-                    interactable.OnRightClick();
+                    interactable.OnRightClick(hitClick.point);
                 }
             }
         }
