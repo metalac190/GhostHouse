@@ -68,6 +68,20 @@ namespace Levels.TestScenes.HoverClickFeedback.Scripts
             }
         }
 
-       
+        #region Satisfying Interactable
+
+        public void OnLeftClick(Vector3 mousePosition)
+        {
+            
+        }
+
+        public void OnRightClick(Vector3 mousePosition)
+        {
+           
+        }
+
+        #endregion
+
+
     }
 }
