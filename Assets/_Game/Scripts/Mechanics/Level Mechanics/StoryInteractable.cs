@@ -1,10 +1,11 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using Mechanics.Feedback;
+using Mechanics.UI;
 using UnityEngine;
 using Utility.Audio.Managers;
 
-namespace Levels.TestScenes.HoverClickFeedback.Scripts
+namespace Mechanics.Level_Mechanics
 {
     public class StoryInteractable : MonoBehaviour, IInteractable
     {
@@ -24,8 +25,17 @@ namespace Levels.TestScenes.HoverClickFeedback.Scripts
         private List<MeshRenderer> _meshRenderers;
         private List<Material> _baseMaterial;
 
+        private bool _missingHoverUi;
+
         private bool OverrideText => _textOnHover && (_useObjectName || !string.IsNullOrEmpty(_hoverText));
         private bool OverrideMaterial => _setMaterialOnHover && _materialToSet != null;
+
+        private void Start() {
+            if (TextHoverController.Singleton == null) {
+                _missingHoverUi = true;
+                Debug.LogWarning("Missing Text Hover Controller in Scene!");
+            }
+        }
 
         public void OnLeftClick() {
             if (_sfxOnClick) {
@@ -40,6 +50,7 @@ namespace Levels.TestScenes.HoverClickFeedback.Scripts
         }
 
         public void OnHoverEnter() {
+            if (_missingHoverUi) return;
             if (OverrideText) {
                 string text = _useObjectName ? name : _hoverText;
                 TextHoverController.Singleton.StartHover(text);
@@ -57,6 +68,7 @@ namespace Levels.TestScenes.HoverClickFeedback.Scripts
         }
 
         public void OnHoverExit() {
+            if (_missingHoverUi) return;
             if (OverrideText) {
                 TextHoverController.Singleton.EndHover();
             }
@@ -70,18 +82,12 @@ namespace Levels.TestScenes.HoverClickFeedback.Scripts
 
         #region Satisfying Interactable
 
-        public void OnLeftClick(Vector3 mousePosition)
-        {
-            
+        public void OnLeftClick(Vector3 mousePosition) {
         }
 
-        public void OnRightClick(Vector3 mousePosition)
-        {
-           
+        public void OnRightClick(Vector3 mousePosition) {
         }
 
         #endregion
-
-
     }
 }

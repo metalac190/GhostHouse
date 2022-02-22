@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.EventSystems;
 
-namespace Levels.TestScenes.HoverClickFeedback.Scripts
+namespace Mechanics.Player
 {
     public class ObjectClickerTest : MonoBehaviour
     {
