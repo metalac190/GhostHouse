@@ -18,6 +18,7 @@ namespace Utility.Audio.Helper
         public float ReverbZoneMix;
 
         // Spatial Settings
+        public Vector3 Position;
         public float SpatialBlend;
         public AudioRolloffMode RolloffMode;
         public float MinDistance;
@@ -60,6 +61,7 @@ namespace Utility.Audio.Helper
             StereoPan = SfxDefaults.StereoPan;
             ReverbZoneMix = SfxDefaults.ReverbZoneMix;
 
+            Position = Vector3.zero;
             SpatialBlend = SfxDefaults.SpatialBlend;
             RolloffMode = SfxDefaults.RolloffMode;
             MinDistance = SfxDefaults.MinDistance;
@@ -85,6 +87,7 @@ namespace Utility.Audio.Helper
             StereoPan = SfxDefaults.StereoPan;
             ReverbZoneMix = SfxDefaults.ReverbZoneMix;
 
+            Position = Vector3.zero;
             SpatialBlend = SfxDefaults.SpatialBlend;
             RolloffMode = SfxDefaults.RolloffMode;
             MinDistance = SfxDefaults.MinDistance;
@@ -93,7 +96,7 @@ namespace Utility.Audio.Helper
             DopplerLevel = SfxDefaults.DopplerLevel;
         }
 
-        public SfxProperties(AudioMixerGroup mixerGroup, int priority, bool loop, float volume, float pitch, float stereoPan, float reverbMix, float spatialBlend,
+        public SfxProperties(AudioMixerGroup mixerGroup, int priority, float volume, float pitch, float stereoPan, float reverbMix, Vector3 position, float spatialBlend,
             AudioRolloffMode rolloffMode, float minDistance, float maxDistance, int spread, float dopplerLevel) {
             Null = true;
             Clip = null;
@@ -105,6 +108,7 @@ namespace Utility.Audio.Helper
             StereoPan = stereoPan;
             ReverbZoneMix = reverbMix;
 
+            Position = position;
             SpatialBlend = spatialBlend;
             RolloffMode = rolloffMode;
             MinDistance = minDistance;
@@ -113,7 +117,7 @@ namespace Utility.Audio.Helper
             DopplerLevel = dopplerLevel;
         }
 
-        public SfxProperties(AudioClip clip, AudioMixerGroup mixerGroup, int priority, bool loop, float volume, float pitch, float stereoPan, float reverbMix, float spatialBlend,
+        public SfxProperties(AudioClip clip, AudioMixerGroup mixerGroup, int priority, float volume, float pitch, float stereoPan, float reverbMix, Vector3 position, float spatialBlend,
             AudioRolloffMode rolloffMode, float minDistance, float maxDistance, int spread, float dopplerLevel) {
             Null = clip != null;
             Clip = clip;
@@ -125,6 +129,7 @@ namespace Utility.Audio.Helper
             StereoPan = stereoPan;
             ReverbZoneMix = reverbMix;
 
+            Position = position;
             SpatialBlend = spatialBlend;
             RolloffMode = rolloffMode;
             MinDistance = minDistance;

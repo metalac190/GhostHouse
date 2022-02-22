@@ -1,3 +1,4 @@
+using UnityEngine;
 using Utility.Audio.Controllers;
 using Utility.Audio.Managers;
 
@@ -6,10 +7,11 @@ namespace Utility.Audio.Helper
     public static class AudioHelper
     {
         // Play the clip with given Sfx Property
-        public static void PlayClip(SfxProperties p) {
-            if (p.Null) return;
+        public static void PlayClip(SfxProperties properties, Vector3 position = default) {
+            if (properties.Null) return;
             var controller = PoolController();
-            controller.SetSourceProperties(p);
+            properties.Position = position;
+            controller.SetSourceProperties(properties);
             controller.Play();
         }
 
