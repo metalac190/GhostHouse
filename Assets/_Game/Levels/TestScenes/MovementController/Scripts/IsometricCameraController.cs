@@ -7,8 +7,8 @@ public class IsometricCameraController : MonoBehaviour
     /*This is probably the biggest class out of all the classes. This is just the camera movement controller for an isometric view.*/
 
     [Header("Camera Connections")]
-    [SerializeField] Camera _mainCamera;
-    [SerializeField] Rigidbody _rigidbody;
+    [SerializeField] Camera _mainCamera = null;
+    [SerializeField] Rigidbody _rigidbody = null;
 
     [Header("Traditional Camera Movement Values")]
     [SerializeField] private float _cameraMoveSpeed = 10f;

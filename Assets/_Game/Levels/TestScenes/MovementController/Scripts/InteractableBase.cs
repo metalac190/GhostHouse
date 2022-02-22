@@ -20,4 +20,15 @@ public abstract class InteractableBase : MonoBehaviour, IInteractable
     {
         
     }
+
+    public virtual void OnLeftClick(Vector3 mousePosition)
+    {
+
+    }
+    public virtual void OnRightClick(Vector3 mousePosition)
+    {
+
+    }
+
+
 }
