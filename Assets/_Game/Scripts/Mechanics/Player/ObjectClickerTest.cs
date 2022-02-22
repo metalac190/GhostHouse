@@ -91,9 +91,11 @@ namespace Levels.TestScenes.HoverClickFeedback.Scripts
             if (interactable != null) {
                 if (left) {
                     interactable.OnLeftClick();
+                    interactable.OnLeftClick(hit.point);
                 }
                 else {
                     interactable.OnRightClick();
+                    interactable.OnRightClick(hit.point);
                 }
             }
         }
