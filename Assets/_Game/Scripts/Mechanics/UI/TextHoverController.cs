@@ -1,7 +1,7 @@
 ﻿using TMPro;
 using UnityEngine;
 
-namespace Levels.TestScenes.HoverClickFeedback.Scripts
+namespace Mechanics.UI
 {
     public class TextHoverController : MonoBehaviour
     {
@@ -12,8 +12,11 @@ namespace Levels.TestScenes.HoverClickFeedback.Scripts
 
         private bool _hovering;
 
-        private void Start() {
+        private void Awake() {
             Singleton = this;
+        }
+
+        private void Start() {
             EndHover();
         }
 
