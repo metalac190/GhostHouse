@@ -67,5 +67,7 @@ namespace Levels.TestScenes.HoverClickFeedback.Scripts
                 _baseMaterial.Clear();
             }
         }
+
+       
     }
 }

@@ -17,6 +17,7 @@ public class ObjectClicker : MonoBehaviour
     /*This is the layermask value of the interactables. All interactables must inherit from the IInteractable Interface and be on the Interactables
      LayerMask.*/
     [SerializeField] private LayerMask _clickableLayerMask = 0;
+    [SerializeField] private LayerMask _nonImportantClickableLayerMask = 0;
 
     //This is just a placeholder variable that I use to switch from OnHoverEnter to OnHoverExit
     private IInteractable _previousInteractable;
@@ -46,6 +47,23 @@ public class ObjectClicker : MonoBehaviour
                 _previousInteractable = interactable;
             }
         }
+        ////returns true if the object it hits is on the Interactables LayerMask and is within 100 units.
+        //if (Physics.Raycast(ray, out hit, _clickDistance, _nonImportantClickableLayerMask))
+        //{
+        //    //This finds the object that the ray hits and stores it in an IInteractable variable (similar to _previousInteractable)
+        //    IInteractable interactable = hit.transform.GetComponent<IInteractable>();
+
+        //    //This is where the placeholder variable comes in. This is how I check to see if the mouse truly moved on or not.
+        //    if (interactable != _previousInteractable)
+        //    {
+        //        /*If the mouse did move on from one object to another, the new object will call OnHoverEnter, and the last object will call OnHoverExit.
+        //         Usually, the else statement below will take care of this, since there will be a period of time where the mouse hovers over no interactable
+        //         object as it travels from the _previousInteractable to the current interactable, but this is more of a safety measure than anything.*/
+        //        if (interactable != null) interactable.OnHoverEnter();
+        //        if (_previousInteractable != null) _previousInteractable.OnHoverExit();
+        //        _previousInteractable = interactable;
+        //    }
+        //}
         //returns true if the raycast hits something that isn't on the Interactables Layer or isn't within 100 units.
         else
         {
@@ -73,6 +91,14 @@ public class ObjectClicker : MonoBehaviour
                     interactable.OnLeftClick();
                 }
             }
+            else if (Physics.Raycast(rayClick, out hitClick, _clickDistance, _nonImportantClickableLayerMask))
+            {
+                IInteractable interactable = hitClick.transform.GetComponent<IInteractable>();
+                if (interactable != null)
+                {
+                    interactable.OnLeftClick();
+                }
+            }
         }
         else if (Input.GetMouseButtonDown(1))
         {
@@ -80,6 +106,14 @@ public class ObjectClicker : MonoBehaviour
             Ray rayClick = Camera.main.ScreenPointToRay(Input.mousePosition);
 
             if (Physics.Raycast(rayClick, out hitClick, _clickDistance, _clickableLayerMask))
+            {
+                IInteractable interactable = hitClick.transform.GetComponent<IInteractable>();
+                if (interactable != null)
+                {
+                    interactable.OnRightClick();
+                }
+            }
+            else if (Physics.Raycast(rayClick, out hitClick, _clickDistance, _nonImportantClickableLayerMask))
             {
                 IInteractable interactable = hitClick.transform.GetComponent<IInteractable>();
                 if (interactable != null)
