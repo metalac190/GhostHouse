@@ -7,7 +7,7 @@ using Utility.Audio.Managers;
 
 namespace Mechanics.Level_Mechanics
 {
-    public class StoryInteractable : MonoBehaviour, IInteractable
+    public class StoryInteractable : InteractableBase
     {
         [Header("Sfx On Click")]
         [SerializeField] private bool _sfxOnClick = false;
@@ -37,19 +37,19 @@ namespace Mechanics.Level_Mechanics
             }
         }
 
-        public void OnLeftClick() {
+        public override void OnLeftClick() {
             if (_sfxOnClick) {
                 SoundManager.Instance.PlaySfx(_sfx);
             }
         }
 
-        public void OnRightClick() {
+        public override void OnRightClick() {
             if (_sfxOnClick) {
                 SoundManager.Instance.PlaySfx(_sfx);
             }
         }
 
-        public void OnHoverEnter() {
+        public override void OnHoverEnter() {
             if (_missingHoverUi) return;
             if (OverrideText) {
                 string text = _useObjectName ? name : _hoverText;
@@ -67,7 +67,7 @@ namespace Mechanics.Level_Mechanics
             }
         }
 
-        public void OnHoverExit() {
+        public override void OnHoverExit() {
             if (_missingHoverUi) return;
             if (OverrideText) {
                 TextHoverController.Singleton.EndHover();
