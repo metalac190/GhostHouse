@@ -1,11 +1,11 @@
 ﻿#if UNITY_EDITOR
 using System.Text.RegularExpressions;
 using Boo.Lang;
-using UnityEngine;
 using UnityEditor;
+using UnityEngine;
 using Utility;
 
-namespace Assets._Game.Editor
+namespace _Game.Editor
 {
     [CustomEditor(typeof(Documentation))]
     public class DocumentationEditor : UnityEditor.Editor
@@ -20,30 +20,36 @@ namespace Assets._Game.Editor
             else {
                 base.OnInspectorGUI();
             }
-            GUILayout.Space(10);
             var text = ((Documentation)target).Text;
             var sections = ConvertToMarkdown(text);
             foreach (var section in sections) {
                 GUIStyle style = new GUIStyle {
-                    wordWrap = true,
-                    fontStyle = section.bold > 0 ? FontStyle.Bold : FontStyle.Normal
+                    wordWrap = true
                 };
-                switch (section.bold) {
-                    case 3:
-                        style.fontSize = 14;
+                int space = 6;
+                switch (section.Bold) {
+                    case 1:
+                        space = 12;
+                        style.fontSize = 24;
+                        style.fontStyle = FontStyle.Bold;
                         break;
                     case 2:
-                        style.fontSize = 24;
+                        space = 20;
+                        style.fontSize = 16;
+                        style.fontStyle = FontStyle.Bold;
                         break;
-                    case 1:
-                        style.fontSize = 32;
+                    case 3:
+                        space = 20;
+                        style.fontSize = 14;
+                        style.fontStyle = FontStyle.Italic;
                         break;
                 }
-                if (!string.IsNullOrEmpty(text)) {
-                    GUILayout.Label(section.text, style);
+                if (!string.IsNullOrEmpty(section.Text)) {
+                    GUILayout.Space(space);
+                    GUILayout.Label(section.Text, style);
                 }
             }
-            GUILayout.Space(10);
+            GUILayout.Space(16);
         }
 
         private static List<MarkdownLine> ConvertToMarkdown(string text) {
@@ -66,8 +72,8 @@ namespace Assets._Game.Editor
                     bold = 1;
                 }
                 var markdownLine = new MarkdownLine {
-                    text = line.Trim(),
-                    bold = bold
+                    Text = line.Trim(),
+                    Bold = bold
                 };
                 markdownLines.Add(markdownLine);
             }
@@ -76,8 +82,8 @@ namespace Assets._Game.Editor
 
         private struct MarkdownLine
         {
-            public string text;
-            public int bold;
+            public string Text;
+            public int Bold;
         }
     }
 }
