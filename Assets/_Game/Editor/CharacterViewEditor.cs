@@ -1,5 +1,7 @@
+#if UNITY_EDITOR
 using UnityEngine;
 using UnityEditor;
+using Game.Dialog;
 
 /// <summary>
 /// A recycled LineViewEditor.cs from YarnSpinner 2.0.2 for CharcterView.cs
@@ -88,3 +90,4 @@ public class CharacterViewEditor : Editor
         serializedObject.ApplyModifiedProperties();
     }
 }
+#endif
