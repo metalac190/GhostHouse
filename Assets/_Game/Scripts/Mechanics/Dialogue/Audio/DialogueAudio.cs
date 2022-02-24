@@ -2,10 +2,11 @@
 using System.Collections.Generic;
 using UnityEngine;
 using Utility.Audio.Clips.Base;
+using Utility.Audio.Controllers;
 
 namespace Game.Dialog
 {
-    [RequireComponent(typeof(AudioSource))]
+    [RequireComponent(typeof(AudioSourceController))]
     public class DialogueAudio : MonoBehaviour
     {
         #region private variables
@@ -20,7 +21,7 @@ namespace Game.Dialog
         [Tooltip("The CharacterView UI this match up to.")]
         CharacterView _characterView = null;
 
-        AudioSource _audioSource = null;
+        AudioSourceController _audioSource = null;
         Yarn.Unity.LocalizedLine _line = null;
         SOCharacterAudio _speaker = null;
         bool _playLastClip = false;
@@ -30,7 +31,7 @@ namespace Game.Dialog
         #region Monobehaviour
         void Awake()
         {
-            _audioSource = GetComponent<AudioSource>();
+            _audioSource = GetComponent<AudioSourceController>();
         }
 
         void OnEnable()
@@ -65,6 +66,10 @@ namespace Game.Dialog
         }
         #endregion
 
+        /// <summary>
+        /// Begin audio loop.
+        /// </summary>
+        /// <param name="line"> Line of dialogue being played. </param>
         void OnLineStart(Yarn.Unity.LocalizedLine line)
         {
             _line = line;
@@ -87,6 +92,10 @@ namespace Game.Dialog
             StartCoroutine(PlayAudioLoop());
         }
 
+        /// <summary>
+        /// Triggered each time the dialogue display is updated. Tracks when audio loop should transition to final state.
+        /// </summary>
+        /// <param name="index"></param>
         void OnLineUpdate(int index)
         {
             if (index < _indexOfLastWord && !_playLastClip)
@@ -95,6 +104,9 @@ namespace Game.Dialog
             }
         }
 
+        /// <summary>
+        /// Cleans up currently running coroutines.
+        /// </summary>
         void OnLineEnd()
         {
             StopCoroutine(nameof(PlayAudioLoop));
@@ -153,12 +165,13 @@ namespace Game.Dialog
                 yield return new WaitForSeconds(waitTime);
                 yield break;
             }
-        }
 
-        float PlayClip(SfxBase clip)
+            float PlayClip(SfxBase clip)
         {
-            clip.Play();
-            return .5f;
+            _audioSource.SetSourceProperties(clip.GetSourceProperties());
+            _audioSource.Play();
+            return _audioSource.Source.clip.length;
+        }
         }
     }
 }

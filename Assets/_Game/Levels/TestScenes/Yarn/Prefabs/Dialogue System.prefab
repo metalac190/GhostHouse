@@ -356,6 +356,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3581883043503669651}
   - component: {fileID: 4878768899816638450}
+  - component: {fileID: 6618375278194351321}
   - component: {fileID: 3808248521545356875}
   m_Layer: 0
   m_Name: Dialogue Audio
@@ -391,8 +392,31 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _secondaryChance: 0.6
-  _characterAudioPool: {fileID: 0}
+  _characterAudioPool: {fileID: 11400000, guid: 87dc281da5205154b82d49fd68954d5f,
+    type: 2}
   _characterView: {fileID: 2298808187949489255}
+--- !u!114 &6618375278194351321
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5539853836581934048}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6b301a30b7c2f894cb7fdc4d6828f3a8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _sfx:
+    UseConstant: 0
+    Clip: {fileID: 0}
+    Base: {fileID: 0}
+  _playOnStart: 0
+  _looping: 0
+  _loopDelay:
+    MinValue: 0
+    MaxValue: 0
+  _delay: 0
 --- !u!82 &3808248521545356875
 AudioSource:
   m_ObjectHideFlags: 0
@@ -792,6 +816,46 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Pivot.y
       value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7423503231173363116, guid: 023baa361181a8c459cf7e02565feb82,
+        type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7423503231173363116, guid: 023baa361181a8c459cf7e02565feb82,
+        type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7423503231173363116, guid: 023baa361181a8c459cf7e02565feb82,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7423503231173363116, guid: 023baa361181a8c459cf7e02565feb82,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7423503231186396741, guid: 023baa361181a8c459cf7e02565feb82,
+        type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7423503231186396741, guid: 023baa361181a8c459cf7e02565feb82,
+        type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7423503231186396741, guid: 023baa361181a8c459cf7e02565feb82,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7423503231186396741, guid: 023baa361181a8c459cf7e02565feb82,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 023baa361181a8c459cf7e02565feb82, type: 3}
