@@ -37,35 +37,27 @@ namespace Mechanics.Level_Mechanics
             }
         }
 
-        public void OnLeftClick() {
-        }
-
-        public void OnLeftClick(Vector3 position) {
+        public override void OnLeftClick(Vector3 position) {
             if (_sfxOnClick) {
                 SoundManager.Instance.PlaySfx(_sfx, position);
             }
         }
 
-        public void OnRightClick() {
-        }
-
-        public void OnRightClick(Vector3 position) {
+        public override void OnRightClick(Vector3 position) {
             if (_sfxOnClick) {
                 SoundManager.Instance.PlaySfx(_sfx, position);
             }
         }
 
 
-        public void OnHoverEnter() {
+        public override void OnHoverEnter() {
             if (_missingHoverUi) return;
             if (OverrideText) {
                 string text = _useObjectName ? name : _hoverText;
                 TextHoverController.Singleton.StartHover(text);
             }
             if (OverrideMaterial) {
-                if (_meshRenderers == null) {
-                    _meshRenderers = gameObject.GetComponentsInChildren<MeshRenderer>().ToList();
-                }
+                _meshRenderers = gameObject.GetComponentsInChildren<MeshRenderer>().ToList();
                 _baseMaterial = new List<Material>();
                 foreach (var meshRenderer in _meshRenderers) {
                     _baseMaterial.Add(meshRenderer.material);
