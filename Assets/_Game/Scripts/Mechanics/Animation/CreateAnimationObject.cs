@@ -1,7 +1,6 @@
 ﻿using UnityEditor;
 using UnityEditor.Animations;
 using UnityEngine;
-using System;
 
 namespace Animations
 {
@@ -15,7 +14,7 @@ namespace Animations
 
         string _rootName = string.Empty;
 
-        UnityEngine.Object _artMesh;
+        GameObject _artMesh;
 
         AnimatorController _controller;
 
@@ -23,7 +22,9 @@ namespace Animations
         static void Initialize()
         {
             CreateAnimationObject window = ScriptableObject.CreateInstance<CreateAnimationObject>();
-            window.position = new Rect(Screen.width / 2, Screen.height / 2, 750, 500);
+            window.position = new Rect(Screen.width / 2, Screen.height / 2, 500, 500);
+            window.minSize = new Vector2(500f, 250f);
+            window.titleContent = new GUIContent("Create Animation Object");
             window.Show();
         }
 
@@ -37,7 +38,7 @@ namespace Animations
             EditorGUILayout.Space();
             EditorGUILayout.Space();
             EditorGUILayout.LabelField("Place art/ object being animated here");
-            _artMesh = EditorGUILayout.ObjectField("Art Mesh", _artMesh, typeof(UnityEngine.Object), true);
+            _artMesh = (GameObject) EditorGUILayout.ObjectField("Object To Animate", _artMesh, typeof(GameObject), true);
 
             EditorGUILayout.Space();
             EditorGUILayout.Space();
@@ -83,11 +84,13 @@ namespace Animations
             if (GUILayout.Button("Create Object and Controller"))
             {
                 CreateObject();
-                this.Close();
             }
             else if (GUILayout.Button("Only Controller"))
             {
                 CreateController();
+            }
+            else if (GUILayout.Button("Exit"))
+            {
                 this.Close();
             }
             GUILayout.EndHorizontal();
@@ -101,7 +104,9 @@ namespace Animations
             rootObject.transform.position = Vector3.zero;
 
             //adds art
-            _artMesh = Instantiate(_artMesh, rootObject.transform, false);
+            GameObject prefab = AssetDatabase.LoadAssetAtPath<GameObject>(AssetDatabase.GetAssetPath(_artMesh));
+            PrefabUtility.InstantiatePrefab(prefab, rootObject.transform);
+
             //puts on interactables layer
             rootObject.layer = 9;
 
@@ -119,11 +124,23 @@ namespace Animations
             // Creates the controller
             //var controller = AnimatorController.CreateAnimatorControllerAtPath(newPath);
 
-            // copies template over to new controller
-            AssetDatabase.CopyAsset(AssetDatabase.GetAssetPath(_template), newPath);
 
-            // loads new controller
-            AnimatorController controller = (AnimatorController)AssetDatabase.LoadAssetAtPath(newPath, typeof(AnimatorController));
+
+            if (_template != null)
+            {
+                // copies template over to new controller
+                AssetDatabase.CopyAsset(AssetDatabase.GetAssetPath(_template), newPath);
+
+                // loads new controller from template
+                AnimatorController controller = (AnimatorController)AssetDatabase.LoadAssetAtPath(newPath, typeof(AnimatorController));
+                _controller = controller;
+            }
+            else
+            {
+                AnimatorController controller = AnimatorController.CreateAnimatorControllerAtPath(newPath);
+                _controller = controller;
+            }
+
 
             /*
             // Get current states 
@@ -141,7 +158,6 @@ namespace Animations
             // Add parameters
             //controller.AddParameter("Interact", AnimatorControllerParameterType.Trigger);
             */
-            _controller = controller;
         }
     }
 }
