@@ -19,7 +19,6 @@ namespace Animations
         {
             _animator = GetComponent<Animator>();
             gameObject.layer = 9;
-            transform.position = Vector3.zero;
         }
 
         public void OnLeftClick(Vector3 mousePosition) { }

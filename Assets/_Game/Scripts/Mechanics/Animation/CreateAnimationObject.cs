@@ -50,6 +50,7 @@ namespace Animations
 
             //else if (_template.GetType() != typeof(AnimatorController)) EditorGUILayout.HelpBox("Missing", MessageType.Warning);
 
+            /*
             EditorGUILayout.Space();
             EditorGUILayout.Space();
             EditorGUILayout.Space();
@@ -67,6 +68,8 @@ namespace Animations
             _interactionAnimation = (AnimationClip)EditorGUILayout.ObjectField("Interaction Animation", _interactionAnimation, typeof(AnimationClip), true);
             _postInteractionAnimation = (AnimationClip)EditorGUILayout.ObjectField("Post-Interaction Animation", _postInteractionAnimation, typeof(AnimationClip), true);
 
+
+            */ 
             EditorGUILayout.Space();
             EditorGUILayout.Space();
             EditorGUILayout.Space();
