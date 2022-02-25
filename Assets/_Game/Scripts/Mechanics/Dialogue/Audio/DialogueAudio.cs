@@ -167,11 +167,20 @@ namespace Game.Dialog
             }
 
             float PlayClip(SfxBase clip)
-        {
-            _audioSource.SetSourceProperties(clip.GetSourceProperties());
-            _audioSource.Play();
-            return _audioSource.Source.clip.length;
-        }
+            {
+                _audioSource.SetSourceProperties(clip.GetSourceProperties());
+                _audioSource.Play();
+
+                if (_audioSource.Source.clip == null)
+                {
+                    Debug.LogWarning($"SfxBase object, {clip.name}, has a null clip. Please correct this.");
+                    return 0;
+                }
+                else
+                {
+                    return _audioSource.Source.clip.length;
+                }
+            }
         }
     }
 }
