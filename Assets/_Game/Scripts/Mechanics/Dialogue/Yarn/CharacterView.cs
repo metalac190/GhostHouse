@@ -105,7 +105,7 @@ namespace Game.Dialog
         // CharacterViewEditor depends on serialized variable names
         [Header("Effects")]
         [SerializeField]
-        bool _useFadeEffect = true;
+        internal bool _useFadeEffect = true;
 
         [SerializeField]
         [Min(0)]
@@ -129,6 +129,9 @@ namespace Game.Dialog
 
         [SerializeField]
         Image _characterPortraitImage = null;
+
+        [SerializeField]
+        SOCharacterPool _charactersData = null;
 
         [SerializeField]
         TextMeshProUGUI _characterNameText = null;
@@ -158,9 +161,22 @@ namespace Game.Dialog
         Yarn.Markup.MarkupAttribute _markup;
         #endregion
 
+        #region Monobehaviour
         public void Start()
         {
             _canvasGroup = GetComponent<CanvasGroup>();
+
+            if (_characterPortraitImage != null)
+            {
+                if (_charactersData == null)
+                {
+                    Debug.LogWarning($"{name} was not provided _charactersData, but a reference to a character image component " +
+                        "was provided. The image will be hidden and any requested character sprites will not be shown. Please " +
+                        "provide character data if the sprite should be shown.");
+                    _characterPortraitImage.enabled = false;
+                }
+            }
+
             HideView();
         }
 
@@ -192,6 +208,7 @@ namespace Game.Dialog
             // We're good to indicate that we want to skip/continue.
             OnContinueClicked();
         }
+        #endregion
 
         public override void DismissLine(Action onDismissalComplete)
         {
@@ -254,27 +271,42 @@ namespace Game.Dialog
 
             ShowView();
 
+            // show the character sprite
             #region MARKUP: [sprite=str/]
             if (_characterPortraitImage != null)
             {
-                //    SOCharacter character = CharacterManager.Instance.GetCharacter(_currentLine.CharacterName);
-                //    if (character == null)
-                //    {
-                //        Debug.LogError($"Unable to find the character \"{_currentLine.CharacterName}\"");
-                //    }
-                //    else
-                //    {
-                //        Sprite characterSprite;
-                //        if (dialogueLine.Text.TryGetAttributeWithName("sprite", out _markup))
-                //        {
-                //            characterSprite = character.GetSprite(_markup.Properties["sprite"].StringValue);
-                //        }
-                //        else
-                //        {
-                //            characterSprite = character.GetSprite("default");
-                //        }
-                //        if (characterSprite)
-                //    }
+                if (_charactersData != null)
+                {
+                    // find appropriate sprite
+                    // configure the ui
+                    SOCharacter character = _charactersData.GetCharacter(dialogueLine.CharacterName);
+
+                    if (character == null)
+                    {
+                        Debug.LogWarning($"Unable to find character \"{dialogueLine.CharacterName}\".");
+                        _characterPortraitImage.enabled = false;
+                    }
+                    else
+                    {
+                        Sprite characterSprite;
+
+                        bool emotiveSprite = dialogueLine.Text.TryGetAttributeWithName("sprite", out _markup);
+                        if (emotiveSprite)
+                        {
+                            CharacterEmotion emote = SOCharacter.StringToEmotion(_markup.Properties["sprite"].StringValue);
+                            characterSprite = character.GetSprite(emote);
+                        }
+                        else
+                        {
+                            characterSprite = character.GetSprite(CharacterEmotion.Neutral);
+                        }
+
+                        if (characterSprite != null)
+                        {
+                            _characterPortraitImage.sprite = characterSprite;
+                        }
+                    }
+                }
             }
             #endregion
 
