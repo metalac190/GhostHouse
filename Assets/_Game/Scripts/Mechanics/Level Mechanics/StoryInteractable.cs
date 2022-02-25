@@ -37,17 +37,18 @@ namespace Mechanics.Level_Mechanics
             }
         }
 
-        public override void OnLeftClick() {
+        public override void OnLeftClick(Vector3 position) {
             if (_sfxOnClick) {
-                SoundManager.Instance.PlaySfx(_sfx);
+                SoundManager.Instance.PlaySfx(_sfx, position);
             }
         }
 
-        public override void OnRightClick() {
+        public override void OnRightClick(Vector3 position) {
             if (_sfxOnClick) {
-                SoundManager.Instance.PlaySfx(_sfx);
+                SoundManager.Instance.PlaySfx(_sfx, position);
             }
         }
+
 
         public override void OnHoverEnter() {
             if (_missingHoverUi) return;
@@ -56,9 +57,7 @@ namespace Mechanics.Level_Mechanics
                 TextHoverController.Singleton.StartHover(text);
             }
             if (OverrideMaterial) {
-                if (_meshRenderers == null) {
-                    _meshRenderers = gameObject.GetComponentsInChildren<MeshRenderer>().ToList();
-                }
+                _meshRenderers = gameObject.GetComponentsInChildren<MeshRenderer>().ToList();
                 _baseMaterial = new List<Material>();
                 foreach (var meshRenderer in _meshRenderers) {
                     _baseMaterial.Add(meshRenderer.material);
@@ -79,15 +78,5 @@ namespace Mechanics.Level_Mechanics
                 _baseMaterial.Clear();
             }
         }
-
-        #region Satisfying Interactable
-
-        public void OnLeftClick(Vector3 mousePosition) {
-        }
-
-        public void OnRightClick(Vector3 mousePosition) {
-        }
-
-        #endregion
     }
 }

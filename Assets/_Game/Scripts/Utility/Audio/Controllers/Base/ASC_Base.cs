@@ -36,6 +36,7 @@ namespace Utility.Audio.Controllers.Base
             source.panStereo = p.StereoPan;
             source.reverbZoneMix = p.ReverbZoneMix;
 
+            transform.position = p.Position;
             source.spatialBlend = p.SpatialBlend;
             source.rolloffMode = p.RolloffMode;
             source.minDistance = p.MinDistance;
