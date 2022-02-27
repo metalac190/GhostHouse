@@ -17,10 +17,11 @@ public class ObjectClicker : MonoBehaviour
     /*This is the layermask value of the interactables. All interactables must inherit from the IInteractable Interface and be on the Interactables
      LayerMask.*/
     [SerializeField] private LayerMask _clickableLayerMask = 0;
+    [SerializeField] private LayerMask _nonImportantClickableLayerMask = 0;
 
     //This is just a placeholder variable that I use to switch from OnHoverEnter to OnHoverExit
     private IInteractable _previousInteractable;
-    
+
     void Update()
     {
         #region OnHoverScopeRayCasts
@@ -46,12 +47,13 @@ public class ObjectClicker : MonoBehaviour
                 _previousInteractable = interactable;
             }
         }
+        
         //returns true if the raycast hits something that isn't on the Interactables Layer or isn't within 100 units.
         else
         {
             if (_previousInteractable != null) _previousInteractable.OnHoverExit();
             _previousInteractable = null;
-            
+
         }
         #endregion
 
@@ -73,6 +75,14 @@ public class ObjectClicker : MonoBehaviour
                     interactable.OnLeftClick();
                 }
             }
+            else if (Physics.Raycast(rayClick, out hitClick, _clickDistance, _nonImportantClickableLayerMask))
+            {
+                IInteractable interactable = hitClick.transform.GetComponent<IInteractable>();
+                if (interactable != null)
+                {
+                    interactable.OnLeftClick(hitClick.point);
+                }
+            }
         }
         else if (Input.GetMouseButtonDown(1))
         {
@@ -85,6 +95,14 @@ public class ObjectClicker : MonoBehaviour
                 if (interactable != null)
                 {
                     interactable.OnRightClick();
+                }
+            }
+            else if (Physics.Raycast(rayClick, out hitClick, _clickDistance, _nonImportantClickableLayerMask))
+            {
+                IInteractable interactable = hitClick.transform.GetComponent<IInteractable>();
+                if (interactable != null)
+                {
+                    interactable.OnRightClick(hitClick.point);
                 }
             }
         }

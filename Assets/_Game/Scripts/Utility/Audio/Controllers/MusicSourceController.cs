@@ -31,7 +31,6 @@ namespace Utility.Audio.Controllers
             SetSourceProperties(track.GetSourceProperties());
             StartCoroutine(FadeRoutine(track.FadeInTime, true));
             Play();
-            Debug.Log(_timeToStop);
         }
 
         public void PlayMusic(MusicTrack track, float time) {

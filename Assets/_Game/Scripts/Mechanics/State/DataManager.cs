@@ -19,8 +19,8 @@ public class DataManager : MonoBehaviour
     public int level { get; set; }
     public int remainingSpiritPoints { get; set; }
 
-    [SerializeField] private YarnObject[] yarnObjects;
-    [SerializeField] private string[] interactableStates;
+    [SerializeField] private YarnObject[] yarnObjects = new YarnObject[0];
+    [SerializeField] private string[] interactableStates = new string[0];
     public OrderedDictionary interactablesMap = new OrderedDictionary();
 
     public float settingsVolume { get; set; }
