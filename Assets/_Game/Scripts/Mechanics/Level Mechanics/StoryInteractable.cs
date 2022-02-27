@@ -9,26 +9,51 @@ namespace Mechanics.Level_Mechanics
 {
     public class StoryInteractable : InteractableBase
     {
-        [Header("Sfx On Click")]
-        [SerializeField] private bool _sfxOnClick = false;
-        [SerializeField] private SfxType _sfx = SfxType.None;
-
-        [Header("Text On Hover")]
-        [SerializeField] private bool _textOnHover = false;
+        [Header("Hover: Preview Text")]
+        [SerializeField] private bool _previewText = false;
         [SerializeField] private bool _useObjectName = false;
         [SerializeField] private string _hoverText = "";
 
-        [Header("Material Override On Hover")]
-        [SerializeField] private bool _setMaterialOnHover = false;
+        [Header("Hover: Highlight")]
+        [SerializeField] private bool _highlight = false;
+        [SerializeField] private Color _highlightColor = Color.yellow;
+        [SerializeField] private float _highlightSize = 1f;
+
+        [Header("Hover: Override Art Materials")]
+        [SerializeField] private bool _clickOverrideMaterial = false;
         [SerializeField] private Material _materialToSet = null;
+
+        [Header("Click: Sfx")]
+        [SerializeField] private bool _clickSfx = false;
+        [SerializeField] private SfxType _sfx = SfxType.None;
+
+        [Header("Click: Modal Window")]
+        [SerializeField] private bool _clickWindow = false;
+        [SerializeField, TextArea] private string _displayText = "";
+        [SerializeField] private bool _displayImage = false;
+        [SerializeField] private Sprite _imageToDisplay = null;
+        [SerializeField] private bool _cancelButton = true;
+
+        [Header("Interaction")]
+        [SerializeField] private bool _confirmButton = true;
+        [SerializeField] private Interactable _interaction = null;
+        [SerializeField] private Sprite _sprite;
+        [SerializeField] private Animator _confirmAnimation = null;
+
+        [Header("Alternate Interaction")]
+        [SerializeField] private bool _confirmAltButton = false;
+        [SerializeField] private Interactable _altInteraction = null;
+        [SerializeField] private Sprite _altSprite;
+        [SerializeField] private Animator _confirmAltAnimation = null;
+
 
         private List<MeshRenderer> _meshRenderers;
         private List<Material> _baseMaterial;
 
         private bool _missingHoverUi;
 
-        private bool OverrideText => _textOnHover && (_useObjectName || !string.IsNullOrEmpty(_hoverText));
-        private bool OverrideMaterial => _setMaterialOnHover && _materialToSet != null;
+        private bool OverrideText => _previewText && (_useObjectName || !string.IsNullOrEmpty(_hoverText));
+        private bool OverrideMaterial => _clickOverrideMaterial && _materialToSet != null;
 
         private void Start() {
             if (TextHoverController.Singleton == null) {
@@ -38,13 +63,14 @@ namespace Mechanics.Level_Mechanics
         }
 
         public override void OnLeftClick(Vector3 position) {
-            if (_sfxOnClick) {
+            if (_clickSfx) {
                 SoundManager.Instance.PlaySfx(_sfx, position);
             }
+            PanelController.Singleton.EnableModalWindow(_interaction, _altInteraction);
         }
 
         public override void OnRightClick(Vector3 position) {
-            if (_sfxOnClick) {
+            if (_clickSfx) {
                 SoundManager.Instance.PlaySfx(_sfx, position);
             }
         }
