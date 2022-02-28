@@ -50,11 +50,11 @@ namespace Mechanics.Level_Mechanics
         [SerializeField] private Sprite _altSprite;
         [SerializeField] private Animator _confirmAltAnimation = null;
 
-        [Header("Collision Information")]
-        [SerializeField] private bool _confirmUseChildCollider = false;
-        [SerializeField] private bool _confirmUseSpecificCollider = false;
-        [SerializeField] private Collider _specificCollider = null;
-        private Collider colliderToUse = null;
+        //[Header("Collision Information")]
+        //[SerializeField] private bool _confirmUseChildCollider = false;
+        //[SerializeField] private bool _confirmUseSpecificCollider = false;
+        //[SerializeField] private Collider _specificCollider = null;
+        //private Collider colliderToUse = null;
 
 
         private List<MeshRenderer> _meshRenderers;
@@ -71,11 +71,7 @@ namespace Mechanics.Level_Mechanics
                 Debug.LogWarning("Missing Text Hover Controller in Scene!");
             }
 
-            //Collider Stuffs
-            if (_confirmUseChildCollider)
-            {
-                
-            }
+            
         }
 
         public override void OnLeftClick(Vector3 position) {
