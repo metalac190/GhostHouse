@@ -10,6 +10,12 @@ public class InteractableResponse : MonoBehaviour
     [SerializeField] private UnityEvent _event;
 
     private void OnEnable() {
+        _interactable.LoadInteraction();
+        if(_interactable._interacted)
+        {
+            Invoke();
+            return;
+        }
         _interactable.Raise(this);
     }
 

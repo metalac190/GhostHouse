@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using UnityEngine;
+using Utility.Buttons;
 
 public class DataManager : MonoBehaviour
 {
@@ -36,6 +37,7 @@ public class DataManager : MonoBehaviour
             DontDestroyOnLoad(this.gameObject);
             filePath = Path.Combine(Application.persistentDataPath, "savedata.json");
             journalUnlocks = new bool[10];
+            interactions = new Dictionary<string, bool>();
         }
         else
         {
@@ -45,7 +47,7 @@ public class DataManager : MonoBehaviour
 
     private void Start()
     {
-        Debug.Log(journalUnlocks.Length);
+
     }
 
     // Read data from the save file into the game
@@ -90,7 +92,14 @@ public class DataManager : MonoBehaviour
 
     public bool GetInteraction(string name)
     {
-        return interactions[name];
+        if(interactions.ContainsKey(name))
+        {
+            return interactions[name];
+        }
+        else
+        {
+            return false;
+        }
     }
 
     // Dump all data to the console
@@ -135,5 +144,11 @@ public class DataManager : MonoBehaviour
         {
             Debug.Log("journal entry failed at: " + index.ToString());
         }
+    }
+
+    [Button(Mode = ButtonMode.NotPlaying)]
+    public void ResetData()
+    {
+        interactions.Clear();
     }
 }
