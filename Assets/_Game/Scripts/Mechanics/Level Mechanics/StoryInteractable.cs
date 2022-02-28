@@ -7,28 +7,62 @@ using Utility.Audio.Managers;
 
 namespace Mechanics.Level_Mechanics
 {
-    public class StoryInteractable : MonoBehaviour, IInteractable
+    public class StoryInteractable : InteractableBase
     {
-        [Header("Sfx On Click")]
-        [SerializeField] private bool _sfxOnClick = false;
-        [SerializeField] private SfxType _sfx = SfxType.None;
-
-        [Header("Text On Hover")]
-        [SerializeField] private bool _textOnHover = false;
+        [Header("Hover: Preview Text")]
+        [SerializeField] private bool _previewText = false;
         [SerializeField] private bool _useObjectName = false;
         [SerializeField] private string _hoverText = "";
 
-        [Header("Material Override On Hover")]
-        [SerializeField] private bool _setMaterialOnHover = false;
+        [Header("Hover: Highlight")]
+        [SerializeField] private bool _highlight = false;
+        [SerializeField] private Color _highlightColor = Color.yellow;
+        [SerializeField] private float _highlightSize = 1f;
+
+        [Header("Hover: Override Art Materials")]
+        [SerializeField] private bool _clickOverrideMaterial = false;
         [SerializeField] private Material _materialToSet = null;
+
+        [Header("Click: Sfx")]
+        [SerializeField] private bool _clickSfx = false;
+        [SerializeField] private SfxType _sfx = SfxType.None;
+
+        [Header("Click: Modal Window")]
+        [SerializeField] private bool _clickWindow = false;
+        [SerializeField, TextArea] private string _displayText = "";
+        [SerializeField] private bool _displayImage = false;
+        [SerializeField] private Sprite _imageToDisplay = null;
+        [SerializeField] private bool _cancelButton = true;
+        [SerializeField] private string _mainButtonText = "";
+        [SerializeField] private string _altButtonText = "";
+
+        [Header("Interaction")]
+        [SerializeField] private bool _confirmButton = true;
+        [SerializeField] private Interactable _interaction = null;
+        [SerializeField] private Sprite _sprite;
+        [SerializeField] private Animator _confirmAnimation = null;
+
+
+        [Header("Alternate Interaction")]
+        [SerializeField] private bool _confirmAltButton = false;
+        [SerializeField] private Interactable _altInteraction = null;
+        [SerializeField] private Sprite _altSprite;
+        [SerializeField] private Animator _confirmAltAnimation = null;
+
+        //[Header("Collision Information")]
+        //[SerializeField] private bool _confirmUseChildCollider = false;
+        //[SerializeField] private bool _confirmUseSpecificCollider = false;
+        //[SerializeField] private Collider _specificCollider = null;
+        //private Collider colliderToUse = null;
+
 
         private List<MeshRenderer> _meshRenderers;
         private List<Material> _baseMaterial;
 
         private bool _missingHoverUi;
 
-        private bool OverrideText => _textOnHover && (_useObjectName || !string.IsNullOrEmpty(_hoverText));
-        private bool OverrideMaterial => _setMaterialOnHover && _materialToSet != null;
+        private bool OverrideText => _previewText && (_useObjectName || !string.IsNullOrEmpty(_hoverText));
+        private bool OverrideMaterial => _clickOverrideMaterial && _materialToSet != null;
 
         private void Start() {
             if (TextHoverController.Singleton == null) {
@@ -37,28 +71,32 @@ namespace Mechanics.Level_Mechanics
             }
         }
 
-        public void OnLeftClick() {
-            if (_sfxOnClick) {
-                SoundManager.Instance.PlaySfx(_sfx);
+        public override void OnLeftClick(Vector3 position) {
+            Debug.Log("Clicked on " + gameObject.name + "!");
+            if (_clickSfx) {
+                SoundManager.Instance.PlaySfx(_sfx, position);
+            }
+            if (_clickWindow && _interaction != null && _interaction.CanInteract) {
+                ModalWindowController.Singleton.EnableModalWindow(_interaction, _altInteraction,
+                    _displayText, _imageToDisplay, _cancelButton, _mainButtonText, _altButtonText);
             }
         }
 
-        public void OnRightClick() {
-            if (_sfxOnClick) {
-                SoundManager.Instance.PlaySfx(_sfx);
+        public override void OnRightClick(Vector3 position) {
+            if (_clickSfx) {
+                SoundManager.Instance.PlaySfx(_sfx, position);
             }
         }
 
-        public void OnHoverEnter() {
+
+        public override void OnHoverEnter() {
             if (_missingHoverUi) return;
             if (OverrideText) {
                 string text = _useObjectName ? name : _hoverText;
                 TextHoverController.Singleton.StartHover(text);
             }
             if (OverrideMaterial) {
-                if (_meshRenderers == null) {
-                    _meshRenderers = gameObject.GetComponentsInChildren<MeshRenderer>().ToList();
-                }
+                _meshRenderers = gameObject.GetComponentsInChildren<MeshRenderer>().ToList();
                 _baseMaterial = new List<Material>();
                 foreach (var meshRenderer in _meshRenderers) {
                     _baseMaterial.Add(meshRenderer.material);
@@ -67,7 +105,7 @@ namespace Mechanics.Level_Mechanics
             }
         }
 
-        public void OnHoverExit() {
+        public override void OnHoverExit() {
             if (_missingHoverUi) return;
             if (OverrideText) {
                 TextHoverController.Singleton.EndHover();
@@ -79,15 +117,5 @@ namespace Mechanics.Level_Mechanics
                 _baseMaterial.Clear();
             }
         }
-
-        #region Satisfying Interactable
-
-        public void OnLeftClick(Vector3 mousePosition) {
-        }
-
-        public void OnRightClick(Vector3 mousePosition) {
-        }
-
-        #endregion
     }
 }
