@@ -19,7 +19,7 @@ public class DataManager : MonoBehaviour
     public int remainingSpiritPoints { get; set; }
 
     [HideInInspector]
-    public ScriptableObject[] interactableObjects;
+    public Dictionary<string, bool> interactions;
 
     public float settingsVolume { get; set; }
     public int settingsGraphics { get; set; }
@@ -58,7 +58,7 @@ public class DataManager : MonoBehaviour
 
             level = saveData.level;
             remainingSpiritPoints = saveData.remainingSpiritPoints;
-            saveData.interactionStates.CopyTo(interactableObjects, 0);
+            //saveData.interactionStates.CopyTo(interactableObjects, 0);
             settingsVolume = saveData.settings.volume;
             settingsGraphics = saveData.settings.graphics;
             saveData.journalUnlocks.CopyTo(journalUnlocks, 0);
@@ -74,7 +74,7 @@ public class DataManager : MonoBehaviour
     {
         saveData.level = level;
         saveData.remainingSpiritPoints = remainingSpiritPoints;
-        interactableObjects.CopyTo(saveData.interactionStates, 0);
+        //interactableObjects.CopyTo(saveData.interactionStates, 0);
         saveData.settings.volume = settingsVolume;
         saveData.settings.graphics = settingsGraphics;
         journalUnlocks.CopyTo(saveData.journalUnlocks, 0);
@@ -83,14 +83,14 @@ public class DataManager : MonoBehaviour
         File.WriteAllText(filePath, jsonString);
     }
 
-    public ScriptableObject GetInteractableState(int index)
+    public void SetInteraction(string name, bool interacted)
     {
-        return interactableObjects[index];
+        interactions[name] = interacted;
     }
 
-    public void SetInteractableState(int index, string state)
+    public bool GetInteraction(string name)
     {
-        //interactableObjects[index] = state;
+        return interactions[name];
     }
 
     // Dump all data to the console
@@ -100,10 +100,10 @@ public class DataManager : MonoBehaviour
         outstr += "\nLevel: " + level.ToString();
         outstr += "\nSpirit Points: " + remainingSpiritPoints.ToString();
         outstr += "\nInteractables:";
-        for(int i = 0; i < interactableObjects.Length; i++)
-        {
+        //for(int i = 0; i < interactions.Length; i++)
+        //{
             //outstr += "\n\tInteractable " + i.ToString() + ": " + interactableObjects[i];
-        }
+        //}
         outstr += "\nSettings:";
         outstr += "\n\tVolume: " + settingsVolume.ToString();
         outstr += "\n\tGraphics: " + settingsGraphics.ToString();
