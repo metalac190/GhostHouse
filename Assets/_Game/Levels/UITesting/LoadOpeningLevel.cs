@@ -9,4 +9,9 @@ public class LoadOpeningLevel : MonoBehaviour
     {
         SceneManager.LoadScene("Sandbox");
     }
+
+    public void LoadSpring()
+    {
+        SceneManager.LoadScene("Spring");
+    }
 }

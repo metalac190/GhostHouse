@@ -10,11 +10,11 @@ public class InteractableResponse : MonoBehaviour
     [SerializeField] private UnityEvent _event;
 
     private void OnEnable() {
-        _interactable.Subscribe(this);
+        _interactable.Raise(this);
     }
 
     private void OnDisable() {
-        _interactable.Unsubscribe(this);
+        _interactable.Unraise(this);
     }
 
     public void Invoke() {

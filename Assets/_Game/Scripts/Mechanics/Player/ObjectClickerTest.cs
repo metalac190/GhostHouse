@@ -88,14 +88,35 @@ namespace Mechanics.Player
             IInteractable interactable = hit.transform.GetComponent<IInteractable>();
 
             // Interactable clicked
-            if (interactable != null) {
-                if (left) {
+            if (interactable != null)
+            {
+                if (left)
+                {
                     interactable.OnLeftClick();
                     interactable.OnLeftClick(hit.point);
                 }
-                else {
+                else
+                {
                     interactable.OnRightClick();
                     interactable.OnRightClick(hit.point);
+                }
+            }
+            else if (interactable == null)
+            {
+                IInteractable parentInteractable = hit.transform.GetComponentInParent<IInteractable>();
+
+                if (parentInteractable != null)
+                {
+                    if (left)
+                    {
+                        parentInteractable.OnLeftClick();
+                        parentInteractable.OnLeftClick(hit.point);
+                    }
+                    else
+                    {
+                        parentInteractable.OnRightClick();
+                        parentInteractable.OnRightClick(hit.point);
+                    }
                 }
             }
         }
