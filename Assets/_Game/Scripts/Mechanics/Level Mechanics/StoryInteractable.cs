@@ -29,7 +29,6 @@ namespace Mechanics.Level_Mechanics
 
         [Header("Click: Modal Window")]
         [SerializeField] private bool _clickWindow = false;
-        [SerializeField] private bool _overrideOriginalValues = false;
         [SerializeField, TextArea] private string _displayText = "";
         [SerializeField] private bool _displayImage = false;
         [SerializeField] private Sprite _imageToDisplay = null;
@@ -42,7 +41,7 @@ namespace Mechanics.Level_Mechanics
         [SerializeField] private Interactable _interaction = null;
         [SerializeField] private Sprite _sprite;
         [SerializeField] private Animator _confirmAnimation = null;
-        
+
 
         [Header("Alternate Interaction")]
         [SerializeField] private bool _confirmAltButton = false;
@@ -70,27 +69,16 @@ namespace Mechanics.Level_Mechanics
                 _missingHoverUi = true;
                 Debug.LogWarning("Missing Text Hover Controller in Scene!");
             }
-
-            
         }
 
         public override void OnLeftClick(Vector3 position) {
-
             Debug.Log("Clicked on " + gameObject.name + "!");
             if (_clickSfx) {
                 SoundManager.Instance.PlaySfx(_sfx, position);
             }
-            if (_clickWindow && _interaction != null)
-            {
-                if (_overrideOriginalValues)
-                {
-                    ModalWindowController.Singleton.EnableModalWindow(_interaction, _altInteraction, _displayText, _imageToDisplay, _cancelButton, _mainButtonText, _altButtonText);
-                }
-                else
-                {
-                    ModalWindowController.Singleton.EnableModalWindow(_interaction, _altInteraction, _interaction.modalWindowDisplayText, _interaction.modalWindowImageToDisplay, 
-                        _interaction.hasCancelButton, _interaction.mainInteractionButtonText, _interaction.altInteractionButtonText);
-                }
+            if (_clickWindow && _interaction != null && _interaction.CanInteract) {
+                ModalWindowController.Singleton.EnableModalWindow(_interaction, _altInteraction,
+                    _displayText, _imageToDisplay, _cancelButton, _mainButtonText, _altButtonText);
             }
         }
 

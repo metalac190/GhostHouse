@@ -7,13 +7,6 @@ using TMPro;
 
 public class ModalWindowController : MonoBehaviour
 {
-    
-
-   
-
-
-
-
     //private variables
     private Interactable _mainInteraction;
     private Interactable _alternateInteraction;
@@ -29,106 +22,104 @@ public class ModalWindowController : MonoBehaviour
     [SerializeField] Button _closeButton = null;
     [SerializeField] Image _displayImage = null;
 
+    private Interactable _interactable;
+    private Interactable _altInteractable;
+
     #region Singleton Pattern
 
     public static ModalWindowController Singleton { get; private set; }
-    private void Awake()
-    {
-        if (Singleton == null)
-        {
+
+    private void Awake() {
+        if (Singleton == null) {
             Singleton = this;
-            DontDestroyOnLoad(gameObject);
+            //DontDestroyOnLoad(gameObject);
         }
-        else
-        {
+        else {
             Destroy(gameObject);
         }
+
         #endregion
 
         _modalWindow.SetActive(false);
     }
 
 
-    public void EnableModalWindow(Interactable interactable, Interactable altInteractable, string displayText, Sprite imageToDisplay, bool hasCancelButton, 
-        string mainIntText, string altIntText) 
-    {
+    public void EnableModalWindow(Interactable interactable, Interactable altInteractable, string displayText, Sprite imageToDisplay, bool hasCancelButton,
+        string mainIntText, string altIntText) {
         // Carlos here
 
+        _interactable = interactable;
+        _altInteractable = interactable;
 
         #region Assigning Variables
-        if (interactable == null)
-        {
+
+        if (interactable == null) {
             Debug.LogWarning("There is no InteractableObject created/connected!");
         }
-        else
-        {
+        else {
             _mainInteraction = interactable;
         }
 
-        if (altInteractable == null)
-        {
+        if (altInteractable == null) {
             //Note to Carlos and UI Designers: If altInteractable is null, then you only need one button for the Modal Window
             //Note to Carlos and UI Designers: feel free to disable the second button here.
             _alternateInteractionButton.gameObject.SetActive(false);
         }
-        else
-        {
+        else {
             _alternateInteraction = altInteractable;
         }
 
-        if (displayText.Equals(""))
-        {
+        if (displayText.Equals("")) {
             _modalWindowText.text = "Default Text";
         }
-        else
-        {
+        else {
             _modalWindowText.text = displayText;
         }
 
-        if (imageToDisplay == null)
-        {
+        if (imageToDisplay == null) {
             //Note to Carlos and UI Designers: If imageToDisplay is null, then you can disable the sprite for the Modal Window
             //Note to Carlos and UI Designers: feel free to disable the sprite here.
         }
-        else
-        {
+        else {
             _displayImage.sprite = imageToDisplay;
         }
-
-        
 
         #endregion
 
         #region Displaying The Window
 
-        if (_modalWindow.activeInHierarchy == false)
-        {
+        if (_modalWindow.activeInHierarchy == false) {
             _modalWindow.SetActive(true);
         }
 
-        if (hasCancelButton)
-        {
+        if (hasCancelButton) {
             _closeButton.gameObject.SetActive(true);
         }
-        else
-        {
+        else {
             _closeButton.gameObject.SetActive(false);
         }
-
 
         #endregion
     }
 
-    public void DisableModalWindow()
-    {
+    public void ClickButton() {
+        _interactable.Interact();
+        DisableModalWindow();
+    }
+
+    public void ClickAltButton() {
+        _altInteractable.Interact();
+        DisableModalWindow();
+    }
+
+    public void DisableModalWindow() {
         //disable the window here
         _modalWindow.SetActive(false);
     }
 
     #region Debug Methods
 
-    public void MainWorked()
-    {
+    public void MainWorked() {
         Debug.Log("Main Interaction Is Done");
     }
 

@@ -28,33 +28,26 @@ public class DataManager : MonoBehaviour
     [HideInInspector]
     public bool[] journalUnlocks;
 
-    private void Awake()
-    {
+    private void Awake() {
         // Singleton pattern, there should only be one of these on the DataManager Prefab
-        if(Instance == null)
-        {
+        if (Instance == null) {
             Instance = this;
             DontDestroyOnLoad(this.gameObject);
             filePath = Path.Combine(Application.persistentDataPath, "savedata.json");
             journalUnlocks = new bool[10];
             interactions = new Dictionary<string, bool>();
         }
-        else
-        {
+        else {
             Destroy(this.gameObject);
         }
     }
 
-    private void Start()
-    {
-
+    private void Start() {
     }
 
     // Read data from the save file into the game
-    public void ReadFile()
-    {
-        if(File.Exists(filePath))
-        {
+    public void ReadFile() {
+        if (File.Exists(filePath)) {
             string fileContents = File.ReadAllText(filePath);
             JsonUtility.FromJsonOverwrite(fileContents, saveData);
 
@@ -65,15 +58,13 @@ public class DataManager : MonoBehaviour
             settingsGraphics = saveData.settings.graphics;
             saveData.journalUnlocks.CopyTo(journalUnlocks, 0);
         }
-        else
-        {
+        else {
             Debug.Log("No save file exists");
         }
     }
 
     // Write the data into the save file
-    public void WriteFile()
-    {
+    public void WriteFile() {
         saveData.level = level;
         saveData.remainingSpiritPoints = remainingSpiritPoints;
         //interactableObjects.CopyTo(saveData.interactionStates, 0);
@@ -85,42 +76,35 @@ public class DataManager : MonoBehaviour
         File.WriteAllText(filePath, jsonString);
     }
 
-    public void SetInteraction(string name, bool interacted)
-    {
+    public void SetInteraction(string name, bool interacted) {
         interactions[name] = interacted;
     }
 
-    public bool GetInteraction(string name)
-    {
-        if(interactions.ContainsKey(name))
-        {
+    public bool GetInteraction(string name) {
+        if (interactions.ContainsKey(name)) {
             return interactions[name];
         }
-        else
-        {
+        else {
             return false;
         }
     }
 
     // Dump all data to the console
-    public void DumpData()
-    {
+    public void DumpData() {
         string outstr = "Data Dump";
         outstr += "\nLevel: " + level.ToString();
         outstr += "\nSpirit Points: " + remainingSpiritPoints.ToString();
         outstr += "\nInteractables:";
         //for(int i = 0; i < interactions.Length; i++)
         //{
-            //outstr += "\n\tInteractable " + i.ToString() + ": " + interactableObjects[i];
+        //outstr += "\n\tInteractable " + i.ToString() + ": " + interactableObjects[i];
         //}
         outstr += "\nSettings:";
         outstr += "\n\tVolume: " + settingsVolume.ToString();
         outstr += "\n\tGraphics: " + settingsGraphics.ToString();
         outstr += "\nJournal Unlocks: ";
-        for(int i = 0; i < journalUnlocks.Length; i++)
-        {
-            if(journalUnlocks[i])
-            {
+        for (int i = 0; i < journalUnlocks.Length; i++) {
+            if (journalUnlocks[i]) {
                 outstr += i.ToString() + " ";
             }
         }
@@ -128,27 +112,22 @@ public class DataManager : MonoBehaviour
     }
 
     // Dump save file contents to the console
-    public void DumpFileContents()
-    {
+    public void DumpFileContents() {
         Debug.Log(File.ReadAllText(filePath));
     }
 
     // Mark a journal entry as unlocked
-    public void UnlockJournalEntry(int index)
-    {
-        try
-        {
+    public void UnlockJournalEntry(int index) {
+        try {
             journalUnlocks[index] = true;
         }
-        catch(System.Exception ex)
-        {
+        catch (System.Exception ex) {
             Debug.Log("journal entry failed at: " + index.ToString());
         }
     }
 
     [Button(Mode = ButtonMode.NotPlaying)]
-    public void ResetData()
-    {
+    public void ResetData() {
         interactions.Clear();
     }
 }
