@@ -558,6 +558,7 @@ GameObject:
   - component: {fileID: 501660904}
   - component: {fileID: 501660903}
   - component: {fileID: 501660902}
+  - component: {fileID: 501660905}
   m_Layer: 5
   m_Name: QuitBtn
   m_TagString: Untagged
@@ -628,8 +629,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_MethodName: QuitGame
+      - m_Target: {fileID: 501660905}
+        m_MethodName: Exit
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -676,6 +677,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 501660900}
   m_CullTransparentMesh: 0
+--- !u!114 &501660905
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 501660900}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2b98eec20cacf2e48bf45aab618aa199, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &724031517
 GameObject:
   m_ObjectHideFlags: 0
@@ -2060,7 +2073,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1873396224}
-        m_MethodName: LoadSandbox
+        m_MethodName: LoadSpring
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
