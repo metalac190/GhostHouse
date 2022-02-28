@@ -80,7 +80,7 @@ namespace Mechanics.Level_Mechanics
             if (_clickSfx) {
                 SoundManager.Instance.PlaySfx(_sfx, position);
             }
-            if (_clickWindow)
+            if (_clickWindow && _interaction != null)
             {
                 if (_overrideOriginalValues)
                 {
