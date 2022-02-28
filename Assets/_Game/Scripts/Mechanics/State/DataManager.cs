@@ -1,6 +1,5 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
-using System.Collections.Specialized;
 using System.IO;
 using UnityEngine;
 
@@ -12,20 +11,20 @@ public class DataManager : MonoBehaviour
     // string to hold the path to the savefile
     private string filePath;
 
-    // Reference to SaveData object, will hold values to save
+    // rweference to SaveData object, will hold values to save
     private SaveData saveData = new SaveData();
 
     // Save Data fields saved in DataManager
     public int level { get; set; }
     public int remainingSpiritPoints { get; set; }
 
-    [SerializeField] private YarnObject[] yarnObjects = new YarnObject[0];
-    [SerializeField] private string[] interactableStates = new string[0];
-    public OrderedDictionary interactablesMap = new OrderedDictionary();
+    [HideInInspector]
+    public ScriptableObject[] interactableObjects;
 
     public float settingsVolume { get; set; }
     public int settingsGraphics { get; set; }
 
+    [HideInInspector]
     public bool[] journalUnlocks;
 
     private void Awake()
@@ -44,18 +43,6 @@ public class DataManager : MonoBehaviour
         }
     }
 
-    private void Start()
-    {
-        if(yarnObjects.Length != interactableStates.Length)
-        {
-            Debug.Log("Each Yarn Object should have a state");
-            for(int i = 0; i < yarnObjects.Length; i++)
-            {
-                interactablesMap.Add(yarnObjects[i], interactableStates[i]);
-            }
-        }
-    }
-
     // Read data from the save file into the game
     public void ReadFile()
     {
@@ -66,16 +53,14 @@ public class DataManager : MonoBehaviour
 
             level = saveData.level;
             remainingSpiritPoints = saveData.remainingSpiritPoints;
-            for(int i = 0; i < interactableStates.Length; i++)
-            {
-                interactablesMap[i] = saveData.interactionStates[i];
-            }
+            saveData.interactionStates.CopyTo(interactableObjects, 0);
             settingsVolume = saveData.settings.volume;
             settingsGraphics = saveData.settings.graphics;
-            for(int i = 0; i < journalUnlocks.Length; i++)
-            {
-                journalUnlocks[i] = saveData.journalUnlocks[i];
-            }
+            saveData.journalUnlocks.CopyTo(journalUnlocks, 0);
+        }
+        else
+        {
+            Debug.Log("No save file exists");
         }
     }
 
@@ -84,28 +69,51 @@ public class DataManager : MonoBehaviour
     {
         saveData.level = level;
         saveData.remainingSpiritPoints = remainingSpiritPoints;
-        for(int i = 0; i < interactableStates.Length; i++)
-        {
-            saveData.interactionStates[i] = (string)interactablesMap[i];
-        }
+        interactableObjects.CopyTo(saveData.interactionStates, 0);
         saveData.settings.volume = settingsVolume;
         saveData.settings.graphics = settingsGraphics;
-        for(int i = 0; i < journalUnlocks.Length; i++)
-        {
-            saveData.journalUnlocks[i] = journalUnlocks[i];
-        }
+        journalUnlocks.CopyTo(saveData.journalUnlocks, 0);
 
         string jsonString = JsonUtility.ToJson(saveData, true);
         File.WriteAllText(filePath, jsonString);
     }
 
-    public string GetInteractableState(YarnObject yo)
+    public ScriptableObject GetInteractableState(int index)
     {
-        return (string)interactablesMap[yo];
+        return interactableObjects[index];
     }
 
-    public void SetInteractableState(YarnObject yo, string state)
+    public void SetInteractableState(int index, string state)
     {
-        interactablesMap[yo] = state;
+        //interactableObjects[index] = state;
+    }
+
+    public void DumpData()
+    {
+        string outstr = "Data Dump";
+        outstr += "\nLevel: " + level.ToString();
+        outstr += "\nSpirit Points: " + remainingSpiritPoints.ToString();
+        outstr += "\nInteractables:";
+        for(int i = 0; i < interactableObjects.Length; i++)
+        {
+            outstr += "\n\tInteractable " + i.ToString() + ": " + interactableObjects[i];
+        }
+        outstr += "\nSettings:";
+        outstr += "\n\tVolume: " + settingsVolume.ToString();
+        outstr += "\n\tGraphics: " + settingsGraphics.ToString();
+        outstr += "Journal Unlocks: ";
+        for(int i = 0; i < journalUnlocks.Length; i++)
+        {
+            if(journalUnlocks[i])
+            {
+                outstr += i.ToString() + " ";
+            }
+        }
+        Debug.Log(outstr);
+    }
+
+    public void DumpFileContents()
+    {
+        Debug.Log(File.ReadAllText(filePath));
     }
 }
