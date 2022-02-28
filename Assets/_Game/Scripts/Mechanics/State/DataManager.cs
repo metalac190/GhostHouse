@@ -35,12 +35,17 @@ public class DataManager : MonoBehaviour
             Instance = this;
             DontDestroyOnLoad(this.gameObject);
             filePath = Path.Combine(Application.persistentDataPath, "savedata.json");
-            Debug.Log(filePath);
+            journalUnlocks = new bool[10];
         }
         else
         {
             Destroy(this.gameObject);
         }
+    }
+
+    private void Start()
+    {
+        Debug.Log(journalUnlocks.Length);
     }
 
     // Read data from the save file into the game
@@ -88,6 +93,7 @@ public class DataManager : MonoBehaviour
         //interactableObjects[index] = state;
     }
 
+    // Dump all data to the console
     public void DumpData()
     {
         string outstr = "Data Dump";
@@ -96,12 +102,12 @@ public class DataManager : MonoBehaviour
         outstr += "\nInteractables:";
         for(int i = 0; i < interactableObjects.Length; i++)
         {
-            outstr += "\n\tInteractable " + i.ToString() + ": " + interactableObjects[i];
+            //outstr += "\n\tInteractable " + i.ToString() + ": " + interactableObjects[i];
         }
         outstr += "\nSettings:";
         outstr += "\n\tVolume: " + settingsVolume.ToString();
         outstr += "\n\tGraphics: " + settingsGraphics.ToString();
-        outstr += "Journal Unlocks: ";
+        outstr += "\nJournal Unlocks: ";
         for(int i = 0; i < journalUnlocks.Length; i++)
         {
             if(journalUnlocks[i])
@@ -112,8 +118,22 @@ public class DataManager : MonoBehaviour
         Debug.Log(outstr);
     }
 
+    // Dump save file contents to the console
     public void DumpFileContents()
     {
         Debug.Log(File.ReadAllText(filePath));
+    }
+
+    // Mark a journal entry as unlocked
+    public void UnlockJournalEntry(int index)
+    {
+        try
+        {
+            journalUnlocks[index] = true;
+        }
+        catch(System.Exception ex)
+        {
+            Debug.Log("journal entry failed at: " + index.ToString());
+        }
     }
 }
