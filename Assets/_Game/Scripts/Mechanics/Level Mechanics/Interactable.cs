@@ -8,10 +8,18 @@ namespace Mechanics.Level_Mechanics
     public class Interactable : ScriptableObject
     {
         //public variables that designers can edit
+        [Header("Interaction Informantion")]
         [SerializeField] public string _interactableName = "Default Name";
-        
-        [TextArea]
-        [SerializeField] public string _interactableDescription = "Default Description";
+        [SerializeField, TextArea] public string _interactableDescription = "Default Description";
+
+        [Header("Modal Window Information")]
+        [SerializeField] public string modalWindowDisplayText = "";
+        [SerializeField] public bool modalWindowDisplayImage = false;
+        [SerializeField] public Sprite modalWindowImageToDisplay = null;
+        [SerializeField] public bool hasCancelButton = true;
+        [SerializeField] public string mainInteractionButtonText = "";
+        [SerializeField] public string altInteractionButtonText = "";
+
 
         private List<InteractableResponse> _interactableResponses = new List<InteractableResponse>();
 
