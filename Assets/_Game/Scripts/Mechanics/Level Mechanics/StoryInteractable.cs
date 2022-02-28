@@ -46,6 +46,12 @@ namespace Mechanics.Level_Mechanics
         [SerializeField] private Sprite _altSprite;
         [SerializeField] private Animator _confirmAltAnimation = null;
 
+        [Header("Collision Information")]
+        [SerializeField] private bool _confirmUseChildCollider = false;
+        [SerializeField] private bool _confirmUseSpecificCollider = false;
+        [SerializeField] private Collider _specificCollider = null;
+        private Collider childCollider = null;
+
 
         private List<MeshRenderer> _meshRenderers;
         private List<Material> _baseMaterial;
