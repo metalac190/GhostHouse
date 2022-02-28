@@ -11,6 +11,7 @@ namespace Mechanics.Level_Mechanics
         [Header("Interaction Informantion")]
         [SerializeField] public string _interactableName = "Default Name";
         [SerializeField, TextArea] public string _interactableDescription = "Default Description";
+        [SerializeField] public bool interacted = false;
 
         [Header("Modal Window Information")]
         [SerializeField] public string modalWindowDisplayText = "";
