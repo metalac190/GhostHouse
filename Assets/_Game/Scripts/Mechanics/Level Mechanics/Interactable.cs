@@ -11,8 +11,8 @@ namespace Mechanics.Level_Mechanics
         [Header("Interaction Informantion")]
         [SerializeField] public string _interactableName = "Default Name";
         [SerializeField, TextArea] public string _interactableDescription = "Default Description";
-        [SerializeField] public bool interacted = false;
-
+        [SerializeField] public bool _interacted = false;
+        
         [Header("Modal Window Information")]
         [SerializeField] public string modalWindowDisplayText = "";
         [SerializeField] public bool modalWindowDisplayImage = false;
@@ -40,10 +40,22 @@ namespace Mechanics.Level_Mechanics
 
             //The same for loop as before, but this one goes backwards to make sure that deleting/removing a interactableResponse doesn't
             //cause any errors.
+            _interacted = true;
+            SaveInteraction();
             for (int i = _interactableResponses.Count - 1; i >= 0; i--)
             {
                 _interactableResponses[i].Invoke();
             }
+        }
+
+        public void SaveInteraction()
+        {
+            DataManager.Instance.SetInteraction(_interactableName, _interacted);
+        }
+
+        public void LoadInteraction()
+        {
+            _interacted = DataManager.Instance.GetInteraction(_interactableName);
         }
     }
 }
