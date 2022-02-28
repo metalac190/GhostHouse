@@ -2,6 +2,7 @@
 using UnityEngine;
 using Utility.Audio.Controllers.Base;
 using Utility.Audio.Helper;
+using Utility.Buttons;
 using Utility.RangedFloats;
 using Utility.ReadOnly;
 
@@ -18,17 +19,8 @@ namespace Utility.Audio.Controllers
         private bool _checkLoop;
 
         private void Start() {
-            if (_sfx != null && _playOnStart) {
-                SetSourceProperties(_sfx.GetSourceProperties());
-                Play();
-                if (_looping) {
-                    if (_loopDelay.MaxValue > 0) {
-                        _checkLoop = _looping;
-                    }
-                    else {
-                        Source.loop = true;
-                    }
-                }
+            if (_playOnStart) {
+                InitializeSfx();
             }
         }
 
@@ -36,6 +28,21 @@ namespace Utility.Audio.Controllers
             if (_checkLoop && !Source.isPlaying) {
                 _delay = _loopDelay.GetRandom();
                 StartCoroutine(LoopDelay());
+            }
+        }
+
+        private void InitializeSfx() {
+            if (_sfx == null) return;
+
+            SetSourceProperties(_sfx.GetSourceProperties());
+            Play();
+            if (_looping) {
+                if (_loopDelay.MaxValue > 0) {
+                    _checkLoop = _looping;
+                }
+                else {
+                    Source.loop = true;
+                }
             }
         }
 
@@ -47,6 +54,13 @@ namespace Utility.Audio.Controllers
             }
             Play();
             _checkLoop = true;
+        }
+
+        [Button(Spacing = 10, Mode = ButtonMode.NotPlaying)]
+        private void ForceUpdateSfxProperties() {
+            Stop();
+            StopAllCoroutines();
+            InitializeSfx();
         }
     }
 }
