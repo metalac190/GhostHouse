@@ -1,5 +1,27 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!114 &845810492
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7418561320095455290}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6b301a30b7c2f894cb7fdc4d6828f3a8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _sfx:
+    UseConstant: 0
+    Clip: {fileID: 0}
+    Base: {fileID: 11400000, guid: e4d404abe25306f4f9132a9747bca39f, type: 2}
+  _playOnStart: 1
+  _looping: 1
+  _loopDelay:
+    MinValue: 0
+    MaxValue: 0
+  _delay: 0
 --- !u!1 &7532006536790389452
 GameObject:
   m_ObjectHideFlags: 0
@@ -43,7 +65,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 83790dbe8d73bf9419f19ae7f9f86481, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _music: {fileID: 11400000, guid: 3cbc269df5793ba44a14a41a9cb8460a, type: 2}
+  _music: {fileID: 11400000, guid: 5f1ba04c0d9e59749a73c22bc068f272, type: 2}
   _playOnStart: 1
 --- !u!1 &8151678011327900988
 GameObject:
@@ -98,6 +120,31 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 2054623344922439734}
     m_Modifications:
+    - target: {fileID: 1487940631333301664, guid: 1111ac2b7b1a8a348a1208fe02060373,
+        type: 3}
+      propertyPath: _playOnStart
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3065737435575595886, guid: 1111ac2b7b1a8a348a1208fe02060373,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5050434306207935400, guid: 1111ac2b7b1a8a348a1208fe02060373,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -33.8
+      objectReference: {fileID: 0}
+    - target: {fileID: 5050434306207935400, guid: 1111ac2b7b1a8a348a1208fe02060373,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 22.6
+      objectReference: {fileID: 0}
+    - target: {fileID: 5106622289792260125, guid: 1111ac2b7b1a8a348a1208fe02060373,
+        type: 3}
+      propertyPath: _loopDelay.MaxValue
+      value: 38.235306
+      objectReference: {fileID: 0}
     - target: {fileID: 7705703172381406026, guid: 1111ac2b7b1a8a348a1208fe02060373,
         type: 3}
       propertyPath: m_Name
@@ -163,6 +210,12 @@ PrefabInstance:
 --- !u!4 &177672544046204871 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7705703172381406027, guid: 1111ac2b7b1a8a348a1208fe02060373,
+    type: 3}
+  m_PrefabInstance: {fileID: 7532006535398044812}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &7418561320095455290 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1041200396559461558, guid: 1111ac2b7b1a8a348a1208fe02060373,
     type: 3}
   m_PrefabInstance: {fileID: 7532006535398044812}
   m_PrefabAsset: {fileID: 0}
