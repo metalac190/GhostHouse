@@ -10,9 +10,10 @@ public class InteractionBehavior : InteractableBase
     /*This is the main Interaction Behavior Script that determines what an Interactable object does when interacted with.*/
 
     #region Variables
+
     [Header("Sfx On Click")]
     [SerializeField] private bool _sfxOnClick = false;
-    [SerializeField] private SfxType _sfx = SfxType.None;
+    [SerializeField] private SfxType _sfx = SfxType.Default;
 
     [Header("Text On Hover")]
     [SerializeField] private bool _textOnHover = false;
@@ -33,10 +34,8 @@ public class InteractionBehavior : InteractableBase
 
     #endregion
 
-    private void Start()
-    {
-        if (TextHoverController.Singleton == null)
-        {
+    private void Start() {
+        if (TextHoverController.Singleton == null) {
             _missingHoverUi = true;
             Debug.LogWarning("Missing Text Hover Controller in Scene!");
         }
@@ -49,48 +48,40 @@ public class InteractionBehavior : InteractableBase
     #endregion
 
     #region Hovering Methods
-    public override void OnHoverEnter()
-    {
+
+    public override void OnHoverEnter() {
         Debug.Log("Started Hovering Over: " + gameObject.name);
         //When the mouse starts hovering over the object. Runs only once.
 
         //Brandon's Story Interactable Code:
         if (_missingHoverUi) return;
-        if (OverrideText)
-        {
+        if (OverrideText) {
             string text = _useObjectName ? name : _hoverText;
             TextHoverController.Singleton.StartHover(text);
         }
-        if (OverrideMaterial)
-        {
-            if (_meshRenderers == null)
-            {
+        if (OverrideMaterial) {
+            if (_meshRenderers == null) {
                 _meshRenderers = gameObject.GetComponentsInChildren<MeshRenderer>().ToList();
             }
             _baseMaterial = new List<Material>();
-            foreach (var meshRenderer in _meshRenderers)
-            {
+            foreach (var meshRenderer in _meshRenderers) {
                 _baseMaterial.Add(meshRenderer.material);
                 meshRenderer.material = _materialToSet;
             }
         }
     }
 
-    public override void OnHoverExit()
-    {
+    public override void OnHoverExit() {
         Debug.Log("Stopped Hovering Over: " + gameObject.name);
         //When the mouse stops hovering over the object. Runs only once.
 
         //Brandon's Story Interactable Code:
         if (_missingHoverUi) return;
-        if (OverrideText)
-        {
+        if (OverrideText) {
             TextHoverController.Singleton.EndHover();
         }
-        if (OverrideMaterial)
-        {
-            for (var i = 0; i < _meshRenderers.Count; i++)
-            {
+        if (OverrideMaterial) {
+            for (var i = 0; i < _meshRenderers.Count; i++) {
                 _meshRenderers[i].material = _baseMaterial[i];
             }
             _baseMaterial.Clear();
@@ -100,37 +91,32 @@ public class InteractionBehavior : InteractableBase
     #endregion
 
     #region Clicking Methods
-    public override void OnLeftClick()
-    {
+
+    public override void OnLeftClick() {
         Debug.Log("Left Clicked On: " + gameObject.name);
         //When the mouse clicks on the object. Left Mouse button cannot be held down as this only runs once per click.
 
         //Brandon's Story Interactable Code:
-        if (_sfxOnClick)
-        {
+        if (_sfxOnClick) {
             SoundManager.Instance.PlaySfx(_sfx);
         }
     }
 
-    public override void OnLeftClick(Vector3 mousePosition)
-    {
+    public override void OnLeftClick(Vector3 mousePosition) {
         //Same thing as the function above, but this one also contains the mouse's position when it clicks.
     }
 
-    public override void OnRightClick()
-    {
+    public override void OnRightClick() {
         Debug.Log("Right Clicked On: " + gameObject.name);
         //When the mouse right clicks on the object. Right Mouse button cannot be held down as this only runs once per click.
 
         //Brandon's Story Interactable Code:
-        if (_sfxOnClick)
-        {
+        if (_sfxOnClick) {
             SoundManager.Instance.PlaySfx(_sfx);
         }
     }
 
-    public override void OnRightClick(Vector3 mousePosition)
-    {
+    public override void OnRightClick(Vector3 mousePosition) {
         //Same thing as the function above, but this one also contains the mouse's position when it clicks.
     }
 
