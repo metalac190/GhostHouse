@@ -9,18 +9,12 @@ namespace Mechanics.Level_Mechanics
     {
         //public variables that designers can edit
         [Header("Interaction Informantion")]
-        [SerializeField] public string _interactableName = "Default Name";
-        [SerializeField, TextArea] public string _interactableDescription = "Default Description";
-        [SerializeField] public bool interacted = false;
+        [SerializeField] private string _interactableName = "Default Name";
+        [SerializeField, TextArea] private string _interactableDescription = "Default Description";
+        [SerializeField] public bool _interacted = false;
+        [SerializeField] private bool _canInteractMultipleTimes = false;
 
-        [Header("Modal Window Information")]
-        [SerializeField] public string modalWindowDisplayText = "";
-        [SerializeField] public bool modalWindowDisplayImage = false;
-        [SerializeField] public Sprite modalWindowImageToDisplay = null;
-        [SerializeField] public bool hasCancelButton = true;
-        [SerializeField] public string mainInteractionButtonText = "";
-        [SerializeField] public string altInteractionButtonText = "";
-
+        public bool CanInteract => !_interacted || _canInteractMultipleTimes;
 
         private List<InteractableResponse> _interactableResponses = new List<InteractableResponse>();
 
@@ -40,10 +34,19 @@ namespace Mechanics.Level_Mechanics
 
             //The same for loop as before, but this one goes backwards to make sure that deleting/removing a interactableResponse doesn't
             //cause any errors.
-            for (int i = _interactableResponses.Count - 1; i >= 0; i--)
-            {
+            _interacted = true;
+            SaveInteraction();
+            for (int i = _interactableResponses.Count - 1; i >= 0; i--) {
                 _interactableResponses[i].Invoke();
             }
+        }
+
+        public void SaveInteraction() {
+            DataManager.Instance.SetInteraction(_interactableName, _interacted);
+        }
+
+        public void LoadInteraction() {
+            _interacted = DataManager.Instance.GetInteraction(_interactableName);
         }
     }
 }
