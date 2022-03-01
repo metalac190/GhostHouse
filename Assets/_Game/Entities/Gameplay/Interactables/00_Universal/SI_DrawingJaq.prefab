@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8682569068074612596}
   - component: {fileID: 529390764879538368}
+  - component: {fileID: 3077727935856688464}
   m_Layer: 0
   m_Name: SI_DrawingJaq
   m_TagString: Untagged
@@ -45,6 +46,39 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 0.1, y: 2.5, z: 2}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &3077727935856688464
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2838984744955502671}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ef8ba7c8d7876444cbdd449add52f354, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _interactableSeasons: 5
+  _textOnHover: 1
+  _hoverTextUseObjectName: 1
+  _hoverText: 
+  _highlightOnHover: 0
+  _highlightColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
+  _highlightSize: 1
+  _setMaterialOnHover: 0
+  _materialToSet: {fileID: 0}
+  _sfxOnClick: 0
+  _sfx: 0
+  _popupWindowOnClick: 0
+  _displayText: 
+  _imageToDisplay: {fileID: 0}
+  _cancelButton: 1
+  _hasInteraction: 1
+  _interaction: {fileID: 11400000, guid: c2a0e0b44ddadb24b8f2a07300af9949, type: 2}
+  _mainButtonText: Interact
+  _hasAltInteraction: 0
+  _altInteraction: {fileID: 0}
+  _altButtonText: Alt Interact
 --- !u!1 &7858360472418960278
 GameObject:
   m_ObjectHideFlags: 0
@@ -71,7 +105,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7858360472418960278}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 2, y: 2, z: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0.1, y: 2.5, z: 2}
   m_Children: []
   m_Father: {fileID: 2270287035283546379}

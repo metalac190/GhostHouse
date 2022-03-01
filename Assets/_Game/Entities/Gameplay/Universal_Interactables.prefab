@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5419463996134236875}
   m_Layer: 0
-  m_Name: Master_Interactables
+  m_Name: Universal_Interactables
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -46,15 +46,25 @@ PrefabInstance:
       propertyPath: m_Name
       value: SI_Breaker
       objectReference: {fileID: 0}
+    - target: {fileID: 2342814935355441663, guid: b661078589272ad4bb2afb9610619d89,
+        type: 3}
+      propertyPath: _displayText
+      value: A Power Breaker
+      objectReference: {fileID: 0}
+    - target: {fileID: 2342814935355441663, guid: b661078589272ad4bb2afb9610619d89,
+        type: 3}
+      propertyPath: _popupWindowOnClick
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6746803315294185589, guid: b661078589272ad4bb2afb9610619d89,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -6.46
+      value: -6
       objectReference: {fileID: 0}
     - target: {fileID: 6746803315294185589, guid: b661078589272ad4bb2afb9610619d89,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 5
+      value: 4.69
       objectReference: {fileID: 0}
     - target: {fileID: 6746803315294185589, guid: b661078589272ad4bb2afb9610619d89,
         type: 3}
@@ -101,26 +111,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 7447625845210643219, guid: b661078589272ad4bb2afb9610619d89,
-        type: 3}
-      propertyPath: m_LocalPosition.y
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7447625845210643219, guid: b661078589272ad4bb2afb9610619d89,
-        type: 3}
-      propertyPath: m_LocalScale.y
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 7447625845210643219, guid: b661078589272ad4bb2afb9610619d89,
-        type: 3}
-      propertyPath: m_LocalScale.z
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 7447625845210643219, guid: b661078589272ad4bb2afb9610619d89,
-        type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0.08
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b661078589272ad4bb2afb9610619d89, type: 3}
 --- !u!4 &1627127763711064456 stripped
@@ -144,7 +134,7 @@ PrefabInstance:
     - target: {fileID: 8279484013848046123, guid: 4a8daa2d4570cd744a3f2c1e3927e0d5,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -15
+      value: -10.83
       objectReference: {fileID: 0}
     - target: {fileID: 8279484013848046123, guid: 4a8daa2d4570cd744a3f2c1e3927e0d5,
         type: 3}
@@ -154,7 +144,7 @@ PrefabInstance:
     - target: {fileID: 8279484013848046123, guid: 4a8daa2d4570cd744a3f2c1e3927e0d5,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: -18
+      value: -17.68
       objectReference: {fileID: 0}
     - target: {fileID: 8279484013848046123, guid: 4a8daa2d4570cd744a3f2c1e3927e0d5,
         type: 3}
@@ -196,6 +186,17 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8834942701526311456, guid: 4a8daa2d4570cd744a3f2c1e3927e0d5,
+        type: 3}
+      propertyPath: _altInteraction
+      value: 
+      objectReference: {fileID: 11400000, guid: 6f181906fe119b64d878a137ef82d681,
+        type: 2}
+    - target: {fileID: 8834942701526311456, guid: 4a8daa2d4570cd744a3f2c1e3927e0d5,
+        type: 3}
+      propertyPath: _altInteractionText
+      value: Open Cage
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4a8daa2d4570cd744a3f2c1e3927e0d5, type: 3}
 --- !u!4 &4166796203348352952 stripped
@@ -219,7 +220,7 @@ PrefabInstance:
     - target: {fileID: 3688081590781286587, guid: cf8cc6f750b4e6a48bd1810cb982d6c5,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 3
+      value: 2.5
       objectReference: {fileID: 0}
     - target: {fileID: 3688081590781286587, guid: cf8cc6f750b4e6a48bd1810cb982d6c5,
         type: 3}
@@ -271,6 +272,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: SI_Painting
       objectReference: {fileID: 0}
+    - target: {fileID: 6354730776366880679, guid: cf8cc6f750b4e6a48bd1810cb982d6c5,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: cf8cc6f750b4e6a48bd1810cb982d6c5, type: 3}
 --- !u!4 &8654651163148613679 stripped
@@ -291,20 +297,36 @@ PrefabInstance:
       propertyPath: m_Name
       value: SI_DrawingJaq
       objectReference: {fileID: 0}
+    - target: {fileID: 3077727935856688464, guid: 7a0ca10b1d6ce0b41813aaea65f1efb4,
+        type: 3}
+      propertyPath: _popupWindowOnClick
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3077727935856688464, guid: 7a0ca10b1d6ce0b41813aaea65f1efb4,
+        type: 3}
+      propertyPath: _displayText
+      value: A Painting by Jaq
+      objectReference: {fileID: 0}
+    - target: {fileID: 3077727935856688464, guid: 7a0ca10b1d6ce0b41813aaea65f1efb4,
+        type: 3}
+      propertyPath: _imageToDisplay
+      value: 
+      objectReference: {fileID: 21300000, guid: 5a51f1fb28a34494ab142a67013456f7,
+        type: 3}
     - target: {fileID: 8682569068074612596, guid: 7a0ca10b1d6ce0b41813aaea65f1efb4,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 21
+      value: 22.969
       objectReference: {fileID: 0}
     - target: {fileID: 8682569068074612596, guid: 7a0ca10b1d6ce0b41813aaea65f1efb4,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 8682569068074612596, guid: 7a0ca10b1d6ce0b41813aaea65f1efb4,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 32
+      value: 33
       objectReference: {fileID: 0}
     - target: {fileID: 8682569068074612596, guid: 7a0ca10b1d6ce0b41813aaea65f1efb4,
         type: 3}

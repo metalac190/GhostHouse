@@ -1,9 +1,8 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
-using Utility.Audio.Clips;
-using Utility.Audio.Clips.Base;
 using Utility.Audio.Helper;
 using Utility.Buttons;
+using Utility.ReadOnly;
 using Yarn.Unity;
 
 namespace Mechanics.Level_Mechanics
@@ -12,13 +11,18 @@ namespace Mechanics.Level_Mechanics
     public class Interactable : ScriptableObject
     {
         //public variables that designers can edit
-        [Header("Interaction Informantion")]
+        [Header("Interactable Name")]
         [SerializeField] private string _interactableName = "Default Name";
         [SerializeField, TextArea] private string _interactableDescription = "Default Description";
-        [SerializeField] private SfxReference _sfxOnInteract = new SfxReference();
-        [SerializeField] public bool _interacted = false;
+
+        [Header("Interactable Settings")]
+        [SerializeField] private string _dialogeYarnNode = "";
+        [SerializeField] private int _cost = 0;
         [SerializeField] private bool _canInteractMultipleTimes = false;
-        public string _dialogeYarnNode = "";
+
+        [Header("Other Settings")]
+        [SerializeField] private SfxReference _sfxOnInteract = new SfxReference();
+        [SerializeField, ReadOnly] public bool _interacted = false;
 
         static DialogueRunner _dialogueRunner;
         static DialogueRunner DialogueRunner {

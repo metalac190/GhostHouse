@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3688081590781286587}
   - component: {fileID: 2047295756776863895}
+  - component: {fileID: 8619662339416877036}
   m_Layer: 0
   m_Name: SI_Painting
   m_TagString: Untagged
@@ -24,7 +25,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6354730776366880679}
-  m_LocalRotation: {x: -0, y: 0.42031342, z: -0, w: 0.90737903}
+  m_LocalRotation: {x: 0, y: 0.42031533, z: 0, w: 0.90737814}
   m_LocalPosition: {x: 21, y: 3, z: 26}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -45,6 +46,39 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 0.5, y: 5, z: 3}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &8619662339416877036
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6354730776366880679}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ef8ba7c8d7876444cbdd449add52f354, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _interactableSeasons: 5
+  _textOnHover: 1
+  _hoverTextUseObjectName: 1
+  _hoverText: 
+  _highlightOnHover: 0
+  _highlightColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
+  _highlightSize: 1
+  _setMaterialOnHover: 0
+  _materialToSet: {fileID: 0}
+  _sfxOnClick: 0
+  _sfx: 0
+  _popupWindowOnClick: 0
+  _displayText: 
+  _imageToDisplay: {fileID: 0}
+  _cancelButton: 1
+  _hasInteraction: 1
+  _interaction: {fileID: 11400000, guid: 74df270c3f3b90b4fa98df7708357562, type: 2}
+  _mainButtonText: Interact
+  _hasAltInteraction: 0
+  _altInteraction: {fileID: 0}
+  _altButtonText: Alt Interact
 --- !u!1 &7742319162016206004
 GameObject:
   m_ObjectHideFlags: 0
