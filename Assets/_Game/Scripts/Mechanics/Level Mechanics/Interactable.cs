@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 using Utility.Buttons;
+using Yarn.Unity;
 
 namespace Mechanics.Level_Mechanics
 {
@@ -13,6 +14,21 @@ namespace Mechanics.Level_Mechanics
         [SerializeField, TextArea] private string _interactableDescription = "Default Description";
         [SerializeField] public bool _interacted = false;
         [SerializeField] private bool _canInteractMultipleTimes = false;
+        public string _dialogeYarnNode = "";
+
+        static DialogueRunner _dialogueRunner;
+        static DialogueRunner DialogueRunner
+        {
+            get
+            {
+                if (_dialogueRunner == null)
+                {
+                    _dialogueRunner = FindObjectOfType<DialogueRunner>();
+                }
+                return _dialogueRunner;
+            }
+        }
+
 
         public bool CanInteract => !_interacted || _canInteractMultipleTimes;
 
@@ -34,6 +50,12 @@ namespace Mechanics.Level_Mechanics
 
             //The same for loop as before, but this one goes backwards to make sure that deleting/removing a interactableResponse doesn't
             //cause any errors.
+
+
+            if (!string.IsNullOrEmpty(_dialogeYarnNode))
+            {
+                DialogueRunner.StartDialogue(_dialogeYarnNode);
+            }
             _interacted = true;
             SaveInteraction();
             for (int i = _interactableResponses.Count - 1; i >= 0; i--) {
