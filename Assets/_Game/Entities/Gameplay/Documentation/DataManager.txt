@@ -1,0 +1,12 @@
+# Data Manager
+
+The Data Manager is meant to be central storage for all data that needs to be persisted during and between game sessions. To reference the DataManager in any script, use DataManager.Instance to reference the class. The contents are hidden in the inspector, but the current data can be printed to the console using the DumpData() function, and the current contents of the save file can be printed to the console using DumpFileContents().
+
+The current data being stored is:
+    - The current level
+    - The remaining spirit points
+    - An array of Scriptable Objects representing the interactables
+    - An array representing which journal entries have been unlocked
+    - Placeholders for the player settings such as volume and graphics
+
+For any help understanding how it works, reach out to Basil.

@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 using Utility.Buttons;
+using Yarn.Unity;
 
 namespace Mechanics.Level_Mechanics
 {
@@ -8,10 +9,28 @@ namespace Mechanics.Level_Mechanics
     public class Interactable : ScriptableObject
     {
         //public variables that designers can edit
-        [SerializeField] public string _interactableName = "Default Name";
-        
-        [TextArea]
-        [SerializeField] public string _interactableDescription = "Default Description";
+        [Header("Interaction Informantion")]
+        [SerializeField] private string _interactableName = "Default Name";
+        [SerializeField, TextArea] private string _interactableDescription = "Default Description";
+        [SerializeField] public bool _interacted = false;
+        [SerializeField] private bool _canInteractMultipleTimes = false;
+        public string _dialogeYarnNode = "";
+
+        static DialogueRunner _dialogueRunner;
+        static DialogueRunner DialogueRunner
+        {
+            get
+            {
+                if (_dialogueRunner == null)
+                {
+                    _dialogueRunner = FindObjectOfType<DialogueRunner>();
+                }
+                return _dialogueRunner;
+            }
+        }
+
+
+        public bool CanInteract => !_interacted || _canInteractMultipleTimes;
 
         private List<InteractableResponse> _interactableResponses = new List<InteractableResponse>();
 
@@ -31,10 +50,25 @@ namespace Mechanics.Level_Mechanics
 
             //The same for loop as before, but this one goes backwards to make sure that deleting/removing a interactableResponse doesn't
             //cause any errors.
-            for (int i = _interactableResponses.Count - 1; i >= 0; i--)
+
+
+            if (!string.IsNullOrEmpty(_dialogeYarnNode))
             {
+                DialogueRunner.StartDialogue(_dialogeYarnNode);
+            }
+            _interacted = true;
+            SaveInteraction();
+            for (int i = _interactableResponses.Count - 1; i >= 0; i--) {
                 _interactableResponses[i].Invoke();
             }
+        }
+
+        public void SaveInteraction() {
+            DataManager.Instance.SetInteraction(_interactableName, _interacted);
+        }
+
+        public void LoadInteraction() {
+            _interacted = DataManager.Instance.GetInteraction(_interactableName);
         }
     }
 }

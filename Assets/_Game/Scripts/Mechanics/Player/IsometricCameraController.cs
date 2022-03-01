@@ -24,8 +24,16 @@ public class IsometricCameraController : MonoBehaviour
     [Header("Camera Sprint")]
     [SerializeField] private bool _enableSprintSpeed = true;
     [SerializeField] private float _cameraSprintSpeed = 20f;
-    
-    
+
+    [Header("Camera Bounds")]
+    [SerializeField] float _maxXValue = 50f;
+    [SerializeField] float _minXValue = -50f;
+    [SerializeField] float _maxZValue = 50f;
+    [SerializeField] float _minZValue = -50f;
+
+
+
+
     private Vector3 forward, right;
 
     private void Start()
@@ -131,7 +139,30 @@ public class IsometricCameraController : MonoBehaviour
     private void Update()
     {
         HandleInput();
+
+        if (transform.position.x > _maxXValue)
+        {
+            transform.position = new Vector3(_maxXValue, transform.position.y, transform.position.z);
+        }
+        if (transform.position.z > _maxZValue)
+        {
+            transform.position = new Vector3(transform.position.x, transform.position.y, _maxZValue);
+        }
+        if (transform.position.x < _minXValue)
+        {
+            transform.position = new Vector3(_minXValue, transform.position.y, transform.position.z);
+        }
+        if (transform.position.z < _minZValue)
+        {
+            transform.position = new Vector3(transform.position.x, transform.position.y, _minZValue);
+        }
+
+
     }
+
+    
+
+    
 
     private void FixedUpdate()
     {

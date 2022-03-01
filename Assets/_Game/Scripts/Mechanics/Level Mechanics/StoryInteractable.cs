@@ -33,6 +33,8 @@ namespace Mechanics.Level_Mechanics
         [SerializeField] private bool _displayImage = false;
         [SerializeField] private Sprite _imageToDisplay = null;
         [SerializeField] private bool _cancelButton = true;
+        [SerializeField] private string _mainButtonText = "";
+        [SerializeField] private string _altButtonText = "";
 
         [Header("Interaction")]
         [SerializeField] private bool _confirmButton = true;
@@ -40,17 +42,18 @@ namespace Mechanics.Level_Mechanics
         [SerializeField] private Sprite _sprite;
         [SerializeField] private Animator _confirmAnimation = null;
 
+
         [Header("Alternate Interaction")]
         [SerializeField] private bool _confirmAltButton = false;
         [SerializeField] private Interactable _altInteraction = null;
         [SerializeField] private Sprite _altSprite;
         [SerializeField] private Animator _confirmAltAnimation = null;
 
-        [Header("Collision Information")]
-        [SerializeField] private bool _confirmUseChildCollider = false;
-        [SerializeField] private bool _confirmUseSpecificCollider = false;
-        [SerializeField] private Collider _specificCollider = null;
-        private Collider childCollider = null;
+        //[Header("Collision Information")]
+        //[SerializeField] private bool _confirmUseChildCollider = false;
+        //[SerializeField] private bool _confirmUseSpecificCollider = false;
+        //[SerializeField] private Collider _specificCollider = null;
+        //private Collider colliderToUse = null;
 
 
         private List<MeshRenderer> _meshRenderers;
@@ -69,10 +72,14 @@ namespace Mechanics.Level_Mechanics
         }
 
         public override void OnLeftClick(Vector3 position) {
+            Debug.Log("Clicked on " + gameObject.name + "!");
             if (_clickSfx) {
                 SoundManager.Instance.PlaySfx(_sfx, position);
             }
-            PanelController.Singleton.EnableModalWindow(_interaction, _altInteraction);
+            if (_clickWindow && _interaction != null && _interaction.CanInteract) {
+                ModalWindowController.Singleton.EnableModalWindow(_interaction, _altInteraction,
+                    _displayText, _imageToDisplay, _cancelButton, _mainButtonText, _altButtonText);
+            }
         }
 
         public override void OnRightClick(Vector3 position) {
