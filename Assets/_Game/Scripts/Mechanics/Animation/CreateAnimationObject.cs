@@ -1,4 +1,5 @@
-﻿using UnityEditor;
+﻿#if UNITY_EDITOR
+using UnityEditor;
 using UnityEditor.Animations;
 using UnityEngine;
 
@@ -19,8 +20,7 @@ namespace Animations
         AnimatorController _controller;
 
         [MenuItem("Tools/CreateAnimationObject")]
-        static void Initialize()
-        {
+        static void Initialize() {
             CreateAnimationObject window = ScriptableObject.CreateInstance<CreateAnimationObject>();
             window.position = new Rect(Screen.width / 2, Screen.height / 2, 500, 500);
             window.minSize = new Vector2(500f, 250f);
@@ -28,8 +28,7 @@ namespace Animations
             window.Show();
         }
 
-        private void OnGUI()
-        {
+        private void OnGUI() {
             EditorGUILayout.LabelField("Create Object");
             EditorGUILayout.Space();
 
@@ -38,7 +37,7 @@ namespace Animations
             EditorGUILayout.Space();
             EditorGUILayout.Space();
             EditorGUILayout.LabelField("Place art/ object being animated here");
-            _artMesh = (GameObject) EditorGUILayout.ObjectField("Object To Animate", _artMesh, typeof(GameObject), true);
+            _artMesh = (GameObject)EditorGUILayout.ObjectField("Object To Animate", _artMesh, typeof(GameObject), true);
 
             EditorGUILayout.Space();
             EditorGUILayout.Space();
@@ -70,7 +69,7 @@ namespace Animations
             _postInteractionAnimation = (AnimationClip)EditorGUILayout.ObjectField("Post-Interaction Animation", _postInteractionAnimation, typeof(AnimationClip), true);
 
 
-            */ 
+            */
             EditorGUILayout.Space();
             EditorGUILayout.Space();
             EditorGUILayout.Space();
@@ -81,23 +80,19 @@ namespace Animations
             EditorGUILayout.Space();
 
             GUILayout.BeginHorizontal();
-            if (GUILayout.Button("Create Object and Controller"))
-            {
+            if (GUILayout.Button("Create Object and Controller")) {
                 CreateObject();
             }
-            else if (GUILayout.Button("Only Controller"))
-            {
+            else if (GUILayout.Button("Only Controller")) {
                 CreateController();
             }
-            else if (GUILayout.Button("Exit"))
-            {
+            else if (GUILayout.Button("Exit")) {
                 this.Close();
             }
             GUILayout.EndHorizontal();
         }
 
-        void CreateObject()
-        {
+        void CreateObject() {
             //creates root object
             GameObject rootObject = new GameObject();
             rootObject.name = _rootName;
@@ -115,19 +110,15 @@ namespace Animations
             rootObject.AddComponent<AnimationBehavior>();
 
             rootObject.GetComponent<Animator>().runtimeAnimatorController = _controller;
-
         }
 
-        void CreateController()
-        {
+        void CreateController() {
             string newPath = "Assets/_Game/Entities/Interactables/AnimationControllers/" + _name + ".controller";
             // Creates the controller
             //var controller = AnimatorController.CreateAnimatorControllerAtPath(newPath);
 
 
-
-            if (_template != null)
-            {
+            if (_template != null) {
                 // copies template over to new controller
                 AssetDatabase.CopyAsset(AssetDatabase.GetAssetPath(_template), newPath);
 
@@ -135,8 +126,7 @@ namespace Animations
                 AnimatorController controller = (AnimatorController)AssetDatabase.LoadAssetAtPath(newPath, typeof(AnimatorController));
                 _controller = controller;
             }
-            else
-            {
+            else {
                 AnimatorController controller = AnimatorController.CreateAnimatorControllerAtPath(newPath);
                 _controller = controller;
             }
@@ -161,3 +151,4 @@ namespace Animations
         }
     }
 }
+#endif
