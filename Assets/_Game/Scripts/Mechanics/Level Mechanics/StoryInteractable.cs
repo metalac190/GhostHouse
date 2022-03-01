@@ -19,7 +19,7 @@ namespace Mechanics.Level_Mechanics
 
         [SerializeField] private bool _highlightOnHover = false;
         [SerializeField] private Color _highlightColor = Color.yellow;
-        [SerializeField] private float _highlightSize = 1f;
+        [SerializeField] private float _highlightSize;
 
         [SerializeField] private bool _setMaterialOnHover = false;
         [SerializeField] private Material _materialToSet = null;
@@ -106,7 +106,7 @@ namespace Mechanics.Level_Mechanics
         #region On Click
 
         public override void OnLeftClick(Vector3 position) {
-            Debug.Log("Clicked on " + gameObject.name + "!");
+            Debug.Log("Clicked on " + gameObject.name + "! Interactable During " + _interactableSeasons);
             if (_sfxOnClick) {
                 SoundManager.Instance.PlaySfx(_sfx, position);
             }

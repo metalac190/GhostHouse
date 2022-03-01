@@ -2,10 +2,10 @@
 
 public class OutlineScript : MonoBehaviour
 {
-    [SerializeField] private Material outlineMaterial;
+    [SerializeField] private Material outlineMaterial = null;
     [SerializeField] private float outlineScaleFactor = 0.0f;
-    [SerializeField] private Color outlineColor;
-    [SerializeField] GameObject _artObject;
+    [SerializeField] private Color outlineColor = Color.yellow;
+    [SerializeField] GameObject _artObject = null;
     private Renderer outlineRenderer;
     private GameObject outlineObject;
     private Renderer rend;

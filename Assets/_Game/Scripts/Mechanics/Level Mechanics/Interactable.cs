@@ -17,12 +17,14 @@ namespace Mechanics.Level_Mechanics
 
         [Header("Interactable Settings")]
         [SerializeField] private string _dialogeYarnNode = "";
-        [SerializeField] private int _cost = 0;
+        [SerializeField] private int _cost;
         [SerializeField] private bool _canInteractMultipleTimes = false;
 
         [Header("Other Settings")]
         [SerializeField] private SfxReference _sfxOnInteract = new SfxReference();
         [SerializeField, ReadOnly] public bool _interacted = false;
+
+        public string InteractableInfo => _interactableName + ": " + _interactableDescription;
 
         static DialogueRunner _dialogueRunner;
         static DialogueRunner DialogueRunner {

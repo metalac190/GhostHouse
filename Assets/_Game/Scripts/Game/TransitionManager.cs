@@ -6,7 +6,7 @@ namespace Game
 {
     public class TransitionManager : MonoBehaviour
     {
-        [SerializeField] private FadeToBlackAnimation _fade;
+        [SerializeField] private FadeToBlackAnimation _fade = null;
 
         [Header("On Scene Load")]
         [SerializeField] private bool _fadeIn = true;
@@ -23,8 +23,10 @@ namespace Game
             if (_fadeIn) {
                 if (_fade != null) _fade.FadeOutUnlocked(_fadeInTime);
             }
-
-            // Title Text
+            if (_showTitleText) {
+                Debug.Log("Title: " + _titleText);
+                // Title Text
+            }
         }
 
         public void Transition() {
