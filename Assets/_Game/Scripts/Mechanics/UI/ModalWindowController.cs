@@ -24,6 +24,8 @@ public class ModalWindowController : MonoBehaviour
     [SerializeField] private Button _closeButton = null;
     [SerializeField] private Image _displayImage = null;
 
+    private bool _enabled;
+
     #region Singleton Pattern
 
     public static ModalWindowController Singleton { get; private set; }
@@ -40,6 +42,12 @@ public class ModalWindowController : MonoBehaviour
         #endregion
 
         DisableModalWindow();
+    }
+
+    private void Update() {
+        if (_enabled && Input.GetKeyDown(KeyCode.Escape)) {
+            DisableModalWindow();
+        }
     }
 
     public void EnableModalWindow(string displayText, Sprite imageToDisplay, bool hasCancelButton,
@@ -72,6 +80,8 @@ public class ModalWindowController : MonoBehaviour
         }
 
         _modalWindow.SetActive(true);
+        _enabled = true;
+        PauseMenu.Singleton.PreventPausing(false);
     }
 
     public void ClickButton() {
@@ -93,6 +103,8 @@ public class ModalWindowController : MonoBehaviour
         _alternateInteractionButton.gameObject.SetActive(false);
         _alternateInteractionText.text = "Interact";
         _modalWindow.SetActive(false);
+        _enabled = false;
+        PauseMenu.Singleton.PreventPausing(true);
     }
 
     #region Debug Methods
