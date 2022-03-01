@@ -1,5 +1,8 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
+using Utility.Audio.Clips;
+using Utility.Audio.Clips.Base;
+using Utility.Audio.Helper;
 using Utility.Buttons;
 using Yarn.Unity;
 
@@ -12,17 +15,15 @@ namespace Mechanics.Level_Mechanics
         [Header("Interaction Informantion")]
         [SerializeField] private string _interactableName = "Default Name";
         [SerializeField, TextArea] private string _interactableDescription = "Default Description";
+        [SerializeField] private SfxReference _sfxOnInteract = new SfxReference();
         [SerializeField] public bool _interacted = false;
         [SerializeField] private bool _canInteractMultipleTimes = false;
         public string _dialogeYarnNode = "";
 
         static DialogueRunner _dialogueRunner;
-        static DialogueRunner DialogueRunner
-        {
-            get
-            {
-                if (_dialogueRunner == null)
-                {
+        static DialogueRunner DialogueRunner {
+            get {
+                if (_dialogueRunner == null) {
                     _dialogueRunner = FindObjectOfType<DialogueRunner>();
                 }
                 return _dialogueRunner;
@@ -52,15 +53,15 @@ namespace Mechanics.Level_Mechanics
             //cause any errors.
 
 
-            if (!string.IsNullOrEmpty(_dialogeYarnNode))
-            {
+            if (!string.IsNullOrEmpty(_dialogeYarnNode)) {
                 DialogueRunner.StartDialogue(_dialogeYarnNode);
             }
-            _interacted = true;
-            SaveInteraction();
             for (int i = _interactableResponses.Count - 1; i >= 0; i--) {
                 _interactableResponses[i].Invoke();
             }
+            _sfxOnInteract.Play();
+            _interacted = true;
+            SaveInteraction();
         }
 
         public void SaveInteraction() {
