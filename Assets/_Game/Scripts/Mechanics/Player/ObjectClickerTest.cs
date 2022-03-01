@@ -98,6 +98,20 @@ namespace Mechanics.Player
                     interactable.OnRightClick(hit.point);
                 }
             }
+            else if (interactable == null) {
+                IInteractable parentInteractable = hit.transform.GetComponentInParent<IInteractable>();
+
+                if (parentInteractable != null) {
+                    if (left) {
+                        parentInteractable.OnLeftClick();
+                        parentInteractable.OnLeftClick(hit.point);
+                    }
+                    else {
+                        parentInteractable.OnRightClick();
+                        parentInteractable.OnRightClick(hit.point);
+                    }
+                }
+            }
         }
 
         #endregion

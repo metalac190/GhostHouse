@@ -2,10 +2,10 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SaveData : MonoBehaviour
+public class SaveData
 {
-    public int level;                   // Store level season as int
-    public int remainingSpiritPoints;   // Store spirit points remaining from last save
+    public int level; // Store level season as int
+    public int remainingSpiritPoints; // Store spirit points remaining from last save
 
     // Array of interactions to save
     public string[] interactionStates;
@@ -26,6 +26,7 @@ public class SaveData : MonoBehaviour
         public float volume;
         public int graphics;
     }
+
     public Settings settings;
 
     // Boolean array of journal unlocks

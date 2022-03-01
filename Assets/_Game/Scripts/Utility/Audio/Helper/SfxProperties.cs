@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using UnityEngine.Audio;
 
@@ -31,7 +32,7 @@ namespace Utility.Audio.Helper
             if (Clip == null) Clip = other.Clip;
             if (Clip != null) Null = false;
             if (MixerGroup == null) MixerGroup = other.MixerGroup;
-            if (Priority != other.Priority) Priority = Mathf.CeilToInt((Priority + other.Priority) * 0.5f);
+            Priority = Mathf.Max(Priority, other.Priority);
 
             // Volume Settings
             Volume *= other.Volume;
@@ -40,12 +41,12 @@ namespace Utility.Audio.Helper
             ReverbZoneMix *= other.ReverbZoneMix;
 
             // Spatial Settings
-            SpatialBlend = (SpatialBlend + other.SpatialBlend) * 0.5f;
+            SpatialBlend = Mathf.Max(SpatialBlend, other.SpatialBlend);
             if (RolloffMode == SfxDefaults.RolloffMode) RolloffMode = other.RolloffMode;
-            MinDistance = (MinDistance + other.MinDistance) * 0.5f;
-            MaxDistance = (MaxDistance + other.MaxDistance) * 0.5f;
-            Spread = Mathf.CeilToInt((Spread + other.Spread) * 0.5f);
-            DopplerLevel = (DopplerLevel + other.DopplerLevel) * 0.5f;
+            MinDistance = Math.Abs(MinDistance - SfxDefaults.MinDistance) > 0.001f ? MinDistance : other.MinDistance;
+            MaxDistance = Math.Abs(MaxDistance - SfxDefaults.MaxDistance) > 0.001f ? MaxDistance : other.MaxDistance;
+            Spread = Spread != SfxDefaults.Spread ? Spread : other.Spread;
+            DopplerLevel = Math.Abs(DopplerLevel - SfxDefaults.DopplerLevel) > 0.001f ? DopplerLevel : other.DopplerLevel;
 
             return this;
         }

@@ -1,9 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using UnityEngine.Animations;
-using UnityEditor;
-using UnityEditor.Animations;
+﻿using UnityEngine;
 
 namespace Animations
 {
@@ -15,23 +10,29 @@ namespace Animations
     {
         Animator _animator;
 
-        private void Awake()
-        {
+        private void Awake() {
             _animator = GetComponent<Animator>();
             gameObject.layer = 9;
         }
 
-        public void OnLeftClick(Vector3 mousePosition) { }
-        public void OnRightClick(Vector3 mousePosition) { }
-        
-        public void OnLeftClick()
-        {
+        public void OnLeftClick(Vector3 mousePosition) {
+        }
+
+        public void OnRightClick(Vector3 mousePosition) {
+        }
+
+        public void OnLeftClick() {
             Debug.Log("Left Clicked");
             _animator.SetTrigger("Interact");
         }
-        public void OnRightClick() { }
 
-        public void OnHoverEnter() { }
-        public void OnHoverExit() { }
+        public void OnRightClick() {
+        }
+
+        public void OnHoverEnter() {
+        }
+
+        public void OnHoverExit() {
+        }
     }
 }

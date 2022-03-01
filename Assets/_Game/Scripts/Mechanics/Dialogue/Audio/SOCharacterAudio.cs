@@ -3,55 +3,22 @@ using System.Collections.Generic;
 using UnityEngine;
 using Utility.Audio.Clips.Base;
 
-[CreateAssetMenu(menuName = "Sound System/Character Audio")]
-public class SOCharacterAudio : ScriptableObject
+namespace Game.Dialog
 {
-    public string CharacterName = null;
-    [TextArea] public string Description = null;
-    public List<SyllablePool> Syllables = new List<SyllablePool>();
-
-    /// <summary>
-    /// Finds the appropriate <see cref="SyllablePool"/> in <see cref="Syllables"/> and gets a random clip from it.
-    /// </summary>
-    /// <param name="token"></param>
-    /// <returns> Will return null if unable to find appropriate audio clip. </returns>
-    public SfxBase GetAudio(string token)
+    [CreateAssetMenu(menuName = "Sound System/Character")]
+    public class SOCharacterAudio : ScriptableObject
     {
-        foreach (SyllablePool syllablePool in Syllables)
-        {
-            if (syllablePool.MatchesTrigger(token))
-            {
-                return syllablePool.GetRandomClip();
-            }
-        }
+        [Header("Character Data")]
+        [Tooltip("non-case-sensitive name of character. This needs to match to what the narrative script uses for each character.")]
+        public string CharacterName = null;
 
-        return null;
-    }
-}
+        [Tooltip("Any notes about this object you would like to leave. This is in now way used by the game.")]
+        [TextArea] public string Description = null;
 
-[System.Serializable]
-public class SyllablePool
-{
-    public string Trigger = null;
-    public List<SfxBase> Clips = new List<SfxBase>();
-
-    /// <summary>
-    /// Compares token to <see cref="Trigger"/>.
-    /// </summary>
-    /// <param name="token"></param>
-    /// <returns> True if this syllable pool should be activated from. </returns>
-    public bool MatchesTrigger(string token)
-    {
-        return Trigger == token;
-    }
-
-    /// <summary>
-    /// Get a random <see cref="SfxBase"/> from <see cref="Clips"/> or null if empty.
-    /// </summary>
-    /// <returns></returns>
-    public SfxBase GetRandomClip()
-    {
-        if (Clips.Count == 0) { return null; }
-        return Clips[(int) Random.Range(0, Clips.Count)];
+        [Header("Audio Clips")]
+        public SfxBase PrimaryClip = null;
+        public SfxBase SecondaryClip = null;
+        public SfxBase TertiaryClip = null;
+        public SfxBase QuaternaryClip = null;
     }
 }
