@@ -10,7 +10,7 @@ namespace Mechanics.Level_Mechanics
     public class StoryInteractable : InteractableBase
     {
         [Header("Seasons when Interactable")]
-        [SerializeField] private Season _interactableSeasons = Season.None;
+        [SerializeField] private Season _interactableSeasons = Season.Universal;
 
         [Header("On Hover")]
         [SerializeField] private bool _textOnHover = false;
