@@ -121,7 +121,7 @@ public class DataManager : MonoBehaviour
         try {
             journalUnlocks[index] = true;
         }
-        catch (System.Exception ex) {
+        catch (System.Exception) {
             Debug.Log("journal entry failed at: " + index.ToString());
         }
     }

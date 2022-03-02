@@ -1,6 +1,8 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
+using Utility.Audio.Helper;
 using Utility.Buttons;
+using Utility.ReadOnly;
 using Yarn.Unity;
 
 namespace Mechanics.Level_Mechanics
@@ -9,20 +11,25 @@ namespace Mechanics.Level_Mechanics
     public class Interactable : ScriptableObject
     {
         //public variables that designers can edit
-        [Header("Interaction Informantion")]
+        [Header("Interactable Name")]
         [SerializeField] private string _interactableName = "Default Name";
         [SerializeField, TextArea] private string _interactableDescription = "Default Description";
-        [SerializeField] public bool _interacted = false;
+
+        [Header("Interactable Settings")]
+        [SerializeField] private string _dialogeYarnNode = "";
+        [SerializeField] private int _cost;
         [SerializeField] private bool _canInteractMultipleTimes = false;
-        public string _dialogeYarnNode = "";
+
+        [Header("Other Settings")]
+        [SerializeField] private SfxReference _sfxOnInteract = new SfxReference();
+        [SerializeField, ReadOnly] public bool _interacted = false;
+
+        public string InteractableInfo => _interactableName + ": " + _interactableDescription;
 
         static DialogueRunner _dialogueRunner;
-        static DialogueRunner DialogueRunner
-        {
-            get
-            {
-                if (_dialogueRunner == null)
-                {
+        static DialogueRunner DialogueRunner {
+            get {
+                if (_dialogueRunner == null) {
                     _dialogueRunner = FindObjectOfType<DialogueRunner>();
                 }
                 return _dialogueRunner;
@@ -52,15 +59,15 @@ namespace Mechanics.Level_Mechanics
             //cause any errors.
 
 
-            if (!string.IsNullOrEmpty(_dialogeYarnNode))
-            {
+            if (!string.IsNullOrEmpty(_dialogeYarnNode)) {
                 DialogueRunner.StartDialogue(_dialogeYarnNode);
             }
-            _interacted = true;
-            SaveInteraction();
             for (int i = _interactableResponses.Count - 1; i >= 0; i--) {
                 _interactableResponses[i].Invoke();
             }
+            _sfxOnInteract.Play();
+            _interacted = true;
+            SaveInteraction();
         }
 
         public void SaveInteraction() {

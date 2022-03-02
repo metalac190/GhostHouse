@@ -8,22 +8,23 @@ using TMPro;
 public class ModalWindowController : MonoBehaviour
 {
     //private variables
-    private Interactable _mainInteraction;
-    private Interactable _alternateInteraction;
+    private Interactable _interactable;
+    private Interactable _altInteractable;
     //private string _windowDisplayText;
     //private Sprite _windowDisplayImage;
     //private bool _cancelButton;
 
     //Actual Connections to Window
-    [SerializeField] GameObject _modalWindow;
-    [SerializeField] Button _mainInteractionButton = null;
-    [SerializeField] Button _alternateInteractionButton = null;
-    [SerializeField] TextMeshProUGUI _modalWindowText = null;
-    [SerializeField] Button _closeButton = null;
-    [SerializeField] Image _displayImage = null;
+    [SerializeField] private GameObject _modalWindow = null;
+    [SerializeField] private Button _mainInteractionButton = null;
+    [SerializeField] private TextMeshProUGUI _mainInteractionText = null;
+    [SerializeField] private Button _alternateInteractionButton = null;
+    [SerializeField] private TextMeshProUGUI _alternateInteractionText = null;
+    [SerializeField] private TextMeshProUGUI _modalWindowText = null;
+    [SerializeField] private Button _closeButton = null;
+    [SerializeField] private Image _displayImage = null;
 
-    private Interactable _interactable;
-    private Interactable _altInteractable;
+    private bool _enabled;
 
     #region Singleton Pattern
 
@@ -40,81 +41,70 @@ public class ModalWindowController : MonoBehaviour
 
         #endregion
 
-        _modalWindow.SetActive(false);
+        DisableModalWindow();
     }
 
-
-    public void EnableModalWindow(Interactable interactable, Interactable altInteractable, string displayText, Sprite imageToDisplay, bool hasCancelButton,
-        string mainIntText, string altIntText) {
-        // Carlos here
-
-        _interactable = interactable;
-        _altInteractable = interactable;
-
-        #region Assigning Variables
-
-        if (interactable == null) {
-            Debug.LogWarning("There is no InteractableObject created/connected!");
+    private void Update() {
+        if (_enabled && Input.GetKeyDown(KeyCode.Escape)) {
+            DisableModalWindow();
         }
-        else {
-            _mainInteraction = interactable;
-        }
+    }
 
-        if (altInteractable == null) {
-            //Note to Carlos and UI Designers: If altInteractable is null, then you only need one button for the Modal Window
-            //Note to Carlos and UI Designers: feel free to disable the second button here.
-            _alternateInteractionButton.gameObject.SetActive(false);
-        }
-        else {
-            _alternateInteraction = altInteractable;
-        }
+    public void EnableModalWindow(string displayText, Sprite imageToDisplay, bool hasCancelButton,
+        Interactable interactable, string interactButtonText, Interactable altInteractable, string altInteractButtonText) {
+        // Enable Modal Window
 
-        if (displayText.Equals("")) {
-            _modalWindowText.text = "Default Text";
-        }
-        else {
-            _modalWindowText.text = displayText;
-        }
-
-        if (imageToDisplay == null) {
-            //Note to Carlos and UI Designers: If imageToDisplay is null, then you can disable the sprite for the Modal Window
-            //Note to Carlos and UI Designers: feel free to disable the sprite here.
-        }
-        else {
+        _modalWindowText.text = displayText;
+        if (imageToDisplay != null) {
+            _displayImage.gameObject.SetActive(true);
             _displayImage.sprite = imageToDisplay;
         }
+        _closeButton.gameObject.SetActive(hasCancelButton);
 
-        #endregion
-
-        #region Displaying The Window
-
-        if (_modalWindow.activeInHierarchy == false) {
-            _modalWindow.SetActive(true);
+        _interactable = null;
+        if (interactable != null && interactable.CanInteract) {
+            _interactable = interactable;
+            _mainInteractionButton.gameObject.SetActive(true);
+            if (!string.IsNullOrEmpty(interactButtonText)) {
+                _mainInteractionText.text = interactButtonText;
+            }
         }
 
-        if (hasCancelButton) {
-            _closeButton.gameObject.SetActive(true);
-        }
-        else {
-            _closeButton.gameObject.SetActive(false);
+        _altInteractable = null;
+        if (altInteractable != null && altInteractable.CanInteract) {
+            _altInteractable = altInteractable;
+            _alternateInteractionButton.gameObject.SetActive(true);
+            if (!string.IsNullOrEmpty(altInteractButtonText)) {
+                _alternateInteractionText.text = altInteractButtonText;
+            }
         }
 
-        #endregion
+        _modalWindow.SetActive(true);
+        _enabled = true;
+        PauseMenu.Singleton.PreventPausing(false);
     }
 
     public void ClickButton() {
-        _interactable.Interact();
         DisableModalWindow();
+        if (_interactable != null) _interactable.Interact();
     }
 
     public void ClickAltButton() {
-        _altInteractable.Interact();
         DisableModalWindow();
+        if (_altInteractable != null) _altInteractable.Interact();
     }
 
     public void DisableModalWindow() {
-        //disable the window here
+        _modalWindowText.text = "";
+        _displayImage.gameObject.SetActive(false);
+        _closeButton.gameObject.SetActive(true);
+        _mainInteractionButton.gameObject.SetActive(false);
+        _mainInteractionText.text = "Interact";
+        _alternateInteractionButton.gameObject.SetActive(false);
+        _alternateInteractionText.text = "Interact";
         _modalWindow.SetActive(false);
+        _enabled = false;
+        PauseMenu.Singleton.PreventPausing(true);
     }
 
     #region Debug Methods

@@ -31,7 +31,6 @@ namespace Mechanics.Feedback
                     return _metalSfx;
                 case SfxType.Glass:
                     return _glassSfx;
-                case SfxType.None:
                 default:
                     return _defaultSfx;
             }
@@ -40,7 +39,7 @@ namespace Mechanics.Feedback
 
     public enum SfxType
     {
-        None,
+        Default,
         Wood,
         Stone,
         Leather,

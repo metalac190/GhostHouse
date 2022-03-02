@@ -10,9 +10,9 @@ public class Test_Crates : InteractableBase
 
     //This is not required. This is just to showcase visually how the IInteractable methods would work.
     [SerializeField] Rigidbody _rigidbody = null;
-    [SerializeField] Renderer _meshRenderer = null;
-    [SerializeField] Material _highlightMaterial = null;
-    [SerializeField] Material _normalMaterial = null;
+    [SerializeField] Renderer _meshRenderer;
+    [SerializeField] Material _highlightMaterial;
+    [SerializeField] Material _normalMaterial;
 
     //These are just sample visual feedback methods.
     #region VisualFeedback

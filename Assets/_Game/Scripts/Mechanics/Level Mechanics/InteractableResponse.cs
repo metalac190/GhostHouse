@@ -6,9 +6,8 @@ using UnityEngine.Events;
 
 public class InteractableResponse : MonoBehaviour
 {
-    [SerializeField] private Interactable _interactable;
-    [SerializeField] private UnityEvent _event;
-    [SerializeField] private UnityEvent _alreadyInteractedEvent;
+    [SerializeField] private Interactable _interactable = null;
+    [SerializeField] private UnityEvent _event = new UnityEvent();
 
     private bool _ignore;
 
@@ -21,7 +20,7 @@ public class InteractableResponse : MonoBehaviour
         if (_interactable == null) return;
         _interactable.LoadInteraction();
         if (!_interactable.CanInteract) {
-            _alreadyInteractedEvent.Invoke();
+            _event.Invoke();
             _ignore = true;
         }
         else {
