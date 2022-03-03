@@ -1,38 +1,19 @@
 ﻿using UnityEngine;
 
-namespace Animations
+namespace Mechanics.Animations
 {
     [AddComponentMenu("Animators/AnimationBehavior")]
     [RequireComponent(typeof(BoxCollider))]
     [RequireComponent(typeof(Animator))]
     [RequireComponent(typeof(AnimationEvents))]
-    public class AnimationBehavior : MonoBehaviour, IInteractable
+    public class AnimationBehavior : MonoBehaviour
     {
-        Animator _animator;
+        Animator _anim;
+        public Animator _animator => _anim;
 
         private void Awake() {
-            _animator = GetComponent<Animator>();
-            gameObject.layer = 9;
-        }
+            _anim = GetComponent<Animator>();
 
-        public void OnLeftClick(Vector3 mousePosition) {
-        }
-
-        public void OnRightClick(Vector3 mousePosition) {
-        }
-
-        public void OnLeftClick() {
-            Debug.Log("Left Clicked");
-            _animator.SetTrigger("Interact");
-        }
-
-        public void OnRightClick() {
-        }
-
-        public void OnHoverEnter() {
-        }
-
-        public void OnHoverExit() {
         }
     }
 }
