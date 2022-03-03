@@ -98,7 +98,7 @@ namespace Game.Dialog
         /// <param name="index"></param>
         void OnLineUpdate(int index)
         {
-            if (index < _indexOfLastWord && !_playLastClip)
+            if (index > _indexOfLastWord && !_playLastClip)
             {
                 _playLastClip = true;
             }
