@@ -5,7 +5,6 @@ namespace Mechanics.Animations
     [AddComponentMenu("Animators/AnimationBehavior")]
     [RequireComponent(typeof(BoxCollider))]
     [RequireComponent(typeof(Animator))]
-    [RequireComponent(typeof(AnimationEvents))]
     public class AnimationBehavior : MonoBehaviour
     {
         Animator _anim;
@@ -14,6 +13,11 @@ namespace Mechanics.Animations
         private void Awake() {
             _anim = GetComponent<Animator>();
 
+        }
+
+        public void Interacted()
+        {
+            _anim.SetTrigger("interact");
         }
     }
 }

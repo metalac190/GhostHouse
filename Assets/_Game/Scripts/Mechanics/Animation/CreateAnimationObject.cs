@@ -132,6 +132,7 @@ namespace Mechanics.Animations
             if (_isInteractable)
             {
                 rootObject.AddComponent<StoryInteractable>();
+                rootObject.AddComponent<InteractableResponse>();
             }
         }
 
