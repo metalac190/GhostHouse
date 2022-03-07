@@ -1,8 +1,10 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using Mechanics.Feedback;
 using Mechanics.UI;
 using UnityEngine;
+using UnityEngine.Events;
 using Utility.Audio.Managers;
 
 namespace Mechanics.Level_Mechanics
@@ -27,6 +29,8 @@ namespace Mechanics.Level_Mechanics
         [Header("On Click")]
         [SerializeField] private bool _sfxOnClick = false;
         [SerializeField] private SfxType _sfx = SfxType.Default;
+        [SerializeField] private bool _moveOnClick = true;
+        [SerializeField] private float _cameraMovementTime = 3f;
 
         [Header("Interaction Window")]
         [SerializeField] private bool _popupWindowOnClick = false;
@@ -51,6 +55,9 @@ namespace Mechanics.Level_Mechanics
 
         private bool _missingHoverUi;
 
+        
+
+
         #region Unity Functions
 
         private void Start() {
@@ -60,6 +67,7 @@ namespace Mechanics.Level_Mechanics
             }
             if (_interaction != null) _interaction.LoadInteraction();
             if (_altInteraction != null) _altInteraction.LoadInteraction();
+           
         }
 
         #endregion
@@ -106,15 +114,26 @@ namespace Mechanics.Level_Mechanics
         #region On Click
 
         public override void OnLeftClick(Vector3 position) {
+           
             Debug.Log("Clicked on " + gameObject.name + "! Interactable During " + _interactableSeasons);
             if (_sfxOnClick) {
                 SoundManager.Instance.PlaySfx(_sfx, position);
             }
-            if (_popupWindowOnClick) {
+            if (_popupWindowOnClick && !(IsometricCameraController.Singleton._interacting)) {
                 ModalWindowController.Singleton.EnableModalWindow(_displayText, _imageToDisplay,
                     _cancelButton, _interaction, _interactionText,
                     _altInteraction, _altInteractionText);
             }
+            if (_moveOnClick)
+            {
+                IsometricCameraController.Singleton.MoveToPosition(transform.position, _cameraMovementTime);
+            }
+
+            //if (_moveOnClick)
+            //{
+            //    StartCoroutine(IsometricCameraController.Singleton.MoveToPosition(transform.position, _cameraMovementTime));
+            //}
+
         }
 
         #endregion

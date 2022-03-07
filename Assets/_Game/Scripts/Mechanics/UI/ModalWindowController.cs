@@ -4,6 +4,7 @@ using Mechanics.Level_Mechanics;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using System;
 
 public class ModalWindowController : MonoBehaviour
 {
@@ -23,6 +24,9 @@ public class ModalWindowController : MonoBehaviour
     [SerializeField] private TextMeshProUGUI _modalWindowText = null;
     [SerializeField] private Button _closeButton = null;
     [SerializeField] private Image _displayImage = null;
+
+    public static event Action OnInteractStart = delegate { };
+    public static event Action OnInteractEnd = delegate { };
 
     private bool _enabled;
 
@@ -53,6 +57,9 @@ public class ModalWindowController : MonoBehaviour
     public void EnableModalWindow(string displayText, Sprite imageToDisplay, bool hasCancelButton,
         Interactable interactable, string interactButtonText, Interactable altInteractable, string altInteractButtonText) {
         // Enable Modal Window
+
+        IsometricCameraController.Singleton._interacting = true;
+        OnInteractStart?.Invoke();
 
         _modalWindowText.text = displayText;
         if (imageToDisplay != null) {
@@ -95,6 +102,8 @@ public class ModalWindowController : MonoBehaviour
     }
 
     public void DisableModalWindow() {
+        
+        OnInteractEnd?.Invoke();
         _modalWindowText.text = "";
         _displayImage.gameObject.SetActive(false);
         _closeButton.gameObject.SetActive(true);
@@ -105,6 +114,10 @@ public class ModalWindowController : MonoBehaviour
         _modalWindow.SetActive(false);
         _enabled = false;
         PauseMenu.Singleton.PreventPausing(true);
+        if (IsometricCameraController.Singleton != null)
+        {
+            IsometricCameraController.Singleton._interacting = false;
+        }
     }
 
     #region Debug Methods
