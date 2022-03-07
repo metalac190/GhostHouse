@@ -26,7 +26,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 318815548190832195}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -11.58, y: 4.95, z: -24.99}
+  m_LocalPosition: {x: -2.01, y: 4.95, z: -31.6}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 9179426409970806213}
@@ -44,7 +44,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 1
-  m_Volume: 0.544
+  m_Volume: 1
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -52,7 +52,7 @@ AudioSource:
   SpatializePostEffects: 0
   Priority: 128
   DopplerLevel: 1
-  MinDistance: 1
+  MinDistance: 0.5
   MaxDistance: 25
   Pan2D: 0
   rolloffMode: 2
@@ -88,7 +88,7 @@ AudioSource:
     m_Curve:
     - serializedVersion: 3
       time: 0
-      value: 0
+      value: 1
       inSlope: 0
       outSlope: 0
       tangentMode: 0
@@ -141,14 +141,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _sfx:
-    UseConstant: 1
+    UseConstant: 0
     Clip: {fileID: 8300000, guid: 9f4f4cdbf3638fb43bb9cce180548906, type: 3}
-    Base: {fileID: 0}
-  _playOnStart: 0
+    Base: {fileID: 11400000, guid: 418d6423f6b2a34499adae09ef0e6b99, type: 2}
+  _playOnStart: 1
   _looping: 1
   _loopDelay:
-    MinValue: 34.714798
-    MaxValue: 73.6805
+    MinValue: 20.545515
+    MaxValue: 53.13472
   _delay: 0
 --- !u!1 &8884581918615551697
 GameObject:
@@ -196,14 +196,14 @@ AudioSource:
   m_PlayOnAwake: 1
   m_Volume: 1
   m_Pitch: 1
-  Loop: 0
+  Loop: 1
   Mute: 0
   Spatialize: 0
   SpatializePostEffects: 0
   Priority: 128
   DopplerLevel: 1
-  MinDistance: 1
-  MaxDistance: 30
+  MinDistance: 0.5
+  MaxDistance: 23.8
   Pan2D: 0
   rolloffMode: 2
   BypassEffects: 0
@@ -238,7 +238,7 @@ AudioSource:
     m_Curve:
     - serializedVersion: 3
       time: 0
-      value: 0
+      value: 1
       inSlope: 0
       outSlope: 0
       tangentMode: 0
@@ -291,10 +291,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _sfx:
-    UseConstant: 1
+    UseConstant: 0
     Clip: {fileID: 8300000, guid: 68f1f5b08ca80f04ba796bad7044d3a4, type: 3}
-    Base: {fileID: 0}
-  _playOnStart: 0
+    Base: {fileID: 11400000, guid: 5f1a94b99800ba74c9b910d1c8f5fc3a, type: 2}
+  _playOnStart: 1
   _looping: 1
   _loopDelay:
     MinValue: 0
