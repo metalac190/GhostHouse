@@ -22,13 +22,19 @@ public class DataManager : MonoBehaviour
     [HideInInspector]
     public Dictionary<string, bool> interactions;
 
-    public float settingsVolume { get; set; }
-    public int settingsGraphics { get; set; }
+    public float settingsSensitivity { get; set; }
+    public float settingsMusicVolume { get; set; }
+    public float settingsSFXVolume { get; set; }
+    public float settingsDialogueVolume { get; set; }
+    public float settingsAmbienceVolume { get; set; }
+    public float settingsBrightness { get; set; }
+    public int settingsWindowMode { get; set; }
 
     [HideInInspector]
     public bool[] journalUnlocks;
 
-    private void Awake() {
+    private void Awake()
+    {
         // Singleton pattern, there should only be one of these on the DataManager Prefab
         if (Instance == null) {
             Instance = this;
@@ -37,71 +43,108 @@ public class DataManager : MonoBehaviour
             journalUnlocks = new bool[10];
             interactions = new Dictionary<string, bool>();
         }
-        else {
+        else
+        {
             Destroy(this.gameObject);
         }
     }
 
-    private void Start() {
-    }
-
     // Read data from the save file into the game
-    public void ReadFile() {
-        if (File.Exists(filePath)) {
+    public void ReadFile()
+    {
+        if (File.Exists(filePath))
+        {
             string fileContents = File.ReadAllText(filePath);
             JsonUtility.FromJsonOverwrite(fileContents, saveData);
 
             level = saveData.level;
             remainingSpiritPoints = saveData.remainingSpiritPoints;
-            //saveData.interactionStates.CopyTo(interactableObjects, 0);
-            settingsVolume = saveData.settings.volume;
-            settingsGraphics = saveData.settings.graphics;
+
+            for(int i = 0; i < 50; i++)
+            {
+                interactions[saveData.interactionNames[i]] = saveData.interactionStates[i];
+            }
+
+            settingsSensitivity = saveData.settings.sensitivity;
+            settingsMusicVolume = saveData.settings.musicVolume;
+            settingsSFXVolume = saveData.settings.sfxVolume;
+            settingsDialogueVolume = saveData.settings.dialogueVolume;
+            settingsAmbienceVolume = saveData.settings.ambienceVolume;
+            settingsBrightness = saveData.settings.brightness;
+            settingsWindowMode = saveData.settings.windowMode;
+
             saveData.journalUnlocks.CopyTo(journalUnlocks, 0);
         }
-        else {
+        else
+        {
             Debug.Log("No save file exists");
         }
     }
 
     // Write the data into the save file
-    public void WriteFile() {
+    public void WriteFile()
+    {
         saveData.level = level;
         saveData.remainingSpiritPoints = remainingSpiritPoints;
-        //interactableObjects.CopyTo(saveData.interactionStates, 0);
-        saveData.settings.volume = settingsVolume;
-        saveData.settings.graphics = settingsGraphics;
+
+        foreach(KeyValuePair<string, bool> entry in interactions)
+        {
+            int i = 0;
+            saveData.interactionNames[i] = entry.Key;
+            saveData.interactionStates[i] = entry.Value;
+            i++;
+        }
+
+        saveData.settings.sensitivity = settingsSensitivity;
+        saveData.settings.musicVolume = settingsMusicVolume;
+        saveData.settings.sfxVolume = settingsSFXVolume;
+        saveData.settings.dialogueVolume = settingsDialogueVolume;
+        saveData.settings.ambienceVolume = settingsAmbienceVolume;
+        saveData.settings.brightness = settingsBrightness;
+        saveData.settings.windowMode = settingsWindowMode;
+
         journalUnlocks.CopyTo(saveData.journalUnlocks, 0);
 
         string jsonString = JsonUtility.ToJson(saveData, true);
         File.WriteAllText(filePath, jsonString);
     }
 
-    public void SetInteraction(string name, bool interacted) {
+    public void SetInteraction(string name, bool interacted)
+    {
         interactions[name] = interacted;
     }
 
-    public bool GetInteraction(string name) {
-        if (interactions.ContainsKey(name)) {
+    public bool GetInteraction(string name)
+    {
+        if (interactions.ContainsKey(name))
+        {
             return interactions[name];
         }
-        else {
+        else
+        {
             return false;
         }
     }
 
     // Dump all data to the console
-    public void DumpData() {
+    public void DumpData()
+    {
         string outstr = "Data Dump";
         outstr += "\nLevel: " + level.ToString();
         outstr += "\nSpirit Points: " + remainingSpiritPoints.ToString();
         outstr += "\nInteractables:";
-        //for(int i = 0; i < interactions.Length; i++)
-        //{
-        //outstr += "\n\tInteractable " + i.ToString() + ": " + interactableObjects[i];
-        //}
+        foreach(KeyValuePair<string, bool> entry in interactions)
+        {
+            outstr += "\n\tInteractable " + entry.Key + ": " + entry.Value;
+        }
         outstr += "\nSettings:";
-        outstr += "\n\tVolume: " + settingsVolume.ToString();
-        outstr += "\n\tGraphics: " + settingsGraphics.ToString();
+        outstr += "\n\tSensitivity: " + settingsSensitivity.ToString();
+        outstr += "\n\tMusic Volume: " + settingsMusicVolume.ToString();
+        outstr += "\n\tSFX Volume: " + settingsSFXVolume.ToString();
+        outstr += "\n\tDialogue Volume: " + settingsDialogueVolume.ToString();
+        outstr += "\n\tAmbience Volume: " + settingsAmbienceVolume.ToString();
+        outstr += "\n\tBrightness: " + settingsBrightness.ToString();
+        outstr += "\n\tWindow Mode: " + settingsMusicVolume.ToString();
         outstr += "\nJournal Unlocks: ";
         for (int i = 0; i < journalUnlocks.Length; i++) {
             if (journalUnlocks[i]) {
@@ -112,22 +155,20 @@ public class DataManager : MonoBehaviour
     }
 
     // Dump save file contents to the console
-    public void DumpFileContents() {
+    public void DumpFileContents()
+    {
         Debug.Log(File.ReadAllText(filePath));
     }
 
     // Mark a journal entry as unlocked
-    public void UnlockJournalEntry(int index) {
-        try {
-            journalUnlocks[index] = true;
-        }
-        catch (System.Exception) {
-            Debug.Log("journal entry failed at: " + index.ToString());
-        }
+    public void UnlockJournalEntry(int index)
+    {
+        journalUnlocks[index] = true;
     }
 
     [Button(Mode = ButtonMode.NotPlaying)]
-    public void ResetData() {
+    public void ResetData()
+    {
         interactions.Clear();
     }
 }
