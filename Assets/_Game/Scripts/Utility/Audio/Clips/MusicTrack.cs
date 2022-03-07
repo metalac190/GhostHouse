@@ -38,7 +38,7 @@ namespace Utility.Audio.Clips
 
         public override SfxProperties GetSourceProperties() {
             if (TrackIsNull) return new SfxProperties(true);
-            var p = new SfxProperties(_track, _mixerGroup, (int)_priority, _volume, 1, 0, 1, Vector3.zero,
+            var p = new SfxProperties(_track, _mixerGroup, (int)_priority, _volume, 1, 0, 1, Vector3.zero, false,
                 0, AudioRolloffMode.Linear, 100, 100, 0, 1);
             return p;
         }
