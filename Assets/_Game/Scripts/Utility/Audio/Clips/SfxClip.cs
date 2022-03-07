@@ -24,6 +24,7 @@ namespace Utility.Audio.Clips
         private float _reverbZoneMix = SfxDefaults.ReverbZoneMix;
 
         [Header("Spatial Settings")]
+        [SerializeField] private bool _enableSpatialSettings = false;
         [SerializeField, Range(SfxDefaults.SpatialBlendMin, SfxDefaults.SpatialBlendMax),
          Tooltip("Sets how much this AudioSource is affected by 3D spatialisation calculations (attenuation, doppler etc). 0.0 makes the sound full 2D, 1.0 makes it full 3D")]
         private float _spatialBlend = SfxDefaults.SpatialBlend;
@@ -60,7 +61,8 @@ namespace Utility.Audio.Clips
             var referenceProperties = _clip.GetSourceProperties();
 
             // Create Current Source Properties
-            var myProperties = new SfxProperties(_mixerGroup, (int)_priority, _volume, _pitch, _stereoPan, _reverbZoneMix, Vector3.zero, _spatialBlend, _rolloffMode, _minDistance, _maxDistance, _spread, _dopplerLevel);
+            var myProperties = new SfxProperties(_mixerGroup, (int)_priority, _volume, _pitch, _stereoPan, _reverbZoneMix, Vector3.zero, _enableSpatialSettings, _spatialBlend, _rolloffMode, _minDistance, _maxDistance, _spread,
+                _dopplerLevel);
 
             // Add properties together and return
             return myProperties.AddProperties(referenceProperties);
