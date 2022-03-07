@@ -12,6 +12,8 @@ public class IsometricCameraController : MonoBehaviour
 
     [Header("Traditional Camera Movement Values")]
     [SerializeField] private float _cameraMoveSpeed = 10f;
+    public bool _interacting = false;
+    bool _clicked = false;
 
     [Header("Rigidbody/Sliding Camera Movement Values")]
     [SerializeField] private bool _enableSlidingMovement = false;
@@ -31,10 +33,49 @@ public class IsometricCameraController : MonoBehaviour
     [SerializeField] float _maxZValue = 50f;
     [SerializeField] float _minZValue = -50f;
 
-
-
-
     private Vector3 forward, right;
+    private float _elapsedTime = 0f;
+
+    private Vector3 _finalLerpPosition;
+    private float _movementTime;
+
+
+
+    #region Singleton Pattern
+    public static IsometricCameraController Singleton { get; private set; }
+
+    private void Awake()
+    {
+        if (Singleton == null) { Singleton = this; }
+        else { Destroy(gameObject); }
+    }
+    #endregion
+
+
+    private void OnEnable()
+    {
+        ModalWindowController.OnInteractStart += InteractStarted;
+        ModalWindowController.OnInteractEnd += InteractEnded;
+        
+    }
+
+    private void OnDisable()
+    {
+        ModalWindowController.OnInteractStart -= InteractStarted;
+        ModalWindowController.OnInteractEnd -= InteractEnded;
+    }
+
+    void InteractStarted()
+    {
+        _interacting = true;
+    }
+
+    void InteractEnded()
+    {
+        _interacting = false;
+        _clicked = false;
+    }
+
 
     private void Start()
     {
@@ -135,11 +176,66 @@ public class IsometricCameraController : MonoBehaviour
 
     }
 
-    //Reeee
-    private void Update()
-    {
-        HandleInput();
 
+    public void MoveToPosition(Vector3 finalPosition, float movementTime)
+    {
+        if (finalPosition.x > _maxXValue)
+        {
+            finalPosition = new Vector3(_maxXValue, transform.position.y, transform.position.z);
+        }
+        if (finalPosition.z > _maxZValue)
+        {
+            finalPosition = new Vector3(transform.position.x, transform.position.y, _maxZValue);
+        }
+        if (finalPosition.x < _minXValue)
+        {
+            finalPosition = new Vector3(_minXValue, transform.position.y, transform.position.z);
+        }
+        if (finalPosition.z < _minZValue)
+        {
+            finalPosition = new Vector3(transform.position.x, transform.position.y, _minZValue);
+        }
+
+        _finalLerpPosition = finalPosition;
+        _movementTime = movementTime;
+
+    }
+
+    //public IEnumerator MoveToPosition(Vector3 finalPosition, float movementTime)
+    //{
+    //    if (finalPosition.x > _maxXValue)
+    //    {
+    //        finalPosition = new Vector3(_maxXValue, transform.position.y, transform.position.z);
+    //    }
+    //    if (finalPosition.z > _maxZValue)
+    //    {
+    //        finalPosition = new Vector3(transform.position.x, transform.position.y, _maxZValue);
+    //    }
+    //    if (finalPosition.x < _minXValue)
+    //    {
+    //        finalPosition = new Vector3(_minXValue, transform.position.y, transform.position.z);
+    //    }
+    //    if (finalPosition.z < _minZValue)
+    //    {
+    //        finalPosition = new Vector3(transform.position.x, transform.position.y, _minZValue);
+    //    }
+
+    //    //_finalLerpPosition = finalPosition;
+    //    //_movementTime = movementTime;
+
+    //    _elapsedTime += Time.deltaTime;
+    //    var end = Time.time + movementTime;
+    //    float _movementPercentage = _elapsedTime / _movementTime;
+    //    while (Time.time < end)
+    //    {
+    //        transform.position = Vector3.Lerp(transform.position, finalPosition, _movementPercentage);
+    //        yield return null;
+    //    }
+
+    //}
+
+    void CameraBounds()
+    {
         if (transform.position.x > _maxXValue)
         {
             transform.position = new Vector3(_maxXValue, transform.position.y, transform.position.z);
@@ -156,6 +252,39 @@ public class IsometricCameraController : MonoBehaviour
         {
             transform.position = new Vector3(transform.position.x, transform.position.y, _minZValue);
         }
+    }
+
+    //Reeee
+    private void Update()
+    {
+
+        if (_interacting && !_clicked)
+        {
+
+            _elapsedTime += Time.deltaTime;
+            float _movementPercentage = _elapsedTime / _movementTime;
+            transform.position = Vector3.Lerp(transform.position, _finalLerpPosition, _movementPercentage);
+
+            if (transform.position == _finalLerpPosition)
+            {
+                _elapsedTime = 0f;
+                _clicked = true;
+
+            }
+        }
+
+
+
+        if (!_interacting)
+        {
+            HandleInput();
+            CameraBounds();
+            
+        }
+
+        //HandleInput();
+
+        //CameraBounds();
 
 
     }
