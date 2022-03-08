@@ -113,11 +113,8 @@ public class ModalWindowController : MonoBehaviour
         _alternateInteractionText.text = "Interact";
         _modalWindow.SetActive(false);
         _enabled = false;
-        PauseMenu.Singleton.PreventPausing(true);
-        if (IsometricCameraController.Singleton != null)
-        {
-            IsometricCameraController.Singleton._interacting = false;
-        }
+        if (PauseMenu.Singleton != null) { PauseMenu.Singleton.PreventPausing(true); }
+        if (IsometricCameraController.Singleton != null) { IsometricCameraController.Singleton._interacting = false; }
     }
 
     #region Debug Methods

@@ -74,6 +74,7 @@ public class IsometricCameraController : MonoBehaviour
     {
         _interacting = false;
         _clicked = false;
+        _finalLerpPosition = transform.position;
     }
 
 
@@ -179,6 +180,7 @@ public class IsometricCameraController : MonoBehaviour
 
     public void MoveToPosition(Vector3 finalPosition, float movementTime)
     {
+        #region Making sure the Camera doesn't go out of bounds
         if (finalPosition.x > _maxXValue)
         {
             finalPosition = new Vector3(_maxXValue, transform.position.y, transform.position.z);
@@ -195,8 +197,9 @@ public class IsometricCameraController : MonoBehaviour
         {
             finalPosition = new Vector3(transform.position.x, transform.position.y, _minZValue);
         }
+        #endregion
 
-        _finalLerpPosition = finalPosition;
+        _finalLerpPosition = new Vector3(finalPosition.x, 0f, finalPosition.z);
         _movementTime = movementTime;
 
     }
