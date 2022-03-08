@@ -37,7 +37,7 @@ public class SaveData
     // Boolean array of journal unlocks
     public bool[] journalUnlocks;
 
-    // Constructor
+    // Constructor to initialize arrays
     public SaveData()
     {
         interactionNames = new string[50];

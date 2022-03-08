@@ -19,9 +19,10 @@ public class DataManager : MonoBehaviour
     public int level { get; set; }
     public int remainingSpiritPoints { get; set; }
 
-    [HideInInspector]
+    // Dictionary to hold state of each interactable
     public Dictionary<string, bool> interactions;
 
+    // Settings options
     public float settingsSensitivity { get; set; }
     public float settingsMusicVolume { get; set; }
     public float settingsSFXVolume { get; set; }
@@ -30,6 +31,7 @@ public class DataManager : MonoBehaviour
     public float settingsBrightness { get; set; }
     public int settingsWindowMode { get; set; }
 
+    // Boolean of what has been unlocked in journal
     [HideInInspector]
     public bool[] journalUnlocks;
 
@@ -54,12 +56,14 @@ public class DataManager : MonoBehaviour
     {
         if (File.Exists(filePath))
         {
+            // Unpack file text as JSON
             string fileContents = File.ReadAllText(filePath);
             JsonUtility.FromJsonOverwrite(fileContents, saveData);
 
             level = saveData.level;
             remainingSpiritPoints = saveData.remainingSpiritPoints;
 
+            // Repopulate dictionary from saved arrays
             for(int i = 0; i < 50; i++)
             {
                 interactions[saveData.interactionNames[i]] = saveData.interactionStates[i];
@@ -87,6 +91,7 @@ public class DataManager : MonoBehaviour
         saveData.level = level;
         saveData.remainingSpiritPoints = remainingSpiritPoints;
 
+        // Unpack dictionary elements into two arrays to save
         foreach(KeyValuePair<string, bool> entry in interactions)
         {
             int i = 0;
@@ -105,15 +110,18 @@ public class DataManager : MonoBehaviour
 
         journalUnlocks.CopyTo(saveData.journalUnlocks, 0);
 
+        // Save data as json string and write to file
         string jsonString = JsonUtility.ToJson(saveData, true);
         File.WriteAllText(filePath, jsonString);
     }
 
+    // Set interaction state
     public void SetInteraction(string name, bool interacted)
     {
         interactions[name] = interacted;
     }
 
+    // Get interaction state of an interaction
     public bool GetInteraction(string name)
     {
         if (interactions.ContainsKey(name))
@@ -122,6 +130,7 @@ public class DataManager : MonoBehaviour
         }
         else
         {
+            Debug.Log("Interaction not stored");
             return false;
         }
     }
@@ -166,6 +175,7 @@ public class DataManager : MonoBehaviour
         journalUnlocks[index] = true;
     }
 
+    // For now, just resets interactions. Will need to clear save file eventually
     [Button(Mode = ButtonMode.NotPlaying)]
     public void ResetData()
     {
