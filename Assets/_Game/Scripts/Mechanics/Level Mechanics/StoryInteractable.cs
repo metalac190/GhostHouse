@@ -1,53 +1,48 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using Mechanics.Feedback;
 using Mechanics.UI;
 using UnityEngine;
+using UnityEngine.Events;
 using Utility.Audio.Managers;
 
 namespace Mechanics.Level_Mechanics
 {
     public class StoryInteractable : InteractableBase
     {
-        [Header("Hover: Preview Text")]
-        [SerializeField] private bool _previewText = false;
-        [SerializeField] private bool _useObjectName = false;
+        [Header("Seasons when Interactable")]
+        [SerializeField] private Season _interactableSeasons = Season.Universal;
+
+        [Header("On Hover")]
+        [SerializeField] private bool _textOnHover = false;
+        [SerializeField] private bool _hoverTextUseObjectName = false;
         [SerializeField] private string _hoverText = "";
 
-        [Header("Hover: Highlight")]
-        [SerializeField] private bool _highlight = false;
+        [SerializeField] private bool _highlightOnHover = false;
         [SerializeField] private Color _highlightColor = Color.yellow;
-        [SerializeField] private float _highlightSize = 1f;
+        [SerializeField] private float _highlightSize;
 
-        [Header("Hover: Override Art Materials")]
-        [SerializeField] private bool _clickOverrideMaterial = false;
+        [SerializeField] private bool _setMaterialOnHover = false;
         [SerializeField] private Material _materialToSet = null;
 
-        [Header("Click: Sfx")]
-        [SerializeField] private bool _clickSfx = false;
-        [SerializeField] private SfxType _sfx = SfxType.None;
+        [Header("On Click")]
+        [SerializeField] private bool _sfxOnClick = false;
+        [SerializeField] private SfxType _sfx = SfxType.Default;
+        [SerializeField] private bool _moveOnClick = true;
+        [SerializeField] private float _cameraMovementTime = 3f;
 
-        [Header("Click: Modal Window")]
-        [SerializeField] private bool _clickWindow = false;
+        [Header("Interaction Window")]
+        [SerializeField] private bool _popupWindowOnClick = false;
         [SerializeField, TextArea] private string _displayText = "";
-        [SerializeField] private bool _displayImage = false;
         [SerializeField] private Sprite _imageToDisplay = null;
         [SerializeField] private bool _cancelButton = true;
-        [SerializeField] private string _mainButtonText = "";
-        [SerializeField] private string _altButtonText = "";
 
-        [Header("Interaction")]
-        [SerializeField] private bool _confirmButton = true;
+        [Header("Interactions")]
         [SerializeField] private Interactable _interaction = null;
-        [SerializeField] private Sprite _sprite;
-        [SerializeField] private Animator _confirmAnimation = null;
-
-
-        [Header("Alternate Interaction")]
-        [SerializeField] private bool _confirmAltButton = false;
+        [SerializeField] private string _interactionText = "Interact";
         [SerializeField] private Interactable _altInteraction = null;
-        [SerializeField] private Sprite _altSprite;
-        [SerializeField] private Animator _confirmAltAnimation = null;
+        [SerializeField] private string _altInteractionText = "Alt Interact";
 
         //[Header("Collision Information")]
         //[SerializeField] private bool _confirmUseChildCollider = false;
@@ -55,47 +50,43 @@ namespace Mechanics.Level_Mechanics
         //[SerializeField] private Collider _specificCollider = null;
         //private Collider colliderToUse = null;
 
-
         private List<MeshRenderer> _meshRenderers;
         private List<Material> _baseMaterial;
 
         private bool _missingHoverUi;
 
-        private bool OverrideText => _previewText && (_useObjectName || !string.IsNullOrEmpty(_hoverText));
-        private bool OverrideMaterial => _clickOverrideMaterial && _materialToSet != null;
+        
+
+
+        #region Unity Functions
 
         private void Start() {
             if (TextHoverController.Singleton == null) {
                 _missingHoverUi = true;
                 Debug.LogWarning("Missing Text Hover Controller in Scene!");
             }
+            if (_interaction != null) _interaction.LoadInteraction();
+            if (_altInteraction != null) _altInteraction.LoadInteraction();
+           
         }
 
-        public override void OnLeftClick(Vector3 position) {
-            Debug.Log("Clicked on " + gameObject.name + "!");
-            if (_clickSfx) {
-                SoundManager.Instance.PlaySfx(_sfx, position);
-            }
-            if (_clickWindow && _interaction != null && _interaction.CanInteract) {
-                ModalWindowController.Singleton.EnableModalWindow(_interaction, _altInteraction,
-                    _displayText, _imageToDisplay, _cancelButton, _mainButtonText, _altButtonText);
-            }
-        }
+        #endregion
 
-        public override void OnRightClick(Vector3 position) {
-            if (_clickSfx) {
-                SoundManager.Instance.PlaySfx(_sfx, position);
-            }
-        }
+        #region On Hover
 
+        private bool TextOnHover => _textOnHover && (_hoverTextUseObjectName || !string.IsNullOrEmpty(_hoverText));
+        private bool SetMaterialOnHover => _setMaterialOnHover && _materialToSet != null;
 
         public override void OnHoverEnter() {
             if (_missingHoverUi) return;
-            if (OverrideText) {
-                string text = _useObjectName ? name : _hoverText;
+            if (TextOnHover) {
+                string text = _hoverTextUseObjectName ? name : _hoverText;
                 TextHoverController.Singleton.StartHover(text);
             }
-            if (OverrideMaterial) {
+            if (_highlightOnHover) {
+                // TODO: Highlight
+            }
+            if (SetMaterialOnHover) {
                 _meshRenderers = gameObject.GetComponentsInChildren<MeshRenderer>().ToList();
                 _baseMaterial = new List<Material>();
                 foreach (var meshRenderer in _meshRenderers) {
@@ -107,15 +98,44 @@ namespace Mechanics.Level_Mechanics
 
         public override void OnHoverExit() {
             if (_missingHoverUi) return;
-            if (OverrideText) {
+            if (TextOnHover) {
                 TextHoverController.Singleton.EndHover();
             }
-            if (OverrideMaterial) {
+            if (SetMaterialOnHover) {
                 for (var i = 0; i < _meshRenderers.Count; i++) {
                     _meshRenderers[i].material = _baseMaterial[i];
                 }
                 _baseMaterial.Clear();
             }
         }
+
+        #endregion
+
+        #region On Click
+
+        public override void OnLeftClick(Vector3 position) {
+           
+            Debug.Log("Clicked on " + gameObject.name + "! Interactable During " + _interactableSeasons);
+            if (_sfxOnClick) {
+                SoundManager.Instance.PlaySfx(_sfx, position);
+            }
+            if (_popupWindowOnClick && !(IsometricCameraController.Singleton._interacting)) {
+                ModalWindowController.Singleton.EnableModalWindow(_displayText, _imageToDisplay,
+                    _cancelButton, _interaction, _interactionText,
+                    _altInteraction, _altInteractionText);
+            }
+            if (_moveOnClick)
+            {
+                IsometricCameraController.Singleton.MoveToPosition(transform.position, _cameraMovementTime);
+            }
+
+            //if (_moveOnClick)
+            //{
+            //    StartCoroutine(IsometricCameraController.Singleton.MoveToPosition(transform.position, _cameraMovementTime));
+            //}
+
+        }
+
+        #endregion
     }
 }

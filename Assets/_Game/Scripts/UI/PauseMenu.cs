@@ -1,20 +1,32 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class PauseMenu : MonoBehaviour
 {
-    public static bool isPaused;
+    public static PauseMenu Singleton;
+
+    private bool isPaused = false;
+    private bool canPause = true;
 
     //Menu Panels
-    [SerializeField] GameObject pauseMenu;
+    [SerializeField] GameObject pauseMenu = null;
+    [SerializeField] Page[] pages; //Only 1 page active at a time
+    [SerializeField] Page activePage;
+    [SerializeField] GameObject tabs = null;
+
+    private void Awake()
+    {
+        Singleton = this;
+    }
 
     // Start is called before the first frame update
     void Start()
     {
-        pauseMenu.SetActive(false);
         isPaused = false;
+        UpdatePaused();
     }
 
     // Update is called once per frame
@@ -33,17 +45,37 @@ public class PauseMenu : MonoBehaviour
         }
     }
 
+    private void UpdatePaused()
+    {
+        if (pauseMenu != null)
+        {
+            pauseMenu.SetActive(isPaused);
+            tabs.SetActive(isPaused);
+        }
+        //Time.timeScale = isPaused ? 0f : 1f;
+    }
+
     public void PauseGame()
     {
-        pauseMenu.SetActive(true);
-        //Time.timeScale = 0f;
+        if (!canPause) return;
         isPaused = true;
+        UpdatePaused();
     }
 
     public void ResumeGame()
     {
-        pauseMenu.SetActive(false);
-        //Time.timeScale = 1f;
         isPaused = false;
+        UpdatePaused();
+    }
+
+    public void PreventPausing(bool canPause)
+    {
+        this.canPause = canPause;
+        UpdatePaused();
+    }
+
+    public void SetActivePage(GameObject page)
+    {
+        activePage = page.GetComponent<Page>();
     }
 }

@@ -1,51 +1,66 @@
-﻿using UnityEditor;
+﻿#if UNITY_EDITOR
+using UnityEditor;
 using UnityEditor.Animations;
 using UnityEngine;
+using Mechanics.Level_Mechanics;
 
-namespace Animations
+namespace Mechanics.Animations
 {
     public class CreateAnimationObject : EditorWindow
     {
-        string _name = "AC_";
-        AnimatorController _template;
-        AnimationClip _idleAnimation;
-        AnimationClip _interactionAnimation;
-        AnimationClip _postInteractionAnimation;
-
+        string _controllerName = "AC_";
         string _rootName = string.Empty;
+        bool _isInteractable = true;
 
-        GameObject _artMesh;
-
+        AnimatorController _controllerTemplate;
         AnimatorController _controller;
 
-        [MenuItem("Tools/CreateAnimationObject")]
-        static void Initialize()
-        {
+        //AnimationClip _idleAnimation;
+        //AnimationClip _interactionAnimation;
+        //AnimationClip _postInteractionAnimation;
+
+        GameObject _animatedObject;
+
+        [MenuItem("Tools/Create Animation Object")]
+        private static void Initialize() {
             CreateAnimationObject window = ScriptableObject.CreateInstance<CreateAnimationObject>();
-            window.position = new Rect(Screen.width / 2, Screen.height / 2, 500, 500);
-            window.minSize = new Vector2(500f, 250f);
+            window.position = new Rect(Screen.width / 2, Screen.height / 2, 500f, 300f);
+            window.minSize = new Vector2(500f, 300f);
+            window.maxSize = new Vector2(500f, 300f);
             window.titleContent = new GUIContent("Create Animation Object");
             window.Show();
         }
 
-        private void OnGUI()
-        {
-            EditorGUILayout.LabelField("Create Object");
+        private void OnGUI() {
+            EditorGUILayout.BeginVertical();
             EditorGUILayout.Space();
+            //EditorGUILayout.LabelField("Create Object");
 
             _rootName = EditorGUILayout.TextField("Object Name", _rootName);
 
             EditorGUILayout.Space();
             EditorGUILayout.Space();
-            EditorGUILayout.LabelField("Place art/ object being animated here");
-            _artMesh = (GameObject) EditorGUILayout.ObjectField("Object To Animate", _artMesh, typeof(GameObject), true);
+
+
+            _isInteractable = EditorGUILayout.Toggle("Is this Object Interactable", _isInteractable);
 
             EditorGUILayout.Space();
             EditorGUILayout.Space();
-            _name = EditorGUILayout.TextField("Animation Controller name", _name);
+
+            EditorGUILayout.LabelField("Place art/ object being animated here");
+            _animatedObject = (GameObject)EditorGUILayout.ObjectField("Object To Animate", _animatedObject, typeof(GameObject), true);
+
             EditorGUILayout.Space();
             EditorGUILayout.Space();
-            _template = (AnimatorController)EditorGUILayout.ObjectField("AC Template", _template, typeof(AnimatorController), true);
+
+            _controllerName = EditorGUILayout.TextField("Animation Controller Name", _controllerName);
+
+            EditorGUILayout.Space();
+            EditorGUILayout.Space();
+
+            _controllerTemplate = (AnimatorController)EditorGUILayout.ObjectField("AC Template", _controllerTemplate, typeof(AnimatorController), true);
+
+            EditorGUILayout.EndVertical();
 
             //if (_template == null) EditorGUILayout.HelpBox("Missing", MessageType.Warning);
 
@@ -70,7 +85,7 @@ namespace Animations
             _postInteractionAnimation = (AnimationClip)EditorGUILayout.ObjectField("Post-Interaction Animation", _postInteractionAnimation, typeof(AnimationClip), true);
 
 
-            */ 
+            */
             EditorGUILayout.Space();
             EditorGUILayout.Space();
             EditorGUILayout.Space();
@@ -81,62 +96,60 @@ namespace Animations
             EditorGUILayout.Space();
 
             GUILayout.BeginHorizontal();
-            if (GUILayout.Button("Create Object and Controller"))
-            {
+            if (GUILayout.Button("Create Object and Controller")) {
                 CreateObject();
             }
-            else if (GUILayout.Button("Only Controller"))
-            {
+            else if (GUILayout.Button("Only Controller")) {
                 CreateController();
             }
-            else if (GUILayout.Button("Exit"))
-            {
+            else if (GUILayout.Button("Exit")) {
                 this.Close();
             }
             GUILayout.EndHorizontal();
         }
 
-        void CreateObject()
-        {
+        private void CreateObject() {
             //creates root object
             GameObject rootObject = new GameObject();
             rootObject.name = _rootName;
             rootObject.transform.position = Vector3.zero;
 
-            //adds art
-            GameObject prefab = AssetDatabase.LoadAssetAtPath<GameObject>(AssetDatabase.GetAssetPath(_artMesh));
-            PrefabUtility.InstantiatePrefab(prefab, rootObject.transform);
+            //creates empty art GameObject as child of root
+            GameObject emptyArt = new GameObject();
+            emptyArt.transform.parent = rootObject.transform;
+            emptyArt.name = "Art";
 
-            //puts on interactables layer
-            rootObject.layer = 9;
+            //places the prefab of the art to be animated
+            GameObject prefab = AssetDatabase.LoadAssetAtPath<GameObject>(AssetDatabase.GetAssetPath(_animatedObject));
+            PrefabUtility.InstantiatePrefab(prefab, emptyArt.transform);
 
+            //creates the controller
             CreateController();
             //adds animators script
             rootObject.AddComponent<AnimationBehavior>();
-
             rootObject.GetComponent<Animator>().runtimeAnimatorController = _controller;
 
+            if (_isInteractable)
+            {
+                rootObject.AddComponent<StoryInteractable>();
+            }
         }
 
-        void CreateController()
-        {
-            string newPath = "Assets/_Game/Entities/Interactables/AnimationControllers/" + _name + ".controller";
+        private void CreateController() {
+            string newPath = "Assets/_Game/Entities/Interactables/AnimationControllers/" + _controllerName + ".controller";
             // Creates the controller
             //var controller = AnimatorController.CreateAnimatorControllerAtPath(newPath);
 
 
-
-            if (_template != null)
-            {
+            if (_controllerTemplate != null) {
                 // copies template over to new controller
-                AssetDatabase.CopyAsset(AssetDatabase.GetAssetPath(_template), newPath);
+                AssetDatabase.CopyAsset(AssetDatabase.GetAssetPath(_controllerTemplate), newPath);
 
                 // loads new controller from template
                 AnimatorController controller = (AnimatorController)AssetDatabase.LoadAssetAtPath(newPath, typeof(AnimatorController));
                 _controller = controller;
             }
-            else
-            {
+            else {
                 AnimatorController controller = AnimatorController.CreateAnimatorControllerAtPath(newPath);
                 _controller = controller;
             }
@@ -161,3 +174,4 @@ namespace Animations
         }
     }
 }
+#endif
