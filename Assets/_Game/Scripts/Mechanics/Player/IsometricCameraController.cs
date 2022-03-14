@@ -18,6 +18,7 @@ public class IsometricCameraController : MonoBehaviour
 
     [Header("Click And Drag Movement Settings")]
     [SerializeField] private bool _clickDragMovementEnabled = true;
+    [SerializeField] private float _panningSpeed = 25f;
 
     [Header("Rigidbody/Sliding Camera Movement Settings")]
     [SerializeField] private bool _enableSlidingMovement = false;
@@ -50,6 +51,11 @@ public class IsometricCameraController : MonoBehaviour
     private Vector3 _origin;
     private Vector3 _difference;
     private Vector3 _resetCamera;
+
+    private Vector2 MouseAxis
+    {
+        get { return new Vector2(Input.GetAxis("Mouse X"), Input.GetAxis("Mouse Y")); }
+    }
 
     private bool drag = false;
 
@@ -312,7 +318,7 @@ public class IsometricCameraController : MonoBehaviour
 
     private void LateUpdate()
     {
-        #region Click and Drag Movement
+        #region Click and Drag Movement Version 1
         if (_clickDragMovementEnabled)
         {
             if (Input.GetMouseButton(0))
@@ -333,12 +339,28 @@ public class IsometricCameraController : MonoBehaviour
             if (drag)
             {
                 transform.position = new Vector3(_origin.x - _difference.x, 0f, _origin.z - _difference.z);
-               
+
             }
 
             CameraBounds();
         }
 
+
+        #endregion
+
+        #region Click and Drag 2
+
+        //if (_clickDragMovementEnabled && Input.GetMouseButton(0) && MouseAxis != Vector2.zero)
+        //{
+        //    Vector3 desiredMove = new Vector3(MouseAxis.x * right.x, 0, MouseAxis.y * forward.z);
+
+        //    desiredMove *= _panningSpeed;
+        //    desiredMove *= Time.deltaTime;
+        //    desiredMove = Quaternion.identity * desiredMove;
+        //    desiredMove = transform.InverseTransformDirection(desiredMove);
+
+        //    transform.Translate(desiredMove, Space.Self);
+        //}
 
         #endregion
     }
