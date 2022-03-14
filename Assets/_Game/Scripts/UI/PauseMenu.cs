@@ -15,7 +15,7 @@ public class PauseMenu : MonoBehaviour
     [SerializeField] GameObject pauseMenu = null;
     [SerializeField] Page[] pages; //Only 1 page active at a time
     [SerializeField] Page activePage;
-    [SerializeField] GameObject tabs;
+    [SerializeField] GameObject tabs = null;
 
     private void Awake()
     {

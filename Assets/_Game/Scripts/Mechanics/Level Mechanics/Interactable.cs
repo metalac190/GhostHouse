@@ -39,13 +39,13 @@ namespace Mechanics.Level_Mechanics
 
         public bool CanInteract => !_interacted || _canInteractMultipleTimes;
 
-        private List<InteractableResponse> _interactableResponses = new List<InteractableResponse>();
+        private List<InteractableResponseBase> _interactableResponses = new List<InteractableResponseBase>();
 
-        public void Raise(InteractableResponse response) {
+        public void Raise(InteractableResponseBase response) {
             _interactableResponses.Add(response);
         }
 
-        public void Unraise(InteractableResponse response) {
+        public void Unraise(InteractableResponseBase response) {
             _interactableResponses.Remove(response);
         }
 
