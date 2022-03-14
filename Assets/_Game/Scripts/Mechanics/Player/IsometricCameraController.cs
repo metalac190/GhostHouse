@@ -10,15 +10,20 @@ public class IsometricCameraController : MonoBehaviour
     [SerializeField] Camera _mainCamera = null;
     [SerializeField] Rigidbody _rigidbody = null;
 
-    [Header("Traditional Camera Movement Values")]
+    [Header("Traditional Camera Movement Settings")]
+    [SerializeField] private bool _traditionalMovementEnabled = false;
     [SerializeField] private float _cameraMoveSpeed = 10f;
     public bool _interacting = false;
     bool _clicked = false;
 
-    [Header("Rigidbody/Sliding Camera Movement Values")]
+    [Header("Click And Drag Movement Settings")]
+    [SerializeField] private bool _clickDragMovementEnabled = true;
+
+    [Header("Rigidbody/Sliding Camera Movement Settings")]
     [SerializeField] private bool _enableSlidingMovement = false;
 
-    [Header("Camera Zoom Values")]
+    [Header("Camera Zoom Settings")]
+    [SerializeField] private bool _cameraZoomEnabled = false;
     [SerializeField] private float _cameraZoomSpeed = 5f;
     [SerializeField] private float _maxZoomInValue = 0.7f;
     [SerializeField] private float _maxZoomOutValue = 6.37f;
@@ -33,12 +38,20 @@ public class IsometricCameraController : MonoBehaviour
     [SerializeField] float _maxZValue = 50f;
     [SerializeField] float _minZValue = -50f;
 
+    //Traditional Movement Values
     private Vector3 forward, right;
     private float _elapsedTime = 0f;
 
+    //Centering on Object Values
     private Vector3 _finalLerpPosition;
     private float _movementTime;
 
+    //Click and Drag Values
+    private Vector3 _origin;
+    private Vector3 _difference;
+    private Vector3 _resetCamera;
+
+    private bool drag = false;
 
 
     #region Singleton Pattern
@@ -51,6 +64,29 @@ public class IsometricCameraController : MonoBehaviour
     }
     #endregion
 
+    private void Start()
+    {
+        if (_mainCamera != null)
+        {
+            forward = _mainCamera.transform.forward;
+            right = _mainCamera.transform.right;
+            _resetCamera = _mainCamera.transform.position;
+        }
+        else
+        {
+            forward = Camera.main.transform.forward;
+            right = Camera.main.transform.right;
+            _resetCamera = transform.position;
+        }
+
+
+        forward.y = 0f;
+        forward = Vector3.Normalize(forward);
+        right = Vector3.Normalize(right);
+
+
+
+    }
 
     private void OnEnable()
     {
@@ -78,26 +114,7 @@ public class IsometricCameraController : MonoBehaviour
     }
 
 
-    private void Start()
-    {
-        if (_mainCamera != null)
-        {
-            forward = _mainCamera.transform.forward;
-            right = _mainCamera.transform.right;
-        }
-        else
-        {
-            forward = Camera.main.transform.forward;
-            right = Camera.main.transform.right;
-        }
-
-       
-        forward.y = 0f;
-        forward = Vector3.Normalize(forward);
-        right = Vector3.Normalize(right);
-
-
-    }
+    
 
     void HandleInput()
     {
@@ -131,7 +148,7 @@ public class IsometricCameraController : MonoBehaviour
             //movementNormalized = (rightMovement + upMovement).normalized;
         }
 
-        if (_mainCamera != null)
+        if (_mainCamera != null && _cameraZoomEnabled)
         {
             _mainCamera.orthographicSize -= Input.GetAxis("Mouse ScrollWheel") * _cameraZoomSpeed;
 
@@ -146,7 +163,7 @@ public class IsometricCameraController : MonoBehaviour
         }
         /*So, this else state doesn't really need to be here, but in case some designer or somebody forgets to connect a camera to the serialized camera
          variable in the beginning, this will just hook onto the default main camera.*/
-        else
+        else if (_mainCamera == null && _cameraZoomEnabled)
         {
             Camera.main.orthographicSize -= Input.GetAxis("Mouse ScrollWheel") * _cameraZoomSpeed;
             if (Camera.main.orthographicSize > _maxZoomOutValue)
@@ -280,7 +297,8 @@ public class IsometricCameraController : MonoBehaviour
 
         if (!_interacting)
         {
-            HandleInput();
+            if (_traditionalMovementEnabled) { HandleInput(); }
+
             CameraBounds();
             
         }
@@ -292,9 +310,40 @@ public class IsometricCameraController : MonoBehaviour
 
     }
 
-    
+    private void LateUpdate()
+    {
+        #region Click and Drag Movement
+        if (_clickDragMovementEnabled)
+        {
+            if (Input.GetMouseButton(0))
+            {
+                _difference = (Camera.main.ScreenToWorldPoint(Input.mousePosition)) - transform.position;
 
-    
+                if (drag == false)
+                {
+                    drag = true;
+                    _origin = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+                }
+            }
+            else
+            {
+                drag = false;
+            }
+
+            if (drag)
+            {
+                transform.position = new Vector3(_origin.x - _difference.x, 0f, _origin.z - _difference.z);
+               
+            }
+
+            CameraBounds();
+        }
+
+
+        #endregion
+    }
+
+
 
     private void FixedUpdate()
     {
