@@ -8,7 +8,7 @@ namespace Game.Dialog
 {
     public static class TextEffects
     {
-        public static IEnumerator Typewriter(TextMeshProUGUI text, float lettersPerSecond, Action<int> onCharacterTyped = null, Action onComplete = null, Yarn.Unity.InterruptionFlag interruption = null)
+        public static IEnumerator Typewriter(TextMeshProUGUI text, float lettersPerSecond, Action<int> onCharacterTyped = null, Action onComplete = null, Yarn.Unity.InterruptionFlag interruption = null, Slider progressBar = null)
         {
             // Start with everything invisible
             text.maxVisibleCharacters = 0;
@@ -105,7 +105,7 @@ namespace Game.Dialog
         // CharacterViewEditor depends on serialized variable names
         [Header("Effects")]
         [SerializeField]
-        internal bool _useFadeEffect = true;
+        bool _useFadeEffect = true;
 
         [SerializeField]
         [Min(0)]
@@ -145,6 +145,9 @@ namespace Game.Dialog
         [SerializeField]
         GameObject _uiParent = null;
 
+        [SerializeField]
+        Slider _progressbar = null;
+
         [Header("Continue Mode")]
         [SerializeField]
         ContinueActionType _continueActionType = ContinueActionType.None;
@@ -159,6 +162,8 @@ namespace Game.Dialog
 
         CanvasGroup _canvasGroup;
         Yarn.Markup.MarkupAttribute _markup;
+
+        float _lineStartStamp = -1;
         #endregion
 
         #region Monobehaviour
@@ -182,10 +187,18 @@ namespace Game.Dialog
 
         public void Update()
         {
+            // update progress bar 
+            if (_lineStartStamp != -1 && _progressbar != null)
+            {
+                float duration = _lineText.text.Length / _typewriterEffectSpeed;
+                float elapsedTime = Time.time - _lineStartStamp;
+                _progressbar.value = elapsedTime / duration;
+            }
+
             // Should we indicate to the DialogueRunner that we want to
             // interrupt/continue a line? We need to pass a number of
             // checks.
-            
+
             // We need to be configured to use a keycode to interrupt/continue
             // lines.
             if (_continueActionType != ContinueActionType.KeyCode)
@@ -421,6 +434,13 @@ namespace Game.Dialog
             {
                 _uiParent.SetActive(false);
             }
+
+            // progress bar
+            if (_progressbar != null)
+            {
+                _progressbar.gameObject.SetActive(false);
+                _lineStartStamp = -1;
+            }
         }
 
         /// <summary>
@@ -435,6 +455,14 @@ namespace Game.Dialog
             if (_uiParent != null)
             {
                 _uiParent.SetActive(true);
+            }
+
+            // progress bar
+            if (_progressbar != null)
+            {
+                _progressbar.gameObject.SetActive(true);
+                _progressbar.value = 0;
+                _lineStartStamp = Time.time;
             }
         }
     }

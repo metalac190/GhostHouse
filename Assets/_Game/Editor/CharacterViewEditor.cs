@@ -25,6 +25,7 @@ namespace Game.Dialog
         SerializedProperty characterNameInLineProperty;
         SerializedProperty continueButtonProperty;
         SerializedProperty uiParentProperty;
+        SerializedProperty progressbarProperty;
 
         SerializedProperty continueActionTypeProperty;
         SerializedProperty continueActionKeyCodeProperty;
@@ -45,6 +46,7 @@ namespace Game.Dialog
             characterNameInLineProperty = serializedObject.FindProperty("_characterNameInLine");
             continueButtonProperty = serializedObject.FindProperty("_continueButton");
             uiParentProperty = serializedObject.FindProperty("_uiParent");
+            progressbarProperty = serializedObject.FindProperty("_progressbar");
 
             continueActionTypeProperty = serializedObject.FindProperty("_continueActionType");
             continueActionKeyCodeProperty = serializedObject.FindProperty("_continueActionKeyCode");
@@ -90,6 +92,7 @@ namespace Game.Dialog
 
             EditorGUILayout.PropertyField(continueButtonProperty);
             EditorGUILayout.PropertyField(uiParentProperty);
+            EditorGUILayout.PropertyField(progressbarProperty);
 
             // continue mode
             EditorGUILayout.PropertyField(continueActionTypeProperty);
