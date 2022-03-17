@@ -6,7 +6,7 @@ using UnityEngine.UI;
 
 namespace Game.Dialog
 {
-    public static class TextEffects
+    public static class Tweens
     {
         public static IEnumerator Typewriter(TextMeshProUGUI text, float lettersPerSecond, Action<int> onCharacterTyped = null, Action onComplete = null, Yarn.Unity.InterruptionFlag interruption = null)
         {
@@ -66,6 +66,30 @@ namespace Game.Dialog
             // Wrap up by invoking our completion handler.
             onComplete?.Invoke();
         }
+
+        public static IEnumerator LerpPosition(Transform transform, Vector3 from, Vector3 to, float duration, Action onComplete = null, Yarn.Unity.InterruptionFlag interruption = null)
+        {
+            transform.position = from;
+
+            var timeElapsed = 0f;
+            while (timeElapsed < duration && (interruption?.Interrupted ?? false) == false)
+            {
+                var fraction = timeElapsed / duration;
+                timeElapsed += Time.deltaTime;
+
+                transform.position = Vector3.Lerp(from, to, fraction);
+                yield return null;
+            }
+
+            transform.position = to;
+            onComplete?.Invoke();
+        }
+
+        public static IEnumerator WaitBefore(float waitTime, Action callback)
+        {
+            yield return new WaitForSeconds(waitTime);
+            callback?.Invoke();
+        }
     }
 
     /// <summary>
@@ -105,7 +129,20 @@ namespace Game.Dialog
         // CharacterViewEditor depends on serialized variable names
         [Header("Effects")]
         [SerializeField]
-        internal bool _useFadeEffect = true;
+        [Tooltip("The Character View will slide onto screen")]
+        bool _useSlideEffect = true;
+
+        [SerializeField]
+        [Tooltip("The direction to slide in from")]
+        Direction _direction = Direction.Bottom;
+
+        [SerializeField]
+        [Tooltip("The time for the UI to slide into frame")]
+        [Min(0)]
+        float _slideTime = .5f;
+
+        [SerializeField]
+        bool _useFadeEffect = false;
 
         [SerializeField]
         [Min(0)]
@@ -114,6 +151,9 @@ namespace Game.Dialog
         [SerializeField]
         [Min(0)]
         float _fadeOutTime = 0.05f;
+
+        [SerializeField]
+        float _inBufferTime = .2f;
 
         [SerializeField]
         bool _useTypewriterEffect = false;
@@ -145,6 +185,9 @@ namespace Game.Dialog
         [SerializeField]
         GameObject _uiParent = null;
 
+        [SerializeField]
+        Slider _progressbar = null;
+
         [Header("Continue Mode")]
         [SerializeField]
         ContinueActionType _continueActionType = ContinueActionType.None;
@@ -159,6 +202,11 @@ namespace Game.Dialog
 
         CanvasGroup _canvasGroup;
         Yarn.Markup.MarkupAttribute _markup;
+
+        float _lineStartStamp = -1;
+        Vector3 _slideStart;
+        Vector3 _slideTarget;
+        const float _slideMargin = 100f;
         #endregion
 
         #region Monobehaviour
@@ -177,15 +225,42 @@ namespace Game.Dialog
                 }
             }
 
+            // cache 
+            _slideTarget = transform.position;
+            switch (_direction)
+            {
+                default:
+                case Direction.Bottom:
+                    _slideStart = new Vector3(transform.position.x, -GetComponent<RectTransform>().rect.height - _slideMargin, transform.position.z);
+                    break;
+                case Direction.Top:
+                    _slideStart = new Vector3(transform.position.x, Screen.width + GetComponent<RectTransform>().rect.height + _slideTime, transform.position.z);
+                    break;
+                case Direction.Left:
+                    _slideStart = new Vector3(-GetComponent<RectTransform>().rect.width - _slideMargin, transform.position.y, transform.position.z);
+                    break;
+                case Direction.Right:
+                    _slideStart = new Vector3(Screen.width + GetComponent<RectTransform>().rect.width + _slideTime, transform.position.y, transform.position.z);
+                    break;
+
+            }
             HideView();
         }
 
         public void Update()
         {
+            // update progress bar 
+            if (_lineStartStamp != -1 && _progressbar != null)
+            {
+                float duration = _lineText.text.Length / _typewriterEffectSpeed;
+                float elapsedTime = Time.time - _lineStartStamp;
+                _progressbar.value = elapsedTime / duration;
+            }
+
             // Should we indicate to the DialogueRunner that we want to
             // interrupt/continue a line? We need to pass a number of
             // checks.
-            
+
             // We need to be configured to use a keycode to interrupt/continue
             // lines.
             if (_continueActionType != ContinueActionType.KeyCode)
@@ -214,7 +289,11 @@ namespace Game.Dialog
         {
             _currentLine = null;
 
-            if (_useFadeEffect)
+            if (_useSlideEffect)
+            {
+                StartCoroutine(Tweens.LerpPosition(transform, _slideTarget, _slideStart, _slideTime, onDismissalComplete));
+            }
+            else if (_useFadeEffect)
             {
                 StartCoroutine(Yarn.Unity.Effects.FadeAlpha(_canvasGroup, 1, 0, _fadeOutTime, onDismissalComplete));
             }
@@ -334,7 +413,7 @@ namespace Game.Dialog
                 _lineText.text = dialogueLine.TextWithoutCharacterName.Text;
             }
 
-            if (_useFadeEffect)
+            if (_useSlideEffect || _useFadeEffect)
             {
                 if (_useTypewriterEffect)
                 {
@@ -349,8 +428,18 @@ namespace Game.Dialog
                     _lineText.maxVisibleCharacters = int.MaxValue;
                 }
 
-                // Fade up and then call FadeComplete when done
-                StartCoroutine(Yarn.Unity.Effects.FadeAlpha(_canvasGroup, 0, 1, _fadeInTime, () => FadeComplete(onDialogueLineFinished), _interruptionFlag));
+                if (_useSlideEffect)
+                {
+                    StartCoroutine(Tweens.LerpPosition(transform, _slideStart, _slideTarget, _slideTime, () => {
+                        StartCoroutine(Tweens.WaitBefore(_inBufferTime, () => FadeComplete(onDialogueLineFinished)));
+                    }, _interruptionFlag));
+                }
+                else
+                {
+                    StartCoroutine(Yarn.Unity.Effects.FadeAlpha(_canvasGroup, 0, 1, _fadeInTime, () => {
+                        StartCoroutine(Tweens.WaitBefore(_inBufferTime, () => FadeComplete(onDialogueLineFinished)));
+                    }, _interruptionFlag));
+                }
             }
             else
             {
@@ -382,7 +471,7 @@ namespace Game.Dialog
             void StartTypewriter(Action onFinished)
             {
                 OnLineStarted(dialogueLine);
-                StartCoroutine(TextEffects.Typewriter(_lineText, _typewriterEffectSpeed, OnCharacterTyped, interruption: _interruptionFlag, onComplete: () => {
+                StartCoroutine(Tweens.Typewriter(_lineText, _typewriterEffectSpeed, OnCharacterTyped, interruption: _interruptionFlag, onComplete: () => {
                     OnLineEnd();
                     onFinished();
                 }));
@@ -421,6 +510,13 @@ namespace Game.Dialog
             {
                 _uiParent.SetActive(false);
             }
+
+            // progress bar
+            if (_progressbar != null)
+            {
+                _progressbar.gameObject.SetActive(false);
+                _lineStartStamp = -1;
+            }
         }
 
         /// <summary>
@@ -436,6 +532,22 @@ namespace Game.Dialog
             {
                 _uiParent.SetActive(true);
             }
+
+            // progress bar
+            if (_progressbar != null)
+            {
+                _progressbar.gameObject.SetActive(true);
+                _progressbar.value = 0;
+                _lineStartStamp = Time.time;
+
+                if (_useFadeEffect) _lineStartStamp += _fadeInTime + _inBufferTime;
+                else if (_useSlideEffect) _lineStartStamp += _slideTime + _inBufferTime;
+            }
+        }
+
+        enum Direction
+        {
+            Bottom, Left, Top, Right
         }
     }
 }
