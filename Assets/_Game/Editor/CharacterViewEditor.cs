@@ -11,9 +11,14 @@ namespace Game.Dialog
     [CustomEditor(typeof(CharacterView))]
     public class CharacterViewEditor : Editor
     {
+        SerializedProperty useSlideEffectProperty;
+        SerializedProperty directionProperty;
+        SerializedProperty slideTimeProperty;
+
         SerializedProperty useFadeEffectProperty;
         SerializedProperty fadeInTimeProperty;
         SerializedProperty fadeOutTimeProperty;
+        SerializedProperty inBufferTimeProperty;
 
         SerializedProperty useTypewriterEffectProperty;
         SerializedProperty typewriterEffectSpeedProperty;
@@ -32,9 +37,14 @@ namespace Game.Dialog
 
         public void OnEnable()
         {
+            useSlideEffectProperty = serializedObject.FindProperty("_useSlideEffect");
+            directionProperty = serializedObject.FindProperty("_direction");
+            slideTimeProperty = serializedObject.FindProperty("_slideTime");
+
             useFadeEffectProperty = serializedObject.FindProperty("_useFadeEffect");
             fadeInTimeProperty = serializedObject.FindProperty("_fadeInTime");
             fadeOutTimeProperty = serializedObject.FindProperty("_fadeOutTime");
+            inBufferTimeProperty = serializedObject.FindProperty("_inBufferTime");
 
             useTypewriterEffectProperty = serializedObject.FindProperty("_useTypewriterEffect");
             typewriterEffectSpeedProperty = serializedObject.FindProperty("_typewriterEffectSpeed");
@@ -55,12 +65,31 @@ namespace Game.Dialog
         public override void OnInspectorGUI()
         {
             // fade effect
-            EditorGUILayout.PropertyField(useFadeEffectProperty);
-            if (useFadeEffectProperty.boolValue)
+            EditorGUILayout.PropertyField(useSlideEffectProperty);
+            if (useSlideEffectProperty.boolValue)
             {
                 EditorGUI.indentLevel += 1;
-                EditorGUILayout.PropertyField(fadeInTimeProperty);
-                EditorGUILayout.PropertyField(fadeOutTimeProperty);
+                EditorGUILayout.PropertyField(directionProperty);
+                EditorGUILayout.PropertyField(slideTimeProperty);
+                EditorGUI.indentLevel -= 1;
+            }
+            else
+            {
+                // fade effect
+                EditorGUILayout.PropertyField(useFadeEffectProperty);
+                if (useFadeEffectProperty.boolValue)
+                {
+                    EditorGUI.indentLevel += 1;
+                    EditorGUILayout.PropertyField(fadeInTimeProperty);
+                    EditorGUILayout.PropertyField(fadeOutTimeProperty);
+                    EditorGUI.indentLevel -= 1;
+                }
+            }
+
+            if (useSlideEffectProperty.boolValue || useFadeEffectProperty.boolValue)
+            {
+                EditorGUI.indentLevel += 1;
+                EditorGUILayout.PropertyField(inBufferTimeProperty);
                 EditorGUI.indentLevel -= 1;
             }
 
