@@ -24,13 +24,21 @@ public class SaveData
     [System.Serializable]
     public struct Settings
     {
-        public float sensitivity;
-        public float musicVolume;
-        public float sfxVolume;
-        public float dialogueVolume;
-        public float ambienceVolume;
-        public float brightness;
-        public int windowMode;
+        public bool leftClickInteract;
+        public bool cameraWASD;
+        public bool cameraArrowKeys;
+        public bool clickDrag;
+        public int sensitivity;
+        public int musicVolume;
+        public int sfxVolume;
+        public int dialogueVolume;
+        public int ambienceVolume;
+        public bool windowMode;
+        public int contrast;
+        public int brightness;
+        public bool largeGUIFont;
+        public bool largeTextFont;
+        public int textFont;
     }
     public Settings settings;
 
