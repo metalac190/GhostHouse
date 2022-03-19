@@ -11,33 +11,33 @@ public class IsometricCameraController : MonoBehaviour
     [SerializeField] Rigidbody _rigidbody = null;
 
     [Header("Traditional Camera Movement Settings")]
-    [SerializeField] private bool _traditionalMovementEnabled = false;
-    [SerializeField] private float _cameraMoveSpeed = 10f;
+    [SerializeField] public bool _traditionalMovementEnabled = false;
+    [SerializeField] public float _cameraMoveSpeed = 10f;
     public bool _interacting = false;
     bool _clicked = false;
 
     [Header("Click And Drag Movement Settings")]
-    [SerializeField] private bool _clickDragMovementEnabled = true;
-    [SerializeField] private float _panningSpeed = 25f;
+    [SerializeField] public bool _clickDragMovementEnabled = true;
+    [SerializeField] public float _panningSpeed = 25f;
 
     [Header("Mouse Motivated Movement Settings (League of Legends)")]
-    [SerializeField] private bool _mouseMotivatedMovementEnabled = false;
-    [SerializeField] private float _mMPanningSpeed = 25f;
-    [SerializeField] private float _panBorderThickness = 50f;
+    [SerializeField] public bool _mouseMotivatedMovementEnabled = false;
+    [SerializeField] public float _mMPanningSpeed = 25f;
+    [SerializeField] public float _panBorderThickness = 50f;
 
     [Header("Rigidbody/Sliding Camera Movement Settings")]
-    [SerializeField] private bool _enableSlidingMovement = false;
+    [SerializeField] public bool _enableSlidingMovement = false;
 
     [Header("Camera Zoom Settings")]
-    [SerializeField] private bool _cameraZoomEnabled = false;
-    [SerializeField] private float _cameraZoomSpeed = 5f;
-    [SerializeField] private float _maxZoomInValue = 0.7f;
-    [SerializeField] private float _maxZoomOutValue = 6.37f;
+    [SerializeField] public bool _cameraZoomEnabled = false;
+    [SerializeField] public float _cameraZoomSpeed = 5f;
+    [SerializeField] public float _maxZoomInValue = 0.7f;
+    [SerializeField] public float _maxZoomOutValue = 6.37f;
 
     [Header("Camera Sprint")]
-    [SerializeField] private bool _enableSprintSpeed = true;
-    [SerializeField] private float _cameraSprintSpeed = 20f;
-    [SerializeField] private float _mouseMotivatedSprintSpeed = 35f;
+    [SerializeField] public bool _enableSprintSpeed = true;
+    [SerializeField] public float _cameraSprintSpeed = 20f;
+    [SerializeField] public float _mouseMotivatedSprintSpeed = 35f;
 
     [Header("Camera Bounds")]
     [SerializeField] float _maxXValue = 50f;
