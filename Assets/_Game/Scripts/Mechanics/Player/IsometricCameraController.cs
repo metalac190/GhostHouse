@@ -20,6 +20,11 @@ public class IsometricCameraController : MonoBehaviour
     [SerializeField] private bool _clickDragMovementEnabled = true;
     [SerializeField] private float _panningSpeed = 25f;
 
+    [Header("Mouse Motivated Movement Settings (League of Legends)")]
+    [SerializeField] private bool _mouseMotivatedMovementEnabled = false;
+    [SerializeField] private float _mMPanningSpeed = 25f;
+    [SerializeField] private float _panBorderThickness = 50f;
+
     [Header("Rigidbody/Sliding Camera Movement Settings")]
     [SerializeField] private bool _enableSlidingMovement = false;
 
@@ -32,6 +37,7 @@ public class IsometricCameraController : MonoBehaviour
     [Header("Camera Sprint")]
     [SerializeField] private bool _enableSprintSpeed = true;
     [SerializeField] private float _cameraSprintSpeed = 20f;
+    [SerializeField] private float _mouseMotivatedSprintSpeed = 35f;
 
     [Header("Camera Bounds")]
     [SerializeField] float _maxXValue = 50f;
@@ -45,7 +51,7 @@ public class IsometricCameraController : MonoBehaviour
 
     //Centering on Object Values
     private Vector3 _finalLerpPosition;
-    private float _movementTime;
+    private float _movementTime = 3f;
 
     //Click and Drag Values
     private Vector3 _origin;
@@ -116,6 +122,7 @@ public class IsometricCameraController : MonoBehaviour
     {
         _interacting = false;
         _clicked = false;
+        _elapsedTime = 0f;
         _finalLerpPosition = transform.position;
     }
 
@@ -223,7 +230,8 @@ public class IsometricCameraController : MonoBehaviour
         #endregion
 
         _finalLerpPosition = new Vector3(finalPosition.x, 0f, finalPosition.z);
-        _movementTime = movementTime;
+        //_movementTime = movementTime;+
+        _movementTime = 3f;
 
     }
 
@@ -305,6 +313,74 @@ public class IsometricCameraController : MonoBehaviour
         {
             if (_traditionalMovementEnabled) { HandleInput(); }
 
+            #region Mouse Motivated Movement
+            if (_mouseMotivatedMovementEnabled)
+            {
+                Vector3 upMovement = new Vector3();
+                Vector3 rightMovement = new Vector3();
+                if (!_enableSprintSpeed)
+                {
+                    if (Input.mousePosition.y >= Screen.height - _panBorderThickness)
+                    {
+                        upMovement = forward * _mMPanningSpeed * Time.deltaTime;
+                    }
+                    else if (Input.mousePosition.y <= _panBorderThickness)
+                    {
+                        upMovement = -forward * _mMPanningSpeed * Time.deltaTime;
+                    }
+                    else if (Input.mousePosition.x >= Screen.width - _panBorderThickness)
+                    {
+                        rightMovement = right * _mMPanningSpeed * Time.deltaTime;
+                    }
+                    else if (Input.mousePosition.x <= _panBorderThickness)
+                    {
+                        rightMovement = -right * _mMPanningSpeed * Time.deltaTime;
+                    }
+                }
+                else
+                {
+                    if (Input.mousePosition.y >= Screen.height - _panBorderThickness)
+                    {
+                        upMovement = forward * _mouseMotivatedSprintSpeed * Time.deltaTime;
+                    }
+                    else if (Input.mousePosition.y <= _panBorderThickness)
+                    {
+                        upMovement = -forward * _mouseMotivatedSprintSpeed * Time.deltaTime;
+                    }
+                    else if (Input.mousePosition.x >= Screen.width - _panBorderThickness)
+                    {
+                        rightMovement = right * _mouseMotivatedSprintSpeed * Time.deltaTime;
+                    }
+                    else if (Input.mousePosition.x <= _panBorderThickness)
+                    {
+                        rightMovement = -right * _mouseMotivatedSprintSpeed * Time.deltaTime;
+                    }
+                }
+
+                transform.position += upMovement;
+                transform.position += rightMovement;
+            }
+            #endregion
+
+            #region Click and Drag Movement
+
+            if (!_interacting)
+            {
+                if (_clickDragMovementEnabled && Input.GetMouseButton(0) && MouseAxis != Vector2.zero)
+                {
+                    Vector3 desiredMove = new Vector3(-MouseAxis.x, 0, -MouseAxis.y);
+
+                    desiredMove *= _panningSpeed;
+                    desiredMove *= Time.deltaTime;
+                    desiredMove = Quaternion.Euler(new Vector3(0f, transform.eulerAngles.y, 0f)) * desiredMove;
+                    desiredMove = transform.InverseTransformDirection(desiredMove);
+
+                    transform.Translate(desiredMove, Space.Self);
+                }
+            }
+
+            #endregion
+
             CameraBounds();
             
         }
@@ -316,54 +392,7 @@ public class IsometricCameraController : MonoBehaviour
 
     }
 
-    private void LateUpdate()
-    {
-        #region Click and Drag Movement Version 1
-        if (_clickDragMovementEnabled)
-        {
-            if (Input.GetMouseButton(0))
-            {
-                _difference = (Camera.main.ScreenToWorldPoint(Input.mousePosition)) - transform.position;
-
-                if (drag == false)
-                {
-                    drag = true;
-                    _origin = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-                }
-            }
-            else
-            {
-                drag = false;
-            }
-
-            if (drag)
-            {
-                transform.position = new Vector3(_origin.x - _difference.x, 0f, _origin.z - _difference.z);
-
-            }
-
-            CameraBounds();
-        }
-
-
-        #endregion
-
-        #region Click and Drag 2
-
-        //if (_clickDragMovementEnabled && Input.GetMouseButton(0) && MouseAxis != Vector2.zero)
-        //{
-        //    Vector3 desiredMove = new Vector3(MouseAxis.x * right.x, 0, MouseAxis.y * forward.z);
-
-        //    desiredMove *= _panningSpeed;
-        //    desiredMove *= Time.deltaTime;
-        //    desiredMove = Quaternion.identity * desiredMove;
-        //    desiredMove = transform.InverseTransformDirection(desiredMove);
-
-        //    transform.Translate(desiredMove, Space.Self);
-        //}
-
-        #endregion
-    }
+   
 
 
 
