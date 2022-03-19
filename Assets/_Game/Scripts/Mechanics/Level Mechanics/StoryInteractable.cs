@@ -113,11 +113,11 @@ namespace Mechanics.Level_Mechanics
 
         #region On Click
 
-        public override void OnLeftClick(Vector3 position) {
+        public override void OnLeftClick(Vector3 mousePosition) {
            
             Debug.Log("Clicked on " + gameObject.name + "! Interactable During " + _interactableSeasons);
             if (_sfxOnClick) {
-                SoundManager.Instance.PlaySfx(_sfx, position);
+                SoundManager.Instance.PlaySfx(_sfx, mousePosition);
             }
             if (_popupWindowOnClick && !(IsometricCameraController.Singleton._interacting)) {
                 ModalWindowController.Singleton.EnableModalWindow(_displayText, _imageToDisplay,
@@ -126,7 +126,7 @@ namespace Mechanics.Level_Mechanics
             }
             if (_moveOnClick)
             {
-                IsometricCameraController.Singleton.MoveToPosition(transform.position, _cameraMovementTime);
+                IsometricCameraController.Singleton.MoveToPosition(mousePosition, _cameraMovementTime);
             }
 
             //if (_moveOnClick)
