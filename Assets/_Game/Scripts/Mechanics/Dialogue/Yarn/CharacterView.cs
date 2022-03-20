@@ -377,7 +377,7 @@ namespace Game.Dialog
                         }
                         else
                         {
-                            characterSprite = character.GetSprite(CharacterEmotion.Neutral);
+                            characterSprite = character.GetSprite(CharacterEmotion.Idle);
                         }
 
                         if (characterSprite != null)
