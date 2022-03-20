@@ -6,6 +6,9 @@ using UnityEngine;
 public class Settings : MonoBehaviour
 {
 
+    //Singleton pattern
+    public static Settings Instance = null;
+
     //Interact Button
     public bool leftClickInteract = true;
 
@@ -35,6 +38,15 @@ public class Settings : MonoBehaviour
     //Load all settings when game starts
     private void Awake()
     {
+        if (Instance == null)
+        {
+            Instance = this;
+        }
+        else
+        {
+            Destroy(this.gameObject);
+        }
+
         leftClickInteract = DataManager.Instance.settingsLeftClickInteract;
         useWASD = DataManager.Instance.settingsCameraWASD;
         useArrowKeys = DataManager.Instance.settingsCameraArrowKeys;
