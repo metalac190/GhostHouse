@@ -11,7 +11,9 @@ namespace Utility.Audio.Clips
     {
         [Header("Music Track Settings")]
         [SerializeField] private AudioClip _track = null;
-        [SerializeField] private AudioClip _trackWhenPaused;
+        [SerializeField, ReadOnly] private float _trackTime;
+        [SerializeField] private AudioClip _trackWhenPaused = null;
+        [SerializeField, ReadOnly] private float _pausedTrackTime;
 
         [Header("Volume Settings")]
         [SerializeField] private AudioMixerGroup _mixerGroup = null;
@@ -19,7 +21,6 @@ namespace Utility.Audio.Clips
         [SerializeField, Range(0, 1)] private float _volume = 1;
 
         [Header("Fade Settings")]
-        [SerializeField, ReadOnly] private float _totalClipTime;
         [SerializeField] private float _fadeInTime = 0;
         [SerializeField] private AnimationCurve _fadeIn = AnimationCurve.Linear(0, 0, 1, 1);
         [SerializeField] private float _fadeOutTime = 0;
@@ -33,7 +34,8 @@ namespace Utility.Audio.Clips
         public float CrossFadeInOverlap => _crossFadeInOverlap;
 
         private void OnValidate() {
-            _totalClipTime = _track != null ? _track.length : 0;
+            _trackTime = _track != null ? _track.length : 0;
+            _pausedTrackTime = _trackWhenPaused != null ? _trackWhenPaused.length : 0;
         }
 
         public override SfxProperties GetSourceProperties() {
