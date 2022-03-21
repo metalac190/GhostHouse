@@ -9,9 +9,12 @@ namespace Mechanics.Animations
     [RequireComponent(typeof(Animator))]
     public class InteractionAnimation : MonoBehaviour
     {
-        [Header("Animate Along")] [SerializeField]
-        private bool _xAxis = true;
+        [Header("Transform Type")] 
+        [SerializeField] private bool _position = false;
+        [SerializeField] private bool _rotation = true;
 
+        [Header("Animate Along")]
+        [SerializeField] private bool _xAxis = true;
         [SerializeField] private bool _yAxis = false;
         [SerializeField] private bool _zAxis = false;
 
@@ -40,7 +43,10 @@ namespace Mechanics.Animations
             string newPath = "Assets/_Game/Entities/Interactables/AnimationControllers/Temp/_AC_" + gameObject.name +
                              ".controller";
 
-            AssetDatabase.CopyAsset(templatePath, newPath);
+            if (AssetDatabase.LoadAssetAtPath<AnimatorController>(newPath) == null)
+            {
+                AssetDatabase.CopyAsset(templatePath, newPath);
+            }
             _controller = AssetDatabase.LoadAssetAtPath<AnimatorController>(newPath);
 
             AnimatorStateMachine rootSm = _controller.layers[0].stateMachine;
@@ -78,42 +84,79 @@ namespace Mechanics.Animations
         {
             AnimationClip interactionAnimation = new AnimationClip();
 
-            if (_xAxis)
+            if (_rotation)
             {
-                float startRot = gameObject.transform.rotation.x;
-                Keyframe[] keys = new Keyframe[4];
-                keys[0] = new Keyframe(0f, startRot);
-                keys[1] = new Keyframe(0.25f, -25f);
-                keys[2] = new Keyframe(0.75f, 25f);
-                keys[3] = new Keyframe(1f, startRot);
-                AnimationCurve curve = new AnimationCurve(keys);
-                interactionAnimation.SetCurve("Art", typeof(Transform), "localEulerAngle.x", curve);
-            }
+                if (_xAxis)
+                {
+                    float startRot = gameObject.transform.localRotation.x;
+                    Keyframe[] keys = new Keyframe[4];
+                    keys[0] = new Keyframe(0f, startRot);
+                    keys[1] = new Keyframe(0.25f, -25f);
+                    keys[2] = new Keyframe(0.75f, 25f);
+                    keys[3] = new Keyframe(1f, startRot);
+                    AnimationCurve curve = new AnimationCurve(keys);
+                    interactionAnimation.SetCurve("Art", typeof(Transform), "localEulerAngle.x", curve);
+                }
 
-            if (_yAxis)
+                if (_yAxis)
+                {
+                    float startRot = gameObject.transform.localRotation.y;
+                    Keyframe[] keys = new Keyframe[4];
+                    keys[0] = new Keyframe(0f, startRot);
+                    keys[1] = new Keyframe(0.25f, -25f);
+                    keys[2] = new Keyframe(0.75f, 25f);
+                    keys[3] = new Keyframe(1f, startRot);
+                    AnimationCurve curve = new AnimationCurve(keys);
+                    interactionAnimation.SetCurve("Art", typeof(Transform), "localEulerAngle.y", curve);
+                }
+
+                if (_zAxis)
+                {
+                    float startRot = gameObject.transform.localRotation.z;
+                    Keyframe[] keys = new Keyframe[4];
+                    keys[0] = new Keyframe(0f, startRot);
+                    keys[1] = new Keyframe(0.25f, -25f);
+                    keys[2] = new Keyframe(0.75f, 25f);
+                    keys[3] = new Keyframe(1f, startRot);
+                    AnimationCurve curve = new AnimationCurve(keys);
+                    interactionAnimation.SetCurve("Art", typeof(Transform), "localEulerAngle.z", curve);
+                }
+            }
+            else if (_position)
             {
-                float startRot = gameObject.transform.rotation.y;
-                Keyframe[] keys = new Keyframe[4];
-                keys[0] = new Keyframe(0f, startRot);
-                keys[1] = new Keyframe(0.25f, -25f);
-                keys[2] = new Keyframe(0.75f, 25f);
-                keys[3] = new Keyframe(1f, startRot);
-                AnimationCurve curve = new AnimationCurve(keys);
-                interactionAnimation.SetCurve("Art", typeof(Transform), "localEulerAngle.y", curve);
-            }
+                if (_xAxis)
+                {
+                    Keyframe[] keys = new Keyframe[4];
+                    keys[0] = new Keyframe(0f, 0);
+                    keys[1] = new Keyframe(0.25f, -0.5f);
+                    keys[2] = new Keyframe(0.75f, 0.5f);
+                    keys[3] = new Keyframe(1f, 0);
+                    AnimationCurve curve = new AnimationCurve(keys);
+                    interactionAnimation.SetCurve("Art", typeof(Transform), "localPosition.x", curve);
+                }
 
-            if (_zAxis)
-            {
-                float startRot = gameObject.transform.rotation.z;
-                Keyframe[] keys = new Keyframe[4];
-                keys[0] = new Keyframe(0f, startRot);
-                keys[1] = new Keyframe(0.25f, -25f);
-                keys[2] = new Keyframe(0.75f, 25f);
-                keys[3] = new Keyframe(1f, startRot);
-                AnimationCurve curve = new AnimationCurve(keys);
-                interactionAnimation.SetCurve("Art", typeof(Transform), "localEulerAngle.z", curve);
-            }
+                if (_yAxis)
+                {
+                    Keyframe[] keys = new Keyframe[4];
+                    keys[0] = new Keyframe(0f, 0);
+                    keys[1] = new Keyframe(0.25f, -0.5f);
+                    keys[2] = new Keyframe(0.75f, 0.5f);
+                    keys[3] = new Keyframe(1f, 0);
+                    AnimationCurve curve = new AnimationCurve(keys);
+                    interactionAnimation.SetCurve("Art", typeof(Transform), "localPosition.y", curve);
+                }
 
+                if (_zAxis)
+                {
+                    Keyframe[] keys = new Keyframe[4];
+                    keys[0] = new Keyframe(0f, 0);
+                    keys[1] = new Keyframe(0.25f, -0.5f);
+                    keys[2] = new Keyframe(0.75f, 0.5f);
+                    keys[3] = new Keyframe(1f, 0);
+                    AnimationCurve curve = new AnimationCurve(keys);
+                    interactionAnimation.SetCurve("Art", typeof(Transform), "localPosition.z", curve);
+                }
+            }
             interactionAnimation.name = "Interaction";
             return interactionAnimation;
         }
