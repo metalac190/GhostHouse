@@ -41,8 +41,8 @@ namespace Mechanics.Level_Mechanics
         [Header("Interactions")]
         [SerializeField] private Interactable _interaction = null;
         [SerializeField] private string _interactionText = "Interact";
-        [SerializeField] private Interactable _altInteraction = null;
-        [SerializeField] private string _altInteractionText = "Alt Interact";
+        [SerializeField] private Interactable _alternateInteraction = null;
+        [SerializeField] private string _alternateInteractionText = "Alt Interact";
 
         //[Header("Collision Information")]
         //[SerializeField] private bool _confirmUseChildCollider = false;
@@ -66,7 +66,7 @@ namespace Mechanics.Level_Mechanics
                 Debug.LogWarning("Missing Text Hover Controller in Scene!");
             }
             if (_interaction != null) _interaction.LoadInteraction();
-            if (_altInteraction != null) _altInteraction.LoadInteraction();
+            if (_alternateInteraction != null) _alternateInteraction.LoadInteraction();
            
         }
 
@@ -113,20 +113,20 @@ namespace Mechanics.Level_Mechanics
 
         #region On Click
 
-        public override void OnLeftClick(Vector3 position) {
+        public override void OnLeftClick(Vector3 mousePosition) {
            
             Debug.Log("Clicked on " + gameObject.name + "! Interactable During " + _interactableSeasons);
             if (_sfxOnClick) {
-                SoundManager.Instance.PlaySfx(_sfx, position);
+                SoundManager.Instance.PlaySfx(_sfx, mousePosition);
             }
             if (_popupWindowOnClick && !(IsometricCameraController.Singleton._interacting)) {
                 ModalWindowController.Singleton.EnableModalWindow(_displayText, _imageToDisplay,
                     _cancelButton, _interaction, _interactionText,
-                    _altInteraction, _altInteractionText);
+                    _alternateInteraction, _alternateInteractionText);
             }
             if (_moveOnClick)
             {
-                IsometricCameraController.Singleton.MoveToPosition(transform.position, _cameraMovementTime);
+                IsometricCameraController.Singleton.MoveToPosition(mousePosition, _cameraMovementTime);
             }
 
             //if (_moveOnClick)

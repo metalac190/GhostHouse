@@ -84,7 +84,7 @@ AudioSource:
   Priority: 128
   DopplerLevel: 1
   MinDistance: 1
-  MaxDistance: 500
+  MaxDistance: 10
   Pan2D: 0
   rolloffMode: 0
   BypassEffects: 0
@@ -119,7 +119,7 @@ AudioSource:
     m_Curve:
     - serializedVersion: 3
       time: 0
-      value: 0
+      value: 1
       inSlope: 0
       outSlope: 0
       tangentMode: 0
@@ -171,6 +171,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6b301a30b7c2f894cb7fdc4d6828f3a8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _enableSounds: 1
   _sfx:
     UseConstant: 0
     Clip: {fileID: 0}
@@ -178,6 +179,6 @@ MonoBehaviour:
   _playOnStart: 1
   _looping: 1
   _loopDelay:
-    MinValue: 0
-    MaxValue: 0
+    MinValue: 4
+    MaxValue: 10
   _delay: 0
