@@ -289,7 +289,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1344223184667239012
 Transform:
   m_ObjectHideFlags: 0
@@ -387,16 +387,16 @@ MonoBehaviour:
   _materialToSet: {fileID: 0}
   _sfxOnClick: 0
   _sfx: 0
+  _moveOnClick: 1
+  _cameraMovementTime: 3
   _popupWindowOnClick: 0
   _displayText: Move to the next season
   _imageToDisplay: {fileID: 0}
   _cancelButton: 1
-  _hasInteraction: 1
   _interaction: {fileID: 11400000, guid: 5137290a7af6f104fbee270028489327, type: 2}
-  _mainButtonText: 
-  _hasAltInteraction: 0
-  _altInteraction: {fileID: 0}
-  _altButtonText: 
+  _interactionText: Interact
+  _alternateInteraction: {fileID: 0}
+  _alternateInteractionText: Alt Interact
 --- !u!114 &8833594902729203021
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1738,7 +1738,7 @@ BoxCollider:
   m_GameObject: {fileID: 4720180332639470844}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
@@ -5328,7 +5328,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d746e772f5f05c74fa7047beae1466e8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _sfx: 1
+  _sfx: 3
 --- !u!1 &4720180333015047428
 GameObject:
   m_ObjectHideFlags: 0
@@ -5435,7 +5435,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d746e772f5f05c74fa7047beae1466e8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _sfx: 1
+  _sfx: 3
 --- !u!1 &4720180333060176514
 GameObject:
   m_ObjectHideFlags: 0
@@ -6700,7 +6700,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &4720180333115963252
 Transform:
   m_ObjectHideFlags: 0
@@ -9131,7 +9131,7 @@ MeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4720180333345606185}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
@@ -9188,7 +9188,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d746e772f5f05c74fa7047beae1466e8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _sfx: 1
+  _sfx: 3
 --- !u!1 &4720180333407214382
 GameObject:
   m_ObjectHideFlags: 0
@@ -11288,7 +11288,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d746e772f5f05c74fa7047beae1466e8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _sfx: 1
+  _sfx: 3
 --- !u!1 &4720180333947996190
 GameObject:
   m_ObjectHideFlags: 0
@@ -12113,7 +12113,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &4720180333967538133
 Transform:
   m_ObjectHideFlags: 0
@@ -12763,7 +12763,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d746e772f5f05c74fa7047beae1466e8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _sfx: 1
+  _sfx: 3
 --- !u!1 &4720180334015381551
 GameObject:
   m_ObjectHideFlags: 0
@@ -15244,7 +15244,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &4720180334086734335
 Transform:
   m_ObjectHideFlags: 0
@@ -17845,8 +17845,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Size: {x: 1, y: 0.4090332, z: 1}
+  m_Center: {x: 0, y: -0.2954834, z: 0}
 --- !u!114 &8656042819573266461
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -18016,7 +18016,7 @@ MeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4720180334535360395}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
@@ -18073,7 +18073,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d746e772f5f05c74fa7047beae1466e8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _sfx: 1
+  _sfx: 3
 --- !u!1 &4720180334536255453
 GameObject:
   m_ObjectHideFlags: 0
