@@ -10,7 +10,6 @@ GameObject:
   m_Component:
   - component: {fileID: 438029161094277101}
   - component: {fileID: 438029161094277100}
-  - component: {fileID: 438029161094277103}
   - component: {fileID: 438029161094277098}
   m_Layer: 0
   m_Name: Main Camera
@@ -76,14 +75,6 @@ Camera:
   m_OcclusionCulling: 1
   m_StereoConvergence: 10
   m_StereoSeparation: 0.022
---- !u!81 &438029161094277103
-AudioListener:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 438029161094277102}
-  m_Enabled: 1
 --- !u!114 &438029161094277098
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -211,14 +202,15 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 438029161404863514}
-  m_LocalRotation: {x: 0.1464466, y: 0.8535535, z: -0.35355338, w: 0.35355338}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 438029161094277101}
+  - {fileID: 7419230035984751345}
   m_Father: {fileID: 438029163017577698}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 45, y: 135, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &438029163017577701
 GameObject:
   m_ObjectHideFlags: 0
@@ -234,7 +226,7 @@ GameObject:
   m_Layer: 0
   m_Name: Camera_Controller
   m_TagString: Untagged
-  m_Icon: {fileID: 0}
+  m_Icon: {fileID: 3306451490063965843, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -245,14 +237,14 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 438029163017577701}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: 0.1464466, y: 0.8535535, z: -0.35355338, w: 0.35355338}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 438029161404863515}
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 45, y: 135, z: 0}
 --- !u!54 &438029163017577696
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -283,13 +275,26 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _mainCamera: {fileID: 438029161094277100}
   _rigidbody: {fileID: 438029163017577696}
+  _traditionalMovementEnabled: 1
   _cameraMoveSpeed: 20
+  _interacting: 0
+  _clickDragMovementEnabled: 1
+  _panningSpeed: 75
+  _mouseMotivatedMovementEnabled: 0
+  _mMPanningSpeed: 25
+  _panBorderThickness: 10
   _enableSlidingMovement: 0
+  _cameraZoomEnabled: 0
   _cameraZoomSpeed: 5
-  _maxZoomInValue: 10
+  _maxZoomInValue: 5
   _maxZoomOutValue: 20
-  _enableSprintSpeed: 1
+  _enableSprintSpeed: 0
   _cameraSprintSpeed: 40
+  _mouseMotivatedSprintSpeed: 35
+  _maxXValue: 39
+  _minXValue: -32
+  _maxZValue: 31
+  _minZValue: -32
 --- !u!114 &1592772763
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -302,3 +307,42 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: df41eae0147c7da48ba1fe96e5045af3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &4279371442415335564
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7419230035984751345}
+  - component: {fileID: 5575229274846809}
+  m_Layer: 0
+  m_Name: Audio Listener
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &7419230035984751345
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4279371442415335564}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 438029161404863515}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!81 &5575229274846809
+AudioListener:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4279371442415335564}
+  m_Enabled: 1

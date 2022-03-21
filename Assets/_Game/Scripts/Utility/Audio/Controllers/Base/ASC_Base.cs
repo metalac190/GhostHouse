@@ -36,12 +36,15 @@ namespace Utility.Audio.Controllers.Base
             source.panStereo = p.StereoPan;
             source.reverbZoneMix = p.ReverbZoneMix;
 
-            source.spatialBlend = p.SpatialBlend;
-            source.rolloffMode = p.RolloffMode;
-            source.minDistance = p.MinDistance;
-            source.maxDistance = p.MaxDistance;
-            source.spread = p.Spread;
-            source.dopplerLevel = p.DopplerLevel;
+            if (p.EnableSpatialSettings) {
+                if (p.Position != default) transform.position = p.Position;
+                source.spatialBlend = p.SpatialBlend;
+                source.rolloffMode = p.RolloffMode;
+                source.minDistance = p.MinDistance;
+                source.maxDistance = p.MaxDistance;
+                source.spread = p.Spread;
+                source.dopplerLevel = p.DopplerLevel;
+            }
 
             _originalVolume = p.Volume;
         }

@@ -77,8 +77,8 @@ namespace Utility.Audio.Managers
             _poolManager.BuildInitialPool(_poolParent, DefaultSfxPlayerName, _initialPoolSize);
         }
 
-        public void PlaySfx(SfxType type) {
-            _collection.GetSfx(type).Play();
+        public void PlaySfx(SfxType type, Vector3 position = default) {
+            _collection.GetSfx(type).Play(position);
         }
 
         public SfxPoolAudioSource GetController() {

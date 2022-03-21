@@ -20,13 +20,13 @@ namespace Utility.Audio.Helper
         }
 
         // Play the clip
-        public void Play() {
+        public void Play(Vector3 position = default) {
             if (NullTest()) return;
             if (UseConstant) {
-                AudioHelper.PlayClip(new SfxProperties(Clip));
+                AudioHelper.PlayClip(new SfxProperties(Clip), position);
             }
             else {
-                Base.Play();
+                Base.Play(position);
             }
         }
 

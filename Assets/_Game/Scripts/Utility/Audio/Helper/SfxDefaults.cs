@@ -29,7 +29,7 @@ namespace Utility.Audio.Helper
         public const float SpatialBlendMin = 0f;
         public const float SpatialBlendMax = 1f;
         public const AudioRolloffMode RolloffMode = AudioRolloffMode.Logarithmic;
-        public const float MinDistance = 0.1f;
+        public const float MinDistance = 0.5f;
         public const float MinDistanceMin = 0.1f;
         public const float MinDistanceMax = 5f;
         public const float MaxDistance = 50f;
