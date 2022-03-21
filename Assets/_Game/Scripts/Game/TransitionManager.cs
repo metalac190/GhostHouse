@@ -29,6 +29,11 @@ namespace Game
             }
         }
 
+        public void SetNextScene(string scene)
+        {
+            _nextScene = scene;
+        }
+
         public void Transition() {
             if (_fadeOut && _fade != null) {
                 _fade.FadeInUnlocked(_fadeInTime);
@@ -45,6 +50,7 @@ namespace Game
         }
 
         private void NextScene() {
+            DataManager.Instance.level = _nextScene;
             SceneManager.LoadScene(_nextScene);
         }
     }

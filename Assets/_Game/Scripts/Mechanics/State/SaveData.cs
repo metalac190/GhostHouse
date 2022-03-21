@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class SaveData
 {
-    public int level; // Store level season as int
+    public string level; // Store level season
     public int remainingSpiritPoints; // Store spirit points remaining from last save
 
     // Array of interactions to save

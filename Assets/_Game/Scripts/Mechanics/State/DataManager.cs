@@ -10,16 +10,17 @@ public class DataManager : MonoBehaviour
     // public instance reference to this script
     public static DataManager Instance = null;
 
+    // Reference to AudioMixerController to control volume levels
     [SerializeField] AudioMixerController audioMixerController;
 
     // string to hold the path to the savefile
     private string filePath;
 
-    // rweference to SaveData object, will hold values to save
+    // reference to SaveData object, will hold values to save
     private SaveData saveData = new SaveData();
 
     // Save Data fields saved in DataManager
-    public int level { get; set; }
+    public string level { get; set; }
     public int remainingSpiritPoints { get; set; }
 
     // Dictionary to hold state of each interactable
@@ -52,14 +53,45 @@ public class DataManager : MonoBehaviour
         if (Instance == null) {
             Instance = this;
             DontDestroyOnLoad(this.gameObject);
-            filePath = Path.Combine(Application.persistentDataPath, "savedata.json");
-            journalUnlocks = new bool[10];
-            interactions = new Dictionary<string, bool>();
         }
         else
         {
             Destroy(this.gameObject);
         }
+    }
+
+    private void Start()
+    {
+        filePath = Path.Combine(Application.persistentDataPath, "savedata.json");
+        interactions = new Dictionary<string, bool>();
+        journalUnlocks = new bool[50];
+
+        SetDefaultValues();
+
+        ReadFile();
+
+        // Set values throughtout game on starting to reload game
+    }
+
+    private void SetDefaultValues()
+    {
+        level = "Spring";
+        remainingSpiritPoints = 3;
+        settingsLeftClickInteract = true;
+        settingsCameraWASD = false;
+        settingsCameraArrowKeys = false;
+        settingsClickDrag = true;
+        settingsSensitivity = 75;
+        settingsMusicVolume = 100;
+        settingsSFXVolume = 75;
+        settingsDialogueVolume = 75;
+        settingsAmbienceVolume = 75;
+        settingsWindowMode = true;  // placeholder
+        settingsContrast = 1;       // placeholder
+        settingsBrightness = 1;     // placeholder
+        settingsLargeGUI = true;    // placeholder
+        settingsLargeText = true;   // placeholder
+        settingsTextFont = 0;       // placeholder
     }
 
     // Read data from the save file into the game
@@ -169,6 +201,13 @@ public class DataManager : MonoBehaviour
         settingsCameraArrowKeys = useArrows;
         settingsClickDrag = clickDrag;
         settingsSensitivity = sensitivity;
+
+        SetControlSettings();
+    }
+
+    private void SetControlSettings()
+    {
+        // Set Control settings on camera controller
     }
 
     public void SaveAudioSettings(int musicVol, int sfxVol, int dialogueVol, int ambVol)
@@ -178,10 +217,15 @@ public class DataManager : MonoBehaviour
         settingsDialogueVolume = dialogueVol;
         settingsAmbienceVolume = ambVol;
 
-        audioMixerController.SetMusicVolume(musicVol);
-        audioMixerController.SetSfxVolume(sfxVol);
-        audioMixerController.SetDialogueVolume(dialogueVol);
-        audioMixerController.SetAmbienceVolume(ambVol);
+        SetAudioSettings();
+    }
+
+    private void SetAudioSettings()
+    {
+        audioMixerController.SetMusicVolume((float)settingsMusicVolume/100);
+        audioMixerController.SetSfxVolume((float)settingsSFXVolume/100);
+        audioMixerController.SetDialogueVolume((float)settingsDialogueVolume/100);
+        audioMixerController.SetAmbienceVolume((float)settingsAmbienceVolume/100);
     }
 
     public void SaveVisualSettings(bool windowMode, int contrast, int brightness, bool largeGUIFont, bool largeTextFont, int textFont)
@@ -192,6 +236,13 @@ public class DataManager : MonoBehaviour
         settingsLargeGUI = largeGUIFont;
         settingsLargeText = largeTextFont;
         settingsTextFont = textFont;
+
+        SetVisualSettings();
+    }
+
+    private void SetVisualSettings()
+    {
+        // Set visual settings wherever
     }
 
     // Dump all data to the console
