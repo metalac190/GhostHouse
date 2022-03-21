@@ -42,13 +42,6 @@ public class DataTestController : MonoBehaviour
         }
     }
 
-    public void IncreaseLevel()
-    {
-        level++;
-        DataManager.Instance.level = level;
-        DataManager.Instance.UnlockJournalEntry(level);
-    }
-
     public void DecreaseSP()
     {
         sp--;
