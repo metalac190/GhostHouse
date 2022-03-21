@@ -63,7 +63,7 @@ public class IsometricCameraController : MonoBehaviour
         get { return new Vector2(Input.GetAxis("Mouse X"), Input.GetAxis("Mouse Y")); }
     }
 
-    private bool drag = false;
+    //private bool drag = false;
 
 
     #region Singleton Pattern
