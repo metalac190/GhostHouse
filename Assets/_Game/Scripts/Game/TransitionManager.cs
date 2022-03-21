@@ -25,7 +25,6 @@ namespace Game
         private void Start() {
             if (_fadeIn) {
                 FadeFromBlack();
-                if (_fadeToBlack != null) StartCoroutine(FadeFromBlack(_fadeInTime));
             }
             else if (_showTitleText) {
                 TitleText();
@@ -46,7 +45,7 @@ namespace Game
         }
 
         private void FadeFromBlack() {
-            if (_fadeToBlack != null) return;
+            if (_fadeToBlack == null) return;
             StartCoroutine(FadeFromBlack(_fadeInTime));
         }
 

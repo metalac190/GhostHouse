@@ -112,9 +112,11 @@ namespace Mechanics.Level_Mechanics
                 SoundManager.Instance.PlaySfx(_sfx, mousePosition);
             }
             if (_popupWindowOnClick && !(IsometricCameraController.Singleton._interacting)) {
-                ModalWindowController.Singleton.EnableModalWindow(_displayText, _imageToDisplay,
-                    _cancelButton, _interaction, _interactionText,
-                    _alternateInteraction, _alternateInteractionText);
+                Action callback = _interaction != null && _interaction.CanInteract ? (Action)Interact : null;
+                Action altCallback = (_alternateInteraction != null && _alternateInteraction.CanInteract) ? (Action)AltInteract : null;
+
+                ModalWindowController.Singleton.EnableModalWindow(_displayText, _imageToDisplay, _cancelButton,
+                    callback, _interactionText, altCallback, _alternateInteractionText);
             }
             if (_moveOnClick) {
                 IsometricCameraController.Singleton.MoveToPosition(mousePosition, _cameraMovementTime);
@@ -124,6 +126,14 @@ namespace Mechanics.Level_Mechanics
             //{
             //    StartCoroutine(IsometricCameraController.Singleton.MoveToPosition(transform.position, _cameraMovementTime));
             //}
+        }
+
+        public void Interact() {
+            _interaction.Interact();
+        }
+
+        public void AltInteract() {
+            _alternateInteraction.Interact();
         }
 
         #endregion
