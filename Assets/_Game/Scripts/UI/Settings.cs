@@ -53,9 +53,16 @@ public class Settings : MonoBehaviour
     //Load all settings when game starts
     private void Start()
     {
-        Debug.Log(Application.persistentDataPath);
-        Debug.Log(DataManager.Instance.settingsLeftClickInteract);
-        DataManager.Instance.ReadFile();
+        //Debug.Log(Application.persistentDataPath);
+        //Debug.Log(DataManager.Instance.settingsLeftClickInteract);
+
+        LoadSettings();
+    }
+
+    [Button(Spacing = 25)]
+    public void LoadSettings()
+    {
+        // This should be called each time the settings menu is opened
 
         leftClickInteract = DataManager.Instance.settingsLeftClickInteract;
         useWASD = DataManager.Instance.settingsCameraWASD;
@@ -72,18 +79,16 @@ public class Settings : MonoBehaviour
         largeGUIFont = DataManager.Instance.settingsLargeGUI;
         largeTextFont = DataManager.Instance.settingsLargeText;
         textFont = DataManager.Instance.settingsTextFont;
-
-
     }
 
-    [Button(Spacing = 10)]
+    [Button(Spacing = 20)]
     public void SaveAllSettings() {
         SaveControlSettings();
         SaveAudioSettings();
         SaveVisualSettings();
     }
 
-    [Button(Spacing = 20)]
+    [Button(Spacing = 10)]
     public void SaveControlSettings()
     {
         DataManager.Instance.SaveControlSettings(leftClickInteract, useWASD, useArrowKeys, useClickNDrag, dragSpeed);
