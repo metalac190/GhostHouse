@@ -11,9 +11,6 @@ namespace Mechanics.Level_Mechanics
 {
     public class StoryInteractable : InteractableBase
     {
-        [Header("Seasons when Interactable")]
-        [SerializeField] private Season _interactableSeasons = Season.Universal;
-
         [Header("On Hover")]
         [SerializeField] private bool _textOnHover = false;
         [SerializeField] private bool _hoverTextUseObjectName = false;
@@ -55,8 +52,6 @@ namespace Mechanics.Level_Mechanics
 
         private bool _missingHoverUi;
 
-        
-
 
         #region Unity Functions
 
@@ -67,7 +62,6 @@ namespace Mechanics.Level_Mechanics
             }
             if (_interaction != null) _interaction.LoadInteraction();
             if (_alternateInteraction != null) _alternateInteraction.LoadInteraction();
-           
         }
 
         #endregion
@@ -114,8 +108,6 @@ namespace Mechanics.Level_Mechanics
         #region On Click
 
         public override void OnLeftClick(Vector3 mousePosition) {
-           
-            Debug.Log("Clicked on " + gameObject.name + "! Interactable During " + _interactableSeasons);
             if (_sfxOnClick) {
                 SoundManager.Instance.PlaySfx(_sfx, mousePosition);
             }
@@ -124,8 +116,7 @@ namespace Mechanics.Level_Mechanics
                     _cancelButton, _interaction, _interactionText,
                     _alternateInteraction, _alternateInteractionText);
             }
-            if (_moveOnClick)
-            {
+            if (_moveOnClick) {
                 IsometricCameraController.Singleton.MoveToPosition(mousePosition, _cameraMovementTime);
             }
 
@@ -133,7 +124,6 @@ namespace Mechanics.Level_Mechanics
             //{
             //    StartCoroutine(IsometricCameraController.Singleton.MoveToPosition(transform.position, _cameraMovementTime));
             //}
-
         }
 
         #endregion
