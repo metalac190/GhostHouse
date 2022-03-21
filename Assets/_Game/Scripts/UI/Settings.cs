@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Utility.Buttons;
 
 //Settings menus change settings values
 public class Settings : MonoBehaviour
@@ -75,16 +76,26 @@ public class Settings : MonoBehaviour
 
     }
 
+    [Button(Spacing = 10)]
+    public void SaveAllSettings() {
+        SaveControlSettings();
+        SaveAudioSettings();
+        SaveVisualSettings();
+    }
+
+    [Button(Spacing = 20)]
     public void SaveControlSettings()
     {
         DataManager.Instance.SaveControlSettings(leftClickInteract, useWASD, useArrowKeys, useClickNDrag, dragSpeed);
     }
 
+    [Button]
     public void SaveAudioSettings()
     {
         DataManager.Instance.SaveAudioSettings(music, SFX, dialog, ambience);
     }
 
+    [Button]
     public void SaveVisualSettings()
     {
         DataManager.Instance.SaveVisualSettings(isWindowed, contrast, brightness, largeGUIFont, largeTextFont, textFont);
