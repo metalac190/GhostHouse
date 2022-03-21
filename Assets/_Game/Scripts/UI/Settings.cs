@@ -35,17 +35,26 @@ public class Settings : MonoBehaviour
     [Range(0, 2)]
     public int textFont = 0;
 
-    //Load all settings when game starts
+
     private void Awake()
     {
         if (Instance == null)
         {
             Instance = this;
+            DontDestroyOnLoad(this.gameObject);
         }
         else
         {
             Destroy(this.gameObject);
         }
+    }
+
+    //Load all settings when game starts
+    private void Start()
+    {
+        Debug.Log(Application.persistentDataPath);
+        Debug.Log(DataManager.Instance.settingsLeftClickInteract);
+        DataManager.Instance.ReadFile();
 
         leftClickInteract = DataManager.Instance.settingsLeftClickInteract;
         useWASD = DataManager.Instance.settingsCameraWASD;
@@ -62,6 +71,8 @@ public class Settings : MonoBehaviour
         largeGUIFont = DataManager.Instance.settingsLargeGUI;
         largeTextFont = DataManager.Instance.settingsLargeText;
         textFont = DataManager.Instance.settingsTextFont;
+
+
     }
 
     public void SaveControlSettings()
