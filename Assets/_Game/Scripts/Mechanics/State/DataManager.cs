@@ -3,11 +3,14 @@ using System.Collections.Generic;
 using System.IO;
 using UnityEngine;
 using Utility.Buttons;
+using Utility.Audio.Managers;
 
 public class DataManager : MonoBehaviour
 {
     // public instance reference to this script
     public static DataManager Instance = null;
+
+    [SerializeField] AudioMixerController audioMixerController;
 
     // string to hold the path to the savefile
     private string filePath;
@@ -174,6 +177,11 @@ public class DataManager : MonoBehaviour
         settingsSFXVolume = sfxVol;
         settingsDialogueVolume = dialogueVol;
         settingsAmbienceVolume = ambVol;
+
+        audioMixerController.SetMusicVolume(musicVol);
+        audioMixerController.SetSfxVolume(sfxVol);
+        audioMixerController.SetDialogueVolume(dialogueVol);
+        audioMixerController.SetAmbienceVolume(ambVol);
     }
 
     public void SaveVisualSettings(bool windowMode, int contrast, int brightness, bool largeGUIFont, bool largeTextFont, int textFont)
