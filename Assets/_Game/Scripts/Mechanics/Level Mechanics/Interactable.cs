@@ -65,6 +65,11 @@ namespace Mechanics.Level_Mechanics
             for (int i = _interactableResponses.Count - 1; i >= 0; i--) {
                 _interactableResponses[i].Invoke();
             }
+
+            if (_cost > 0) {
+                // TODO: Apply Spirit Point Cost
+            }
+
             _sfxOnInteract.Play();
             _interacted = true;
             SaveInteraction();
