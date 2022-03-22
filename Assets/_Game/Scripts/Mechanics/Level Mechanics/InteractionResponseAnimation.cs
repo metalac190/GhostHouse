@@ -9,10 +9,9 @@ public class InteractionResponseAnimation : InteractableResponseBase
 
     private Animator GetAnimator()
     {
-        var parent = gameObject.transform.parent;
-        var anim = parent.GetComponent<Animator>();
+        var anim = GetComponent<Animator>();
         if (anim != null) return anim;
-        anim = parent.GetComponentInChildren<Animator>();
+        anim = GetComponentInChildren<Animator>();
         if (anim != null) return anim;
         Debug.LogError("Error: No animator attached to this Interaction Response Animator", gameObject);
         return null;
