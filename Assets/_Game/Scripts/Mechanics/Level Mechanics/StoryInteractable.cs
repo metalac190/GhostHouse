@@ -113,6 +113,9 @@ namespace Mechanics.Level_Mechanics
 
                 ModalWindowController.Singleton.EnableModalWindow(_closeMenuText, callback, _interactionText, altCallback, _alternateInteractionText);
             }
+            else if (_interaction != null) {
+                    _interaction.Interact();
+            }
             if (_moveOnClick) {
                 IsometricCameraController.Singleton.MoveToPosition(mousePosition, _cameraMovementTime);
             }

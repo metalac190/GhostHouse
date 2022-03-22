@@ -54,8 +54,6 @@ public class ModalWindowController : MonoBehaviour
 
     public void EnableModalWindow(string closeButtonText, Action callback, string interactButtonText, Action altCallback, string altInteractButtonText) {
         // Enable Modal Window
-        transform.position = Input.mousePosition;
-
         IsometricCameraController.Singleton._interacting = true;
         OnInteractStart?.Invoke();
 
@@ -87,8 +85,10 @@ public class ModalWindowController : MonoBehaviour
     public void DisableModalWindow() {
         OnInteractEnd?.Invoke();
         _mainInteractionButton.gameObject.SetActive(false);
+        _mainInteractionButton.onClick.RemoveAllListeners();
         _mainInteractionText.text = "Interact";
         _alternateInteractionButton.gameObject.SetActive(false);
+        _alternateInteractionButton.onClick.RemoveAllListeners();
         _alternateInteractionText.text = "Interact";
         _modalWindow.SetActive(false);
         _enabled = false;
