@@ -54,8 +54,6 @@ public class ModalWindowController : MonoBehaviour
 
     public void EnableModalWindow(string closeButtonText, Action callback, string interactButtonText, Action altCallback, string altInteractButtonText) {
         // Enable Modal Window
-        transform.position = Input.mousePosition;
-
         IsometricCameraController.Singleton._interacting = true;
         OnInteractStart?.Invoke();
 
