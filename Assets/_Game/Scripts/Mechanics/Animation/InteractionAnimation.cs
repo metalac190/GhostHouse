@@ -6,6 +6,7 @@ using UnityEditor;
 using UnityEngine;
 using UnityEditor.Animations;
 using UnityEditor.VersionControl;
+using Utility.Buttons;
 
 [RequireComponent(typeof(Animator))]
 public class InteractionAnimation : MonoBehaviour
@@ -27,28 +28,37 @@ public class InteractionAnimation : MonoBehaviour
     private AnimatorState _interactionState;
     private AnimatorState _postInteractionState;
 
-
-    void Awake()
+    private void Awake()
     {
         if (GetComponent<Animator>() != null) _animator = GetComponent<Animator>();
     }
-
-    void Start()
+    private void Start()
     {
-        CreateController();
+        var controller = (AnimatorController) AssetDatabase.LoadAssetAtPath("Assets/_Game/Entities/Interactables/Temp/Controllers/_AC_" + gameObject.name +
+                                      ".controller",typeof(AnimatorController));
+
+        _animator.runtimeAnimatorController = controller;
     }
 
     private void SaveAnimation(AnimationClip clip)
     {
-        string savePath = "Assets/_Game/Entities/Interactables/Temp/Animation/anim_" + gameObject.name + "_" +
+        string savePath = "Assets/_Game/Entities/Interactables/Temp/Animations/anim_" + gameObject.name + "_" +
                           clip.name + ".anim";
         AssetDatabase.CreateAsset(clip,savePath);
     }
 
+    private void AssignController()
+    {
+
+    }
+
+    [Button(Mode = ButtonMode.NotPlaying)]
     private void CreateController()
     {
+        if (GetComponent<Animator>() != null) _animator = GetComponent<Animator>();
+
         string templatePath = "Assets/_Game/Entities/Interactables/AnimationControllers/_AC_Template.controller";
-        string newPath = "Assets/_Game/Entities/Interactables/Temp/Controllers/Temp/_AC_" + gameObject.name +
+        string newPath = "Assets/_Game/Entities/Interactables/Temp/Controllers/_AC_" + gameObject.name +
                          ".controller";
 
         if (AssetDatabase.LoadAssetAtPath<AnimatorController>(newPath) == null)
