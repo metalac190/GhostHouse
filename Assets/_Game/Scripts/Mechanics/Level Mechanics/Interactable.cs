@@ -17,12 +17,14 @@ namespace Mechanics.Level_Mechanics
 
         [Header("Interactable Settings")]
         [SerializeField] private string _dialogeYarnNode = "";
-        [SerializeField] private int _cost = 0;
+        [SerializeField] private int _cost;
         [SerializeField] private bool _canInteractMultipleTimes = false;
 
         [Header("Other Settings")]
         [SerializeField] private SfxReference _sfxOnInteract = new SfxReference();
         [SerializeField, ReadOnly] public bool _interacted = false;
+
+        public string InteractableInfo => _interactableName + ": " + _interactableDescription;
 
         static DialogueRunner _dialogueRunner;
         static DialogueRunner DialogueRunner {
@@ -37,13 +39,13 @@ namespace Mechanics.Level_Mechanics
 
         public bool CanInteract => !_interacted || _canInteractMultipleTimes;
 
-        private List<InteractableResponse> _interactableResponses = new List<InteractableResponse>();
+        private List<InteractableResponseBase> _interactableResponses = new List<InteractableResponseBase>();
 
-        public void Raise(InteractableResponse response) {
+        public void Raise(InteractableResponseBase response) {
             _interactableResponses.Add(response);
         }
 
-        public void Unraise(InteractableResponse response) {
+        public void Unraise(InteractableResponseBase response) {
             _interactableResponses.Remove(response);
         }
 
@@ -63,6 +65,11 @@ namespace Mechanics.Level_Mechanics
             for (int i = _interactableResponses.Count - 1; i >= 0; i--) {
                 _interactableResponses[i].Invoke();
             }
+
+            if (_cost > 0) {
+                // TODO: Apply Spirit Point Cost
+            }
+
             _sfxOnInteract.Play();
             _interacted = true;
             SaveInteraction();

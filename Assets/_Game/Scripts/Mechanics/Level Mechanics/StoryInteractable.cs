@@ -1,17 +1,16 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using Mechanics.Feedback;
 using Mechanics.UI;
 using UnityEngine;
+using UnityEngine.Events;
 using Utility.Audio.Managers;
 
 namespace Mechanics.Level_Mechanics
 {
     public class StoryInteractable : InteractableBase
     {
-        [Header("Seasons when Interactable")]
-        [SerializeField] private Season _interactableSeasons = Season.Universal;
-
         [Header("On Hover")]
         [SerializeField] private bool _textOnHover = false;
         [SerializeField] private bool _hoverTextUseObjectName = false;
@@ -19,7 +18,7 @@ namespace Mechanics.Level_Mechanics
 
         [SerializeField] private bool _highlightOnHover = false;
         [SerializeField] private Color _highlightColor = Color.yellow;
-        [SerializeField] private float _highlightSize = 1f;
+        [SerializeField] private float _highlightSize;
 
         [SerializeField] private bool _setMaterialOnHover = false;
         [SerializeField] private Material _materialToSet = null;
@@ -27,18 +26,16 @@ namespace Mechanics.Level_Mechanics
         [Header("On Click")]
         [SerializeField] private bool _sfxOnClick = false;
         [SerializeField] private SfxType _sfx = SfxType.Default;
+        [SerializeField] private bool _moveOnClick = true;
+        [SerializeField] private float _cameraMovementTime = 3f;
 
         [Header("Interaction Window")]
         [SerializeField] private bool _popupWindowOnClick = false;
-        [SerializeField, TextArea] private string _displayText = "";
-        [SerializeField] private Sprite _imageToDisplay = null;
-        [SerializeField] private bool _cancelButton = true;
-
-        [Header("Interactions")]
         [SerializeField] private Interactable _interaction = null;
         [SerializeField] private string _interactionText = "Interact";
-        [SerializeField] private Interactable _altInteraction = null;
-        [SerializeField] private string _altInteractionText = "Alt Interact";
+        [SerializeField] private Interactable _alternateInteraction = null;
+        [SerializeField] private string _alternateInteractionText = "Alt Interact";
+        [SerializeField] private string _closeMenuText = "Close";
 
         //[Header("Collision Information")]
         //[SerializeField] private bool _confirmUseChildCollider = false;
@@ -51,6 +48,7 @@ namespace Mechanics.Level_Mechanics
 
         private bool _missingHoverUi;
 
+
         #region Unity Functions
 
         private void Start() {
@@ -59,7 +57,7 @@ namespace Mechanics.Level_Mechanics
                 Debug.LogWarning("Missing Text Hover Controller in Scene!");
             }
             if (_interaction != null) _interaction.LoadInteraction();
-            if (_altInteraction != null) _altInteraction.LoadInteraction();
+            if (_alternateInteraction != null) _alternateInteraction.LoadInteraction();
         }
 
         #endregion
@@ -105,16 +103,35 @@ namespace Mechanics.Level_Mechanics
 
         #region On Click
 
-        public override void OnLeftClick(Vector3 position) {
-            Debug.Log("Clicked on " + gameObject.name + "!");
+        public override void OnLeftClick(Vector3 mousePosition) {
             if (_sfxOnClick) {
-                SoundManager.Instance.PlaySfx(_sfx, position);
+                SoundManager.Instance.PlaySfx(_sfx, mousePosition);
             }
-            if (_popupWindowOnClick) {
-                ModalWindowController.Singleton.EnableModalWindow(_displayText, _imageToDisplay,
-                    _cancelButton, _interaction, _interactionText,
-                    _altInteraction, _altInteractionText);
+            if (_popupWindowOnClick && !(IsometricCameraController.Singleton._interacting)) {
+                Action callback = _interaction != null && _interaction.CanInteract ? (Action)Interact : null;
+                Action altCallback = (_alternateInteraction != null && _alternateInteraction.CanInteract) ? (Action)AltInteract : null;
+
+                ModalWindowController.Singleton.EnableModalWindow(_closeMenuText, callback, _interactionText, altCallback, _alternateInteractionText);
             }
+            else if (_interaction != null) {
+                    _interaction.Interact();
+            }
+            if (_moveOnClick) {
+                IsometricCameraController.Singleton.MoveToPosition(mousePosition, _cameraMovementTime);
+            }
+
+            //if (_moveOnClick)
+            //{
+            //    StartCoroutine(IsometricCameraController.Singleton.MoveToPosition(transform.position, _cameraMovementTime));
+            //}
+        }
+
+        public void Interact() {
+            _interaction.Interact();
+        }
+
+        public void AltInteract() {
+            _alternateInteraction.Interact();
         }
 
         #endregion
