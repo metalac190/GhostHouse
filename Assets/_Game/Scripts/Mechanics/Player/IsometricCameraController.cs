@@ -416,6 +416,7 @@ public class IsometricCameraController : MonoBehaviour
                 if (Physics.Raycast(ray, out var hit, _groundLayer))
                 {
                     Vector3 diff = _dragStart - Vector3.Lerp(_dragStart, hit.point, _clickDragSmooth);
+                    diff.y = 0;
                     transform.position += diff;
                 }
             }
