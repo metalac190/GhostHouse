@@ -26,7 +26,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 438029161094277102}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: -32}
+  m_LocalPosition: {x: 0, y: 0, z: -100}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 438029161404863515}
@@ -281,6 +281,7 @@ MonoBehaviour:
   _interacting: 0
   _clickDragMovementEnabled: 1
   _panningSpeed: 75
+  _exposedField: 10
   _mouseMotivatedMovementEnabled: 0
   _mMPanningSpeed: 25
   _panBorderThickness: 10
@@ -321,7 +322,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _startingSpiritPoints: 3
-  _currentSpiritPoints: 0
+  _currentSpiritPoints: {fileID: 0}
 --- !u!1 &4279371442415335564
 GameObject:
   m_ObjectHideFlags: 0
