@@ -1,5 +1,49 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &486527335730288291
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3637315165755008296}
+  - component: {fileID: 2136247957103980159}
+  m_Layer: 0
+  m_Name: Interaction_Response
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &3637315165755008296
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 486527335730288291}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 8682569068074612596}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2136247957103980159
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 486527335730288291}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 857108f1cc9766945b6ef10cd5c2dedb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _interactable: {fileID: 11400000, guid: 6a3a886c1f0fa8647a3876a3d3e804c5, type: 2}
 --- !u!1 &2838984744955502671
 GameObject:
   m_ObjectHideFlags: 0
@@ -11,6 +55,8 @@ GameObject:
   - component: {fileID: 8682569068074612596}
   - component: {fileID: 529390764879538368}
   - component: {fileID: 3077727935856688464}
+  - component: {fileID: 2414294872326862347}
+  - component: {fileID: 8844852283396141632}
   m_Layer: 0
   m_Name: SI_DrawingJaq
   m_TagString: Untagged
@@ -30,6 +76,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 2270287035283546379}
+  - {fileID: 3637315165755008296}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -69,16 +116,50 @@ MonoBehaviour:
   _materialToSet: {fileID: 0}
   _sfxOnClick: 0
   _sfx: 0
-  _popupWindowOnClick: 0
-  _displayText: 
-  _imageToDisplay: {fileID: 0}
+  _moveOnClick: 1
+  _cameraMovementTime: 3
+  _popupWindowOnClick: 1
+  _displayText: A drawing by Jaq
+  _imageToDisplay: {fileID: 21300000, guid: 5a51f1fb28a34494ab142a67013456f7, type: 3}
   _cancelButton: 1
-  _hasInteraction: 1
-  _interaction: {fileID: 11400000, guid: c2a0e0b44ddadb24b8f2a07300af9949, type: 2}
-  _mainButtonText: Interact
-  _hasAltInteraction: 0
-  _altInteraction: {fileID: 0}
-  _altButtonText: Alt Interact
+  _interaction: {fileID: 11400000, guid: 6a3a886c1f0fa8647a3876a3d3e804c5, type: 2}
+  _interactionText: Interact
+  _alternateInteraction: {fileID: 0}
+  _alternateInteractionText: Alt Interact
+--- !u!95 &2414294872326862347
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2838984744955502671}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 0}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &8844852283396141632
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2838984744955502671}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 73b855d88e471e4418b0d92c38df83dc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _xAxis: 1
+  _yAxis: 0
+  _zAxis: 0
 --- !u!1 &7858360472418960278
 GameObject:
   m_ObjectHideFlags: 0
