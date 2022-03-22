@@ -2,6 +2,7 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using Yarn.Unity;
 
 namespace Game
 {
@@ -16,11 +17,22 @@ namespace Game
         [SerializeField] private bool _showTitleText = true;
         [SerializeField] private float _titleTextTime = 1;
         [SerializeField] private AnimationCurve _titleTextVisibility = new AnimationCurve(new Keyframe(0, 0), new Keyframe(0.25f, 1), new Keyframe(0.75f, 1), new Keyframe(1, 0));
+        [SerializeField] private string _dialogueOnStart = "";
 
         [Header("On Scene End")]
         [SerializeField] private string _nextScene = "MainMenu";
         [SerializeField] private bool _fadeOut = true;
         [SerializeField] private float _fadeOutTime = 1;
+
+        private static DialogueRunner _dialogueRunner;
+        private static DialogueRunner DialogueRunner {
+            get {
+                if (_dialogueRunner == null) {
+                    _dialogueRunner = FindObjectOfType<DialogueRunner>();
+                }
+                return _dialogueRunner;
+            }
+        }
 
         private void Start() {
             if (_fadeIn) {
@@ -73,6 +85,11 @@ namespace Game
                 yield return null;
             }
             _titleBanner.gameObject.SetActive(false);
+            StartDialogue();
+        }
+
+        private void StartDialogue() {
+            DialogueRunner.StartDialogue(_dialogueOnStart);
         }
 
         private IEnumerator FadeToBlack(float time) {

@@ -21,9 +21,7 @@ public class ModalWindowController : MonoBehaviour
     [SerializeField] private TextMeshProUGUI _mainInteractionText = null;
     [SerializeField] private Button _alternateInteractionButton = null;
     [SerializeField] private TextMeshProUGUI _alternateInteractionText = null;
-    [SerializeField] private TextMeshProUGUI _modalWindowText = null;
-    [SerializeField] private Button _closeButton = null;
-    [SerializeField] private Image _displayImage = null;
+    [SerializeField] private TextMeshProUGUI _closeButton = null;
 
     public static event Action OnInteractStart = delegate { };
     public static event Action OnInteractEnd = delegate { };
@@ -54,19 +52,12 @@ public class ModalWindowController : MonoBehaviour
         }
     }
 
-    public void EnableModalWindow(string displayText, Sprite imageToDisplay, bool hasCancelButton,
-        Action callback, string interactButtonText, Action altCallback, string altInteractButtonText) {
+    public void EnableModalWindow(string closeButtonText, Action callback, string interactButtonText, Action altCallback, string altInteractButtonText) {
         // Enable Modal Window
+        transform.position = Input.mousePosition;
 
         IsometricCameraController.Singleton._interacting = true;
         OnInteractStart?.Invoke();
-
-        _modalWindowText.text = displayText;
-        if (imageToDisplay != null) {
-            _displayImage.gameObject.SetActive(true);
-            _displayImage.sprite = imageToDisplay;
-        }
-        _closeButton.gameObject.SetActive(hasCancelButton);
 
         if (callback != null) {
             _mainInteractionButton.gameObject.SetActive(true);
@@ -76,6 +67,8 @@ public class ModalWindowController : MonoBehaviour
                 _mainInteractionText.text = interactButtonText;
             }
         }
+
+        _closeButton.text = closeButtonText;
 
         if (altCallback != null) {
             _alternateInteractionButton.gameObject.SetActive(true);
@@ -93,9 +86,6 @@ public class ModalWindowController : MonoBehaviour
 
     public void DisableModalWindow() {
         OnInteractEnd?.Invoke();
-        _modalWindowText.text = "";
-        _displayImage.gameObject.SetActive(false);
-        _closeButton.gameObject.SetActive(true);
         _mainInteractionButton.gameObject.SetActive(false);
         _mainInteractionText.text = "Interact";
         _alternateInteractionButton.gameObject.SetActive(false);

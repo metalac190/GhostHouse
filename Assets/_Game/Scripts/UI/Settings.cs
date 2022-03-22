@@ -6,7 +6,6 @@ using Utility.Buttons;
 //Settings menus change settings values
 public class Settings : MonoBehaviour
 {
-
     //Singleton pattern
     public static Settings Instance = null;
 
@@ -37,31 +36,26 @@ public class Settings : MonoBehaviour
     public int textFont = 0;
 
 
-    private void Awake()
-    {
-        if (Instance == null)
-        {
+    private void Awake() {
+        if (Instance == null) {
             Instance = this;
             DontDestroyOnLoad(this.gameObject);
         }
-        else
-        {
+        else {
             Destroy(this.gameObject);
         }
     }
 
     //Load all settings when game starts
-    private void Start()
-    {
+    private void Start() {
         //Debug.Log(Application.persistentDataPath);
         //Debug.Log(DataManager.Instance.settingsLeftClickInteract);
 
         LoadSettings();
     }
 
-    [Button(Spacing = 25)]
-    public void LoadSettings()
-    {
+    [Button(Spacing = 25, Mode = ButtonMode.NotPlaying)]
+    public void LoadSettings() {
         // This should be called each time the settings menu is opened
 
         leftClickInteract = DataManager.Instance.settingsLeftClickInteract;
@@ -81,28 +75,25 @@ public class Settings : MonoBehaviour
         textFont = DataManager.Instance.settingsTextFont;
     }
 
-    [Button(Spacing = 20)]
+    [Button(Spacing = 20, Mode = ButtonMode.NotPlaying)]
     public void SaveAllSettings() {
         SaveControlSettings();
         SaveAudioSettings();
         SaveVisualSettings();
     }
 
-    [Button(Spacing = 10)]
-    public void SaveControlSettings()
-    {
+    [Button(Spacing = 10, Mode = ButtonMode.NotPlaying)]
+    public void SaveControlSettings() {
         DataManager.Instance.SaveControlSettings(leftClickInteract, useWASD, useArrowKeys, useClickNDrag, dragSpeed);
     }
 
-    [Button]
-    public void SaveAudioSettings()
-    {
+    [Button(Mode = ButtonMode.NotPlaying)]
+    public void SaveAudioSettings() {
         DataManager.Instance.SaveAudioSettings(music, SFX, dialog, ambience);
     }
 
-    [Button]
-    public void SaveVisualSettings()
-    {
+    [Button(Mode = ButtonMode.NotPlaying)]
+    public void SaveVisualSettings() {
         DataManager.Instance.SaveVisualSettings(isWindowed, contrast, brightness, largeGUIFont, largeTextFont, textFont);
     }
 }

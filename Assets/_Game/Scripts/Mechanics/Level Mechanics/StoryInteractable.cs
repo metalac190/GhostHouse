@@ -31,15 +31,11 @@ namespace Mechanics.Level_Mechanics
 
         [Header("Interaction Window")]
         [SerializeField] private bool _popupWindowOnClick = false;
-        [SerializeField, TextArea] private string _displayText = "";
-        [SerializeField] private Sprite _imageToDisplay = null;
-        [SerializeField] private bool _cancelButton = true;
-
-        [Header("Interactions")]
         [SerializeField] private Interactable _interaction = null;
         [SerializeField] private string _interactionText = "Interact";
         [SerializeField] private Interactable _alternateInteraction = null;
         [SerializeField] private string _alternateInteractionText = "Alt Interact";
+        [SerializeField] private string _closeMenuText = "Close";
 
         //[Header("Collision Information")]
         //[SerializeField] private bool _confirmUseChildCollider = false;
@@ -115,8 +111,7 @@ namespace Mechanics.Level_Mechanics
                 Action callback = _interaction != null && _interaction.CanInteract ? (Action)Interact : null;
                 Action altCallback = (_alternateInteraction != null && _alternateInteraction.CanInteract) ? (Action)AltInteract : null;
 
-                ModalWindowController.Singleton.EnableModalWindow(_displayText, _imageToDisplay, _cancelButton,
-                    callback, _interactionText, altCallback, _alternateInteractionText);
+                ModalWindowController.Singleton.EnableModalWindow(_closeMenuText, callback, _interactionText, altCallback, _alternateInteractionText);
             }
             if (_moveOnClick) {
                 IsometricCameraController.Singleton.MoveToPosition(mousePosition, _cameraMovementTime);
