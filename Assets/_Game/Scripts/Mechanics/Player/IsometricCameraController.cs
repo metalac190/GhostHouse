@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 public class IsometricCameraController : MonoBehaviour
 {
@@ -23,6 +24,7 @@ public class IsometricCameraController : MonoBehaviour
     [SerializeField] private LayerMask _groundLayer = 0;
     [SerializeField, Range(0, 1)] private float _clickDragSmooth = 0.5f;
     private Vector3 _dragStart;
+    private bool _dragging;
 
     [Header("Mouse Motivated Movement Settings (League of Legends)")]
     [SerializeField] public bool _mouseMotivatedMovementEnabled = false;
@@ -65,6 +67,16 @@ public class IsometricCameraController : MonoBehaviour
     private Vector2 MouseAxis
     {
         get { return new Vector2(Input.GetAxis("Mouse X"), Input.GetAxis("Mouse Y")); }
+    }
+
+    // Checks if mouse is over UI
+    public static bool IsMouseOverUi
+    {
+        get
+        {
+            var events = EventSystem.current;
+            return events != null && events.IsPointerOverGameObject();
+        }
     }
 
     private bool drag = false;
@@ -402,23 +414,29 @@ public class IsometricCameraController : MonoBehaviour
 
             #region Click and Drag but Sad
 
-            if (Input.GetMouseButtonDown(0))
+            if (Input.GetMouseButtonDown(0) && !IsMouseOverUi)
             {
                 Ray ray = _mainCamera.ScreenPointToRay(Input.mousePosition);
-                if (Physics.Raycast(ray, out var hit, _groundLayer))
-                {
+                if (Physics.Raycast(ray, out var hit, _groundLayer)) {
+                    _dragging = true;
                     _dragStart = hit.point;
                 }
             }
-            else if (Input.GetMouseButton(0))
+            else if (Input.GetMouseButtonUp(0))
+            {
+                _dragging = false;
+            }
+            else if (Input.GetMouseButton(0) && _dragging)
             {
                 Ray ray = _mainCamera.ScreenPointToRay(Input.mousePosition);
                 if (Physics.Raycast(ray, out var hit, _groundLayer))
                 {
                     Vector3 diff = _dragStart - Vector3.Lerp(_dragStart, hit.point, _clickDragSmooth);
+                    diff.y = 0;
                     transform.position += diff;
                 }
             }
+            
             CameraBounds();
 
             #endregion
