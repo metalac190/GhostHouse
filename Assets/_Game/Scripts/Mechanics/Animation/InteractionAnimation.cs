@@ -49,10 +49,12 @@ public class InteractionAnimation : MonoBehaviour
 
     private void AssignController()
     {
-
+        var controller = (AnimatorController)AssetDatabase.LoadAssetAtPath("Assets/_Game/Entities/Interactables/Temp/Controllers/_AC_" + gameObject.name +
+                                                                           ".controller", typeof(AnimatorController));
+        _animator.runtimeAnimatorController = controller;
     }
 
-    [Button(Mode = ButtonMode.NotPlaying)]
+    [Button(Mode = ButtonMode.WhilePlaying)]
     private void CreateController()
     {
         if (GetComponent<Animator>() != null) _animator = GetComponent<Animator>();
@@ -87,7 +89,7 @@ public class InteractionAnimation : MonoBehaviour
 
         _controller.layers[0].stateMachine = rootSm;
 
-        _animator.runtimeAnimatorController = _controller;
+        AssignController();
     }
 
     private AnimationClip CreateIdleAnimation()
