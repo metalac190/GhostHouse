@@ -7,10 +7,12 @@ public class InteractionResponseAnimation : InteractableResponseBase
         anim.SetTrigger("interact");
     }
 
-    private Animator GetAnimator() {
-        var anim = GetComponent<Animator>();
+    private Animator GetAnimator()
+    {
+        var parent = gameObject.transform.parent;
+        var anim = parent.GetComponent<Animator>();
         if (anim != null) return anim;
-        anim = GetComponentInChildren<Animator>();
+        anim = parent.GetComponentInChildren<Animator>();
         if (anim != null) return anim;
         Debug.LogError("Error: No animator attached to this Interaction Response Animator", gameObject);
         return null;
