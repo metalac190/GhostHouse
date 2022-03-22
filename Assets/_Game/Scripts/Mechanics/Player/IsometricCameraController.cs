@@ -20,6 +20,9 @@ public class IsometricCameraController : MonoBehaviour
     [SerializeField] public bool _clickDragMovementEnabled = true;
     [SerializeField] public float _panningSpeed = 25f;
     [SerializeField] private float _exposedField = 10f;
+    [SerializeField] private LayerMask _groundLayer = 0;
+    [SerializeField, Range(0, 1)] private float _clickDragSmooth = 0.5f;
+    private Vector3 _dragStart;
 
     [Header("Mouse Motivated Movement Settings (League of Legends)")]
     [SerializeField] public bool _mouseMotivatedMovementEnabled = false;
@@ -396,8 +399,29 @@ public class IsometricCameraController : MonoBehaviour
 
             #endregion
 
+
+            #region Click and Drag but Sad
+
+            if (Input.GetMouseButtonDown(0))
+            {
+                Ray ray = _mainCamera.ScreenPointToRay(Input.mousePosition);
+                if (Physics.Raycast(ray, out var hit, _groundLayer))
+                {
+                    _dragStart = hit.point;
+                }
+            }
+            else if (Input.GetMouseButton(0))
+            {
+                Ray ray = _mainCamera.ScreenPointToRay(Input.mousePosition);
+                if (Physics.Raycast(ray, out var hit, _groundLayer))
+                {
+                    Vector3 diff = _dragStart - Vector3.Lerp(_dragStart, hit.point, _clickDragSmooth);
+                    transform.position += diff;
+                }
+            }
             CameraBounds();
-            
+
+            #endregion
         }
 
         //HandleInput();
@@ -412,6 +436,7 @@ public class IsometricCameraController : MonoBehaviour
     private void LateUpdate()
     {
         #region Click and Drag But Bad
+        /*
         if (Input.GetMouseButton(0))
         {
             _difference = (Camera.main.ScreenToWorldPoint(Input.mousePosition)) - transform.position;
@@ -433,6 +458,7 @@ public class IsometricCameraController : MonoBehaviour
 
             //transform.position = new Vector3(Mathf.Clamp(transform.position.x, _minXValue, _maxXValue), transform.position.y, Mathf.Clamp(transform.position.z, _minZValue, _maxZValue));
         }
+        */
         #endregion
 
         #region Click and Drag Maybe Better
@@ -451,7 +477,6 @@ public class IsometricCameraController : MonoBehaviour
         //transform.Translate(move, Space.World);
 
         #endregion
-
 
 
     }
