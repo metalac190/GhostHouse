@@ -33,13 +33,6 @@ namespace UI
             SetLayout();
         }
 
-#if UNITY_EDITOR
-        protected override void OnValidate() {
-            base.OnValidate();
-            SetLayout();
-        }
-#endif
-
         #endregion
 
         private void SetLayout() {
@@ -64,6 +57,9 @@ namespace UI
                     flip = !flip;
                 }
                 child.localScale = new Vector3(flip ? 1 : -1, 1, 1);
+                // Fix annoying centering
+                var centerPos = new Vector2(0.5f, 0.5f);
+                child.anchorMin = child.anchorMax = child.pivot = centerPos;
             }
         }
     }
