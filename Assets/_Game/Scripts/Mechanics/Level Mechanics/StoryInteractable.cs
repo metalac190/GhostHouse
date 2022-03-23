@@ -107,14 +107,15 @@ namespace Mechanics.Level_Mechanics
             if (_sfxOnClick) {
                 SoundManager.Instance.PlaySfx(_sfx, mousePosition);
             }
-            if (_popupWindowOnClick && !(IsometricCameraController.Singleton._interacting)) {
+            if (_popupWindowOnClick && !(IsometricCameraController.Singleton._dragging)) {
                 Action callback = _interaction != null && _interaction.CanInteract ? (Action)Interact : null;
                 Action altCallback = (_alternateInteraction != null && _alternateInteraction.CanInteract) ? (Action)AltInteract : null;
+                int maxPointsSpent = Mathf.Max(_interaction != null ? _interaction.Cost : 0, _alternateInteraction != null ? _alternateInteraction.Cost : 0);
 
-                ModalWindowController.Singleton.EnableModalWindow(_closeMenuText, callback, _interactionText, altCallback, _alternateInteractionText);
+                ModalWindowController.Singleton.EnableModalWindow(_closeMenuText, callback, _interactionText, altCallback, _alternateInteractionText, maxPointsSpent);
             }
-            else if (_interaction != null) {
-                    _interaction.Interact();
+            else if (!_popupWindowOnClick && _interaction != null) {
+                _interaction.Interact();
             }
             if (_moveOnClick) {
                 IsometricCameraController.Singleton.MoveToPosition(mousePosition, _cameraMovementTime);

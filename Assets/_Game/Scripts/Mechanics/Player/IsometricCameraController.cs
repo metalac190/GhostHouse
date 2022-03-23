@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using Utility.ReadOnly;
 
 public class IsometricCameraController : MonoBehaviour
 {
@@ -24,7 +25,7 @@ public class IsometricCameraController : MonoBehaviour
     [SerializeField] private LayerMask _groundLayer = 0;
     [SerializeField, Range(0, 1)] private float _clickDragSmooth = 0.5f;
     private Vector3 _dragStart;
-    private bool _dragging;
+    [ReadOnly] public bool _dragging;
 
     [Header("Mouse Motivated Movement Settings (League of Legends)")]
     [SerializeField] public bool _mouseMotivatedMovementEnabled = false;
