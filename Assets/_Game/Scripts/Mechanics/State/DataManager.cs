@@ -194,6 +194,11 @@ public class DataManager : MonoBehaviour
         File.WriteAllText(filePath, jsonString);
     }
 
+    public void SetDefaultInteraction(string name) {
+        if (interactions.ContainsKey(name)) return;
+        interactions.Add(name, false);
+    }
+
     // Set interaction state
     public void SetInteraction(string name, bool interacted)
     {

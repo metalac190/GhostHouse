@@ -29,12 +29,13 @@ namespace UI
 
         // Call this on Start() to setup spirit points
         public void SetMaxSpiritPoints(int maxPoints) {
+            Debug.Log(maxPoints);
             if (_spiritPoints.Count < maxPoints) {
                 Debug.LogError("Not enough Spirit Points in List to sustain a max of " + maxPoints, gameObject);
                 return;
             }
             for (var i = 0; i < _spiritPoints.Count; i++) {
-                _spiritPoints[i].gameObject.SetActive(i <= maxPoints);
+                _spiritPoints[i].gameObject.SetActive(i < maxPoints);
                 _spiritPoints[i].sprite = _spiritPointBright;
             }
             _maxPoints = maxPoints;
@@ -48,13 +49,15 @@ namespace UI
         public void SetSpiritPoints(int points, int aboutToSpend = 0) {
             Debug.Log("Spirit Points: " + points + ". About to Spend " + aboutToSpend + ".");
             for (var i = 0; i < _maxPoints; i++) {
-                if (i > points) {
-                    _spiritPoints[i].sprite = null;
+                if (i >= points) {
+                    _spiritPoints[i].enabled = false;
                 }
-                else if (i > points - aboutToSpend) {
+                else if (i >= points - aboutToSpend) {
+                    _spiritPoints[i].enabled = true;
                     _spiritPoints[i].sprite = _spiritPointDull;
                 }
                 else {
+                    _spiritPoints[i].enabled = true;
                     _spiritPoints[i].sprite = _spiritPointBright;
                 }
             }
