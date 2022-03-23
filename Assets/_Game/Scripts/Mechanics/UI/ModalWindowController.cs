@@ -25,7 +25,7 @@ public class ModalWindowController : MonoBehaviour
     [SerializeField] private TextMeshProUGUI _closeButton = null;
 
     [Header("HUD")]
-    [SerializeField] private PlayerHUD _playerHud;
+    [SerializeField] private PlayerHUD _playerHud = null;
 
     public static event Action OnInteractStart = delegate { };
     public static event Action OnInteractEnd = delegate { };

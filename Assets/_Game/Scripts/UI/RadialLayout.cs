@@ -64,9 +64,6 @@ namespace UI
                     flip = !flip;
                 }
                 child.localScale = new Vector3(flip ? 1 : -1, 1, 1);
-                // Fix annoying centering
-                var centerPos = new Vector2(0.5f, 0.5f);
-                child.anchorMin = child.anchorMax = child.pivot = centerPos;
             }
         }
     }

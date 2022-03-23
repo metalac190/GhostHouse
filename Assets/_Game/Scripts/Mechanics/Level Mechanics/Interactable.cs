@@ -14,7 +14,7 @@ namespace Mechanics.Level_Mechanics
 
         [Header("Interactable Settings")]
         [SerializeField] private string _dialogeYarnNode = "";
-        [SerializeField] private int _cost;
+        [SerializeField] private int _cost = 0;
         [SerializeField] private bool _canInteractMultipleTimes = false;
 
         [Header("Other Settings")]
@@ -68,8 +68,7 @@ namespace Mechanics.Level_Mechanics
             _sfxOnInteract.Play();
             DataManager.Instance.SetInteraction(name, true);
 
-            if (!string.IsNullOrEmpty(_dialogeYarnNode))
-            {
+            if (!string.IsNullOrEmpty(_dialogeYarnNode)) {
                 DialogueRunner.StartDialogue(_dialogeYarnNode);
             }
         }
