@@ -56,8 +56,12 @@ namespace Mechanics.Level_Mechanics
                 _missingHoverUi = true;
                 Debug.LogWarning("Missing Text Hover Controller in Scene!");
             }
-            if (_interaction != null) _interaction.LoadInteraction();
-            if (_alternateInteraction != null) _alternateInteraction.LoadInteraction();
+            if (_interaction != null) {
+                DataManager.Instance.SetDefaultInteraction(_interaction.name);
+            }
+            if (_alternateInteraction != null) {
+                DataManager.Instance.SetDefaultInteraction(_alternateInteraction.name);
+            }
         }
 
         #endregion

@@ -10,9 +10,6 @@ namespace Mechanics.Level_Mechanics
     [CreateAssetMenu(fileName = "NewInteractable", menuName = "Interactions/Interactable")]
     public class Interactable : ScriptableObject
     {
-        //public variables that designers can edit
-        [Header("Interactable Name")]
-        [SerializeField] private string _interactableName = "Default Name";
         [SerializeField, TextArea] private string _interactableDescription = "Default Description";
 
         [Header("Interactable Settings")]
@@ -22,9 +19,6 @@ namespace Mechanics.Level_Mechanics
 
         [Header("Other Settings")]
         [SerializeField] private SfxReference _sfxOnInteract = new SfxReference();
-        [SerializeField, ReadOnly] public bool _interacted = false;
-
-        public string InteractableInfo => _interactableName + ": " + _interactableDescription;
 
         public int Cost => _cost;
 
@@ -39,7 +33,8 @@ namespace Mechanics.Level_Mechanics
         }
 
 
-        public bool CanInteract => !_interacted || _canInteractMultipleTimes;
+        public bool Interacted => DataManager.Instance.GetInteraction(name);
+        public bool CanInteract => !Interacted || _canInteractMultipleTimes;
 
         private List<InteractableResponseBase> _interactableResponses = new List<InteractableResponseBase>();
 
@@ -71,21 +66,12 @@ namespace Mechanics.Level_Mechanics
             }
 
             _sfxOnInteract.Play();
-            _interacted = true;
-            SaveInteraction();
+            DataManager.Instance.SetInteraction(name, true);
 
             if (!string.IsNullOrEmpty(_dialogeYarnNode))
             {
                 DialogueRunner.StartDialogue(_dialogeYarnNode);
             }
-        }
-
-        public void SaveInteraction() {
-            DataManager.Instance.SetInteraction(_interactableName, _interacted);
-        }
-
-        public void LoadInteraction() {
-            _interacted = DataManager.Instance.GetInteraction(_interactableName);
         }
     }
 }
