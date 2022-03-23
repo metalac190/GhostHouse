@@ -26,6 +26,8 @@ namespace Mechanics.Level_Mechanics
 
         public string InteractableInfo => _interactableName + ": " + _interactableDescription;
 
+        public int Cost => _cost;
+
         static DialogueRunner _dialogueRunner;
         static DialogueRunner DialogueRunner {
             get {
@@ -59,20 +61,23 @@ namespace Mechanics.Level_Mechanics
             //cause any errors.
 
 
-            if (!string.IsNullOrEmpty(_dialogeYarnNode)) {
-                DialogueRunner.StartDialogue(_dialogeYarnNode);
-            }
             for (int i = _interactableResponses.Count - 1; i >= 0; i--) {
                 _interactableResponses[i].Invoke();
             }
 
             if (_cost > 0) {
                 // TODO: Apply Spirit Point Cost
+                DataManager.Instance.remainingSpiritPoints -= _cost;
             }
 
             _sfxOnInteract.Play();
             _interacted = true;
             SaveInteraction();
+
+            if (!string.IsNullOrEmpty(_dialogeYarnNode))
+            {
+                DialogueRunner.StartDialogue(_dialogeYarnNode);
+            }
         }
 
         public void SaveInteraction() {

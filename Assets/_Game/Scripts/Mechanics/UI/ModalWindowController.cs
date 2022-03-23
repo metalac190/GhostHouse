@@ -5,6 +5,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 using System;
+using UI;
 
 public class ModalWindowController : MonoBehaviour
 {
@@ -22,6 +23,9 @@ public class ModalWindowController : MonoBehaviour
     [SerializeField] private Button _alternateInteractionButton = null;
     [SerializeField] private TextMeshProUGUI _alternateInteractionText = null;
     [SerializeField] private TextMeshProUGUI _closeButton = null;
+
+    [Header("HUD")]
+    [SerializeField] private PlayerHUD _playerHud;
 
     public static event Action OnInteractStart = delegate { };
     public static event Action OnInteractEnd = delegate { };
@@ -42,7 +46,9 @@ public class ModalWindowController : MonoBehaviour
         }
 
         #endregion
+    }
 
+    private void Start() {
         DisableModalWindow();
     }
 
@@ -52,7 +58,9 @@ public class ModalWindowController : MonoBehaviour
         }
     }
 
-    public void EnableModalWindow(string closeButtonText, Action callback, string interactButtonText, Action altCallback, string altInteractButtonText) {
+    public void EnableModalWindow(string closeButtonText, Action callback, string interactButtonText, Action altCallback, string altInteractButtonText, int pointsToSpend) {
+        if (_playerHud != null) _playerHud.UpdateSpiritPoints(pointsToSpend);
+
         // Enable Modal Window
         IsometricCameraController.Singleton._interacting = true;
         OnInteractStart?.Invoke();
@@ -83,6 +91,7 @@ public class ModalWindowController : MonoBehaviour
     }
 
     public void DisableModalWindow() {
+        if (_playerHud != null) _playerHud.UpdateSpiritPoints();
         OnInteractEnd?.Invoke();
         _mainInteractionButton.gameObject.SetActive(false);
         _mainInteractionButton.onClick.RemoveAllListeners();
