@@ -80,7 +80,7 @@ public class IsometricCameraController : MonoBehaviour
         }
     }
 
-    private bool drag = false;
+    private bool drag;
 
 
     #region Singleton Pattern
