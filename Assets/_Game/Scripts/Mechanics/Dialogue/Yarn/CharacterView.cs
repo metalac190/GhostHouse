@@ -3,95 +3,10 @@ using System.Collections;
 using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
+using Mechanics.Animations;
 
-namespace Game.Dialog
+namespace Mechanics.Dialog
 {
-    public static class Tweens
-    {
-        public static IEnumerator Typewriter(TextMeshProUGUI text, float lettersPerSecond, Action<int> onCharacterTyped = null, Action onComplete = null, Yarn.Unity.InterruptionFlag interruption = null)
-        {
-            // Start with everything invisible
-            text.maxVisibleCharacters = 0;
-
-            // Wait a single frame to let the text component process its
-            // content, otherwise text.textInfo.characterCount won't be
-            // accurate
-            yield return null;
-
-            // How many visible characters are present in the text?
-            var characterCount = text.textInfo.characterCount;
-
-            // Early out if letter speed is zero or text length is zero
-            if (lettersPerSecond <= 0 || characterCount == 0)
-            {
-                // Show everything and invoke the completion handler
-                text.maxVisibleCharacters = characterCount;
-                onComplete?.Invoke();
-                yield break;
-            }
-
-            // Convert 'letters per second' into its inverse
-            float secondsPerLetter = 1.0f / lettersPerSecond;
-
-            // If lettersPerSecond is larger than the average framerate, we
-            // need to show more than one letter per frame, so simply
-            // adding 1 letter every secondsPerLetter won't be good enough
-            // (we'd cap out at 1 letter per frame, which could be slower
-            // than the user requested.)
-            //
-            // Instead, we'll accumulate time every frame, and display as
-            // many letters in that frame as we need to in order to achieve
-            // the requested speed.
-            var accumulator = Time.deltaTime;
-
-            while (text.maxVisibleCharacters < characterCount && (interruption == null || interruption.Interrupted == false))
-            {
-                // We need to show as many letters as we have accumulated
-                // time for.
-                while (accumulator >= secondsPerLetter)
-                {
-                    text.maxVisibleCharacters += 1;
-                    onCharacterTyped?.Invoke(text.maxVisibleCharacters-1);
-                    accumulator -= secondsPerLetter;
-                }
-                accumulator += Time.deltaTime;
-
-                yield return null;
-            }
-
-            // We either finished displaying everything, or were
-            // interrupted. Either way, display everything now.
-            text.maxVisibleCharacters = characterCount;
-
-            // Wrap up by invoking our completion handler.
-            onComplete?.Invoke();
-        }
-
-        public static IEnumerator LerpPosition(Transform transform, Vector3 from, Vector3 to, float duration, Action onComplete = null, Yarn.Unity.InterruptionFlag interruption = null)
-        {
-            transform.position = from;
-
-            var timeElapsed = 0f;
-            while (timeElapsed < duration && (interruption?.Interrupted ?? false) == false)
-            {
-                var fraction = timeElapsed / duration;
-                timeElapsed += Time.deltaTime;
-
-                transform.position = Vector3.Lerp(from, to, fraction);
-                yield return null;
-            }
-
-            transform.position = to;
-            onComplete?.Invoke();
-        }
-
-        public static IEnumerator WaitBefore(float waitTime, Action callback)
-        {
-            yield return new WaitForSeconds(waitTime);
-            callback?.Invoke();
-        }
-    }
-
     /// <summary>
     /// A heavily recycled version of LineView.cs from YarnSpinner 2.0.2
     /// Used for displaying dialogue, character sprites, and playing dialogue sfx
@@ -99,12 +14,6 @@ namespace Game.Dialog
     [RequireComponent(typeof(CanvasGroup))]
     public class CharacterView : Yarn.Unity.DialogueViewBase
     {
-        internal enum ContinueActionType
-        {
-            None,
-            KeyCode,
-        }
-
         #region events
         /// <summary>
         /// (LocalizedLine line): line is the dialogue being displayed.
@@ -127,19 +36,13 @@ namespace Game.Dialog
 
         #region serialized variables
         // CharacterViewEditor depends on serialized variable names
+        [Header("Continue Mode")]
+        [SerializeField]
+        KeyCode _continueKeyCode = KeyCode.None;
+
         [Header("Effects")]
         [SerializeField]
-        [Tooltip("The Character View will slide onto screen")]
-        bool _useSlideEffect = true;
-
-        [SerializeField]
-        [Tooltip("The direction to slide in from")]
-        Direction _direction = Direction.Bottom;
-
-        [SerializeField]
-        [Tooltip("The time for the UI to slide into frame")]
-        [Min(0)]
-        float _slideTime = .5f;
+        float _inBufferTime = .2f;
 
         [SerializeField]
         bool _useFadeEffect = false;
@@ -151,9 +54,6 @@ namespace Game.Dialog
         [SerializeField]
         [Min(0)]
         float _fadeOutTime = 0.05f;
-
-        [SerializeField]
-        float _inBufferTime = .2f;
 
         [SerializeField]
         bool _useTypewriterEffect = false;
@@ -187,26 +87,16 @@ namespace Game.Dialog
 
         [SerializeField]
         Slider _progressbar = null;
-
-        [Header("Continue Mode")]
-        [SerializeField]
-        ContinueActionType _continueActionType = ContinueActionType.None;
-
-        [SerializeField]
-        KeyCode _continueActionKeyCode = KeyCode.Escape;
         #endregion
 
         #region private variables
-        Yarn.Unity.InterruptionFlag _interruptionFlag = new Yarn.Unity.InterruptionFlag();
+        InterruptionFlag _interruptionFlag = new InterruptionFlag();
         Yarn.Unity.LocalizedLine _currentLine = null;
 
         CanvasGroup _canvasGroup;
         Yarn.Markup.MarkupAttribute _markup;
 
         float _lineStartStamp = -1;
-        Vector3 _slideStart;
-        Vector3 _slideTarget;
-        const float _slideMargin = 100f;
         #endregion
 
         #region Monobehaviour
@@ -225,25 +115,6 @@ namespace Game.Dialog
                 }
             }
 
-            // cache 
-            _slideTarget = transform.position;
-            switch (_direction)
-            {
-                default:
-                case Direction.Bottom:
-                    _slideStart = new Vector3(transform.position.x, -GetComponent<RectTransform>().rect.height - _slideMargin, transform.position.z);
-                    break;
-                case Direction.Top:
-                    _slideStart = new Vector3(transform.position.x, Screen.width + GetComponent<RectTransform>().rect.height + _slideTime, transform.position.z);
-                    break;
-                case Direction.Left:
-                    _slideStart = new Vector3(-GetComponent<RectTransform>().rect.width - _slideMargin, transform.position.y, transform.position.z);
-                    break;
-                case Direction.Right:
-                    _slideStart = new Vector3(Screen.width + GetComponent<RectTransform>().rect.width + _slideTime, transform.position.y, transform.position.z);
-                    break;
-
-            }
             HideView();
         }
 
@@ -263,13 +134,13 @@ namespace Game.Dialog
 
             // We need to be configured to use a keycode to interrupt/continue
             // lines.
-            if (_continueActionType != ContinueActionType.KeyCode)
+            if (_continueKeyCode == KeyCode.None)
             {
                 return;
             }
 
             // That keycode needs to have been pressed this frame.
-            if (!UnityEngine.Input.GetKeyDown(_continueActionKeyCode))
+            if (!Input.GetKeyDown(_continueKeyCode))
             {
                 return;
             }
@@ -289,11 +160,7 @@ namespace Game.Dialog
         {
             _currentLine = null;
 
-            if (_useSlideEffect)
-            {
-                StartCoroutine(Tweens.LerpPosition(transform, _slideTarget, _slideStart, _slideTime, onDismissalComplete));
-            }
-            else if (_useFadeEffect)
+            if (_useFadeEffect)
             {
                 StartCoroutine(Yarn.Unity.Effects.FadeAlpha(_canvasGroup, 1, 0, _fadeOutTime, onDismissalComplete));
             }
@@ -418,7 +285,7 @@ namespace Game.Dialog
                 _lineText.text = dialogueLine.TextWithoutCharacterName.Text;
             }
 
-            if (_useSlideEffect || _useFadeEffect)
+            if (_useFadeEffect)
             {
                 if (_useTypewriterEffect)
                 {
@@ -433,26 +300,31 @@ namespace Game.Dialog
                     _lineText.maxVisibleCharacters = int.MaxValue;
                 }
 
-                if (_useSlideEffect)
+                StartCoroutine(Tweens.LerpAlpha(_canvasGroup, 0, 1, _fadeInTime, interruption: _interruptionFlag,
+                onComplete: () =>
                 {
-                    StartCoroutine(Tweens.LerpPosition(transform, _slideStart, _slideTarget, _slideTime, () => {
-                        StartCoroutine(Tweens.WaitBefore(_inBufferTime, () => FadeComplete(onDialogueLineFinished)));
-                    }, _interruptionFlag));
-                }
-                else
-                {
-                    StartCoroutine(Yarn.Unity.Effects.FadeAlpha(_canvasGroup, 0, 1, _fadeInTime, () => {
-                        StartCoroutine(Tweens.WaitBefore(_inBufferTime, () => FadeComplete(onDialogueLineFinished)));
-                    }, _interruptionFlag));
-                }
+                    StartCoroutine(Tweens.WaitBefore(_inBufferTime, () => InEffectComplete()));
+                }));
             }
             else
             {
                 if (_useTypewriterEffect)
                 {
-                    // Start the typewriter
-                    //StartCoroutine(TextEffects.Typewriter(_lineText, _typewriterEffectSpeed, OnCharacterTyped, onDialogueLineFinished, _interruptionFlag));
-                    StartTypewriter(onDialogueLineFinished);
+                    StartTypewriter();
+                }
+                else
+                {
+                    // no effects were used, so just display the view
+                    onDialogueLineFinished();
+                }
+            }
+
+            // called when the in-animation is complete
+            void InEffectComplete()
+            {
+                if (_useTypewriterEffect)
+                {
+                    StartTypewriter();
                 }
                 else
                 {
@@ -460,25 +332,14 @@ namespace Game.Dialog
                 }
             }
 
-            void FadeComplete(Action onFinished)
-            {
-                if (_useTypewriterEffect)
-                {
-                    //StartCoroutine(TextEffects.Typewriter(_lineText, _typewriterEffectSpeed, OnCharacterTyped, onFinished, _interruptionFlag));
-                    StartTypewriter(onFinished);
-                }
-                else
-                {
-                    onFinished();
-                }
-            }
-
-            void StartTypewriter(Action onFinished)
+            void StartTypewriter()
             {
                 OnLineStarted(dialogueLine);
-                StartCoroutine(Tweens.Typewriter(_lineText, _typewriterEffectSpeed, OnCharacterTyped, interruption: _interruptionFlag, onComplete: () => {
+                StartCoroutine(Tweens.SimpleTypewriter(_lineText, _typewriterEffectSpeed, OnCharacterTyped, interruption: _interruptionFlag,
+                onComplete: () =>
+                {
                     OnLineEnd();
-                    onFinished();
+                    onDialogueLineFinished();
                 }));
             }
         }
@@ -546,7 +407,6 @@ namespace Game.Dialog
                 _lineStartStamp = Time.time;
 
                 if (_useFadeEffect) _lineStartStamp += _fadeInTime + _inBufferTime;
-                else if (_useSlideEffect) _lineStartStamp += _slideTime + _inBufferTime;
             }
         }
 
