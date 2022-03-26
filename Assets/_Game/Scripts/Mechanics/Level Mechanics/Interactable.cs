@@ -39,13 +39,13 @@ namespace Mechanics.Level_Mechanics
 
         public bool CanInteract => !_interacted || _canInteractMultipleTimes;
 
-        private List<InteractableResponse> _interactableResponses = new List<InteractableResponse>();
+        private List<InteractableResponseBase> _interactableResponses = new List<InteractableResponseBase>();
 
-        public void Raise(InteractableResponse response) {
+        public void Raise(InteractableResponseBase response) {
             _interactableResponses.Add(response);
         }
 
-        public void Unraise(InteractableResponse response) {
+        public void Unraise(InteractableResponseBase response) {
             _interactableResponses.Remove(response);
         }
 
@@ -65,6 +65,11 @@ namespace Mechanics.Level_Mechanics
             for (int i = _interactableResponses.Count - 1; i >= 0; i--) {
                 _interactableResponses[i].Invoke();
             }
+
+            if (_cost > 0) {
+                // TODO: Apply Spirit Point Cost
+            }
+
             _sfxOnInteract.Play();
             _interacted = true;
             SaveInteraction();

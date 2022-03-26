@@ -91,11 +91,11 @@ namespace Mechanics.Player
             if (interactable != null) {
                 if (left) {
                     interactable.OnLeftClick();
-                    interactable.OnLeftClick(hit.point);
+                    interactable.OnLeftClick(hit.transform.position);
                 }
                 else {
                     interactable.OnRightClick();
-                    interactable.OnRightClick(hit.point);
+                    interactable.OnRightClick(hit.transform.position);
                 }
             }
             else if (interactable == null) {

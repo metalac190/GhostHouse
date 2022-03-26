@@ -27,7 +27,7 @@ namespace Utility.Audio.Clips
         private RangedFloat _reverbZoneMix = new RangedFloat(SfxDefaults.ReverbZoneMix);
 
         [Header("Spatial Settings")]
-        [SerializeField] private bool _enableSpatialSettings = false;
+        [SerializeField] private bool _overrideSpatialSettings = false;
         [SerializeField, MinMaxRange(SfxDefaults.SpatialBlendMin, SfxDefaults.SpatialBlendMax),
          Tooltip("Sets how much this AudioSource is affected by 3D spatialisation calculations (attenuation, doppler etc). 0.0 makes the sound full 2D, 1.0 makes it full 3D")]
         private RangedFloat _spatialBlend = new RangedFloat(SfxDefaults.SpatialBlend);
@@ -57,7 +57,7 @@ namespace Utility.Audio.Clips
 
             // Create Current Source Properties
             var myProperties = new SfxProperties(_mixerGroup, (int)_priority, _volume.GetRandom(), _pitch.GetRandom(), _stereoPan.GetRandom(), _reverbZoneMix.GetRandom(), Vector3.zero,
-                _enableSpatialSettings, _spatialBlend.GetRandom(), _rolloffMode, _minDistance.GetRandom(), _maxDistance.GetRandom(), Mathf.RoundToInt(_spread.GetRandom()), _dopplerLevel.GetRandom());
+                _overrideSpatialSettings, _spatialBlend.GetRandom(), _rolloffMode, _minDistance.GetRandom(), _maxDistance.GetRandom(), Mathf.RoundToInt(_spread.GetRandom()), _dopplerLevel.GetRandom());
 
             // Add properties together and return
             return referenceProperties.AddProperties(myProperties);
