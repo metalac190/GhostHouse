@@ -4,7 +4,7 @@ using UnityEngine;
 using System;
 using TMPro;
 
-namespace Mechanics.Animations
+namespace Mechanics.Dialog
 {
     /// <summary>
     /// A flag used to abort animations or processes early.
@@ -17,7 +17,7 @@ namespace Mechanics.Animations
     }
 
     /// <summary>
-    /// An class of animation coroutines.
+    /// A class of animation coroutines.
     /// </summary>
     public static class Tweens
     {

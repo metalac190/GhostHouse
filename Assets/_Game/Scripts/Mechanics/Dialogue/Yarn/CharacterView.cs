@@ -3,7 +3,6 @@ using System.Collections;
 using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
-using Mechanics.Animations;
 
 namespace Mechanics.Dialog
 {
@@ -120,12 +119,19 @@ namespace Mechanics.Dialog
 
         public void Update()
         {
-            // update progress bar 
-            if (_lineStartStamp != -1 && _progressbar != null)
+            // update progress bar
+            if (_progressbar != null && _lineStartStamp != -1 && _currentLine != null)
             {
-                float duration = _lineText.text.Length / _typewriterEffectSpeed;
-                float elapsedTime = Time.time - _lineStartStamp;
-                _progressbar.value = elapsedTime / duration;
+                if (_currentLine.Status == Yarn.Unity.LineStatus.Presenting)
+                {
+                    float duration = _lineText.text.Length / _typewriterEffectSpeed;
+                    float elapsedTime = Time.time - _lineStartStamp;
+                    _progressbar.value = elapsedTime / duration;
+                }
+                else if (_currentLine.Status == Yarn.Unity.LineStatus.Interrupted || _currentLine.Status == Yarn.Unity.LineStatus.FinishedPresenting)
+                {
+                    _progressbar.value = _progressbar.maxValue;
+                }
             }
 
             // Should we indicate to the DialogueRunner that we want to
