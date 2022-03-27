@@ -4,7 +4,7 @@ using UnityEngine;
 using Utility.Audio.Clips.Base;
 using Utility.Audio.Controllers;
 
-namespace Game.Dialog
+namespace Mechanics.Dialog
 {
     [RequireComponent(typeof(AudioSourceController))]
     public class DialogueAudio : MonoBehaviour
@@ -109,7 +109,7 @@ namespace Game.Dialog
         /// </summary>
         void OnLineEnd()
         {
-            StopCoroutine(nameof(PlayAudioLoop));
+            StopAllCoroutines();
         }
 
         IEnumerator PlayAudioLoop()
