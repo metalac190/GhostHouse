@@ -65,6 +65,7 @@ public class DataManager : MonoBehaviour
 
             // Load all file information in Awake so other game-objects can call it in Start.
             LoadFile();
+            // Set values throughtout game on starting to reload game
         }
         else
         {
@@ -72,10 +73,6 @@ public class DataManager : MonoBehaviour
         }
     }
 
-    private void Start()
-    {
-        // Set values throughtout game on starting to reload game
-    }
 
     private void LoadFile()
     {
