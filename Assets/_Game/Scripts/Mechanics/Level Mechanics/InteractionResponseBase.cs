@@ -14,7 +14,8 @@ public abstract class InteractableResponseBase : MonoBehaviour
     private void Start()
     {
         if (_interactable == null) return;
-        _interactable.LoadInteraction();
+        // TODO: This doesn't work
+        //if (_interactable.Interacted) PreviouslyInvoked();
     }
 
     private void OnDisable()
@@ -24,4 +25,9 @@ public abstract class InteractableResponseBase : MonoBehaviour
     }
 
     public abstract void Invoke();
+
+    public virtual void PreviouslyInvoked()
+    {
+
+    }
 }
