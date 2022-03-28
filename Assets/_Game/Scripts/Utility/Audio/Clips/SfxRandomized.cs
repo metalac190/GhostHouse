@@ -12,7 +12,7 @@ namespace Utility.Audio.Clips
     public class SfxRandomized : SfxBase
     {
         [Header("Audio Clip Settings")]
-        [SerializeField] private List<SfxReference> _clips = new List<SfxReference> { new SfxReference() };
+        [SerializeField] private List<SfxReference> _clips = new List<SfxReference> { new SfxReference(false) };
         [SerializeField] private AudioMixerGroup _mixerGroup = null;
         [SerializeField] private SfxPriorityLevel _priority = SfxDefaults.Priority;
 
