@@ -110,6 +110,8 @@ namespace Mechanics.Level_Mechanics
         #region On Click
 
         public override void OnLeftClick(Vector3 mousePosition) {
+            if (_interaction == null && _alternateInteraction == null) { return; }
+            
             if (_sfxOnClick) {
                 SoundManager.Instance.PlaySfx(_sfx, mousePosition);
             }

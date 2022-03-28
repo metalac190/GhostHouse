@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [CreateAssetMenu]
-public class Integer : ScriptableObject
+public class IntegerVariable : ScriptableObject
 {
     public int value;
 }
