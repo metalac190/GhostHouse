@@ -7,6 +7,7 @@ public class LoadOpeningLevel : MonoBehaviour
 {
     public void LoadSandbox()
     {
+        DataManager.Instance.ResetData();
         SceneManager.LoadScene("Sandbox");
     }
 
