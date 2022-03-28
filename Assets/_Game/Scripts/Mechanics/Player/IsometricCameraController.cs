@@ -4,6 +4,14 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using Utility.ReadOnly;
 
+
+public enum CameraMode
+{
+    KEYBOARD,
+    CLICKDRAG,
+    MOUSEBORDER
+}
+
 public class IsometricCameraController : MonoBehaviour
 {
     /*This is probably the biggest class out of all the classes. This is just the camera movement controller for an isometric view.*/
@@ -12,14 +20,15 @@ public class IsometricCameraController : MonoBehaviour
     [SerializeField] Camera _mainCamera = null;
     [SerializeField] Rigidbody _rigidbody = null;
 
+    [Header("General Movement Settings")]
+    public CameraMode _cameraMode = CameraMode.CLICKDRAG;
+
     [Header("Traditional Camera Movement Settings")]
-    [SerializeField] public bool _traditionalMovementEnabled = false;
     [SerializeField] public float _cameraMoveSpeed = 10f;
     public bool _interacting = false;
     bool _clicked = false;
 
     [Header("Click And Drag Movement Settings")]
-    [SerializeField] public bool _clickDragMovementEnabled = true;
     [SerializeField] public float _panningSpeed = 25f;
     [SerializeField] private float _exposedField = 10f;
     [SerializeField] private LayerMask _groundLayer = 0;
@@ -28,7 +37,6 @@ public class IsometricCameraController : MonoBehaviour
     [ReadOnly] public bool _dragging;
 
     [Header("Mouse Motivated Movement Settings (League of Legends)")]
-    [SerializeField] public bool _mouseMotivatedMovementEnabled = false;
     [SerializeField] public float _mMPanningSpeed = 25f;
     [SerializeField] public float _panBorderThickness = 50f;
 
@@ -328,10 +336,10 @@ public class IsometricCameraController : MonoBehaviour
 
         if (!_interacting)
         {
-            if (_traditionalMovementEnabled) { HandleInput(); }
+            if (_cameraMode == CameraMode.KEYBOARD) { HandleInput(); }
 
             #region Mouse Motivated Movement
-            if (_mouseMotivatedMovementEnabled)
+            if (_cameraMode == CameraMode.MOUSEBORDER)
             {
                 Vector3 upMovement = new Vector3();
                 Vector3 rightMovement = new Vector3();
@@ -415,30 +423,34 @@ public class IsometricCameraController : MonoBehaviour
 
             #region Click and Drag but Sad
 
-            if (Input.GetMouseButtonDown(0) && !IsMouseOverUi)
+            if (_cameraMode == CameraMode.CLICKDRAG)
             {
-                Ray ray = _mainCamera.ScreenPointToRay(Input.mousePosition);
-                if (Physics.Raycast(ray, out var hit, _groundLayer)) {
-                    _dragging = true;
-                    _dragStart = hit.point;
-                }
-            }
-            else if (Input.GetMouseButtonUp(0))
-            {
-                _dragging = false;
-            }
-            else if (Input.GetMouseButton(0) && _dragging)
-            {
-                Ray ray = _mainCamera.ScreenPointToRay(Input.mousePosition);
-                if (Physics.Raycast(ray, out var hit, _groundLayer))
+                if (Input.GetMouseButtonDown(0) && !IsMouseOverUi)
                 {
-                    Vector3 diff = _dragStart - Vector3.Lerp(_dragStart, hit.point, _clickDragSmooth);
-                    diff.y = 0;
-                    transform.position += diff;
+                    Ray ray = _mainCamera.ScreenPointToRay(Input.mousePosition);
+                    if (Physics.Raycast(ray, out var hit, _groundLayer))
+                    {
+                        _dragging = true;
+                        _dragStart = hit.point;
+                    }
                 }
+                else if (Input.GetMouseButtonUp(0))
+                {
+                    _dragging = false;
+                }
+                else if (Input.GetMouseButton(0) && _dragging)
+                {
+                    Ray ray = _mainCamera.ScreenPointToRay(Input.mousePosition);
+                    if (Physics.Raycast(ray, out var hit, _groundLayer))
+                    {
+                        Vector3 diff = _dragStart - Vector3.Lerp(_dragStart, hit.point, _clickDragSmooth);
+                        diff.y = 0;
+                        transform.position += diff;
+                    }
+                }
+
+                CameraBounds();
             }
-            
-            CameraBounds();
 
             #endregion
         }
