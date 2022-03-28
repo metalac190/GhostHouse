@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Game.Dialog
+namespace Mechanics.Dialog
 {
     [CreateAssetMenu(menuName = "Narrative/Character")]
     public class SOCharacter : ScriptableObject
@@ -21,8 +21,7 @@ namespace Game.Dialog
         /// </summary>
         /// <param name="emotion"></param>
         /// <returns> null if unable to find it.</returns>
-        public Sprite GetSprite(CharacterEmotion emotion)
-        {
+        public Sprite GetSprite(CharacterEmotion emotion) {
             if (_sprites.Count == 0)
             {
                 Debug.LogWarning($"character file \"{name}\". {CharacterName} has no sprites.");

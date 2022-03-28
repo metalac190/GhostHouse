@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 7330670172255671047}
   - component: {fileID: 490194710478527663}
   m_Layer: 0
-  m_Name: Response
+  m_Name: Interaction_Response
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -69,7 +69,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 1
         m_CallState: 2
-      - m_Target: {fileID: 5452176915008105665}
+      - m_Target: {fileID: 918978817237516562}
         m_MethodName: set_enabled
         m_Mode: 6
         m_Arguments:
@@ -80,9 +80,6 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-  _alreadyInteractedEvent:
-    m_PersistentCalls:
-      m_Calls: []
 --- !u!1 &854667493591808770
 GameObject:
   m_ObjectHideFlags: 0
@@ -374,11 +371,13 @@ MonoBehaviour:
   _materialToSet: {fileID: 0}
   _sfxOnClick: 0
   _sfx: 0
+  _moveOnClick: 1
+  _cameraMovementTime: 3
   _popupWindowOnClick: 1
   _displayText: Would you like to push over this book?
   _imageToDisplay: {fileID: 0}
   _cancelButton: 1
   _interaction: {fileID: 11400000, guid: 2fb92a3d4d0ccc04da4f61a7fea0e1eb, type: 2}
   _interactionText: Push Book Over
-  _altInteraction: {fileID: 11400000, guid: 1d61de5b408b1494e98d640affa3e975, type: 2}
-  _altInteractionText: Do Not
+  _alternateInteraction: {fileID: 0}
+  _alternateInteractionText: Alt Interact
