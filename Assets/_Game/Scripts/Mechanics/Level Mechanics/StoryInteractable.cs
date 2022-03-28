@@ -58,9 +58,11 @@ namespace Mechanics.Level_Mechanics
             }
             if (_interaction != null) {
                 DataManager.Instance.SetDefaultInteraction(_interaction.name);
+                //Debug.Log(_interaction.name + ": " + _interaction.CanInteract);
             }
             if (_alternateInteraction != null) {
                 DataManager.Instance.SetDefaultInteraction(_alternateInteraction.name);
+                //Debug.Log(_alternateInteraction.name + ": " + _alternateInteraction.CanInteract);
             }
         }
 

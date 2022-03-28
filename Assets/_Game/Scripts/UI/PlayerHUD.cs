@@ -29,7 +29,7 @@ namespace UI
 
         // Call this on Start() to setup spirit points
         public void SetMaxSpiritPoints(int maxPoints) {
-            Debug.Log(maxPoints);
+            //Debug.Log(maxPoints);
             if (_spiritPoints.Count < maxPoints) {
                 Debug.LogError("Not enough Spirit Points in List to sustain a max of " + maxPoints, gameObject);
                 return;
@@ -47,7 +47,7 @@ namespace UI
 
         // Call this each time the number of spirit points changes
         public void SetSpiritPoints(int points, int aboutToSpend = 0) {
-            Debug.Log("Spirit Points: " + points + ". About to Spend " + aboutToSpend + ".");
+            //Debug.Log("Spirit Points: " + points + ". About to Spend " + aboutToSpend + ".");
             for (var i = 0; i < _maxPoints; i++) {
                 if (i >= points) {
                     _spiritPoints[i].enabled = false;
