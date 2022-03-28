@@ -229,7 +229,8 @@ public class DataManager : MonoBehaviour
 
     private void SetControlSettings()
     {
-        // Set Control settings on camera controller
+        // Set Control settings on camera controllerc
+        if (CameraController == null) return;
         CameraController._traditionalMovementEnabled = settingsCameraWASD;
         CameraController._clickDragMovementEnabled = settingsClickDrag;
     }
