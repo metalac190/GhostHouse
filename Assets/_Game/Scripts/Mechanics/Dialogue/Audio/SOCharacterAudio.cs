@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Utility.Audio.Clips.Base;
 
-namespace Game.Dialog
+namespace Mechanics.Dialog
 {
     [CreateAssetMenu(menuName = "Sound System/Character")]
     public class SOCharacterAudio : ScriptableObject

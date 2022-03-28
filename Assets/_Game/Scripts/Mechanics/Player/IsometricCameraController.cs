@@ -1,6 +1,8 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
+using Utility.ReadOnly;
 
 public class IsometricCameraController : MonoBehaviour
 {
@@ -19,6 +21,11 @@ public class IsometricCameraController : MonoBehaviour
     [Header("Click And Drag Movement Settings")]
     [SerializeField] public bool _clickDragMovementEnabled = true;
     [SerializeField] public float _panningSpeed = 25f;
+    [SerializeField] private float _exposedField = 10f;
+    [SerializeField] private LayerMask _groundLayer = 0;
+    [SerializeField, Range(0, 1)] private float _clickDragSmooth = 0.5f;
+    private Vector3 _dragStart;
+    [ReadOnly] public bool _dragging;
 
     [Header("Mouse Motivated Movement Settings (League of Legends)")]
     [SerializeField] public bool _mouseMotivatedMovementEnabled = false;
@@ -63,7 +70,17 @@ public class IsometricCameraController : MonoBehaviour
         get { return new Vector2(Input.GetAxis("Mouse X"), Input.GetAxis("Mouse Y")); }
     }
 
-    private bool drag = false;
+    // Checks if mouse is over UI
+    public static bool IsMouseOverUi
+    {
+        get
+        {
+            var events = EventSystem.current;
+            return events != null && events.IsPointerOverGameObject();
+        }
+    }
+
+    private bool drag;
 
 
     #region Singleton Pattern
@@ -362,27 +379,68 @@ public class IsometricCameraController : MonoBehaviour
             }
             #endregion
 
+
+
             #region Click and Drag Movement
 
-            if (!_interacting)
-            {
-                if (_clickDragMovementEnabled && Input.GetMouseButton(0) && MouseAxis != Vector2.zero)
-                {
-                    Vector3 desiredMove = new Vector3(-MouseAxis.x, 0, -MouseAxis.y);
+            //if (!_interacting)
+            //{
+            //    if (_clickDragMovementEnabled && Input.GetMouseButton(0) && MouseAxis != Vector2.zero)
+            //    {
+            //        Vector3 desiredMove = new Vector3(-MouseAxis.x, 0, -MouseAxis.y);
 
-                    desiredMove *= _panningSpeed;
-                    desiredMove *= Time.deltaTime;
-                    desiredMove = Quaternion.Euler(new Vector3(0f, transform.eulerAngles.y, 0f)) * desiredMove;
-                    desiredMove = transform.InverseTransformDirection(desiredMove);
+            //        desiredMove *= _panningSpeed;
+            //        desiredMove *= Time.deltaTime;
+            //        desiredMove = Quaternion.Euler(new Vector3(0f, transform.eulerAngles.y, 0f)) * desiredMove;
+            //        desiredMove = transform.InverseTransformDirection(desiredMove);
 
-                    transform.Translate(desiredMove, Space.Self);
-                }
-            }
+            //        transform.Translate(desiredMove, Space.Self);
+            //    }
+            //}
 
             #endregion
 
-            CameraBounds();
+            #region Click and Drag Maybe Best
+
+            //if (Input.GetMouseButton(0))
+            //{
+            //    Vector3 newPosition = new Vector3();
+            //    newPosition.x = Input.GetAxis("Mouse X") * _panningSpeed * Time.deltaTime;
+            //    newPosition.z = Input.GetAxis("Mouse Y") * _panningSpeed * Time.deltaTime;
+            //    transform.Translate(-newPosition);
+            //}
+
+            #endregion
+
+
+            #region Click and Drag but Sad
+
+            if (Input.GetMouseButtonDown(0) && !IsMouseOverUi)
+            {
+                Ray ray = _mainCamera.ScreenPointToRay(Input.mousePosition);
+                if (Physics.Raycast(ray, out var hit, _groundLayer)) {
+                    _dragging = true;
+                    _dragStart = hit.point;
+                }
+            }
+            else if (Input.GetMouseButtonUp(0))
+            {
+                _dragging = false;
+            }
+            else if (Input.GetMouseButton(0) && _dragging)
+            {
+                Ray ray = _mainCamera.ScreenPointToRay(Input.mousePosition);
+                if (Physics.Raycast(ray, out var hit, _groundLayer))
+                {
+                    Vector3 diff = _dragStart - Vector3.Lerp(_dragStart, hit.point, _clickDragSmooth);
+                    diff.y = 0;
+                    transform.position += diff;
+                }
+            }
             
+            CameraBounds();
+
+            #endregion
         }
 
         //HandleInput();
@@ -392,8 +450,55 @@ public class IsometricCameraController : MonoBehaviour
 
     }
 
-   
 
+
+    private void LateUpdate()
+    {
+        #region Click and Drag But Bad
+        /*
+        if (Input.GetMouseButton(0))
+        {
+            _difference = (Camera.main.ScreenToWorldPoint(Input.mousePosition)) - transform.position;
+            
+            if (drag == false)
+            {
+                drag = true;
+                _origin = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+            }
+        }
+        else
+        {
+            drag = false;
+        }
+
+        if (drag)
+        {
+            transform.position = new Vector3(_origin.x - _difference.x, _origin.y - _difference.y, _origin.z - _difference.z);
+
+            //transform.position = new Vector3(Mathf.Clamp(transform.position.x, _minXValue, _maxXValue), transform.position.y, Mathf.Clamp(transform.position.z, _minZValue, _maxZValue));
+        }
+        */
+        #endregion
+
+        #region Click and Drag Maybe Better
+
+        //if (Input.GetMouseButtonDown(0))
+        //{
+        //    _origin = Input.mousePosition;
+        //    return;
+        //}
+
+        ////if (!Input.GetMouseButtonDown(0)) return;
+
+        //Vector3 pos = Camera.main.ScreenToViewportPoint(Input.mousePosition - _origin);
+        //Vector3 move = new Vector3(pos.x * _panningSpeed, 0f, pos.y * _panningSpeed);
+
+        //transform.Translate(move, Space.World);
+
+        #endregion
+
+
+    }
 
 
     private void FixedUpdate()

@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Game.Dialog
+namespace Mechanics.Dialog
 {
     [CreateAssetMenu(menuName = "Narrative/Character")]
     public class SOCharacter : ScriptableObject
@@ -21,8 +21,7 @@ namespace Game.Dialog
         /// </summary>
         /// <param name="emotion"></param>
         /// <returns> null if unable to find it.</returns>
-        public Sprite GetSprite(CharacterEmotion emotion)
-        {
+        public Sprite GetSprite(CharacterEmotion emotion) {
             if (_sprites.Count == 0)
             {
                 Debug.LogWarning($"character file \"{name}\". {CharacterName} has no sprites.");
@@ -44,24 +43,32 @@ namespace Game.Dialog
         /// <returns> <see cref="CharacterEmotion.Neutral"/> if unable to find requested value. </returns>
         public static CharacterEmotion StringToEmotion(string str)
         {
-            switch(str.ToLower())
+            switch (str.ToLower())
             {
+                case "angry":
+                case "anger":
+                    return CharacterEmotion.Angry;
+
+                case "happy":
+                    return CharacterEmotion.Happy;
+
+                case "neutral":
+                case "idle":
+                    return CharacterEmotion.Idle;
+
                 case "surprise":
                 case "surprised":
-                    return CharacterEmotion.Surprise;
+                    return CharacterEmotion.Surprised;
 
                 default:
                     Debug.LogWarning($"Unable to find CharacterEmotion for {str}");
-                    return CharacterEmotion.Neutral;
-
-                case "neutral":
-                    return CharacterEmotion.Neutral;
+                    return CharacterEmotion.Idle;
             }
         }
     }
 
     public enum CharacterEmotion
     {
-        Neutral = 0, Surprise = 1
+        Angry = 0, Happy = 1, Idle = 2, Sad = 3, Surprised = 4
     }
 }

@@ -7,7 +7,8 @@ public class InteractionResponseAnimation : InteractableResponseBase
         anim.SetTrigger("interact");
     }
 
-    private Animator GetAnimator() {
+    private Animator GetAnimator()
+    {
         var anim = GetComponent<Animator>();
         if (anim != null) return anim;
         anim = GetComponentInChildren<Animator>();
