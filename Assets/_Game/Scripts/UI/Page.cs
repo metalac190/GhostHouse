@@ -6,8 +6,7 @@ using TMPro;
 
 public class Page : MonoBehaviour
 {
-    [SerializeField] 
-    List<Entry> entries = new List<Entry>();
+    public List<Entry> entries = new List<Entry>();
 
     public int index;
 
