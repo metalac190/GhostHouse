@@ -20,6 +20,7 @@ public class ModalWindowController : MonoBehaviour
     [SerializeField] private GameObject _modalWindow = null;
     [SerializeField] private Button _mainInteractionButton = null;
     [SerializeField] private TextMeshProUGUI _mainInteractionText = null;
+    [SerializeField] private List<GameObject> _spiritPoints = new List<GameObject>();
     [SerializeField] private Button _alternateInteractionButton = null;
     [SerializeField] private TextMeshProUGUI _alternateInteractionText = null;
     [SerializeField] private TextMeshProUGUI _closeButton = null;
@@ -60,6 +61,9 @@ public class ModalWindowController : MonoBehaviour
 
     public void EnableModalWindow(string closeButtonText, Action callback, string interactButtonText, Action altCallback, string altInteractButtonText, int pointsToSpend) {
         if (_playerHud != null) _playerHud.UpdateSpiritPoints(pointsToSpend);
+        for (var i = 0; i < _spiritPoints.Count; i++) {
+            _spiritPoints[i].SetActive(i < pointsToSpend);
+        }
 
         // Enable Modal Window
         IsometricCameraController.Singleton._interacting = true;
