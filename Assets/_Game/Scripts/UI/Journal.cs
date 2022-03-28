@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class Journal : MonoBehaviour
 {
-    static Tab[] tabs = new Tab[7];
+    public Tab[] tabs = new Tab[7];
 
     public List<Page> pages = new List<Page>();
 
@@ -22,8 +22,7 @@ public class Journal : MonoBehaviour
         tabs[3].associatedPage = 3;
         tabs[4].associatedPage = 4;
         tabs[5].associatedPage = 5;
-        tabs[6].associatedPage = 6;
-        tabs[7].associatedPage = 8;
+        tabs[6].associatedPage = 7;
 
         //Gives each page a list identifier
         int i = 0;
@@ -49,7 +48,9 @@ public class Journal : MonoBehaviour
 
     public void ActivatePage(int pageNum)
     {
-        activePage.gameObject.GetComponent<Renderer>().enabled = false;
+        if (activePage != null)
+            activePage.gameObject.GetComponent<Renderer>().enabled = false;
+
         activePage = pages[pageNum];
         activePage.gameObject.GetComponent<Renderer>().enabled = true;
         UpdateTabs();
@@ -57,7 +58,9 @@ public class Journal : MonoBehaviour
 
     public void ActivatePage(Page page)
     {
-        activePage.gameObject.GetComponent<Renderer>().enabled = false;
+        if (activePage != null)
+            activePage.gameObject.GetComponent<Renderer>().enabled = false;
+
         activePage = page;
         activePage.gameObject.GetComponent<Renderer>().enabled = true;
         UpdateTabs();
