@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using UnityEngine;
@@ -63,6 +63,9 @@ public class DataManager : MonoBehaviour
             Instance = this;
             DontDestroyOnLoad(this.gameObject);
 
+            interactions = new Dictionary<string, bool>();
+            journalUnlocks = new bool[50];
+
             // Load all file information in Awake so other game-objects can call it in Start.
             LoadFile();
             // Set values throughtout game on starting to reload game
@@ -76,12 +79,9 @@ public class DataManager : MonoBehaviour
 
     private void LoadFile()
     {
-        filePath = Path.Combine(Application.persistentDataPath, "savedata.json");
-        interactions = new Dictionary<string, bool>();
-        journalUnlocks = new bool[50];
-
         SetDefaultValues();
 
+        filePath = Path.Combine(Application.persistentDataPath, "savedata.json");
         ReadFile();
 
         // Set all loaded settings for the player
