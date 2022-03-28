@@ -13,9 +13,9 @@ public class Settings : MonoBehaviour
     public bool leftClickInteract = true;
 
     //Camera Movement
-    public bool useWASD = true;
+    public bool useWASD = false;
     public bool useArrowKeys = true;
-    public bool useClickNDrag = false;
+    public bool useClickNDrag = true;
     public int dragSpeed = 75;
 
     //Audio Settings

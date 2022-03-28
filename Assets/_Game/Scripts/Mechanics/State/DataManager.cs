@@ -95,7 +95,7 @@ public class DataManager : MonoBehaviour
         level = "Spring";
         remainingSpiritPoints = 3;
         settingsLeftClickInteract = true;
-        settingsCameraWASD = true;
+        settingsCameraWASD = false;
         settingsCameraArrowKeys = true;
         settingsClickDrag = true;
         settingsSensitivity = 75;
@@ -231,8 +231,11 @@ public class DataManager : MonoBehaviour
     {
         // Set Control settings on camera controllerc
         if (CameraController == null) return;
-        CameraController._traditionalMovementEnabled = settingsCameraWASD;
-        CameraController._clickDragMovementEnabled = settingsClickDrag;
+        //CameraController._traditionalMovementEnabled = settingsCameraWASD;
+        //CameraController._clickDragMovementEnabled = settingsClickDrag;
+
+        if (settingsCameraWASD) { CameraController._cameraMode = CameraMode.KEYBOARD; }
+        else if (settingsClickDrag) { CameraController._cameraMode = CameraMode.CLICKDRAG; }
     }
 
     public void SaveAudioSettings(int musicVol, int sfxVol, int dialogueVol, int ambVol)
