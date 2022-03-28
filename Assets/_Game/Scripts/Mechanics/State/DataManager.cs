@@ -13,6 +13,10 @@ public class DataManager : MonoBehaviour
     // Reference to AudioMixerController to control volume levels
     [SerializeField] AudioMixerController audioMixerController = null;
 
+    //Reference to the Spirit Point Scriptable Objects
+    [SerializeField] IntegerVariable _startingSP;
+    [SerializeField] IntegerVariable _currentSP;
+
     // Lazy load the Camera Controller
     private IsometricCameraController cameraController;
     private IsometricCameraController CameraController {
@@ -92,8 +96,16 @@ public class DataManager : MonoBehaviour
 
     private void SetDefaultValues()
     {
+        if (_currentSP != null)
+        {
+            remainingSpiritPoints = _currentSP.value;
+        }
+        else
+        {
+            remainingSpiritPoints = 3;
+        }
+
         level = "Spring";
-        remainingSpiritPoints = 3;
         settingsLeftClickInteract = true;
         settingsCameraWASD = false;
         settingsCameraArrowKeys = true;
