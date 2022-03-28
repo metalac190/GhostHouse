@@ -124,6 +124,7 @@ namespace Game
 
         private void NextScene() {
             DataManager.Instance.level = _nextScene;
+            DataManager.Instance.WriteFile();
             SceneManager.LoadScene(_nextScene);
         }
     }
