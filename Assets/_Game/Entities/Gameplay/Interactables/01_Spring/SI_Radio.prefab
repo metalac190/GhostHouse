@@ -11,6 +11,8 @@ GameObject:
   - component: {fileID: 6095436353443152492}
   - component: {fileID: 8592797482582969527}
   - component: {fileID: 5331110484467161392}
+  - component: {fileID: 2976997549592915837}
+  - component: {fileID: 5975402033272699479}
   m_Layer: 0
   m_Name: SI_Radio
   m_TagString: Untagged
@@ -30,6 +32,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 7577273632232369938}
+  - {fileID: 864775941151700922}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -69,14 +72,52 @@ MonoBehaviour:
   _materialToSet: {fileID: 0}
   _sfxOnClick: 0
   _sfx: 0
-  _popupWindowOnClick: 0
-  _displayText: 
+  _moveOnClick: 1
+  _cameraMovementTime: 3
+  _popupWindowOnClick: 1
+  _displayText: A radio on the shelf...
   _imageToDisplay: {fileID: 0}
   _cancelButton: 1
-  _interaction: {fileID: 0}
+  _interaction: {fileID: 11400000, guid: 6a1c3bb7fd4517f48a83b24168f7ae9d, type: 2}
   _interactionText: Interact
-  _altInteraction: {fileID: 0}
-  _altInteractionText: Alt Interact
+  _alternateInteraction: {fileID: 0}
+  _alternateInteractionText: Alt Interact
+--- !u!95 &2976997549592915837
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4597991760410861267}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 0}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &5975402033272699479
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4597991760410861267}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 73b855d88e471e4418b0d92c38df83dc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _position: 0
+  _rotation: 1
+  _xAxis: 1
+  _yAxis: 0
+  _zAxis: 0
 --- !u!1 &5643281859769220573
 GameObject:
   m_ObjectHideFlags: 0
@@ -103,7 +144,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5643281859769220573}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -0.25, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 2, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 7577273632232369938}
@@ -156,6 +197,50 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+--- !u!1 &5934792074502969765
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 864775941151700922}
+  - component: {fileID: 3612745456009544552}
+  m_Layer: 0
+  m_Name: Interaction_Response
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &864775941151700922
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5934792074502969765}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 6095436353443152492}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &3612745456009544552
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5934792074502969765}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 857108f1cc9766945b6ef10cd5c2dedb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _interactable: {fileID: 11400000, guid: 6a1c3bb7fd4517f48a83b24168f7ae9d, type: 2}
 --- !u!1 &8177678418749119709
 GameObject:
   m_ObjectHideFlags: 0

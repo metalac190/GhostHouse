@@ -11,7 +11,16 @@ public class DataManager : MonoBehaviour
     public static DataManager Instance = null;
 
     // Reference to AudioMixerController to control volume levels
-    [SerializeField] AudioMixerController audioMixerController;
+    [SerializeField] AudioMixerController audioMixerController = null;
+
+    // Lazy load the Camera Controller
+    private IsometricCameraController cameraController;
+    private IsometricCameraController CameraController {
+        get {
+            if (cameraController == null) cameraController = FindObjectOfType<IsometricCameraController>();
+            return cameraController;
+        }
+    }
 
     // string to hold the path to the savefile
     private string filePath;
@@ -53,6 +62,9 @@ public class DataManager : MonoBehaviour
         if (Instance == null) {
             Instance = this;
             DontDestroyOnLoad(this.gameObject);
+
+            // Load all file information in Awake so other game-objects can call it in Start.
+            LoadFile();
         }
         else
         {
@@ -62,6 +74,11 @@ public class DataManager : MonoBehaviour
 
     private void Start()
     {
+        // Set values throughtout game on starting to reload game
+    }
+
+    private void LoadFile()
+    {
         filePath = Path.Combine(Application.persistentDataPath, "savedata.json");
         interactions = new Dictionary<string, bool>();
         journalUnlocks = new bool[50];
@@ -70,7 +87,10 @@ public class DataManager : MonoBehaviour
 
         ReadFile();
 
-        // Set values throughtout game on starting to reload game
+        // Set all loaded settings for the player
+        SetControlSettings();
+        SetAudioSettings();
+        SetVisualSettings();
     }
 
     private void SetDefaultValues()
@@ -78,8 +98,8 @@ public class DataManager : MonoBehaviour
         level = "Spring";
         remainingSpiritPoints = 3;
         settingsLeftClickInteract = true;
-        settingsCameraWASD = false;
-        settingsCameraArrowKeys = false;
+        settingsCameraWASD = true;
+        settingsCameraArrowKeys = true;
         settingsClickDrag = true;
         settingsSensitivity = 75;
         settingsMusicVolume = 100;
@@ -208,6 +228,8 @@ public class DataManager : MonoBehaviour
     private void SetControlSettings()
     {
         // Set Control settings on camera controller
+        CameraController._traditionalMovementEnabled = settingsCameraWASD;
+        CameraController._clickDragMovementEnabled = settingsClickDrag;
     }
 
     public void SaveAudioSettings(int musicVol, int sfxVol, int dialogueVol, int ambVol)
@@ -222,10 +244,11 @@ public class DataManager : MonoBehaviour
 
     private void SetAudioSettings()
     {
-        audioMixerController.SetMusicVolume((float)settingsMusicVolume/100);
-        audioMixerController.SetSfxVolume((float)settingsSFXVolume/100);
-        audioMixerController.SetDialogueVolume((float)settingsDialogueVolume/100);
-        audioMixerController.SetAmbienceVolume((float)settingsAmbienceVolume/100);
+        // Assuming 0 to 100 instead of 0 to 1
+        audioMixerController.SetMusicVolume(settingsMusicVolume * 0.01f);
+        audioMixerController.SetSfxVolume(settingsSFXVolume * 0.01f);
+        audioMixerController.SetDialogueVolume(settingsDialogueVolume * 0.01f);
+        audioMixerController.SetAmbienceVolume(settingsAmbienceVolume * 0.01f);
     }
 
     public void SaveVisualSettings(bool windowMode, int contrast, int brightness, bool largeGUIFont, bool largeTextFont, int textFont)

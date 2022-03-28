@@ -8,7 +8,7 @@ using TMPro;
 //Communication between the Settings UI and Settings singleton
 public class PanelMediator : MonoBehaviour
 {
-    //Update settings values
+    //The UI needs to be up to date with everything
     private void Update()
     {
     }

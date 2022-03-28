@@ -382,7 +382,12 @@ namespace Game.Dialog
 
                         if (characterSprite != null)
                         {
+                            _characterPortraitImage.enabled = true;
                             _characterPortraitImage.sprite = characterSprite;
+                        }
+                        else
+                        {
+                            _characterPortraitImage.enabled = false;
                         }
                     }
                 }
