@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using Utility.Audio.Managers;
 
 public class PauseMenu : MonoBehaviour
 {
@@ -47,6 +48,7 @@ public class PauseMenu : MonoBehaviour
 
     private void UpdatePaused()
     {
+        SoundManager.MusicManager.SetPaused(isPaused);
         if (pauseMenu != null)
         {
             pauseMenu.SetActive(isPaused);
