@@ -70,6 +70,7 @@ public class DataManager : MonoBehaviour
             interactions = new Dictionary<string, bool>();
             journalUnlocks = new bool[50];
 
+            filePath = Path.Combine(Application.persistentDataPath, "savedata.json");
             // Load all file information in Awake so other game-objects can call it in Start.
             LoadFile();
             // Set values throughtout game on starting to reload game
@@ -85,7 +86,6 @@ public class DataManager : MonoBehaviour
     {
         SetDefaultValues();
 
-        filePath = Path.Combine(Application.persistentDataPath, "savedata.json");
         ReadFile();
 
         // Set all loaded settings for the player
