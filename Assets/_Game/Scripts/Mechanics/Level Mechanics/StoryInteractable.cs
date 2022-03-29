@@ -118,12 +118,16 @@ namespace Mechanics.Level_Mechanics
             if (_popupWindowOnClick && !(IsometricCameraController.Singleton._dragging)) {
                 Action callback = _interaction != null && _interaction.CanInteract ? (Action)Interact : null;
                 Action altCallback = (_alternateInteraction != null && _alternateInteraction.CanInteract) ? (Action)AltInteract : null;
-                int maxPointsSpent = Mathf.Max(_interaction != null ? _interaction.Cost : 0, _alternateInteraction != null ? _alternateInteraction.Cost : 0);
+                int points = _interaction != null ? _interaction.Cost : 0;
+                int altPoints = _alternateInteraction != null ? _alternateInteraction.Cost : 0;
 
-                ModalWindowController.Singleton.EnableModalWindow(_closeMenuText, callback, _interactionText, altCallback, _alternateInteractionText, maxPointsSpent);
+                ModalWindowController.Singleton.EnableModalWindow(_closeMenuText, callback, _interactionText, altCallback, _alternateInteractionText, points, altPoints);
             }
             else if (!_popupWindowOnClick && _interaction != null) {
-                _interaction.Interact();
+                if (_interaction.Cost <= DataManager.Instance.remainingSpiritPoints)
+                {
+                    _interaction.Interact();
+                }
             }
             if (_moveOnClick) {
                 IsometricCameraController.Singleton.MoveToPosition(mousePosition, _cameraMovementTime);
