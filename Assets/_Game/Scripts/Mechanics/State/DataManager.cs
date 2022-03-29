@@ -14,8 +14,7 @@ public class DataManager : MonoBehaviour
     [SerializeField] AudioMixerController audioMixerController = null;
 
     //Reference to the Spirit Point Scriptable Objects
-    [SerializeField] IntegerVariable _startingSP;
-    [SerializeField] IntegerVariable _currentSP;
+
 
     // Lazy load the Camera Controller
     private IsometricCameraController cameraController;
@@ -96,20 +95,13 @@ public class DataManager : MonoBehaviour
 
     private void SetDefaultValues()
     {
-        if (_currentSP != null)
-        {
-            remainingSpiritPoints = _currentSP.value;
-        }
-        else
-        {
-            remainingSpiritPoints = 3;
-        }
-
+       
+        remainingSpiritPoints = 3;
         level = "Spring";
         settingsLeftClickInteract = true;
-        settingsCameraWASD = false;
+        settingsCameraWASD = true;
         settingsCameraArrowKeys = true;
-        settingsClickDrag = true;
+        settingsClickDrag = false;
         settingsSensitivity = 75;
         settingsMusicVolume = 100;
         settingsSFXVolume = 75;
@@ -243,11 +235,11 @@ public class DataManager : MonoBehaviour
     {
         // Set Control settings on camera controllerc
         if (CameraController == null) return;
-        //CameraController._traditionalMovementEnabled = settingsCameraWASD;
-        //CameraController._clickDragMovementEnabled = settingsClickDrag;
+        CameraController._enableWASDMovement = settingsCameraWASD;
+        CameraController._enableClickDragMovement = settingsClickDrag;
 
-        if (settingsCameraWASD) { CameraController._cameraMode = CameraMode.KEYBOARD; }
-        else if (settingsClickDrag) { CameraController._cameraMode = CameraMode.CLICKDRAG; }
+        //if (settingsCameraWASD) { CameraController._cameraMode = CameraMode.KEYBOARD; }
+        //else if (settingsClickDrag) { CameraController._cameraMode = CameraMode.CLICKDRAG; }
     }
 
     public void SaveAudioSettings(int musicVol, int sfxVol, int dialogueVol, int ambVol)
