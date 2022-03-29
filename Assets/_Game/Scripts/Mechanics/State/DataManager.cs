@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using UnityEngine;
@@ -12,6 +12,9 @@ public class DataManager : MonoBehaviour
 
     // Reference to AudioMixerController to control volume levels
     [SerializeField] AudioMixerController audioMixerController = null;
+
+    //Reference to the Spirit Point Scriptable Objects
+
 
     // Lazy load the Camera Controller
     private IsometricCameraController cameraController;
@@ -63,8 +66,13 @@ public class DataManager : MonoBehaviour
             Instance = this;
             DontDestroyOnLoad(this.gameObject);
 
+            interactions = new Dictionary<string, bool>();
+            journalUnlocks = new bool[50];
+
+            filePath = Path.Combine(Application.persistentDataPath, "savedata.json");
             // Load all file information in Awake so other game-objects can call it in Start.
             LoadFile();
+            // Set values throughtout game on starting to reload game
         }
         else
         {
@@ -72,17 +80,9 @@ public class DataManager : MonoBehaviour
         }
     }
 
-    private void Start()
-    {
-        // Set values throughtout game on starting to reload game
-    }
 
     private void LoadFile()
     {
-        filePath = Path.Combine(Application.persistentDataPath, "savedata.json");
-        interactions = new Dictionary<string, bool>();
-        journalUnlocks = new bool[50];
-
         SetDefaultValues();
 
         ReadFile();
@@ -95,12 +95,13 @@ public class DataManager : MonoBehaviour
 
     private void SetDefaultValues()
     {
-        level = "Spring";
+       
         remainingSpiritPoints = 3;
+        level = "Spring";
         settingsLeftClickInteract = true;
         settingsCameraWASD = true;
         settingsCameraArrowKeys = true;
-        settingsClickDrag = true;
+        settingsClickDrag = false;
         settingsSensitivity = 75;
         settingsMusicVolume = 100;
         settingsSFXVolume = 75;
@@ -232,9 +233,13 @@ public class DataManager : MonoBehaviour
 
     private void SetControlSettings()
     {
-        // Set Control settings on camera controller
-        CameraController._traditionalMovementEnabled = settingsCameraWASD;
-        CameraController._clickDragMovementEnabled = settingsClickDrag;
+        // Set Control settings on camera controllerc
+        if (CameraController == null) return;
+        CameraController._enableWASDMovement = settingsCameraWASD;
+        CameraController._enableClickDragMovement = settingsClickDrag;
+
+        //if (settingsCameraWASD) { CameraController._cameraMode = CameraMode.KEYBOARD; }
+        //else if (settingsClickDrag) { CameraController._cameraMode = CameraMode.CLICKDRAG; }
     }
 
     public void SaveAudioSettings(int musicVol, int sfxVol, int dialogueVol, int ambVol)

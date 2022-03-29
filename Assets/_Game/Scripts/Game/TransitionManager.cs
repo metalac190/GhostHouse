@@ -12,6 +12,10 @@ namespace Game
         [SerializeField] private CanvasGroup _titleBanner = null;
         [SerializeField] private GameObject _raycastBlock = null;
 
+        [Header("Spirit Points")]
+        [SerializeField] private int _spiritPointsForLevel = 3;
+        //[SerializeField] private Integer _spiritPoints = null;
+
         [Header("On Scene Load")]
         [SerializeField] private bool _fadeIn = true;
         [SerializeField] private float _fadeInTime = 1;
@@ -36,6 +40,11 @@ namespace Game
         }
 
         private void Start() {
+            // Set Spirit Points
+            DataManager.Instance.remainingSpiritPoints = _spiritPointsForLevel;
+            //if (_spiritPoints != null) _spiritPoints.value = _spiritPointsForLevel;
+
+            // Intro Sequence
             if (_raycastBlock != null) _raycastBlock.gameObject.SetActive(true);
             if (_fadeIn) {
                 FadeFromBlack();
@@ -115,6 +124,7 @@ namespace Game
 
         private void NextScene() {
             DataManager.Instance.level = _nextScene;
+            DataManager.Instance.WriteFile();
             SceneManager.LoadScene(_nextScene);
         }
     }

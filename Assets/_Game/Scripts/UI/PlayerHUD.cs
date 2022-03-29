@@ -16,6 +16,8 @@ namespace UI
         [SerializeField] private List<Image> _spiritPoints = new List<Image>();
         [SerializeField] private Sprite _spiritPointBright = null;
         [SerializeField] private Sprite _spiritPointDull = null;
+        [SerializeField] private IntegerVariable _startingSP;
+        [SerializeField] private IntegerVariable _currentSP;
 
         private int _maxPoints;
 
@@ -24,12 +26,18 @@ namespace UI
         }
 
         private void Start() {
-            SetMaxSpiritPoints(DataManager.Instance.remainingSpiritPoints);
+            if (_startingSP != null)
+            {
+                SetMaxSpiritPoints(_startingSP.value);
+            }
+            else {
+                SetMaxSpiritPoints(DataManager.Instance.remainingSpiritPoints);
+            }
         }
 
         // Call this on Start() to setup spirit points
         public void SetMaxSpiritPoints(int maxPoints) {
-            Debug.Log(maxPoints);
+            //Debug.Log(maxPoints);
             if (_spiritPoints.Count < maxPoints) {
                 Debug.LogError("Not enough Spirit Points in List to sustain a max of " + maxPoints, gameObject);
                 return;
@@ -42,12 +50,19 @@ namespace UI
         }
 
         public void UpdateSpiritPoints(int aboutToSpend = 0) {
-            SetSpiritPoints(DataManager.Instance.remainingSpiritPoints, aboutToSpend);
+            if (_currentSP != null)
+            {
+                SetSpiritPoints(_currentSP.value, aboutToSpend);
+            }
+            else
+            {
+                SetSpiritPoints(DataManager.Instance.remainingSpiritPoints, aboutToSpend);
+            }
         }
 
         // Call this each time the number of spirit points changes
         public void SetSpiritPoints(int points, int aboutToSpend = 0) {
-            Debug.Log("Spirit Points: " + points + ". About to Spend " + aboutToSpend + ".");
+            //Debug.Log("Spirit Points: " + points + ". About to Spend " + aboutToSpend + ".");
             for (var i = 0; i < _maxPoints; i++) {
                 if (i >= points) {
                     _spiritPoints[i].enabled = false;

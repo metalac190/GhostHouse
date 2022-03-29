@@ -5,16 +5,16 @@ using UnityEngine;
 public class PlayerScript : MonoBehaviour
 {
     [SerializeField] public int _startingSpiritPoints;
-    [SerializeField] public Integer _currentSpiritPoints;
+    [SerializeField] public int _currentSpiritPoints;
 
     private void Awake()
     {
-        _currentSpiritPoints.value = _startingSpiritPoints;
+        _currentSpiritPoints = 3;
     }
 
     public int GetCurrentSpiritPoints()
     {
-        return _currentSpiritPoints.value;
+        return _currentSpiritPoints;
     }
     public int GetStartingSpiritPoints()
     {
@@ -23,15 +23,15 @@ public class PlayerScript : MonoBehaviour
 
     public void AddSpiritPoints(int num)
     {
-        _currentSpiritPoints.value += num;
+        _currentSpiritPoints += num;
     }
     public void SubtractSpiritPoints(int num)
     {
-        _currentSpiritPoints.value -= num;
+        _currentSpiritPoints -= num;
     }
     public void SetSpiritPoints(int num)
     {
-        _currentSpiritPoints.value = num;
+        _currentSpiritPoints = num;
     }
 
     
