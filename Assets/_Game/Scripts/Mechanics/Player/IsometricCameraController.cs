@@ -3,14 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using Utility.ReadOnly;
+using Yarn.Unity;
 
 
-public enum CameraMode
-{
-    KEYBOARD,
-    CLICKDRAG,
-    MOUSEBORDER
-}
+
 
 public class IsometricCameraController : MonoBehaviour
 {
@@ -19,16 +15,18 @@ public class IsometricCameraController : MonoBehaviour
     [Header("Camera Connections")]
     [SerializeField] Camera _mainCamera = null;
     [SerializeField] Rigidbody _rigidbody = null;
+    DialogueRunner _dialogueRunner = null;
 
-    [Header("General Movement Settings")]
-    public CameraMode _cameraMode = CameraMode.CLICKDRAG;
+
 
     [Header("Traditional Camera Movement Settings")]
+    [SerializeField] public bool _enableWASDMovement = true;
     [SerializeField] public float _cameraMoveSpeed = 10f;
     public bool _interacting = false;
     bool _clicked = false;
 
     [Header("Click And Drag Movement Settings")]
+    [SerializeField] public bool _enableClickDragMovement = false;
     [SerializeField] public float _panningSpeed = 25f;
     [SerializeField] private float _exposedField = 10f;
     [SerializeField] private LayerMask _groundLayer = 0;
@@ -37,6 +35,7 @@ public class IsometricCameraController : MonoBehaviour
     [ReadOnly] public bool _dragging;
 
     [Header("Mouse Motivated Movement Settings (League of Legends)")]
+    [SerializeField] public bool _enableMouseBorderMovement = false;
     [SerializeField] public float _mMPanningSpeed = 25f;
     [SerializeField] public float _panBorderThickness = 50f;
 
@@ -98,6 +97,8 @@ public class IsometricCameraController : MonoBehaviour
     {
         if (Singleton == null) { Singleton = this; }
         else { Destroy(gameObject); }
+
+        _dialogueRunner = FindObjectOfType<DialogueRunner>();
     }
     #endregion
 
@@ -336,10 +337,10 @@ public class IsometricCameraController : MonoBehaviour
 
         if (!_interacting)
         {
-            if (_cameraMode == CameraMode.KEYBOARD) { HandleInput(); }
+            if (_enableWASDMovement && !_dialogueRunner.IsDialogueRunning) { HandleInput(); }
 
             #region Mouse Motivated Movement
-            if (_cameraMode == CameraMode.MOUSEBORDER)
+            if (_enableMouseBorderMovement && !_dialogueRunner.IsDialogueRunning)
             {
                 Vector3 upMovement = new Vector3();
                 Vector3 rightMovement = new Vector3();
@@ -423,7 +424,7 @@ public class IsometricCameraController : MonoBehaviour
 
             #region Click and Drag but Sad
 
-            if (_cameraMode == CameraMode.CLICKDRAG)
+            if (_enableClickDragMovement && !_dialogueRunner.IsDialogueRunning)
             {
                 if (Input.GetMouseButtonDown(0) && !IsMouseOverUi)
                 {
