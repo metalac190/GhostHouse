@@ -49,20 +49,20 @@ public class Journal : MonoBehaviour
     public void ActivatePage(int pageNum)
     {
         if (activePage != null)
-            activePage.gameObject.GetComponent<Renderer>().enabled = false;
+            activePage.gameObject.SetActive(false);
 
         activePage = pages[pageNum];
-        activePage.gameObject.GetComponent<Renderer>().enabled = true;
+        activePage.gameObject.SetActive(true);
         UpdateTabs();
     }
 
     public void ActivatePage(Page page)
     {
         if (activePage != null)
-            activePage.gameObject.GetComponent<Renderer>().enabled = false;
+            activePage.gameObject.SetActive(false);
 
         activePage = page;
-        activePage.gameObject.GetComponent<Renderer>().enabled = true;
+        activePage.gameObject.SetActive(true);
         UpdateTabs();
     }
 
