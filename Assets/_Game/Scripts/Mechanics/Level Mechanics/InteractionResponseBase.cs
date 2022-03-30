@@ -4,6 +4,8 @@ using UnityEngine;
 public abstract class InteractableResponseBase : MonoBehaviour
 {
     [SerializeField] private Interactable _interactable = null;
+
+    public Interactable Interactable => _interactable;
     
     private void OnEnable()
     {
