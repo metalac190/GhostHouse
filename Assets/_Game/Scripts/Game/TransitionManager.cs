@@ -54,10 +54,6 @@ namespace Game
             }
         }
 
-        public void SetNextScene(string scene) {
-            _nextScene = scene;
-        }
-
         public void Transition() {
             if (_fadeOut && _fadeToBlack != null) {
                 StartCoroutine(FadeToBlack(_fadeOutTime));

@@ -7,14 +7,10 @@ using Utility.Audio.Managers;
 
 public class DataManager : MonoBehaviour
 {
-    // public instance reference to this script
-    public static DataManager Instance = null;
+    public static DataManager Instance = null;  // Singleton instance
 
     // Reference to AudioMixerController to control volume levels
     [SerializeField] AudioMixerController audioMixerController = null;
-
-    //Reference to the Spirit Point Scriptable Objects
-
 
     // Lazy load the Camera Controller
     private IsometricCameraController cameraController;
@@ -25,15 +21,18 @@ public class DataManager : MonoBehaviour
         }
     }
 
-    // string to hold the path to the savefile
-    private string filePath;
+    private string filePath; // save file for saving & loading
 
-    // reference to SaveData object, will hold values to save
+    // reference to SaveData object, will hold values to save to file
     private SaveData saveData = new SaveData();
 
-    // Save Data fields saved in DataManager
-    public string level { get; set; }
-    public int remainingSpiritPoints { get; set; }
+    public string level { get; set; }       // Current level season
+    public int remainingSpiritPoints { get; set; }  // Current points left to spend
+
+    // Points earned towards the various endings
+    public int cousinsEndingPoints { get; set; }
+    public int sistersEndingPoints { get; set; }
+    public int trueEndingPoints { get; set; }
 
     // Dictionary to hold state of each interactable
     public Dictionary<string, bool> interactions;
@@ -67,12 +66,13 @@ public class DataManager : MonoBehaviour
             DontDestroyOnLoad(this.gameObject);
 
             interactions = new Dictionary<string, bool>();
-            journalUnlocks = new bool[50];
+            journalUnlocks = new bool[24];      // Initializes array of all false entries
 
             filePath = Path.Combine(Application.persistentDataPath, "savedata.json");
+
             // Load all file information in Awake so other game-objects can call it in Start.
+            SetDefaultValues();
             LoadFile();
-            // Set values throughtout game on starting to reload game
         }
         else
         {
@@ -80,24 +80,14 @@ public class DataManager : MonoBehaviour
         }
     }
 
-
-    private void LoadFile()
-    {
-        SetDefaultValues();
-
-        ReadFile();
-
-        // Set all loaded settings for the player
-        SetControlSettings();
-        SetAudioSettings();
-        SetVisualSettings();
-    }
-
+    // Set the values to their default values at the start of Spring on a fresh save
     private void SetDefaultValues()
     {
-       
-        remainingSpiritPoints = 3;
         level = "Spring";
+        remainingSpiritPoints = 3;
+        cousinsEndingPoints = 0;
+        sistersEndingPoints = 0;
+        trueEndingPoints = 0;
         settingsLeftClickInteract = true;
         settingsCameraWASD = true;
         settingsCameraArrowKeys = true;
@@ -115,6 +105,17 @@ public class DataManager : MonoBehaviour
         settingsTextFont = 0;       // placeholder
     }
 
+    // Load the game from file and set up the game
+    private void LoadFile()
+    {
+        ReadFile();
+
+        // Set all loaded settings for the player
+        SetControlSettings();
+        SetAudioSettings();
+        SetVisualSettings();
+    }
+
     // Read data from the save file into the game
     public void ReadFile()
     {
@@ -125,10 +126,13 @@ public class DataManager : MonoBehaviour
             JsonUtility.FromJsonOverwrite(fileContents, saveData);
 
             level = saveData.level;
-            remainingSpiritPoints = saveData.remainingSpiritPoints;
+
+            cousinsEndingPoints = saveData.cousinsEndingPoints;
+            sistersEndingPoints = saveData.sistersEndingPoints;
+            trueEndingPoints = saveData.trueEndingPoints;
 
             // Repopulate dictionary from saved arrays
-            for(int i = 0; i < 50; i++)
+            for(int i = 0; i < 48; i++)
             {
                 interactions[saveData.interactionNames[i]] = saveData.interactionStates[i];
             }
@@ -161,15 +165,25 @@ public class DataManager : MonoBehaviour
     public void WriteFile()
     {
         saveData.level = level;
-        saveData.remainingSpiritPoints = remainingSpiritPoints;
+
+        saveData.cousinsEndingPoints = cousinsEndingPoints;
+        saveData.sistersEndingPoints = sistersEndingPoints;
+        saveData.trueEndingPoints = trueEndingPoints;
 
         // Unpack dictionary elements into two arrays to save
         foreach(KeyValuePair<string, bool> entry in interactions)
         {
             int i = 0;
-            saveData.interactionNames[i] = entry.Key;
-            saveData.interactionStates[i] = entry.Value;
-            i++;
+            if(i >= 48)
+            {
+                Debug.Log("Error: Unexpectedly high number of interactions");
+            }
+            else
+            {
+                saveData.interactionNames[i] = entry.Key;
+                saveData.interactionStates[i] = entry.Value;
+                i++;
+            }
         }
 
         saveData.settings.leftClickInteract = settingsLeftClickInteract;
@@ -195,6 +209,7 @@ public class DataManager : MonoBehaviour
         File.WriteAllText(filePath, jsonString);
     }
 
+    // Interactables call this on their Start() to initialize themselves in the interactions dictionary
     public void SetDefaultInteraction(string name) {
         if (interactions.ContainsKey(name)) return;
         interactions.Add(name, false);
@@ -215,11 +230,13 @@ public class DataManager : MonoBehaviour
         }
         else
         {
+            // This shouldn't happen if interactions initialize correctly
             Debug.Log("Interaction not stored");
             return false;
         }
     }
 
+    // Save settings from the control settings menu
     public void SaveControlSettings(bool leftClick, bool useWASD, bool useArrows, bool clickDrag, int sensitivity)
     {
         settingsLeftClickInteract = leftClick;
@@ -231,9 +248,10 @@ public class DataManager : MonoBehaviour
         SetControlSettings();
     }
 
+    // Update the camera controller with the new settings
     private void SetControlSettings()
     {
-        // Set Control settings on camera controllerc
+        // Set Control settings on camera controller
         if (CameraController == null) return;
         CameraController._enableWASDMovement = settingsCameraWASD;
         CameraController._enableClickDragMovement = settingsClickDrag;
@@ -242,6 +260,7 @@ public class DataManager : MonoBehaviour
         //else if (settingsClickDrag) { CameraController._cameraMode = CameraMode.CLICKDRAG; }
     }
 
+    // Save settings from the audio settings menu
     public void SaveAudioSettings(int musicVol, int sfxVol, int dialogueVol, int ambVol)
     {
         settingsMusicVolume = musicVol;
@@ -252,6 +271,7 @@ public class DataManager : MonoBehaviour
         SetAudioSettings();
     }
 
+    // Update audio mixer controller with audio values
     private void SetAudioSettings()
     {
         // Assuming 0 to 100 instead of 0 to 1
@@ -261,6 +281,7 @@ public class DataManager : MonoBehaviour
         audioMixerController.SetAmbienceVolume(settingsAmbienceVolume * 0.01f);
     }
 
+    // Save settings from the visual settings menu
     public void SaveVisualSettings(bool windowMode, int contrast, int brightness, bool largeGUIFont, bool largeTextFont, int textFont)
     {
         settingsWindowMode = windowMode;
@@ -273,9 +294,10 @@ public class DataManager : MonoBehaviour
         SetVisualSettings();
     }
 
+    // Update visual settings in the font manager and elsewhere
     private void SetVisualSettings()
     {
-        // Set visual settings wherever
+        // Set visual settings wherever eventually
     }
 
     // Dump all data to the console
@@ -284,6 +306,9 @@ public class DataManager : MonoBehaviour
         string outstr = "Data Dump";
         outstr += "\nLevel: " + level.ToString();
         outstr += "\nSpirit Points: " + remainingSpiritPoints.ToString();
+        outstr += "\nCousins Ending Points: " + cousinsEndingPoints.ToString();
+        outstr += "\nSisters Ending Points: " + sistersEndingPoints.ToString();
+        outstr += "\nTrue Ending Points: " + trueEndingPoints.ToString();
         outstr += "\nInteractables:";
         foreach(KeyValuePair<string, bool> entry in interactions)
         {
