@@ -7,7 +7,7 @@ using UnityEngine.SceneManagement;
 
 public class FontManager : MonoBehaviour
 {
-    public static FontManager _instance = null;
+    public static FontManager Instance = null;
 
     [Header("Font Assets")]
     [SerializeField]
@@ -19,47 +19,47 @@ public class FontManager : MonoBehaviour
     [SerializeField]
     TMP_FontAsset _dyslexiaFont = null;
 
-    [SerializeField]
-    bool _useNormalFont = true;
+    FontMode _curFont = FontMode.Fancy;
 
     void Awake()
     {
         // enforce singleton pattern
-        if (_instance == null)
+        if (Instance == null)
         {
-            _instance = this;
+            Instance = this;
         }
         else
         {
             Destroy(this);
         }
+
         SceneManager.activeSceneChanged += UpdateAllTextInScene;
     }
 
     void OnDestroy()
     {
-        if (_instance == null) return;
+        if (Instance == null) return;
+
+        Instance = null;
         SceneManager.activeSceneChanged -= UpdateAllTextInScene;
     }
-
-    void Start() => UpdateAllText();
 
     /// <summary>
     /// Gets the font asset corresponding to the player's choice in <see cref="DataManager"/>
     /// </summary>
     /// <returns></returns>
-    public TMP_FontAsset GetFont()
+    public TMP_FontAsset GetFont(FontMode mode)
     {
-        switch (DataManager.Instance.settingsTextFont)
+        switch (mode)
         {
             default:
-            case 0:
+            case FontMode.Fancy:
                 return _fancyFont;
 
-            case 1:
+            case FontMode.Normal:
                 return _normalFont;
 
-            case 2:
+            case FontMode.Dyslexia:
                 return _dyslexiaFont;
         }
     }
@@ -68,14 +68,23 @@ public class FontManager : MonoBehaviour
     {
         // if this is the first scene loaded, let Start trigger UpdateAllText.
         if (previousScene == null) return;
-        UpdateAllText();
+        UpdateAllText(_curFont);
     }
 
     /// <summary>
     /// Updates the fonts of text in scene to user preferences.
     /// </summary>
-    void UpdateAllText()
+    /// <param name="mode"></param>
+    /// <exception cref="System.ArgumentNullException"> Unable to find a font asset corresponding to <paramref name="mode"/> </exception>
+    public void UpdateAllText(FontMode mode)
     {
+        // verify we have a font
+        TMP_FontAsset fontAsset = GetFont(mode);
+        if (fontAsset == null) throw new System.ArgumentNullException("font is null.");
+
+        // cache mode to allow scene-changes to follow suit
+        _curFont = mode;
+
         // get all text mesh pro components in the scene
         TMP_Text[] textInCurScene = Resources.FindObjectsOfTypeAll<TMP_Text>();
         for (int i = 0; i < textInCurScene.Length; i++)
@@ -84,11 +93,10 @@ public class FontManager : MonoBehaviour
                 textInCurScene[i] = null;
         }
 
-        TMP_FontAsset fontAsset = _useNormalFont? _normalFont : GetFont();
-
         foreach (var text in textInCurScene)
         {
             if (text == null) continue;
+
             try
             {
                 text.font = fontAsset;

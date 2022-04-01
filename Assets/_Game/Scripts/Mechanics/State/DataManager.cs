@@ -97,12 +97,12 @@ public class DataManager : MonoBehaviour
         settingsSFXVolume = 75;
         settingsDialogueVolume = 75;
         settingsAmbienceVolume = 75;
-        settingsWindowMode = true;  // placeholder
-        settingsContrast = 1;       // placeholder
-        settingsBrightness = 1;     // placeholder
+        settingsWindowMode = true;
+        settingsContrast = -20;
+        settingsBrightness = 0;
         settingsLargeGUI = true;    // placeholder
         settingsLargeText = true;   // placeholder
-        settingsTextFont = 0;       // placeholder
+        settingsTextFont = 0;
     }
 
     // Load the game from file and set up the game
@@ -297,7 +297,14 @@ public class DataManager : MonoBehaviour
     // Update visual settings in the font manager and elsewhere
     private void SetVisualSettings()
     {
-        // Set visual settings wherever eventually
+        // set font
+        FontManager fontManager = FontManager.Instance;
+        fontManager.UpdateAllText((FontMode) settingsTextFont);
+
+        // set post-processing volume
+        GraphicsController.ScreenMode = settingsWindowMode ? FullScreenMode.FullScreenWindow : FullScreenMode.ExclusiveFullScreen;
+        GraphicsController.Exposure = settingsBrightness;
+        GraphicsController.Contrast = settingsContrast;
     }
 
     // Dump all data to the console
