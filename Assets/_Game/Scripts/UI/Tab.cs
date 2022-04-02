@@ -31,10 +31,17 @@ public class Tab : MonoBehaviour
         journal.UpdateTabs();
     }
 
-    public void ChangePosition()
+    public void ChangePosition(bool isActive)
     {
         rect.localScale = new Vector3(1, 1, 1);
-        rect.anchoredPosition = new Vector3(-620, originalPos.y, 0);
+
+        if (isActive)
+        {
+            rect.anchoredPosition = new Vector3(-635, originalPos.y, 0);
+            return;
+        }
+
+        rect.anchoredPosition = new Vector3(-655, originalPos.y, 0);
     }
 
     //Reset tab position

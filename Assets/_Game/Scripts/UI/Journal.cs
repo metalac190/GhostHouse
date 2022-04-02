@@ -87,7 +87,8 @@ public class Journal : MonoBehaviour
             }
             else
             {
-                tab.ChangePosition();
+                if (tabPage == activePage) tab.ChangePosition(true);
+                else tab.ChangePosition(false);
             }    
         }
     }
