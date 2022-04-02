@@ -14,6 +14,8 @@ public class Journal : MonoBehaviour
 
     public Button nextBtn, previousBtn;
 
+    int tabIndex = 0;
+
     private void Start()
     {
         tabs[0].associatedPage = 0;
@@ -46,6 +48,8 @@ public class Journal : MonoBehaviour
         ActivatePage(currentIndex - 1);
     }
 
+    
+
     public void ActivatePage(int pageNum)
     {
         if (activePage != null)
@@ -71,15 +75,20 @@ public class Journal : MonoBehaviour
         ActivatePage(pausePage);
     }
 
-    void UpdateTabs()
+    //When UpdateTabs() is called, all tabs should update relative to the what the current ActivePage is
+    public void UpdateTabs()
     {
         foreach (Tab tab in tabs)
         {
             Page tabPage = pages[tab.associatedPage];
             if (activePage.index < tabPage.index)
             {
-                tab.Reset();
+                tab.ResetPosition();
             }
+            else
+            {
+                tab.ChangePosition();
+            }    
         }
     }
 
