@@ -17,6 +17,12 @@ namespace Mechanics.Level_Mechanics
         [SerializeField] private int _cost = 0;
         [SerializeField] private bool _canInteractMultipleTimes = false;
 
+        [Header("Ending Points")]
+        [SerializeField] private int _sisterEndingPoints = 0;
+        [SerializeField] private int _cousinEndingPoints = 0;
+        [SerializeField] private int _trueEndingPoints = 0;
+
+
         [Header("Other Settings")]
         [SerializeField] private SfxReference _sfxOnInteract = new SfxReference();
 
@@ -72,6 +78,10 @@ namespace Mechanics.Level_Mechanics
 
             _sfxOnInteract.Play();
             DataManager.Instance.SetInteraction(name, true);
+
+            DataManager.Instance.trueEndingPoints += _trueEndingPoints;
+            DataManager.Instance.cousinsEndingPoints += _cousinEndingPoints;
+            DataManager.Instance.sistersEndingPoints += _sisterEndingPoints;
 
             if (!string.IsNullOrEmpty(_dialogeYarnNode)) {
                 DialogueRunner.StartDialogue(_dialogeYarnNode);
