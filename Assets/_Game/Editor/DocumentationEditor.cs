@@ -1,6 +1,6 @@
 ﻿#if UNITY_EDITOR
 using System.Text.RegularExpressions;
-using Boo.Lang;
+using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
 using Utility;

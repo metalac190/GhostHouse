@@ -43,6 +43,9 @@ namespace Mechanics.Level_Mechanics
         //[SerializeField] private Collider _specificCollider = null;
         //private Collider colliderToUse = null;
 
+        public Interactable Interaction => _interaction;
+        public Interactable AltInteraction => _alternateInteraction;
+
         private List<MeshRenderer> _meshRenderers;
         private List<Material> _baseMaterial;
 

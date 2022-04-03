@@ -1,12 +1,29 @@
 # Data Manager
 
-The Data Manager is meant to be central storage for all data that needs to be persisted during and between game sessions. To reference the DataManager in any script, use DataManager.Instance to reference the class. The contents are hidden in the inspector, but the current data can be printed to the console using the DumpData() function, and the current contents of the save file can be printed to the console using DumpFileContents().
+The Data Manager is meant to be central storage for all data that needs to be persisted during and between game sessions.
+
+To reference the DataManager in any script, use DataManager.Instance to reference the class.
+The contents are hidden in the inspector, but the current data can be printed to the console using the DumpData() function,
+and the current contents of the save file can be printed to the console using DumpFileContents().
 
 The current data being stored is:
     - The current level
     - The remaining spirit points
+    - The number of points accumulated towards each ending
     - A dictionary of names and states of each interactable
     - An array representing which journal entries have been unlocked
     - Player settings
+
+Default settings for a fresh game save should be set in the SetDefaultValues() function, which is called on New Game start.
+
+To load the game, the LoadFile() function is called, which will read the data from the current save file and use those values to set up the game.
+
+The game is saved using the WriteFile() function which is called at the end of each season.
+
+The state of an interaction can be obtained using GetInteraction(name).
+
+To unlock a journal entry, call UnlockJournalEntry(index).
+
+To set the settings, call SaveControlSettings(), SaveAudioSettings(), and SaveVisualSettings() from their respective menus.
 
 For any help understanding how it works, reach out to Basil.
