@@ -10,21 +10,21 @@ namespace Mechanics.Level_Mechanics
     [CreateAssetMenu(fileName = "NewInteractable", menuName = "Interactions/Interactable")]
     public class Interactable : ScriptableObject
     {
-        //public variables that designers can edit
-        [Header("Interactable Name")]
-        [SerializeField] private string _interactableName = "Default Name";
         [SerializeField, TextArea] private string _interactableDescription = "Default Description";
 
         [Header("Interactable Settings")]
         [SerializeField] private string _dialogeYarnNode = "";
-        [SerializeField] private int _cost;
+        [SerializeField] private int _cost = 0;
         [SerializeField] private bool _canInteractMultipleTimes = false;
 
         [Header("Other Settings")]
         [SerializeField] private SfxReference _sfxOnInteract = new SfxReference();
-        [SerializeField, ReadOnly] public bool _interacted = false;
 
-        public string InteractableInfo => _interactableName + ": " + _interactableDescription;
+        [Header("Dialogue Settings")]
+        [SerializeField] private bool _useRandomDialogue = false;
+        [SerializeField] private List<string> _randomDialoguePool = null;
+
+        public int Cost => _cost;
 
         static DialogueRunner _dialogueRunner;
         static DialogueRunner DialogueRunner {
@@ -37,7 +37,8 @@ namespace Mechanics.Level_Mechanics
         }
 
 
-        public bool CanInteract => !_interacted || _canInteractMultipleTimes;
+        public bool Interacted => DataManager.Instance.GetInteraction(name);
+        public bool CanInteract => !Interacted || _canInteractMultipleTimes;
 
         private List<InteractableResponseBase> _interactableResponses = new List<InteractableResponseBase>();
 
@@ -59,23 +60,22 @@ namespace Mechanics.Level_Mechanics
             //cause any errors.
 
 
-            if (!string.IsNullOrEmpty(_dialogeYarnNode)) {
-                DialogueRunner.StartDialogue(_dialogeYarnNode);
-            }
             for (int i = _interactableResponses.Count - 1; i >= 0; i--) {
                 _interactableResponses[i].Invoke();
             }
+
+            if (_cost > 0) {
+                // TODO: Apply Spirit Point Cost
+                DataManager.Instance.remainingSpiritPoints -= _cost;
+                ModalWindowController.Singleton.PlaySpiritPointSpentSounds(DataManager.Instance.remainingSpiritPoints <= 0);
+            }
+
             _sfxOnInteract.Play();
-            _interacted = true;
-            SaveInteraction();
-        }
+            DataManager.Instance.SetInteraction(name, true);
 
-        public void SaveInteraction() {
-            DataManager.Instance.SetInteraction(_interactableName, _interacted);
-        }
-
-        public void LoadInteraction() {
-            _interacted = DataManager.Instance.GetInteraction(_interactableName);
+            if (!string.IsNullOrEmpty(_dialogeYarnNode)) {
+                DialogueRunner.StartDialogue(_dialogeYarnNode);
+            }
         }
     }
 }

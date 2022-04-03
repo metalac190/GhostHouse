@@ -11,9 +11,6 @@ namespace Mechanics.Level_Mechanics
 {
     public class StoryInteractable : InteractableBase
     {
-        [Header("Seasons when Interactable")]
-        [SerializeField] private Season _interactableSeasons = Season.Universal;
-
         [Header("On Hover")]
         [SerializeField] private bool _textOnHover = false;
         [SerializeField] private bool _hoverTextUseObjectName = false;
@@ -34,15 +31,11 @@ namespace Mechanics.Level_Mechanics
 
         [Header("Interaction Window")]
         [SerializeField] private bool _popupWindowOnClick = false;
-        [SerializeField, TextArea] private string _displayText = "";
-        [SerializeField] private Sprite _imageToDisplay = null;
-        [SerializeField] private bool _cancelButton = true;
-
-        [Header("Interactions")]
         [SerializeField] private Interactable _interaction = null;
         [SerializeField] private string _interactionText = "Interact";
         [SerializeField] private Interactable _alternateInteraction = null;
         [SerializeField] private string _alternateInteractionText = "Alt Interact";
+        [SerializeField] private string _closeMenuText = "Close";
 
         //[Header("Collision Information")]
         //[SerializeField] private bool _confirmUseChildCollider = false;
@@ -50,12 +43,13 @@ namespace Mechanics.Level_Mechanics
         //[SerializeField] private Collider _specificCollider = null;
         //private Collider colliderToUse = null;
 
+        public Interactable Interaction => _interaction;
+        public Interactable AltInteraction => _alternateInteraction;
+
         private List<MeshRenderer> _meshRenderers;
         private List<Material> _baseMaterial;
 
         private bool _missingHoverUi;
-
-        
 
 
         #region Unity Functions
@@ -65,9 +59,14 @@ namespace Mechanics.Level_Mechanics
                 _missingHoverUi = true;
                 Debug.LogWarning("Missing Text Hover Controller in Scene!");
             }
-            if (_interaction != null) _interaction.LoadInteraction();
-            if (_alternateInteraction != null) _alternateInteraction.LoadInteraction();
-           
+            if (_interaction != null) {
+                DataManager.Instance.SetDefaultInteraction(_interaction.name);
+                //Debug.Log(_interaction.name + ": " + _interaction.CanInteract);
+            }
+            if (_alternateInteraction != null) {
+                DataManager.Instance.SetDefaultInteraction(_alternateInteraction.name);
+                //Debug.Log(_alternateInteraction.name + ": " + _alternateInteraction.CanInteract);
+            }
         }
 
         #endregion
@@ -114,18 +113,26 @@ namespace Mechanics.Level_Mechanics
         #region On Click
 
         public override void OnLeftClick(Vector3 mousePosition) {
-           
-            Debug.Log("Clicked on " + gameObject.name + "! Interactable During " + _interactableSeasons);
+            if (_interaction == null && _alternateInteraction == null) { return; }
+            
             if (_sfxOnClick) {
                 SoundManager.Instance.PlaySfx(_sfx, mousePosition);
             }
-            if (_popupWindowOnClick && !(IsometricCameraController.Singleton._interacting)) {
-                ModalWindowController.Singleton.EnableModalWindow(_displayText, _imageToDisplay,
-                    _cancelButton, _interaction, _interactionText,
-                    _alternateInteraction, _alternateInteractionText);
+            if (_popupWindowOnClick && !(IsometricCameraController.Singleton._dragging)) {
+                Action callback = _interaction != null && _interaction.CanInteract ? (Action)Interact : null;
+                Action altCallback = (_alternateInteraction != null && _alternateInteraction.CanInteract) ? (Action)AltInteract : null;
+                int points = _interaction != null ? _interaction.Cost : 0;
+                int altPoints = _alternateInteraction != null ? _alternateInteraction.Cost : 0;
+
+                ModalWindowController.Singleton.EnableModalWindow(_closeMenuText, callback, _interactionText, altCallback, _alternateInteractionText, points, altPoints);
             }
-            if (_moveOnClick)
-            {
+            else if (!_popupWindowOnClick && _interaction != null) {
+                if (_interaction.Cost <= DataManager.Instance.remainingSpiritPoints)
+                {
+                    _interaction.Interact();
+                }
+            }
+            if (_moveOnClick) {
                 IsometricCameraController.Singleton.MoveToPosition(mousePosition, _cameraMovementTime);
             }
 
@@ -133,7 +140,14 @@ namespace Mechanics.Level_Mechanics
             //{
             //    StartCoroutine(IsometricCameraController.Singleton.MoveToPosition(transform.position, _cameraMovementTime));
             //}
+        }
 
+        public void Interact() {
+            _interaction.Interact();
+        }
+
+        public void AltInteract() {
+            _alternateInteraction.Interact();
         }
 
         #endregion
