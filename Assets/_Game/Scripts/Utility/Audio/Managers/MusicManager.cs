@@ -63,7 +63,6 @@ namespace Utility.Audio.Managers
         }
 
         public void SetPaused(bool paused) {
-            Debug.Log(paused);
             if (_paused == paused) return;
             _paused = paused;
             if (_pausedRoutine != null) {
@@ -97,8 +96,12 @@ namespace Utility.Audio.Managers
         }
 
         private void SetMusicVolume() {
-            _currentController.SetCustomVolume(1 - _pausedStatus);
-            _currentPauseController.SetCustomVolume(_pausedStatus);
+            if (_currentController != null) {
+                _currentController.SetCustomVolume(1 - _pausedStatus);
+            }
+            if (_currentPauseController != null) {
+                _currentPauseController.SetCustomVolume(_pausedStatus);
+            }
         }
 
         public void NextTrack() {

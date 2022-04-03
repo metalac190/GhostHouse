@@ -69,6 +69,12 @@ namespace UI
             _lamp.sprite = points + aboutToSpend > 0 ? _lampOn : _lampOff;
         }
 
+        public void AddJournalNotification() {
+        }
+
+        public void ClearJournalNotification() {
+        }
+
         public void OpenJournal() {
             PauseMenu.Singleton.PauseGame();
         }
