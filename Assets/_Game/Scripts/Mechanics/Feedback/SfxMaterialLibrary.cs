@@ -3,8 +3,8 @@ using Utility.Audio.Helper;
 
 namespace Mechanics.Feedback
 {
-    [CreateAssetMenu(menuName = "Sound System/Sfx Collection")]
-    public class SfxCollection : ScriptableObject
+    [CreateAssetMenu(menuName = "Sound System/Libraries/Sfx Material Library")]
+    public class SfxMaterialLibrary : ScriptableObject
     {
         [SerializeField] private SfxReference _defaultSfx = new SfxReference();
         [SerializeField] private SfxReference _woodSfx = new SfxReference();
