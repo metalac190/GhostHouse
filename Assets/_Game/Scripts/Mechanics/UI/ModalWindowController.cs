@@ -62,6 +62,11 @@ public class ModalWindowController : MonoBehaviour
         }
     }
 
+    public void HideHudOnPause(bool pause) {
+        if (_playerHud == null) return;
+        _playerHud.gameObject.SetActive(!pause);
+    }
+
     public void EnableModalWindow(string closeButtonText, Action callback, string interactButtonText, Action altCallback, string altInteractButtonText, int pointsToSpend, int altPointsToSpend) {
         int maxPointsToSpend = 0;
         int currentPoints = DataManager.Instance.remainingSpiritPoints;

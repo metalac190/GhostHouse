@@ -48,6 +48,7 @@ public class PauseMenu : MonoBehaviour
 
     private void UpdatePaused()
     {
+        ModalWindowController.Singleton.HideHudOnPause(isPaused);
         SoundManager.MusicManager.SetPaused(isPaused);
         if (pauseMenu != null)
         {
@@ -70,10 +71,13 @@ public class PauseMenu : MonoBehaviour
         UpdatePaused();
     }
 
-    public void PreventPausing(bool canPause)
+    public void PreventPausing(bool updateCanPause)
     {
-        this.canPause = canPause;
-        UpdatePaused();
+        // If no longer able to pause but also currently paused, resume
+        if (!updateCanPause && isPaused) {
+            ResumeGame();
+        }
+        canPause = updateCanPause;
     }
 
     public void SetActivePage(GameObject page)
