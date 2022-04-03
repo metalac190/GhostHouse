@@ -17,6 +17,13 @@ namespace Utility.Audio.Helper
         public SfxReference() {
             UseConstant = false;
             Clip = null;
+            Base = null;
+        }
+
+        public SfxReference(bool sfxBase) {
+            UseConstant = !sfxBase;
+            Clip = null;
+            Base = null;
         }
 
         // Play the clip

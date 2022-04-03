@@ -63,6 +63,7 @@ namespace Mechanics.Level_Mechanics
             if (_cost > 0) {
                 // TODO: Apply Spirit Point Cost
                 DataManager.Instance.remainingSpiritPoints -= _cost;
+                ModalWindowController.Singleton.PlaySpiritPointSpentSounds(DataManager.Instance.remainingSpiritPoints <= 0);
             }
 
             _sfxOnInteract.Play();

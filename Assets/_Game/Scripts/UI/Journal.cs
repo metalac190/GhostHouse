@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using Mechanics.Feedback;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -13,6 +14,11 @@ public class Journal : MonoBehaviour
     Page activePage, pausePage, lastPage;
 
     public Button nextBtn, previousBtn;
+
+    [SerializeField] private SfxUiLibrary _sfxUiLibrary = null;
+    public SfxUiLibrary SfxUiLibrary => _sfxUiLibrary;
+
+    int tabIndex = 0;
 
     private void Start()
     {
@@ -37,32 +43,36 @@ public class Journal : MonoBehaviour
     public void NextPage()
     {
         int currentIndex = activePage.index;
+        if (_sfxUiLibrary != null) _sfxUiLibrary.OnSwitchPageRight();
         ActivatePage(currentIndex + 1);
     }
 
     public void PreviousPage()
     {
         int currentIndex = activePage.index;
+        if (_sfxUiLibrary != null) _sfxUiLibrary.OnSwitchPageLeft();
         ActivatePage(currentIndex - 1);
     }
+
+    
 
     public void ActivatePage(int pageNum)
     {
         if (activePage != null)
-            activePage.gameObject.GetComponent<Renderer>().enabled = false;
+            activePage.gameObject.SetActive(false);
 
         activePage = pages[pageNum];
-        activePage.gameObject.GetComponent<Renderer>().enabled = true;
+        activePage.gameObject.SetActive(true);
         UpdateTabs();
     }
 
     public void ActivatePage(Page page)
     {
         if (activePage != null)
-            activePage.gameObject.GetComponent<Renderer>().enabled = false;
+            activePage.gameObject.SetActive(false);
 
         activePage = page;
-        activePage.gameObject.GetComponent<Renderer>().enabled = true;
+        activePage.gameObject.SetActive(true);
         UpdateTabs();
     }
 
@@ -71,15 +81,21 @@ public class Journal : MonoBehaviour
         ActivatePage(pausePage);
     }
 
-    void UpdateTabs()
+    //When UpdateTabs() is called, all tabs should update relative to the what the current ActivePage is
+    public void UpdateTabs()
     {
         foreach (Tab tab in tabs)
         {
             Page tabPage = pages[tab.associatedPage];
             if (activePage.index < tabPage.index)
             {
-                tab.Reset();
+                tab.ResetPosition();
             }
+            else
+            {
+                if (tabPage == activePage) tab.ChangePosition(true);
+                else tab.ChangePosition(false);
+            }    
         }
     }
 

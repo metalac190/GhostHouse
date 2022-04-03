@@ -16,23 +16,20 @@ namespace UI
         [SerializeField] private List<Image> _spiritPoints = new List<Image>();
         [SerializeField] private Sprite _spiritPointBright = null;
         [SerializeField] private Sprite _spiritPointDull = null;
-        [SerializeField] private IntegerVariable _startingSP;
-        [SerializeField] private IntegerVariable _currentSP;
+        [SerializeField] private IntegerVariable _startingSP = null;
+        [SerializeField] private IntegerVariable _currentSP = null;
 
         private int _maxPoints;
+
+        private int SpiritPointsStart => _startingSP != null ? _startingSP.value : DataManager.Instance.remainingSpiritPoints;
+        private int SpiritPointsCurrent => _currentSP != null ? _startingSP.value : DataManager.Instance.remainingSpiritPoints;
 
         private void Awake() {
             _spiritPoints = _spiritPoints.Where(image => image != null).ToList();
         }
 
         private void Start() {
-            if (_startingSP != null)
-            {
-                SetMaxSpiritPoints(_startingSP.value);
-            }
-            else {
-                SetMaxSpiritPoints(DataManager.Instance.remainingSpiritPoints);
-            }
+            SetMaxSpiritPoints(SpiritPointsStart);
         }
 
         // Call this on Start() to setup spirit points
@@ -50,14 +47,7 @@ namespace UI
         }
 
         public void UpdateSpiritPoints(int aboutToSpend = 0) {
-            if (_currentSP != null)
-            {
-                SetSpiritPoints(_currentSP.value, aboutToSpend);
-            }
-            else
-            {
-                SetSpiritPoints(DataManager.Instance.remainingSpiritPoints, aboutToSpend);
-            }
+            SetSpiritPoints(SpiritPointsCurrent, aboutToSpend);
         }
 
         // Call this each time the number of spirit points changes
@@ -77,6 +67,12 @@ namespace UI
                 }
             }
             _lamp.sprite = points + aboutToSpend > 0 ? _lampOn : _lampOff;
+        }
+
+        public void AddJournalNotification() {
+        }
+
+        public void ClearJournalNotification() {
         }
 
         public void OpenJournal() {
