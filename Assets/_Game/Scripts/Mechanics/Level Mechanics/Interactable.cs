@@ -83,9 +83,23 @@ namespace Mechanics.Level_Mechanics
             DataManager.Instance.cousinsEndingPoints += _cousinEndingPoints;
             DataManager.Instance.sistersEndingPoints += _sisterEndingPoints;
 
-            if (!string.IsNullOrEmpty(_dialogeYarnNode)) {
+            if (!string.IsNullOrEmpty(_dialogeYarnNode))
+            {
                 DialogueRunner.StartDialogue(_dialogeYarnNode);
             }
+            else if (_useRandomDialogue)
+            {
+                if (_randomDialoguePool.Count == 0)
+                {
+                    Debug.LogWarning("The Random Dialogue Pool has no dialogues in it...");
+                }
+                else
+                {
+                    DialogueRunner.StartDialogue(_randomDialoguePool[Random.Range(0, _randomDialoguePool.Count)]);
+                }
+
+            }
+
         }
     }
 }
