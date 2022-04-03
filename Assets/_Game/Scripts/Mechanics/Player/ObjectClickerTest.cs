@@ -67,6 +67,11 @@ namespace Mechanics.Player
         private void OnHover(RaycastHit hit) {
             IInteractable interactable = hit.transform.GetComponent<IInteractable>();
 
+            if (interactable == null)
+            {
+                interactable = hit.transform.GetComponentInParent<IInteractable>();
+            }
+
             // If a new object is hovered, reset hover to the new object
             if (interactable != _previousInteractable) {
                 ResetHover(interactable);
@@ -91,11 +96,11 @@ namespace Mechanics.Player
             if (interactable != null) {
                 if (left) {
                     interactable.OnLeftClick();
-                    interactable.OnLeftClick(hit.point);
+                    interactable.OnLeftClick(hit.transform.position);
                 }
                 else {
                     interactable.OnRightClick();
-                    interactable.OnRightClick(hit.point);
+                    interactable.OnRightClick(hit.transform.position);
                 }
             }
             else if (interactable == null) {

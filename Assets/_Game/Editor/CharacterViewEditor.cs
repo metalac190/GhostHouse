@@ -1,22 +1,25 @@
 #if UNITY_EDITOR
 using UnityEngine;
 using UnityEditor;
-using Game.Dialog;
+using Mechanics.Dialog;
 
-namespace Game.Dialog
+namespace _Game.Editor
 {
     /// <summary>
     /// A recycled LineViewEditor.cs from YarnSpinner 2.0.2 for CharcterView.cs
     /// </summary>
     [CustomEditor(typeof(CharacterView))]
-    public class CharacterViewEditor : Editor
+    public class CharacterViewEditor : UnityEditor.Editor
     {
         SerializedProperty useFadeEffectProperty;
         SerializedProperty fadeInTimeProperty;
         SerializedProperty fadeOutTimeProperty;
+        SerializedProperty inBufferTimeProperty;
 
         SerializedProperty useTypewriterEffectProperty;
         SerializedProperty typewriterEffectSpeedProperty;
+
+        SerializedProperty continueKeyCodeProperty;
 
         SerializedProperty lineTextProperty;
         SerializedProperty characterNameTextProperty;
@@ -25,18 +28,19 @@ namespace Game.Dialog
         SerializedProperty characterNameInLineProperty;
         SerializedProperty continueButtonProperty;
         SerializedProperty uiParentProperty;
-
-        SerializedProperty continueActionTypeProperty;
-        SerializedProperty continueActionKeyCodeProperty;
+        SerializedProperty progressbarProperty;
 
         public void OnEnable()
         {
             useFadeEffectProperty = serializedObject.FindProperty("_useFadeEffect");
             fadeInTimeProperty = serializedObject.FindProperty("_fadeInTime");
             fadeOutTimeProperty = serializedObject.FindProperty("_fadeOutTime");
+            inBufferTimeProperty = serializedObject.FindProperty("_inBufferTime");
 
             useTypewriterEffectProperty = serializedObject.FindProperty("_useTypewriterEffect");
             typewriterEffectSpeedProperty = serializedObject.FindProperty("_typewriterEffectSpeed");
+
+            continueKeyCodeProperty = serializedObject.FindProperty("_continueKeyCode");
 
             lineTextProperty = serializedObject.FindProperty("_lineText");
             characterPortraitImageProperty = serializedObject.FindProperty("_characterPortraitImage");
@@ -45,13 +49,13 @@ namespace Game.Dialog
             characterNameInLineProperty = serializedObject.FindProperty("_characterNameInLine");
             continueButtonProperty = serializedObject.FindProperty("_continueButton");
             uiParentProperty = serializedObject.FindProperty("_uiParent");
-
-            continueActionTypeProperty = serializedObject.FindProperty("_continueActionType");
-            continueActionKeyCodeProperty = serializedObject.FindProperty("_continueActionKeyCode");
+            progressbarProperty = serializedObject.FindProperty("_progressbar");
         }
 
         public override void OnInspectorGUI()
         {
+            EditorGUILayout.PropertyField(inBufferTimeProperty);
+
             // fade effect
             EditorGUILayout.PropertyField(useFadeEffectProperty);
             if (useFadeEffectProperty.boolValue)
@@ -70,6 +74,9 @@ namespace Game.Dialog
                 EditorGUILayout.PropertyField(typewriterEffectSpeedProperty);
                 EditorGUI.indentLevel -= 1;
             }
+
+            // continue mode
+            EditorGUILayout.PropertyField(continueKeyCodeProperty);
 
             // UI references
             EditorGUILayout.PropertyField(lineTextProperty);
@@ -90,13 +97,7 @@ namespace Game.Dialog
 
             EditorGUILayout.PropertyField(continueButtonProperty);
             EditorGUILayout.PropertyField(uiParentProperty);
-
-            // continue mode
-            EditorGUILayout.PropertyField(continueActionTypeProperty);
-            if (continueActionTypeProperty.enumValueIndex != 0)
-            {
-                EditorGUILayout.PropertyField(continueActionKeyCodeProperty);
-            }
+            EditorGUILayout.PropertyField(progressbarProperty);
 
             serializedObject.ApplyModifiedProperties();
         }

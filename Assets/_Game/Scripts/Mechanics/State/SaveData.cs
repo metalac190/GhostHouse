@@ -4,33 +4,36 @@ using UnityEngine;
 
 public class SaveData
 {
-    public int level; // Store level season as int
-    public int remainingSpiritPoints; // Store spirit points remaining from last save
+    public string level; // Store level season
+
+    // Store the points towards the various endings
+    public int cousinsEndingPoints;
+    public int sistersEndingPoints;
+    public int trueEndingPoints;
 
     // Array of interactions to save
     public string[] interactionNames;
     public bool[] interactionStates;
 
-    // Serializable Dialogue struct to keep track of dialogue progress
-    /*[System.Serializable]
-    public struct Dialogue
-    {
-
-    }
-    // Array of dialogue progress to save
-    public Dialogue[] dialogues;*/
-
     // Serializable Settings struct
     [System.Serializable]
     public struct Settings
     {
-        public float sensitivity;
-        public float musicVolume;
-        public float sfxVolume;
-        public float dialogueVolume;
-        public float ambienceVolume;
-        public float brightness;
-        public int windowMode;
+        public bool leftClickInteract;
+        public bool cameraWASD;
+        public bool cameraArrowKeys;
+        public bool clickDrag;
+        public int sensitivity;
+        public int musicVolume;
+        public int sfxVolume;
+        public int dialogueVolume;
+        public int ambienceVolume;
+        public bool windowMode;
+        public int contrast;
+        public int brightness;
+        public bool largeGUIFont;
+        public bool largeTextFont;
+        public int textFont;
     }
     public Settings settings;
 
@@ -40,8 +43,8 @@ public class SaveData
     // Constructor to initialize arrays
     public SaveData()
     {
-        interactionNames = new string[50];
-        interactionStates = new bool[50];
-        journalUnlocks = new bool[50];
+        interactionNames = new string[48];
+        interactionStates = new bool[48];
+        journalUnlocks = new bool[24];
     }
 }

@@ -4,18 +4,36 @@ using UnityEngine;
 
 public class PlayerScript : MonoBehaviour
 {
-    //Variables
-    string _playerName = "testName";
+    [SerializeField] public int _startingSpiritPoints;
+    [SerializeField] public int _currentSpiritPoints;
 
-    //Accessor "Getter" Methods
-    public string GetPlayerName()
+    private void Awake()
     {
-        return _playerName;
+        _currentSpiritPoints = 3;
     }
 
-    //Mutator "Setter" Methods
-    public void SetPlayerName(string _newName)
+    public int GetCurrentSpiritPoints()
     {
-        _newName = _playerName;
+        return _currentSpiritPoints;
     }
+    public int GetStartingSpiritPoints()
+    {
+        return _startingSpiritPoints;
+    }
+
+    public void AddSpiritPoints(int num)
+    {
+        _currentSpiritPoints += num;
+    }
+    public void SubtractSpiritPoints(int num)
+    {
+        _currentSpiritPoints -= num;
+    }
+    public void SetSpiritPoints(int num)
+    {
+        _currentSpiritPoints = num;
+    }
+
+    
+
 }
