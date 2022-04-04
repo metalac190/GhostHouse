@@ -68,20 +68,20 @@ public class SquashStretchAnimation : MonoBehaviour
         AnimatorStateMachine rootSm = _controller.layers[0].stateMachine;
         ChildAnimatorState[] states = rootSm.states;
 
-        var idle = CreateIdleAnimation();
+        //var idle = CreateIdleAnimation();
         var interaction = CreateAnimation();
 
-        SaveAnimation(idle);
+        //SaveAnimation(idle);
         SaveAnimation(interaction);
 
         _idleState = rootSm.defaultState;
-        _idleState.motion = idle;
+        //_idleState.motion = idle;
 
         _interactionState = states[1].state;
         _interactionState.motion = interaction;
 
         _postInteractionState = states[2].state;
-        _postInteractionState.motion = idle;
+        //_postInteractionState.motion = idle;
 
         _controller.layers[0].stateMachine = rootSm;
 
