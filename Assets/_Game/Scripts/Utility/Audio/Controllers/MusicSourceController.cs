@@ -10,29 +10,20 @@ namespace Utility.Audio.Controllers
     {
         private MusicTrack _current;
         private bool _routineActive;
-        private float _timeToStop;
-        private bool _active;
-
-        private void Update() {
-            if (_active && Time.time >= _timeToStop) {
-                SoundManager.MusicManager.NextTrack();
-                _active = false;
-            }
-        }
 
         public void ResetSource() {
             Source.outputAudioMixerGroup = SoundManager.MusicGroup;
         }
 
-        public void PlayMusic(MusicTrack track) {
-            _timeToStop = Time.time + track.TrackLength - Mathf.Max(track.FadeOutTime, track.CrossFadeInOverlap);
+        public float PlayMusic(MusicTrack track, float delay) {
             _current = track;
-            _active = true;
             SetSourceProperties(track.GetSourceProperties());
-            StartCoroutine(FadeRoutine(track.FadeInTime, true));
+            StartCoroutine(FadeRoutine(track.FadeInTime, true, delay));
             Play();
+            return Time.time + track.TrackLength - track.FadeOutTime;
         }
 
+        /*
         public void PlayMusic(MusicTrack track, float time) {
             if (time < 0 || time >= track.TrackLength) return;
             _current = track;
@@ -47,24 +38,26 @@ namespace Utility.Audio.Controllers
                 _active = false;
             }
             else {
-                _timeToStop = Time.time + track.TrackLength - time - Mathf.Max(track.FadeOutTime, track.CrossFadeInOverlap);
+                _timeToStop = Time.time + track.TrackLength - time - Mathf.Max(track.FadeOutTime, track.DelayNextSong);
             }
             Play();
         }
+        */
 
         public void StopMusic() {
-            _active = false;
             StartCoroutine(FadeRoutine(_current.FadeOutTime, false));
         }
 
-        private IEnumerator FadeRoutine(float timer, bool fadeIn, float startTime = 0) {
+        private IEnumerator FadeRoutine(float fadeLength, bool fadeIn, float delay = 0, float startTime = 0) {
             if (_routineActive) {
                 yield return null;
             }
+            for (float t = 0; t < delay; t += Time.deltaTime) {
+                yield return null;
+            }
             _routineActive = true;
-            for (float t = startTime; t < timer; t += Time.time) {
-                float delta = t / timer;
-                Debug.Log(fadeIn + " " + delta);
+            for (float t = startTime; t < fadeLength; t += Time.time) {
+                float delta = t / fadeLength;
                 SetCustomVolume(_current.Evaluate(delta, fadeIn));
                 yield return null;
             }

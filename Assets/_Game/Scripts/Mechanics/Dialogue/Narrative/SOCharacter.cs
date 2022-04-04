@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Game.Dialog
+namespace Mechanics.Dialog
 {
     [CreateAssetMenu(menuName = "Narrative/Character")]
     public class SOCharacter : ScriptableObject
@@ -62,7 +62,7 @@ namespace Game.Dialog
 
                 default:
                     Debug.LogWarning($"Unable to find CharacterEmotion for {str}");
-                    return CharacterEmotion.Idle;
+                    return CharacterEmotion.Sad;
             }
         }
     }

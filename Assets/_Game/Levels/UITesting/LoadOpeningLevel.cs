@@ -7,11 +7,13 @@ public class LoadOpeningLevel : MonoBehaviour
 {
     public void LoadSandbox()
     {
+        DataManager.Instance.ResetData();
         SceneManager.LoadScene("Sandbox");
     }
 
     public void LoadSpring()
     {
+        DataManager.Instance.ResetData();
         SceneManager.LoadScene("Spring");
     }
 }

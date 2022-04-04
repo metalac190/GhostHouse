@@ -207,7 +207,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4bec29c0a230741bdac901dba8da47ee, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  yarnProject: {fileID: 7545569452688597077, guid: 5a5937e80bda3b54393e20dd56bffe5f,
+  yarnProject: {fileID: 7545569452688597077, guid: c4ed98f73c738c945977d30ec425ba19,
     type: 3}
   _variableStorage: {fileID: 2298808189291819633}
   dialogueViews:
@@ -221,13 +221,35 @@ MonoBehaviour:
   verboseLogging: 0
   onNodeStart:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 11400000, guid: baeda7ea57cbc2540a83a61afaaa0f42, type: 2}
+        m_MethodName: OnDialogueWindowAppears
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   onNodeComplete:
     m_PersistentCalls:
       m_Calls: []
   onDialogueComplete:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 11400000, guid: baeda7ea57cbc2540a83a61afaaa0f42, type: 2}
+        m_MethodName: OnDialogueWindowCloses
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   onCommand:
     m_PersistentCalls:
       m_Calls: []
@@ -392,7 +414,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _secondaryChance: 0.6
-  _characterAudioPool: {fileID: 11400000, guid: 87dc281da5205154b82d49fd68954d5f,
+  _characterAudioPool: {fileID: 11400000, guid: c2243cf9098257e48ae420f46d648e7c,
     type: 2}
   _characterView: {fileID: 2298808187949489255}
 --- !u!114 &6618375278194351321
@@ -604,12 +626,12 @@ PrefabInstance:
     - target: {fileID: 1792924761693572205, guid: 098ee75f0025e7c4a9675ff2be458a88,
         type: 3}
       propertyPath: m_SizeDelta.x
-      value: -400
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1792924761693572205, guid: 098ee75f0025e7c4a9675ff2be458a88,
         type: 3}
       propertyPath: m_SizeDelta.y
-      value: 250
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1792924761693572205, guid: 098ee75f0025e7c4a9675ff2be458a88,
         type: 3}
@@ -629,7 +651,7 @@ PrefabInstance:
     - target: {fileID: 1792924761693572205, guid: 098ee75f0025e7c4a9675ff2be458a88,
         type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1792924761693572205, guid: 098ee75f0025e7c4a9675ff2be458a88,
         type: 3}
@@ -639,7 +661,17 @@ PrefabInstance:
     - target: {fileID: 1792924761693572205, guid: 098ee75f0025e7c4a9675ff2be458a88,
         type: 3}
       propertyPath: m_Pivot.y
-      value: 0
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 1792924762395430257, guid: 098ee75f0025e7c4a9675ff2be458a88,
+        type: 3}
+      propertyPath: m_firstOverflowCharacterIndex
+      value: -1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1792924762395430257, guid: 098ee75f0025e7c4a9675ff2be458a88,
+        type: 3}
+      propertyPath: m_textInfo.lineCount
+      value: 2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 098ee75f0025e7c4a9675ff2be458a88, type: 3}

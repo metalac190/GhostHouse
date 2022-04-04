@@ -2,9 +2,43 @@
 
 public class InteractionResponseAnimation : InteractableResponseBase
 {
-    public override void Invoke() {
-        var anim = GetAnimator();
-        anim.SetTrigger("interact");
+    [SerializeField] private Animator _animator;
+
+    private void Awake() {
+        if (_animator == null) {
+            _animator = GetComponent<Animator>();
+        }
+        if (_animator == null) {
+            Debug.LogError("Interaction Response Animation hooked up to object without any Animator!", gameObject);
+        }
+    }
+
+    protected override void OnEnable() {
+        base.OnEnable();
+        if (_interactable != null && _animator != null)
+        {
+            _interactable.ConnectedAnimators.Add(_animator);
+        }
+    }
+
+
+    protected override void OnDisable() {
+        base.OnDisable();
+        if (_interactable != null && _animator != null)
+        {
+            _interactable.ConnectedAnimators.Remove(_animator);
+        }
+    }
+
+    private void OnValidate() {
+        if (_animator == null) {
+            _animator = GetComponent<Animator>();
+        }
+    }
+
+    public override void Invoke()
+    {
+        _animator.SetTrigger("interact");
     }
 
     private Animator GetAnimator()

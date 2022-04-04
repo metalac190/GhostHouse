@@ -853,6 +853,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1604386417766318597}
   - component: {fileID: 1604386417766318598}
+  - component: {fileID: 3268317355485783214}
   m_Layer: 0
   m_Name: PostProcessVolume
   m_TagString: Untagged
@@ -891,6 +892,20 @@ MonoBehaviour:
   blendDistance: 0
   weight: 1
   sharedProfile: {fileID: 11400000, guid: 135e3a6d845c2f1409c52d2c0893117f, type: 2}
+--- !u!114 &3268317355485783214
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1604386417766318596}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6df97cd84b1780a4eac9913411bb2ba0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _exposureBounds: {x: -100, y: 100}
+  _contrastBounds: {x: -100, y: 100}
 --- !u!1 &1604386418141157737
 GameObject:
   m_ObjectHideFlags: 0
@@ -935,7 +950,7 @@ Light:
   m_Type: 1
   m_Shape: 0
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_Intensity: 80000
+  m_Intensity: 10000
   m_Range: 10
   m_SpotAngle: 30
   m_InnerSpotAngle: 21.80208
@@ -1004,7 +1019,7 @@ MonoBehaviour:
   m_PointlightHDType: 0
   m_SpotLightShape: 0
   m_AreaLightShape: 0
-  m_Intensity: 80000
+  m_Intensity: 10000
   m_EnableSpotReflector: 0
   m_LuxAtDistance: 1
   m_InnerSpotPercent: 0

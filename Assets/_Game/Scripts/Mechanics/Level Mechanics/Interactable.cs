@@ -10,21 +10,37 @@ namespace Mechanics.Level_Mechanics
     [CreateAssetMenu(fileName = "NewInteractable", menuName = "Interactions/Interactable")]
     public class Interactable : ScriptableObject
     {
-        //public variables that designers can edit
-        [Header("Interactable Name")]
-        [SerializeField] private string _interactableName = "Default Name";
         [SerializeField, TextArea] private string _interactableDescription = "Default Description";
 
-        [Header("Interactable Settings")]
-        [SerializeField] private string _dialogeYarnNode = "";
-        [SerializeField] private int _cost;
-        [SerializeField] private bool _canInteractMultipleTimes = false;
+        [Header("Interaction Settings")]
+        [SerializeField, Tooltip("Type in the name inside the dialogue yarn file.")]
+        private string _dialogeYarnNode = "";
+        [SerializeField, Tooltip("Click this if you want the interaction to happen multiple times.")]
+        private bool _canInteractMultipleTimes = false;
+        [SerializeField, Tooltip("Click this if you want the interaction to unlock an entry in the Journal.")]
+        private bool _opensJournalUnlock = false;
+        [SerializeField, Tooltip("Click this if you want to use random dialogue per every interaction.")]
+        private bool _useRandomDialogue = false;
+        [SerializeField, Tooltip("Type in the names inside the dialogue yarn files that you want to be used.")]
+        private List<string> _randomDialoguePool = new List<string>();
+
+        [Header("Spirit Points")]
+        [SerializeField, Tooltip("The Spirit Points cost for the interaction")]
+        private int _cost = 0;
+        [SerializeField, Tooltip("Points allocated to the Sister Ending from this interaction")]
+        private int _sisterEndingPoints = 0;
+        [SerializeField, Tooltip("Points allocated to the Cousin Ending from this interaction")]
+        private int _cousinEndingPoints = 0;
+        [SerializeField, Tooltip("Points allocated to the True Ending from this interaction")]
+        private int _trueEndingPoints = 0;
 
         [Header("Other Settings")]
         [SerializeField] private SfxReference _sfxOnInteract = new SfxReference();
-        [SerializeField, ReadOnly] public bool _interacted = false;
 
-        public string InteractableInfo => _interactableName + ": " + _interactableDescription;
+        public List<MeshRenderer> ConnectedMeshRenderers { get; set; }
+        public List<Animator> ConnectedAnimators { get; set; }
+
+        public int Cost => _cost;
 
         static DialogueRunner _dialogueRunner;
         static DialogueRunner DialogueRunner {
@@ -37,7 +53,8 @@ namespace Mechanics.Level_Mechanics
         }
 
 
-        public bool CanInteract => !_interacted || _canInteractMultipleTimes;
+        public bool Interacted => DataManager.Instance.GetInteraction(name);
+        public bool CanInteract => !Interacted || _canInteractMultipleTimes;
 
         private List<InteractableResponseBase> _interactableResponses = new List<InteractableResponseBase>();
 
@@ -59,28 +76,34 @@ namespace Mechanics.Level_Mechanics
             //cause any errors.
 
 
-            if (!string.IsNullOrEmpty(_dialogeYarnNode)) {
-                DialogueRunner.StartDialogue(_dialogeYarnNode);
-            }
             for (int i = _interactableResponses.Count - 1; i >= 0; i--) {
                 _interactableResponses[i].Invoke();
             }
 
             if (_cost > 0) {
                 // TODO: Apply Spirit Point Cost
+                DataManager.Instance.remainingSpiritPoints -= _cost;
+                ModalWindowController.Singleton.PlaySpiritPointSpentSounds(DataManager.Instance.remainingSpiritPoints <= 0);
             }
 
             _sfxOnInteract.Play();
-            _interacted = true;
-            SaveInteraction();
-        }
+            DataManager.Instance.SetInteraction(name, true);
 
-        public void SaveInteraction() {
-            DataManager.Instance.SetInteraction(_interactableName, _interacted);
-        }
+            DataManager.Instance.trueEndingPoints += _trueEndingPoints;
+            DataManager.Instance.cousinsEndingPoints += _cousinEndingPoints;
+            DataManager.Instance.sistersEndingPoints += _sisterEndingPoints;
 
-        public void LoadInteraction() {
-            _interacted = DataManager.Instance.GetInteraction(_interactableName);
+            if (!string.IsNullOrEmpty(_dialogeYarnNode)) {
+                DialogueRunner.StartDialogue(_dialogeYarnNode);
+            }
+            else if (_useRandomDialogue) {
+                if (_randomDialoguePool.Count == 0) {
+                    Debug.LogWarning("The Random Dialogue Pool has no dialogues in it...");
+                }
+                else {
+                    DialogueRunner.StartDialogue(_randomDialoguePool[Random.Range(0, _randomDialoguePool.Count)]);
+                }
+            }
         }
     }
 }

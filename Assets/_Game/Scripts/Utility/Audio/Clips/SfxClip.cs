@@ -9,7 +9,7 @@ namespace Utility.Audio.Clips
     public class SfxClip : SfxBase
     {
         [Header("Audio Clip Settings")]
-        [SerializeField] private SfxReference _clip = null;
+        [SerializeField] private SfxReference _clip = new SfxReference(false);
         [SerializeField] private AudioMixerGroup _mixerGroup = null;
         [SerializeField] private SfxPriorityLevel _priority = SfxDefaults.Priority;
 
