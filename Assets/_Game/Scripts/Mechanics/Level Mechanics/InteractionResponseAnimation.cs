@@ -4,8 +4,7 @@ public class InteractionResponseAnimation : InteractableResponseBase
 {
     [SerializeField] private Animator _animator;
 
-    private void Awake()
-    {
+    private void Awake() {
         if (_animator == null) {
             _animator = GetComponent<Animator>();
         }
@@ -14,17 +13,21 @@ public class InteractionResponseAnimation : InteractableResponseBase
         }
     }
 
-    protected override void OnEnable()
-    {
+    protected override void OnEnable() {
         base.OnEnable();
         if (_interactable != null) _interactable.ConnectedAnimators.Add(_animator);
     }
 
 
-    protected override void OnDisable()
-    {
+    protected override void OnDisable() {
         base.OnDisable();
         if (_interactable != null) _interactable.ConnectedAnimators.Remove(_animator);
+    }
+
+    private void OnValidate() {
+        if (_animator == null) {
+            _animator = GetComponent<Animator>();
+        }
     }
 
     public override void Invoke()
