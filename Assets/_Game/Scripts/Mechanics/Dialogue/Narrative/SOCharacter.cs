@@ -62,7 +62,7 @@ namespace Mechanics.Dialog
 
                 default:
                     Debug.LogWarning($"Unable to find CharacterEmotion for {str}");
-                    return CharacterEmotion.Idle;
+                    return CharacterEmotion.Sad;
             }
         }
     }
