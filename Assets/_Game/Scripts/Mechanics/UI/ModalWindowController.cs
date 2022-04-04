@@ -5,6 +5,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 using System;
+using Mechanics.Feedback;
 using UI;
 
 public class ModalWindowController : MonoBehaviour
@@ -18,6 +19,7 @@ public class ModalWindowController : MonoBehaviour
 
     //Actual Connections to Window
     [SerializeField] private GameObject _modalWindow = null;
+    [SerializeField] private SfxUiLibrary _sfxUiLibrary = null;
     [SerializeField] private Button _mainInteractionButton = null;
     [SerializeField] private TextMeshProUGUI _mainInteractionText = null;
     [SerializeField] private List<Image> _spiritPoints = new List<Image>();
@@ -119,6 +121,7 @@ public class ModalWindowController : MonoBehaviour
         _modalWindow.SetActive(true);
         _enabled = true;
         PauseMenu.Singleton.PreventPausing(false);
+        _sfxUiLibrary.OnInteractionWindowOpen();
     }
 
     public void DisableModalWindow() {
@@ -137,6 +140,26 @@ public class ModalWindowController : MonoBehaviour
         }
         if (IsometricCameraController.Singleton != null) {
             IsometricCameraController.Singleton._interacting = false;
+        }
+    }
+
+    public void AddJournalNotification() {
+        if (_sfxUiLibrary != null) _sfxUiLibrary.OnJournalNotification();
+        if (_playerHud != null) _playerHud.AddJournalNotification();
+    }
+
+    public void HideHudOnPause(bool pause) {
+        if (_playerHud == null) return;
+        if (pause) _playerHud.ClearJournalNotification();
+        _playerHud.gameObject.SetActive(!pause);
+    }
+
+    public void PlaySpiritPointSpentSounds(bool usedAll) {
+        if (usedAll) {
+            _sfxUiLibrary.OnNoSpiritPointsLeft();
+        }
+        else {
+            _sfxUiLibrary.OnSpendSpiritPoint();
         }
     }
 
