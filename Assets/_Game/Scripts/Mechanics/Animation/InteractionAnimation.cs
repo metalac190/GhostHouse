@@ -37,7 +37,7 @@ public class InteractionAnimation : MonoBehaviour
         var controller = (AnimatorController) AssetDatabase.LoadAssetAtPath("Assets/_Game/Entities/Interactables/Temp/Controllers/_AC_" + gameObject.name +
                                       ".controller",typeof(AnimatorController));
 
-        _animator.runtimeAnimatorController = controller;
+        //_animator.runtimeAnimatorController = controller;
     }
 
     private void SaveAnimation(AnimationClip clip)

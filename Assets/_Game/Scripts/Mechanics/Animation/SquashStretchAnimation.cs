@@ -23,6 +23,7 @@ public class SquashStretchAnimation : MonoBehaviour
     private AnimatorState _idleState;
     private AnimatorState _interactionState;
     private AnimatorState _postInteractionState;
+    private AnimatorState _onClickState;
 
     private void Awake()
     {
@@ -33,7 +34,7 @@ public class SquashStretchAnimation : MonoBehaviour
         var controller = (AnimatorController)AssetDatabase.LoadAssetAtPath("Assets/_Game/Entities/Interactables/Temp/Controllers/_AC_" + gameObject.name +
                                       ".controller", typeof(AnimatorController));
 
-        _animator.runtimeAnimatorController = controller;
+        //_animator.runtimeAnimatorController = controller;
     }
 
     private void SaveAnimation(AnimationClip clip)
@@ -63,29 +64,59 @@ public class SquashStretchAnimation : MonoBehaviour
         {
             AssetDatabase.CopyAsset(templatePath, newPath);
         }
+
         _controller = AssetDatabase.LoadAssetAtPath<AnimatorController>(newPath);
 
         AnimatorStateMachine rootSm = _controller.layers[0].stateMachine;
         ChildAnimatorState[] states = rootSm.states;
 
         //var idle = CreateIdleAnimation();
-        var interaction = CreateAnimation();
+        var anim = CreateAnimation();
 
         //SaveAnimation(idle);
-        SaveAnimation(interaction);
+        SaveAnimation(anim);
 
         _idleState = rootSm.defaultState;
         //_idleState.motion = idle;
 
         _interactionState = states[1].state;
-        _interactionState.motion = interaction;
+        //_interactionState.motion = anim;
 
         _postInteractionState = states[2].state;
         //_postInteractionState.motion = idle;
 
+        _onClickState = states[3].state;
+        _onClickState.motion = anim;
+
         _controller.layers[0].stateMachine = rootSm;
 
         AssignController();
+    }
+
+    [Button(Mode = ButtonMode.WhilePlaying)]
+    private void ClearController()
+    {
+        AnimatorStateMachine rootSm = _controller.layers[0].stateMachine;
+        ChildAnimatorState[] states = rootSm.states;
+
+        //var idle = CreateIdleAnimation();
+        var anim = CreateAnimation();
+
+        //SaveAnimation(idle);
+        SaveAnimation(anim);
+
+        _idleState = rootSm.defaultState;
+
+        _interactionState = states[1].state;
+        _interactionState.motion = null;
+
+        _postInteractionState = states[2].state;
+        _postInteractionState.motion = null;
+
+        _onClickState = states[3].state;
+        _onClickState.motion = anim;
+
+        _controller.layers[0].stateMachine = rootSm;
     }
 
     private AnimationClip CreateIdleAnimation()
@@ -110,7 +141,7 @@ public class SquashStretchAnimation : MonoBehaviour
             return null;
         }
 
-        AnimationClip interactionAnimation = new AnimationClip();
+        AnimationClip anim = new AnimationClip();
 
         float startYScale = gameObject.transform.localScale.y;
 
@@ -126,13 +157,13 @@ public class SquashStretchAnimation : MonoBehaviour
         stretchKeys[2] = new Keyframe(1f, startYScale);
         AnimationCurve stretchCurve = new AnimationCurve(stretchKeys);
 
-        interactionAnimation.SetCurve("Art", typeof(Transform), "localScale.y", squashCurve);
+        anim.SetCurve("Art", typeof(Transform), "localScale.y", squashCurve);
 
-        if (_xAxis) interactionAnimation.SetCurve("Art", typeof(Transform), "localScale.x", stretchCurve);
-        if (_zAxis) interactionAnimation.SetCurve("Art", typeof(Transform), "localScale.z", stretchCurve);
+        if (_xAxis) anim.SetCurve("Art", typeof(Transform), "localScale.x", stretchCurve);
+        if (_zAxis) anim.SetCurve("Art", typeof(Transform), "localScale.z", stretchCurve);
 
-        interactionAnimation.name = "SquashAndStretch";
-        return interactionAnimation;
+        anim.name = "SquashAndStretch";
+        return anim;
     }
 
     public void Interact()
