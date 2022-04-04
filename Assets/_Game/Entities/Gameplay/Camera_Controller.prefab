@@ -276,17 +276,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _mainCamera: {fileID: 438029161094277100}
   _rigidbody: {fileID: 438029163017577696}
-  _traditionalMovementEnabled: 1
+  _enableWASDMovement: 1
   _cameraMoveSpeed: 20
   _interacting: 0
-  _clickDragMovementEnabled: 1
+  _enableClickDragMovement: 0
   _panningSpeed: 75
   _exposedField: 10
   _groundLayer:
     serializedVersion: 2
     m_Bits: 1048576
   _clickDragSmooth: 0.8
-  _mouseMotivatedMovementEnabled: 0
+  _dragging: 0
+  _enableMouseBorderMovement: 0
   _mMPanningSpeed: 25
   _panBorderThickness: 10
   _enableSlidingMovement: 0
@@ -325,9 +326,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cf26c3255716c354db8937b58fcb1068, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _startingSpiritPoints: 3
-  _currentSpiritPoints: {fileID: 11400000, guid: f4ec3a5eefab79e449daf30b2211967a,
-    type: 2}
+  _startingSpiritPoints: 0
+  _currentSpiritPoints: 0
 --- !u!1 &4279371442415335564
 GameObject:
   m_ObjectHideFlags: 0

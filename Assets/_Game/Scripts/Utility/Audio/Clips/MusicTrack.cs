@@ -21,17 +21,17 @@ namespace Utility.Audio.Clips
         [SerializeField, Range(0, 1)] private float _volume = 1;
 
         [Header("Fade Settings")]
-        [SerializeField] private float _fadeInTime = 0;
+        [SerializeField] private float _fadeInTime = 1;
         [SerializeField] private AnimationCurve _fadeIn = AnimationCurve.Linear(0, 0, 1, 1);
-        [SerializeField] private float _fadeOutTime = 0;
-        [SerializeField] private float _crossFadeInOverlap = 0;
+        [SerializeField] private float _fadeOutTime = 1;
+        [SerializeField] private float _delayNextSong = 0;
         [SerializeField] private AnimationCurve _fadeOut = AnimationCurve.Linear(0, 1, 1, 0);
 
         public bool TrackIsNull => _track == null;
         public float TrackLength => _track.length;
         public float FadeInTime => _fadeInTime;
         public float FadeOutTime => _fadeOutTime;
-        public float CrossFadeInOverlap => _crossFadeInOverlap;
+        public float DelayNextSong => _delayNextSong;
 
         private void OnValidate() {
             _trackTime = _track != null ? _track.length : 0;

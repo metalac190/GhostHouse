@@ -17,8 +17,18 @@ namespace Mechanics.Level_Mechanics
         [SerializeField] private int _cost = 0;
         [SerializeField] private bool _canInteractMultipleTimes = false;
 
+        [Header("Ending Points")]
+        [SerializeField] private int _sisterEndingPoints = 0;
+        [SerializeField] private int _cousinEndingPoints = 0;
+        [SerializeField] private int _trueEndingPoints = 0;
+
+
         [Header("Other Settings")]
         [SerializeField] private SfxReference _sfxOnInteract = new SfxReference();
+
+        [Header("Dialogue Settings")]
+        [SerializeField] private bool _useRandomDialogue = false;
+        [SerializeField] private List<string> _randomDialoguePool = null;
 
         public int Cost => _cost;
 
@@ -63,14 +73,33 @@ namespace Mechanics.Level_Mechanics
             if (_cost > 0) {
                 // TODO: Apply Spirit Point Cost
                 DataManager.Instance.remainingSpiritPoints -= _cost;
+                ModalWindowController.Singleton.PlaySpiritPointSpentSounds(DataManager.Instance.remainingSpiritPoints <= 0);
             }
 
             _sfxOnInteract.Play();
             DataManager.Instance.SetInteraction(name, true);
 
-            if (!string.IsNullOrEmpty(_dialogeYarnNode)) {
+            DataManager.Instance.trueEndingPoints += _trueEndingPoints;
+            DataManager.Instance.cousinsEndingPoints += _cousinEndingPoints;
+            DataManager.Instance.sistersEndingPoints += _sisterEndingPoints;
+
+            if (!string.IsNullOrEmpty(_dialogeYarnNode))
+            {
                 DialogueRunner.StartDialogue(_dialogeYarnNode);
             }
+            else if (_useRandomDialogue)
+            {
+                if (_randomDialoguePool.Count == 0)
+                {
+                    Debug.LogWarning("The Random Dialogue Pool has no dialogues in it...");
+                }
+                else
+                {
+                    DialogueRunner.StartDialogue(_randomDialoguePool[Random.Range(0, _randomDialoguePool.Count)]);
+                }
+
+            }
+
         }
     }
 }
