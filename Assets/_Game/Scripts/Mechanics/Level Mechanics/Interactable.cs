@@ -12,23 +12,22 @@ namespace Mechanics.Level_Mechanics
     {
         [SerializeField, TextArea] private string _interactableDescription = "Default Description";
 
-        [Header("Interactable Settings")]
-        [SerializeField] private string _dialogeYarnNode = "";
-        [SerializeField] private int _cost = 0;
-        [SerializeField] private bool _canInteractMultipleTimes = false;
+        [Header("Interaction Settings")]
+        [SerializeField, Tooltip("Type in the name inside the dialogue yarn file.")] private string _dialogeYarnNode = "";
+        [SerializeField, Tooltip("Click this if you want the interaction to happen multiple times.")] private bool _canInteractMultipleTimes = false;
+        [SerializeField, Tooltip("Click this if you want to use random dialogue per every interaction.")] private bool _useRandomDialogue = false;
+        [SerializeField, Tooltip("Type in the names inside the dialogue yarn files that you want to be used.")] private List<string> _randomDialoguePool = new List<string>();
 
-        [Header("Ending Points")]
-        [SerializeField] private int _sisterEndingPoints = 0;
-        [SerializeField] private int _cousinEndingPoints = 0;
-        [SerializeField] private int _trueEndingPoints = 0;
-
+        [Header("Spirit Points")]
+        [SerializeField, Tooltip("The Spirit Points cost for the interaction")] private int _cost = 0;
+        [SerializeField, Tooltip("Points allocated to the Sister Ending from this interaction")] private int _sisterEndingPoints = 0;
+        [SerializeField, Tooltip("Points allocated to the Cousin Ending from this interaction")] private int _cousinEndingPoints = 0;
+        [SerializeField, Tooltip("Points allocated to the True Ending from this interaction")] private int _trueEndingPoints = 0;
 
         [Header("Other Settings")]
         [SerializeField] private SfxReference _sfxOnInteract = new SfxReference();
 
-        [Header("Dialogue Settings")]
-        [SerializeField] private bool _useRandomDialogue = false;
-        [SerializeField] private List<string> _randomDialoguePool = null;
+
 
         public int Cost => _cost;
 
