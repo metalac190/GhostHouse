@@ -153,7 +153,17 @@ public class DataManager : MonoBehaviour
             settingsLargeText = saveData.settings.largeTextFont;
             settingsTextFont = saveData.settings.textFont;
 
-            saveData.journalUnlocks.CopyTo(journalUnlocks, 0);
+            try
+            {
+                saveData.journalUnlocks.CopyTo(journalUnlocks, 0);
+            }
+            catch
+            {
+                for(int i = 0; i < journalUnlocks.Length; i++)
+                {
+                    journalUnlocks[i] = saveData.journalUnlocks[i];
+                }
+            }
         }
         else
         {
