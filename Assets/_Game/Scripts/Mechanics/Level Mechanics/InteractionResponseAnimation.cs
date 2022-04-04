@@ -15,13 +15,19 @@ public class InteractionResponseAnimation : InteractableResponseBase
 
     protected override void OnEnable() {
         base.OnEnable();
-        if (_interactable != null) _interactable.ConnectedAnimators.Add(_animator);
+        if (_interactable != null && _animator != null)
+        {
+            _interactable.ConnectedAnimators.Add(_animator);
+        }
     }
 
 
     protected override void OnDisable() {
         base.OnDisable();
-        if (_interactable != null) _interactable.ConnectedAnimators.Remove(_animator);
+        if (_interactable != null && _animator != null)
+        {
+            _interactable.ConnectedAnimators.Remove(_animator);
+        }
     }
 
     private void OnValidate() {
