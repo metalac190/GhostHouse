@@ -135,13 +135,13 @@ public class PanelMediator : MonoBehaviour
     // ---------------- Font ----------------
 
     public void SetFontFancy() => SetFontStyle(0);
-    public void SetFontNormal() => SetFontStyle(0);
-    public void SetFontDyslexia() => SetFontStyle(0);
+    public void SetFontNormal() => SetFontStyle(1);
+    public void SetFontDyslexia() => SetFontStyle(2);
 
     public void SetFontStyle(int fontStyle)
     {
         Settings.Instance.textFont = fontStyle;
-        if (SaveOnChange) SaveControls();
+        if (SaveOnChange) SaveVisuals();
     }
 
     // ----------- Camera Movement -----------

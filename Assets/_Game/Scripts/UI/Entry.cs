@@ -9,9 +9,13 @@ public class Entry : MonoBehaviour
 
     private void OnEnable() {
         if (_interactable == null) return;
-        bool unlocked = DataManager.Instance.interactions[_interactable.name];
+        bool unlocked = GetUnlocked(_interactable.name);
 
         if (_locked != null) _locked.gameObject.SetActive(!unlocked);
         if (_unlocked != null) _unlocked.gameObject.SetActive(unlocked);
+    }
+
+    private static bool GetUnlocked(string interaction) {
+        return DataManager.Instance.interactions.ContainsKey(interaction) && DataManager.Instance.interactions[interaction];
     }
 }
