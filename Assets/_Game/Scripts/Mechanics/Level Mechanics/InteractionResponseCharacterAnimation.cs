@@ -4,8 +4,9 @@ public class InteractionResponseCharacterAnimation : InteractableResponseBase
 {
     [SerializeField] private Animator _animator;
 
-    [Header("Animation To Play")]
+    [Header("Animation To Play (only Val and Jaq have angry animations)")]
     [SerializeField] private bool _surpriseAnimation = false;
+    [Tooltip("Only Val and Jaq have angry animations")]
     [SerializeField] private bool _angryAnimation = false;
 
     private void Awake() {
@@ -13,6 +14,8 @@ public class InteractionResponseCharacterAnimation : InteractableResponseBase
         {
             _animator = GetAnimator();
         }
+
+        if (gameObject.name.Contains("Morgan") || gameObject.name.Contains("Nath")) _angryAnimation = false;
     }
 
     protected override void OnEnable() {
