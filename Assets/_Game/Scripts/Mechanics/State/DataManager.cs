@@ -3,23 +3,10 @@ using System.Collections.Generic;
 using System.IO;
 using UnityEngine;
 using Utility.Buttons;
-using Utility.Audio.Managers;
 
 public class DataManager : MonoBehaviour
 {
     public static DataManager Instance = null;  // Singleton instance
-
-    // Reference to AudioMixerController to control volume levels
-    [SerializeField] AudioMixerController audioMixerController = null;
-
-    // Lazy load the Camera Controller
-    private IsometricCameraController cameraController;
-    private IsometricCameraController CameraController {
-        get {
-            if (cameraController == null) cameraController = FindObjectOfType<IsometricCameraController>();
-            return cameraController;
-        }
-    }
 
     private string filePath; // save file for saving & loading
 
@@ -118,9 +105,9 @@ public class DataManager : MonoBehaviour
         ReadFile();
 
         // Set all loaded settings for the player
-        SetControlSettings();
-        SetAudioSettings();
-        SetVisualSettings();
+        //SetControlSettings();
+        //SetAudioSettings();
+        //SetVisualSettings();
     }
 
     // Read data from the save file into the game
@@ -284,20 +271,6 @@ public class DataManager : MonoBehaviour
         settingsSensitivity = sensitivity;
 
         WriteSettings();
-
-        SetControlSettings();
-    }
-
-    // Update the camera controller with the new settings
-    private void SetControlSettings()
-    {
-        // Set Control settings on camera controller
-        if (CameraController == null) return;
-        CameraController._enableWASDMovement = settingsCameraWASD;
-        CameraController._enableClickDragMovement = settingsClickDrag;
-
-        //if (settingsCameraWASD) { CameraController._cameraMode = CameraMode.KEYBOARD; }
-        //else if (settingsClickDrag) { CameraController._cameraMode = CameraMode.CLICKDRAG; }
     }
 
     // Save settings from the audio settings menu
@@ -309,18 +282,6 @@ public class DataManager : MonoBehaviour
         settingsAmbienceVolume = ambVol;
 
         WriteSettings();
-
-        SetAudioSettings();
-    }
-
-    // Update audio mixer controller with audio values
-    private void SetAudioSettings()
-    {
-        // Assuming 0 to 100 instead of 0 to 1
-        audioMixerController.SetMusicVolume(settingsMusicVolume * 0.01f);
-        audioMixerController.SetSfxVolume(settingsSFXVolume * 0.01f);
-        audioMixerController.SetDialogueVolume(settingsDialogueVolume * 0.01f);
-        audioMixerController.SetAmbienceVolume(settingsAmbienceVolume * 0.01f);
     }
 
     // Save settings from the visual settings menu
@@ -334,21 +295,6 @@ public class DataManager : MonoBehaviour
         settingsTextFont = textFont;
 
         WriteSettings();
-
-        SetVisualSettings();
-    }
-
-    // Update visual settings in the font manager and elsewhere
-    private void SetVisualSettings()
-    {
-        // set font
-        FontManager fontManager = FontManager.Instance;
-        fontManager.UpdateAllText((FontMode) settingsTextFont);
-
-        // set post-processing volume
-        GraphicsController.ScreenMode = settingsWindowMode ? FullScreenMode.FullScreenWindow : FullScreenMode.ExclusiveFullScreen;
-        GraphicsController.Exposure = settingsBrightness;
-        GraphicsController.Contrast = settingsContrast;
     }
 
     // Dump all data to the console
