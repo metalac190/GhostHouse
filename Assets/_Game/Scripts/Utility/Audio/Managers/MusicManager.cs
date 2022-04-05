@@ -3,6 +3,7 @@ using UnityEngine;
 using Utility.Audio.Clips;
 using Utility.Audio.Controllers;
 using Utility.ObjectPooling;
+using Utility.ReadOnly;
 
 namespace Utility.Audio.Managers
 {
@@ -10,16 +11,16 @@ namespace Utility.Audio.Managers
     {
         [SerializeField] private float _pauseTransitionTime = 1;
 
-        private MusicTrack _currentTrack;
+        [SerializeField, ReadOnly] private MusicTrack _currentTrack;
 
         private PoolManager<MusicSourceController> _poolManager = new PoolManager<MusicSourceController>();
-        private MusicSourceController _currentController;
-        private MusicSourceController _currentPauseController;
+        [SerializeField, ReadOnly] private MusicSourceController _currentController;
+        [SerializeField, ReadOnly] private MusicSourceController _currentPauseController;
 
-        private bool _playingTrack = false;
-        private float _timeToLoop;
-        private bool _paused;
-        private float _pausedStatus;
+        [SerializeField, ReadOnly] private bool _playingTrack;
+        [SerializeField, ReadOnly] private float _timeToLoop;
+        [SerializeField, ReadOnly] private bool _paused;
+        [SerializeField, ReadOnly] private float _pausedStatus;
         private Coroutine _pausedRoutine;
 
         // Equivalent to Awake / Start (Called from SoundManager)
@@ -48,7 +49,9 @@ namespace Utility.Audio.Managers
             _timeToLoop = _currentController.PlayMusic(musicClip, delay);
             // Paused Track
             _currentPauseController = _poolManager.GetObject();
-            _currentPauseController.PlayMusic(musicClip, delay);
+            _currentPauseController.PlayMusic(musicClip, delay, true);
+            // Play Tracks
+            SetMusicVolume();
             _playingTrack = true;
         }
 
@@ -63,7 +66,6 @@ namespace Utility.Audio.Managers
         }
 
         public void SetPaused(bool paused) {
-            Debug.Log(paused);
             if (_paused == paused) return;
             _paused = paused;
             if (_pausedRoutine != null) {
@@ -97,8 +99,12 @@ namespace Utility.Audio.Managers
         }
 
         private void SetMusicVolume() {
-            _currentController.SetCustomVolume(1 - _pausedStatus);
-            _currentPauseController.SetCustomVolume(_pausedStatus);
+            if (_currentController != null) {
+                _currentController.SetMusicVolume(1 - _pausedStatus);
+            }
+            if (_currentPauseController != null) {
+                _currentPauseController.SetMusicVolume(_pausedStatus);
+            }
         }
 
         public void NextTrack() {

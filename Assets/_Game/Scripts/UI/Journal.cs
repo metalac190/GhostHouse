@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using Mechanics.Feedback;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -13,6 +14,9 @@ public class Journal : MonoBehaviour
     Page activePage, pausePage, lastPage;
 
     public Button nextBtn, previousBtn;
+
+    [SerializeField] private SfxUiLibrary _sfxUiLibrary = null;
+    public SfxUiLibrary SfxUiLibrary => _sfxUiLibrary;
 
     int tabIndex = 0;
 
@@ -39,12 +43,14 @@ public class Journal : MonoBehaviour
     public void NextPage()
     {
         int currentIndex = activePage.index;
+        if (_sfxUiLibrary != null) _sfxUiLibrary.OnSwitchPageRight();
         ActivatePage(currentIndex + 1);
     }
 
     public void PreviousPage()
     {
         int currentIndex = activePage.index;
+        if (_sfxUiLibrary != null) _sfxUiLibrary.OnSwitchPageLeft();
         ActivatePage(currentIndex - 1);
     }
 

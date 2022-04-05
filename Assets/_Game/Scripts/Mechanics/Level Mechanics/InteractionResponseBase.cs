@@ -3,24 +3,24 @@ using UnityEngine;
 
 public abstract class InteractableResponseBase : MonoBehaviour
 {
-    [SerializeField] private Interactable _interactable = null;
+    [SerializeField] protected Interactable _interactable = null;
 
     public Interactable Interactable => _interactable;
     
-    private void OnEnable()
+    protected virtual void OnEnable()
     {
         if (_interactable == null) return;
         _interactable.Raise(this);
     }
 
-    private void Start()
+    protected virtual void Start()
     {
         if (_interactable == null) return;
         // TODO: This doesn't work
         //if (_interactable.Interacted) PreviouslyInvoked();
     }
 
-    private void OnDisable()
+    protected virtual void OnDisable()
     {
         if (_interactable == null) return;
         _interactable.Unraise(this);

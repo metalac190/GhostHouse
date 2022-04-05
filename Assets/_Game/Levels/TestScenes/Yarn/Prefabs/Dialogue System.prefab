@@ -221,13 +221,35 @@ MonoBehaviour:
   verboseLogging: 0
   onNodeStart:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 11400000, guid: baeda7ea57cbc2540a83a61afaaa0f42, type: 2}
+        m_MethodName: OnDialogueWindowAppears
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   onNodeComplete:
     m_PersistentCalls:
       m_Calls: []
   onDialogueComplete:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 11400000, guid: baeda7ea57cbc2540a83a61afaaa0f42, type: 2}
+        m_MethodName: OnDialogueWindowCloses
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   onCommand:
     m_PersistentCalls:
       m_Calls: []
@@ -412,6 +434,8 @@ MonoBehaviour:
     UseConstant: 0
     Clip: {fileID: 0}
     Base: {fileID: 0}
+  _overrideMixer: {fileID: 4305126310376759749, guid: 47d4cc4ca77eae946b0d79e4643e8522,
+    type: 2}
   _playOnStart: 0
   _looping: 0
   _loopDelay:
@@ -427,7 +451,8 @@ AudioSource:
   m_GameObject: {fileID: 5539853836581934048}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
+  OutputAudioMixerGroup: {fileID: 4305126310376759749, guid: 47d4cc4ca77eae946b0d79e4643e8522,
+    type: 2}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 1
   m_Volume: 1

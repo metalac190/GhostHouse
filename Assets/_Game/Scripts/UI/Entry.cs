@@ -1,27 +1,19 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using Mechanics.Level_Mechanics;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 
 public class Entry : MonoBehaviour
 {
-    public bool isLocked = true;
-    public GameObject owner;
-    Image image = null;
-    TextMeshPro text = null;
+    [SerializeField] private Interactable _interactable = null;
+    [SerializeField] private Image _image = null;
+    [SerializeField] private TextMeshProUGUI _text = null;
 
-    void Start()
-    {
-        image = owner.GetComponent<Image>();
-        text = owner.GetComponent<TextMeshPro>();
+    private void OnEnable() {
+        if (_interactable == null) return;
+        bool unlocked = DataManager.Instance.interactions[_interactable.name];
 
-        if (isLocked)
-        {
-            text.text = "???????";
-
-            //Encrypt image
-            image.color = new Color(1, 1, 1, 0.75f);
-        }
+        if (_image != null) _image.gameObject.SetActive(unlocked);
+        if (_text != null) _text.gameObject.SetActive(unlocked);
     }
 }

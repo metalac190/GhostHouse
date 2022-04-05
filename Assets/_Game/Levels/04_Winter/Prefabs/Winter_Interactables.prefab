@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 6951916554347468517}
   - component: {fileID: 7666786920380311086}
   m_Layer: 0
-  m_Name: Cylinder
+  m_Name: geo_wrappingRoll
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -107,7 +107,7 @@ GameObject:
   - component: {fileID: 2165096894542143252}
   - component: {fileID: 2104073405022660373}
   m_Layer: 0
-  m_Name: Capsule
+  m_Name: geo_panda
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -238,11 +238,15 @@ MonoBehaviour:
   _highlightOnHover: 0
   _highlightColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
   _highlightSize: 0
+  _animateConnectionsOnHover: 1
+  _animationsHoverTrigger: hover
   _setMaterialOnHover: 0
   _materialToSet: {fileID: 0}
   _sfxOnClick: 0
   _sfx: 0
   _moveOnClick: 1
+  _animateConnectionsOnClick: 1
+  _animationsClickTrigger: click
   _cameraMovementTime: 3
   _popupWindowOnClick: 1
   _interaction: {fileID: 11400000, guid: a1e7489064e45724cbd93deb6595f6a0, type: 2}
@@ -280,7 +284,7 @@ Transform:
   m_Children:
   - {fileID: 2971900561049011018}
   m_Father: {fileID: 1589552547398249886}
-  m_RootOrder: 8
+  m_RootOrder: 12
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &8346976889922341460
 MonoBehaviour:
@@ -300,11 +304,15 @@ MonoBehaviour:
   _highlightOnHover: 0
   _highlightColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
   _highlightSize: 0
+  _animateConnectionsOnHover: 1
+  _animationsHoverTrigger: hover
   _setMaterialOnHover: 0
   _materialToSet: {fileID: 0}
   _sfxOnClick: 0
   _sfx: 0
   _moveOnClick: 1
+  _animateConnectionsOnClick: 1
+  _animationsClickTrigger: click
   _cameraMovementTime: 3
   _popupWindowOnClick: 1
   _interaction: {fileID: 11400000, guid: 782f7062d468a5444af07132853f0b72, type: 2}
@@ -431,11 +439,15 @@ MonoBehaviour:
   _highlightOnHover: 0
   _highlightColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
   _highlightSize: 0
+  _animateConnectionsOnHover: 1
+  _animationsHoverTrigger: hover
   _setMaterialOnHover: 0
   _materialToSet: {fileID: 0}
   _sfxOnClick: 0
   _sfx: 0
   _moveOnClick: 1
+  _animateConnectionsOnClick: 1
+  _animationsClickTrigger: click
   _cameraMovementTime: 3
   _popupWindowOnClick: 0
   _interaction: {fileID: 11400000, guid: f896e91e4c0a5474e821edd8182b81e1, type: 2}
@@ -456,7 +468,7 @@ GameObject:
   - component: {fileID: 7186266974090068435}
   - component: {fileID: 5804190513012310106}
   m_Layer: 0
-  m_Name: Capsule
+  m_Name: geo_stockings
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -550,7 +562,7 @@ GameObject:
   - component: {fileID: 7907401677787175356}
   - component: {fileID: 4985252154536232468}
   m_Layer: 0
-  m_Name: Cube
+  m_Name: geo_paperwork
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -660,7 +672,7 @@ Transform:
   m_Children:
   - {fileID: 3648120133067327975}
   m_Father: {fileID: 1589552547398249886}
-  m_RootOrder: 9
+  m_RootOrder: 14
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1791294289652557041
 MonoBehaviour:
@@ -680,11 +692,15 @@ MonoBehaviour:
   _highlightOnHover: 0
   _highlightColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
   _highlightSize: 0
+  _animateConnectionsOnHover: 1
+  _animationsHoverTrigger: hover
   _setMaterialOnHover: 0
   _materialToSet: {fileID: 0}
   _sfxOnClick: 0
   _sfx: 0
   _moveOnClick: 1
+  _animateConnectionsOnClick: 1
+  _animationsClickTrigger: click
   _cameraMovementTime: 3
   _popupWindowOnClick: 0
   _interaction: {fileID: 0}
@@ -974,11 +990,15 @@ MonoBehaviour:
   _highlightOnHover: 0
   _highlightColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
   _highlightSize: 1
+  _animateConnectionsOnHover: 1
+  _animationsHoverTrigger: hover
   _setMaterialOnHover: 0
   _materialToSet: {fileID: 0}
   _sfxOnClick: 0
   _sfx: 0
   _moveOnClick: 1
+  _animateConnectionsOnClick: 1
+  _animationsClickTrigger: click
   _cameraMovementTime: 3
   _popupWindowOnClick: 0
   _interaction: {fileID: 11400000, guid: 85692b745a8cb5a438cdf82bdf2e15a8, type: 2}
@@ -986,6 +1006,64 @@ MonoBehaviour:
   _alternateInteraction: {fileID: 0}
   _alternateInteractionText: Alt Interact
   _closeMenuText: Close
+--- !u!1 &1467722224437382049
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4743680811594627645}
+  - component: {fileID: 4718234893666752110}
+  m_Layer: 0
+  m_Name: WelcomeSign_ResponseEND
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4743680811594627645
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1467722224437382049}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1589552547398249886}
+  m_RootOrder: 17
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &4718234893666752110
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1467722224437382049}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ec876ca7c816b6b429b263dc58c01213, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _interactable: {fileID: 11400000, guid: 103afb2c95f25d14eb69e35911ba5a14, type: 2}
+  _event:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 8675778894416221249}
+        m_MethodName: SetActive
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &1589552547398249887
 GameObject:
   m_ObjectHideFlags: 0
@@ -1014,21 +1092,27 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
+  - {fileID: 2340174140466789642}
+  - {fileID: 5991918751025919818}
+  - {fileID: 9128853537479732573}
   - {fileID: 4989579693072806357}
-  - {fileID: 3072329179006583997}
   - {fileID: 6090104693996142344}
+  - {fileID: 3072329179006583997}
   - {fileID: 3165917166174963085}
   - {fileID: 2613902008778389634}
   - {fileID: 6133787151577065869}
   - {fileID: 8463723683353701496}
   - {fileID: 2845821138362617561}
+  - {fileID: 2717493210232568429}
   - {fileID: 4679151997431024270}
+  - {fileID: 4248398407484088894}
   - {fileID: 2319417486556971969}
   - {fileID: 4082054235323771479}
   - {fileID: 8439646104942846849}
+  - {fileID: 4743680811594627645}
   - {fileID: 7913075437863667108}
+  - {fileID: 8228119131131730816}
   - {fileID: 1880424541101939333}
-  - {fileID: 5991918751025919818}
   - {fileID: 779983187802533402}
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -1117,7 +1201,7 @@ GameObject:
   - component: {fileID: 1810497475469219801}
   - component: {fileID: 6048597684371061555}
   m_Layer: 0
-  m_Name: Cube
+  m_Name: geo_cookingSupplies
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1213,7 +1297,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &5048427773319764126
 Transform:
   m_ObjectHideFlags: 0
@@ -1227,7 +1311,7 @@ Transform:
   m_Children:
   - {fileID: 9134973625118464552}
   m_Father: {fileID: 779983187802533402}
-  m_RootOrder: 3
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &7711934619908983093
 MonoBehaviour:
@@ -1247,11 +1331,15 @@ MonoBehaviour:
   _highlightOnHover: 0
   _highlightColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
   _highlightSize: 0
+  _animateConnectionsOnHover: 1
+  _animationsHoverTrigger: hover
   _setMaterialOnHover: 0
   _materialToSet: {fileID: 0}
   _sfxOnClick: 0
   _sfx: 0
   _moveOnClick: 1
+  _animateConnectionsOnClick: 1
+  _animationsClickTrigger: click
   _cameraMovementTime: 3
   _popupWindowOnClick: 0
   _interaction: {fileID: 0}
@@ -1272,7 +1360,7 @@ GameObject:
   - component: {fileID: 1152063502704568558}
   - component: {fileID: 856800718941064829}
   m_Layer: 0
-  m_Name: Cube (2)
+  m_Name: geo_presents3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1352,6 +1440,86 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!1 &2120775651734708138
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 9128853537479732573}
+  - component: {fileID: 8162167808660941112}
+  m_Layer: 0
+  m_Name: ValSad_Response
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &9128853537479732573
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2120775651734708138}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1589552547398249886}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &8162167808660941112
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2120775651734708138}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ec876ca7c816b6b429b263dc58c01213, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _interactable: {fileID: 11400000, guid: f07b48dae291ee345bf8cf6c56af03bf, type: 2}
+  _event:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 5619547589346116019}
+        m_MethodName: SetActive
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
+      - m_Target: {fileID: 4054197540033919039}
+        m_MethodName: SetActive
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
+      - m_Target: {fileID: 6333229344867934415}
+        m_MethodName: SetActive
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &2364820049247844365
 GameObject:
   m_ObjectHideFlags: 0
@@ -1404,11 +1572,15 @@ MonoBehaviour:
   _highlightOnHover: 0
   _highlightColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
   _highlightSize: 0
+  _animateConnectionsOnHover: 1
+  _animationsHoverTrigger: hover
   _setMaterialOnHover: 0
   _materialToSet: {fileID: 0}
   _sfxOnClick: 0
   _sfx: 0
   _moveOnClick: 1
+  _animateConnectionsOnClick: 1
+  _animationsClickTrigger: click
   _cameraMovementTime: 3
   _popupWindowOnClick: 0
   _interaction: {fileID: 11400000, guid: 2f12d30b82f407a4287c1ffa094269ed, type: 2}
@@ -1429,7 +1601,7 @@ GameObject:
   - component: {fileID: 7310191429795842544}
   - component: {fileID: 622941805598199092}
   m_Layer: 0
-  m_Name: Cube
+  m_Name: geo_presents1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1555,15 +1727,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _textOnHover: 1
   _hoverTextUseObjectName: 0
-  _hoverText: Wrapping Paper
+  _hoverText: Wrap Gift
   _highlightOnHover: 0
   _highlightColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
   _highlightSize: 0
+  _animateConnectionsOnHover: 1
+  _animationsHoverTrigger: hover
   _setMaterialOnHover: 0
   _materialToSet: {fileID: 0}
   _sfxOnClick: 0
   _sfx: 0
   _moveOnClick: 1
+  _animateConnectionsOnClick: 1
+  _animationsClickTrigger: click
   _cameraMovementTime: 3
   _popupWindowOnClick: 1
   _interaction: {fileID: 11400000, guid: e26e87fe620bc3645a0d0c1ffcd51d25, type: 2}
@@ -1584,7 +1760,7 @@ GameObject:
   - component: {fileID: 1197039264266701453}
   - component: {fileID: 2571822982984394343}
   m_Layer: 0
-  m_Name: Capsule
+  m_Name: geo_jaq
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1619,7 +1795,7 @@ MeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2521497033432437777}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
@@ -1678,7 +1854,7 @@ GameObject:
   - component: {fileID: 1843622490353057836}
   - component: {fileID: 9120853947569926628}
   m_Layer: 0
-  m_Name: Cylinder
+  m_Name: geo_wrappingPaper
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1809,11 +1985,15 @@ MonoBehaviour:
   _highlightOnHover: 0
   _highlightColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
   _highlightSize: 0
+  _animateConnectionsOnHover: 1
+  _animationsHoverTrigger: hover
   _setMaterialOnHover: 0
   _materialToSet: {fileID: 0}
   _sfxOnClick: 0
   _sfx: 0
   _moveOnClick: 1
+  _animateConnectionsOnClick: 1
+  _animationsClickTrigger: click
   _cameraMovementTime: 3
   _popupWindowOnClick: 0
   _interaction: {fileID: 11400000, guid: ecd413084d46d1449aa1d2aa5c13742f, type: 2}
@@ -1834,7 +2014,7 @@ GameObject:
   - component: {fileID: 7490368167605956463}
   - component: {fileID: 8045377254286474234}
   m_Layer: 0
-  m_Name: Cube
+  m_Name: geo_oven
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1927,7 +2107,7 @@ GameObject:
   - component: {fileID: 8627179206855964338}
   - component: {fileID: 7897520955349671538}
   m_Layer: 0
-  m_Name: Capsule
+  m_Name: geo_lambie
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2021,7 +2201,7 @@ GameObject:
   - component: {fileID: 7681509835364237671}
   - component: {fileID: 119149830862382934}
   m_Layer: 0
-  m_Name: Capsule
+  m_Name: geo_val
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2056,7 +2236,7 @@ MeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3332883717255210544}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
@@ -2115,7 +2295,7 @@ GameObject:
   - component: {fileID: 545596105936027911}
   - component: {fileID: 8727295543961043694}
   m_Layer: 0
-  m_Name: Capsule
+  m_Name: geo_val
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2209,7 +2389,7 @@ GameObject:
   - component: {fileID: 6339203555544940948}
   - component: {fileID: 1872648866676523658}
   m_Layer: 0
-  m_Name: Capsule
+  m_Name: geo_pollyCage
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2409,11 +2589,15 @@ MonoBehaviour:
   _highlightOnHover: 0
   _highlightColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
   _highlightSize: 0
+  _animateConnectionsOnHover: 1
+  _animationsHoverTrigger: hover
   _setMaterialOnHover: 0
   _materialToSet: {fileID: 0}
   _sfxOnClick: 0
   _sfx: 0
   _moveOnClick: 1
+  _animateConnectionsOnClick: 1
+  _animationsClickTrigger: click
   _cameraMovementTime: 3
   _popupWindowOnClick: 1
   _interaction: {fileID: 11400000, guid: 8eebb5e9ed5f22c4dafc9829336eeb7c, type: 2}
@@ -2452,7 +2636,7 @@ Transform:
   m_Children:
   - {fileID: 8741612295014698189}
   m_Father: {fileID: 1589552547398249886}
-  m_RootOrder: 12
+  m_RootOrder: 18
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1535437959238697295
 MonoBehaviour:
@@ -2472,13 +2656,17 @@ MonoBehaviour:
   _highlightOnHover: 0
   _highlightColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
   _highlightSize: 1
+  _animateConnectionsOnHover: 1
+  _animationsHoverTrigger: hover
   _setMaterialOnHover: 0
   _materialToSet: {fileID: 0}
   _sfxOnClick: 0
   _sfx: 3
   _moveOnClick: 1
+  _animateConnectionsOnClick: 1
+  _animationsClickTrigger: click
   _cameraMovementTime: 3
-  _popupWindowOnClick: 1
+  _popupWindowOnClick: 0
   _interaction: {fileID: 11400000, guid: 0e8e96d8799e3f645a6c86ebba5d0a7c, type: 2}
   _interactionText: Interact
   _alternateInteraction: {fileID: 0}
@@ -2499,7 +2687,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &6090104693996142344
 Transform:
   m_ObjectHideFlags: 0
@@ -2520,7 +2708,7 @@ Transform:
   - {fileID: 1216995536881415676}
   - {fileID: 2759700135352668296}
   m_Father: {fileID: 1589552547398249886}
-  m_RootOrder: 2
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &4312096638257187022
 GameObject:
@@ -2535,7 +2723,7 @@ GameObject:
   - component: {fileID: 6505266254706788128}
   - component: {fileID: 1505891344242774101}
   m_Layer: 0
-  m_Name: Cube
+  m_Name: geo_piano
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2813,7 +3001,7 @@ GameObject:
   - component: {fileID: 6963675887674731524}
   - component: {fileID: 6035301383110512368}
   m_Layer: 0
-  m_Name: Capsule
+  m_Name: geo_tree
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2907,7 +3095,7 @@ GameObject:
   - component: {fileID: 5193956517136081295}
   - component: {fileID: 1143357421868154177}
   m_Layer: 0
-  m_Name: Cube (1)
+  m_Name: geo_presents2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3000,7 +3188,7 @@ GameObject:
   - component: {fileID: 8321969662165215022}
   - component: {fileID: 2831723589644286380}
   m_Layer: 0
-  m_Name: Capsule
+  m_Name: geo_pollyCage
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3139,6 +3327,64 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+--- !u!1 &5334937192743601287
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2717493210232568429}
+  - component: {fileID: 1325881998768031906}
+  m_Layer: 0
+  m_Name: Stockings_ResponseEND
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2717493210232568429
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5334937192743601287}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1589552547398249886}
+  m_RootOrder: 11
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1325881998768031906
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5334937192743601287}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ec876ca7c816b6b429b263dc58c01213, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _interactable: {fileID: 11400000, guid: 2505d290a5cc0c34cbce34de4dfdeee3, type: 2}
+  _event:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 6035721319547692594}
+        m_MethodName: SetActive
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &5416604768320897443
 GameObject:
   m_ObjectHideFlags: 0
@@ -3189,11 +3435,15 @@ MonoBehaviour:
   _highlightOnHover: 0
   _highlightColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
   _highlightSize: 0
+  _animateConnectionsOnHover: 1
+  _animationsHoverTrigger: hover
   _setMaterialOnHover: 0
   _materialToSet: {fileID: 0}
   _sfxOnClick: 0
   _sfx: 0
   _moveOnClick: 1
+  _animateConnectionsOnClick: 1
+  _animationsClickTrigger: click
   _cameraMovementTime: 3
   _popupWindowOnClick: 1
   _interaction: {fileID: 11400000, guid: d28134c241bfa6c42ac0a353c3d7b84b, type: 2}
@@ -3249,7 +3499,7 @@ MeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5432995948251841035}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
@@ -3343,7 +3593,7 @@ MeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5492743778438183725}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
@@ -3439,11 +3689,15 @@ MonoBehaviour:
   _highlightOnHover: 0
   _highlightColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
   _highlightSize: 1
+  _animateConnectionsOnHover: 1
+  _animationsHoverTrigger: hover
   _setMaterialOnHover: 0
   _materialToSet: {fileID: 0}
   _sfxOnClick: 0
   _sfx: 0
   _moveOnClick: 1
+  _animateConnectionsOnClick: 1
+  _animationsClickTrigger: click
   _cameraMovementTime: 3
   _popupWindowOnClick: 0
   _interaction: {fileID: 11400000, guid: 4f07ff61deb53594a9553472e7f683b1, type: 2}
@@ -3466,7 +3720,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &4989579693072806357
 Transform:
   m_ObjectHideFlags: 0
@@ -3495,7 +3749,7 @@ Transform:
   - {fileID: 7312387835756599408}
   - {fileID: 944739017528017418}
   m_Father: {fileID: 1589552547398249886}
-  m_RootOrder: 0
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &5635374848829221621
 GameObject:
@@ -3510,7 +3764,7 @@ GameObject:
   - component: {fileID: 2364151949937968077}
   - component: {fileID: 5512983106859272557}
   m_Layer: 0
-  m_Name: Cylinder
+  m_Name: geo_ornament
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3622,7 +3876,7 @@ Transform:
   - {fileID: 7259673383799634424}
   - {fileID: 1375733341304332252}
   m_Father: {fileID: 1589552547398249886}
-  m_RootOrder: 3
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &125988289820383991
 MonoBehaviour:
@@ -3642,11 +3896,15 @@ MonoBehaviour:
   _highlightOnHover: 0
   _highlightColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
   _highlightSize: 0
+  _animateConnectionsOnHover: 1
+  _animationsHoverTrigger: hover
   _setMaterialOnHover: 0
   _materialToSet: {fileID: 0}
   _sfxOnClick: 0
   _sfx: 0
   _moveOnClick: 1
+  _animateConnectionsOnClick: 1
+  _animationsClickTrigger: click
   _cameraMovementTime: 3
   _popupWindowOnClick: 0
   _interaction: {fileID: 11400000, guid: e19a3bd812d8ee142ae58ae05e89b73e, type: 2}
@@ -3667,7 +3925,7 @@ GameObject:
   - component: {fileID: 7954590502540394288}
   - component: {fileID: 6680157005888418567}
   m_Layer: 0
-  m_Name: Cube
+  m_Name: geo_musicSheets
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3777,10 +4035,12 @@ Transform:
   - {fileID: 4199643140833532304}
   - {fileID: 4719405231465649742}
   - {fileID: 3606670447684683098}
+  - {fileID: 539341750685757777}
   - {fileID: 5048427773319764126}
   - {fileID: 1863798909322376169}
+  - {fileID: 3835622239159822601}
   m_Father: {fileID: 1589552547398249886}
-  m_RootOrder: 15
+  m_RootOrder: 21
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &5767066756763705857
 GameObject:
@@ -3812,7 +4072,7 @@ Transform:
   m_Children:
   - {fileID: 3466389278525654718}
   m_Father: {fileID: 779983187802533402}
-  m_RootOrder: 4
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &7520819337202183011
 MonoBehaviour:
@@ -3832,13 +4092,17 @@ MonoBehaviour:
   _highlightOnHover: 0
   _highlightColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
   _highlightSize: 0
+  _animateConnectionsOnHover: 1
+  _animationsHoverTrigger: hover
   _setMaterialOnHover: 0
   _materialToSet: {fileID: 0}
   _sfxOnClick: 0
   _sfx: 0
   _moveOnClick: 1
+  _animateConnectionsOnClick: 1
+  _animationsClickTrigger: click
   _cameraMovementTime: 3
-  _popupWindowOnClick: 0
+  _popupWindowOnClick: 1
   _interaction: {fileID: 11400000, guid: 6de7ee45dec4b4640b6e6da2b32430f3, type: 2}
   _interactionText: Interact
   _alternateInteraction: {fileID: 0}
@@ -3876,7 +4140,7 @@ Transform:
   - {fileID: 4883441079807438438}
   - {fileID: 406214408628596177}
   m_Father: {fileID: 1589552547398249886}
-  m_RootOrder: 1
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &5916214545513135133
 GameObject:
@@ -3966,7 +4230,7 @@ Transform:
   m_Children:
   - {fileID: 5658577350921939627}
   m_Father: {fileID: 1589552547398249886}
-  m_RootOrder: 7
+  m_RootOrder: 10
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &2606579071399687635
 MonoBehaviour:
@@ -3986,11 +4250,15 @@ MonoBehaviour:
   _highlightOnHover: 0
   _highlightColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
   _highlightSize: 0
+  _animateConnectionsOnHover: 1
+  _animationsHoverTrigger: hover
   _setMaterialOnHover: 0
   _materialToSet: {fileID: 0}
   _sfxOnClick: 0
   _sfx: 0
   _moveOnClick: 1
+  _animateConnectionsOnClick: 1
+  _animationsClickTrigger: click
   _cameraMovementTime: 3
   _popupWindowOnClick: 0
   _interaction: {fileID: 11400000, guid: 2505d290a5cc0c34cbce34de4dfdeee3, type: 2}
@@ -4027,7 +4295,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1589552547398249886}
-  m_RootOrder: 6
+  m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &7518200569157327549
 MonoBehaviour:
@@ -4072,7 +4340,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &4719405231465649742
 Transform:
   m_ObjectHideFlags: 0
@@ -4106,11 +4374,15 @@ MonoBehaviour:
   _highlightOnHover: 0
   _highlightColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
   _highlightSize: 0
+  _animateConnectionsOnHover: 1
+  _animationsHoverTrigger: hover
   _setMaterialOnHover: 0
   _materialToSet: {fileID: 0}
   _sfxOnClick: 0
   _sfx: 0
   _moveOnClick: 1
+  _animateConnectionsOnClick: 1
+  _animationsClickTrigger: click
   _cameraMovementTime: 3
   _popupWindowOnClick: 0
   _interaction: {fileID: 0}
@@ -4148,7 +4420,7 @@ Transform:
   m_Children:
   - {fileID: 1110442768291711400}
   m_Father: {fileID: 1589552547398249886}
-  m_RootOrder: 13
+  m_RootOrder: 20
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &4970769322567232313
 MonoBehaviour:
@@ -4168,11 +4440,15 @@ MonoBehaviour:
   _highlightOnHover: 0
   _highlightColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
   _highlightSize: 0
+  _animateConnectionsOnHover: 1
+  _animationsHoverTrigger: hover
   _setMaterialOnHover: 0
   _materialToSet: {fileID: 0}
   _sfxOnClick: 0
   _sfx: 0
   _moveOnClick: 1
+  _animateConnectionsOnClick: 1
+  _animationsClickTrigger: click
   _cameraMovementTime: 3
   _popupWindowOnClick: 0
   _interaction: {fileID: 0}
@@ -4210,7 +4486,7 @@ Transform:
   m_Children:
   - {fileID: 7897057739629954366}
   m_Father: {fileID: 1589552547398249886}
-  m_RootOrder: 14
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &8340755676659330871
 MonoBehaviour:
@@ -4230,11 +4506,15 @@ MonoBehaviour:
   _highlightOnHover: 0
   _highlightColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
   _highlightSize: 0
+  _animateConnectionsOnHover: 1
+  _animationsHoverTrigger: hover
   _setMaterialOnHover: 0
   _materialToSet: {fileID: 0}
   _sfxOnClick: 0
   _sfx: 0
   _moveOnClick: 1
+  _animateConnectionsOnClick: 1
+  _animationsClickTrigger: click
   _cameraMovementTime: 3
   _popupWindowOnClick: 0
   _interaction: {fileID: 11400000, guid: f07b48dae291ee345bf8cf6c56af03bf, type: 2}
@@ -4271,7 +4551,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1589552547398249886}
-  m_RootOrder: 4
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &6578126627362676476
 MonoBehaviour:
@@ -4324,7 +4604,7 @@ GameObject:
   - component: {fileID: 4498797122742063251}
   - component: {fileID: 7230752892225656865}
   m_Layer: 0
-  m_Name: Cube
+  m_Name: geo_letter
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4434,7 +4714,7 @@ Transform:
   m_Children:
   - {fileID: 4857046678802791151}
   m_Father: {fileID: 1589552547398249886}
-  m_RootOrder: 10
+  m_RootOrder: 15
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &7381247097830799696
 MonoBehaviour:
@@ -4454,11 +4734,15 @@ MonoBehaviour:
   _highlightOnHover: 0
   _highlightColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
   _highlightSize: 0
+  _animateConnectionsOnHover: 1
+  _animationsHoverTrigger: hover
   _setMaterialOnHover: 0
   _materialToSet: {fileID: 0}
   _sfxOnClick: 0
   _sfx: 0
   _moveOnClick: 1
+  _animateConnectionsOnClick: 1
+  _animationsClickTrigger: click
   _cameraMovementTime: 3
   _popupWindowOnClick: 0
   _interaction: {fileID: 0}
@@ -4611,11 +4895,15 @@ MonoBehaviour:
   _highlightOnHover: 0
   _highlightColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
   _highlightSize: 0
+  _animateConnectionsOnHover: 1
+  _animationsHoverTrigger: hover
   _setMaterialOnHover: 0
   _materialToSet: {fileID: 0}
   _sfxOnClick: 0
   _sfx: 0
   _moveOnClick: 1
+  _animateConnectionsOnClick: 1
+  _animationsClickTrigger: click
   _cameraMovementTime: 3
   _popupWindowOnClick: 0
   _interaction: {fileID: 11400000, guid: 108c0d960ae85ea42b9137228c84d03f, type: 2}
@@ -4742,11 +5030,15 @@ MonoBehaviour:
   _highlightOnHover: 0
   _highlightColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
   _highlightSize: 0
+  _animateConnectionsOnHover: 1
+  _animationsHoverTrigger: hover
   _setMaterialOnHover: 0
   _materialToSet: {fileID: 0}
   _sfxOnClick: 0
   _sfx: 0
   _moveOnClick: 1
+  _animateConnectionsOnClick: 1
+  _animationsClickTrigger: click
   _cameraMovementTime: 3
   _popupWindowOnClick: 0
   _interaction: {fileID: 11400000, guid: 49f565db10d34724a9dc95e096364055, type: 2}
@@ -4767,7 +5059,7 @@ GameObject:
   - component: {fileID: 4163749433429872141}
   - component: {fileID: 4753628725355284241}
   m_Layer: 0
-  m_Name: Capsule
+  m_Name: geo_tree
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4898,11 +5190,15 @@ MonoBehaviour:
   _highlightOnHover: 0
   _highlightColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
   _highlightSize: 0
+  _animateConnectionsOnHover: 1
+  _animationsHoverTrigger: hover
   _setMaterialOnHover: 0
   _materialToSet: {fileID: 0}
   _sfxOnClick: 0
   _sfx: 0
   _moveOnClick: 1
+  _animateConnectionsOnClick: 1
+  _animationsClickTrigger: click
   _cameraMovementTime: 3
   _popupWindowOnClick: 1
   _interaction: {fileID: 11400000, guid: 1b745c3be179233459685cd11f7fe7ec, type: 2}
@@ -4992,7 +5288,7 @@ GameObject:
   - component: {fileID: 3989311052603726439}
   - component: {fileID: 6128473595506814919}
   m_Layer: 0
-  m_Name: Cube
+  m_Name: geo_fireplace
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5102,7 +5398,7 @@ Transform:
   m_Children:
   - {fileID: 909714544768360631}
   m_Father: {fileID: 1589552547398249886}
-  m_RootOrder: 5
+  m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &4680343714926374271
 MonoBehaviour:
@@ -5117,16 +5413,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _textOnHover: 1
-  _hoverTextUseObjectName: 1
+  _hoverTextUseObjectName: 0
   _hoverText: Empty Roll
   _highlightOnHover: 0
   _highlightColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
   _highlightSize: 0
+  _animateConnectionsOnHover: 1
+  _animationsHoverTrigger: hover
   _setMaterialOnHover: 0
   _materialToSet: {fileID: 0}
   _sfxOnClick: 0
   _sfx: 0
   _moveOnClick: 1
+  _animateConnectionsOnClick: 1
+  _animationsClickTrigger: click
   _cameraMovementTime: 3
   _popupWindowOnClick: 1
   _interaction: {fileID: 11400000, guid: c0a494b03359d694d9bb1844fb241a94, type: 2}
@@ -5134,6 +5434,64 @@ MonoBehaviour:
   _alternateInteraction: {fileID: 0}
   _alternateInteractionText: Alt Interact
   _closeMenuText: Close
+--- !u!1 &7451271700734004213
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4248398407484088894}
+  - component: {fileID: 1207828906912388211}
+  m_Layer: 0
+  m_Name: Piano_ResponseEND
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4248398407484088894
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7451271700734004213}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1589552547398249886}
+  m_RootOrder: 13
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1207828906912388211
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7451271700734004213}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ec876ca7c816b6b429b263dc58c01213, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _interactable: {fileID: 11400000, guid: 782f7062d468a5444af07132853f0b72, type: 2}
+  _event:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 627511687863206679}
+        m_MethodName: SetActive
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &7481220457336205717
 GameObject:
   m_ObjectHideFlags: 0
@@ -5147,7 +5505,7 @@ GameObject:
   - component: {fileID: 322870940374655379}
   - component: {fileID: 7112291697594624696}
   m_Layer: 0
-  m_Name: Cylinder
+  m_Name: geo_wrappingPaper
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5241,7 +5599,7 @@ GameObject:
   - component: {fileID: 8585275861160282721}
   - component: {fileID: 8298328021891088647}
   m_Layer: 0
-  m_Name: Cube
+  m_Name: geo_photoAlbum
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5334,7 +5692,7 @@ GameObject:
   - component: {fileID: 6908589463837772631}
   - component: {fileID: 1412241121192156669}
   m_Layer: 0
-  m_Name: Cube
+  m_Name: geo_welcomeSign
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5414,6 +5772,122 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!1 &7827630131031770449
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 539341750685757777}
+  - component: {fileID: 1211243904788585772}
+  m_Layer: 0
+  m_Name: Letter_ResponseEND
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &539341750685757777
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7827630131031770449}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 779983187802533402}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1211243904788585772
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7827630131031770449}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ec876ca7c816b6b429b263dc58c01213, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _interactable: {fileID: 11400000, guid: 1b745c3be179233459685cd11f7fe7ec, type: 2}
+  _event:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 7064374773639110249}
+        m_MethodName: SetActive
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!1 &7859309275325736589
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8228119131131730816}
+  - component: {fileID: 4521905378354187488}
+  m_Layer: 0
+  m_Name: Jacket_ResponseEND
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8228119131131730816
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7859309275325736589}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1589552547398249886}
+  m_RootOrder: 19
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &4521905378354187488
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7859309275325736589}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ec876ca7c816b6b429b263dc58c01213, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _interactable: {fileID: 11400000, guid: 0e8e96d8799e3f645a6c86ebba5d0a7c, type: 2}
+  _event:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 3934791662021225955}
+        m_MethodName: SetActive
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &7964965958227804085
 GameObject:
   m_ObjectHideFlags: 0
@@ -5464,11 +5938,15 @@ MonoBehaviour:
   _highlightOnHover: 0
   _highlightColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
   _highlightSize: 0
+  _animateConnectionsOnHover: 1
+  _animationsHoverTrigger: hover
   _setMaterialOnHover: 0
   _materialToSet: {fileID: 0}
   _sfxOnClick: 0
   _sfx: 0
   _moveOnClick: 1
+  _animateConnectionsOnClick: 1
+  _animationsClickTrigger: click
   _cameraMovementTime: 3
   _popupWindowOnClick: 0
   _interaction: {fileID: 11400000, guid: a79a44903fbd99c4a9e42109df0a10d7, type: 2}
@@ -5526,15 +6004,85 @@ MonoBehaviour:
   _highlightOnHover: 0
   _highlightColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
   _highlightSize: 0
+  _animateConnectionsOnHover: 1
+  _animationsHoverTrigger: hover
   _setMaterialOnHover: 0
   _materialToSet: {fileID: 0}
   _sfxOnClick: 0
   _sfx: 0
   _moveOnClick: 1
+  _animateConnectionsOnClick: 1
+  _animationsClickTrigger: click
   _cameraMovementTime: 3
-  _popupWindowOnClick: 1
+  _popupWindowOnClick: 0
   _interaction: {fileID: 11400000, guid: a92bbee773d3c11408e6960167e85e39, type: 2}
   _interactionText: Inspect Tree
+  _alternateInteraction: {fileID: 0}
+  _alternateInteractionText: Alt Interact
+  _closeMenuText: Close
+--- !u!1 &8097794419169277429
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2340174140466789642}
+  - component: {fileID: 1883469616507938063}
+  m_Layer: 0
+  m_Name: SI_GrandfatherClock
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2340174140466789642
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8097794419169277429}
+  m_LocalRotation: {x: -0, y: -0.70710576, z: -0, w: 0.70710784}
+  m_LocalPosition: {x: 11.78, y: 4, z: -25.62}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 1140533908413606756}
+  m_Father: {fileID: 1589552547398249886}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: -90.00001, z: 0}
+--- !u!114 &1883469616507938063
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8097794419169277429}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ef8ba7c8d7876444cbdd449add52f354, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _textOnHover: 1
+  _hoverTextUseObjectName: 0
+  _hoverText: Next Season
+  _highlightOnHover: 0
+  _highlightColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
+  _highlightSize: 1
+  _animateConnectionsOnHover: 1
+  _animationsHoverTrigger: hover
+  _setMaterialOnHover: 0
+  _materialToSet: {fileID: 0}
+  _sfxOnClick: 0
+  _sfx: 0
+  _moveOnClick: 1
+  _animateConnectionsOnClick: 1
+  _animationsClickTrigger: click
+  _cameraMovementTime: 3
+  _popupWindowOnClick: 1
+  _interaction: {fileID: 11400000, guid: 5137290a7af6f104fbee270028489327, type: 2}
+  _interactionText: End Season
   _alternateInteraction: {fileID: 0}
   _alternateInteractionText: Alt Interact
   _closeMenuText: Close
@@ -5588,11 +6136,15 @@ MonoBehaviour:
   _highlightOnHover: 0
   _highlightColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
   _highlightSize: 0
+  _animateConnectionsOnHover: 1
+  _animationsHoverTrigger: hover
   _setMaterialOnHover: 0
   _materialToSet: {fileID: 0}
   _sfxOnClick: 0
   _sfx: 0
   _moveOnClick: 1
+  _animateConnectionsOnClick: 1
+  _animationsClickTrigger: click
   _cameraMovementTime: 3
   _popupWindowOnClick: 1
   _interaction: {fileID: 11400000, guid: df42c39a9a838c5408c7b2531b246f11, type: 2}
@@ -5600,6 +6152,157 @@ MonoBehaviour:
   _alternateInteraction: {fileID: 0}
   _alternateInteractionText: Alt Interact
   _closeMenuText: Close
+--- !u!1 &8228794546092402137
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3835622239159822601}
+  - component: {fileID: 2812839814965965693}
+  m_Layer: 0
+  m_Name: Fireplace_ResponseEND
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &3835622239159822601
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8228794546092402137}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 779983187802533402}
+  m_RootOrder: 6
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2812839814965965693
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8228794546092402137}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ec876ca7c816b6b429b263dc58c01213, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _interactable: {fileID: 11400000, guid: 6de7ee45dec4b4640b6e6da2b32430f3, type: 2}
+  _event:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 5767066756763705857}
+        m_MethodName: SetActive
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!1 &8258352111140263817
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1140533908413606756}
+  - component: {fileID: 3389359314538972833}
+  - component: {fileID: 6300109650050986266}
+  - component: {fileID: 991666827631173742}
+  m_Layer: 0
+  m_Name: geo_grandfatherClock
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1140533908413606756
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8258352111140263817}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 4, y: 9, z: 3}
+  m_Children: []
+  m_Father: {fileID: 2340174140466789642}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!33 &3389359314538972833
+MeshFilter:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8258352111140263817}
+  m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!23 &6300109650050986266
+MeshRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8258352111140263817}
+  m_Enabled: 0
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_DynamicOccludee: 1
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 2100000, guid: 45f379d53371d264e94a028d9f3d09af, type: 2}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 3
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+--- !u!65 &991666827631173742
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8258352111140263817}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &8324368272352489016
 GameObject:
   m_ObjectHideFlags: 0
@@ -5682,7 +6385,7 @@ GameObject:
   - component: {fileID: 5438955505733767724}
   - component: {fileID: 1440957928915222965}
   m_Layer: 0
-  m_Name: Cube
+  m_Name: geo_gift
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5939,11 +6642,15 @@ MonoBehaviour:
   _highlightOnHover: 0
   _highlightColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
   _highlightSize: 0
+  _animateConnectionsOnHover: 1
+  _animationsHoverTrigger: hover
   _setMaterialOnHover: 0
   _materialToSet: {fileID: 0}
   _sfxOnClick: 0
   _sfx: 0
   _moveOnClick: 1
+  _animateConnectionsOnClick: 1
+  _animationsClickTrigger: click
   _cameraMovementTime: 3
   _popupWindowOnClick: 0
   _interaction: {fileID: 11400000, guid: dfb98206cfe33a04382e61f165eb9ad9, type: 2}
@@ -5981,7 +6688,7 @@ Transform:
   m_Children:
   - {fileID: 9164358562889301807}
   m_Father: {fileID: 1589552547398249886}
-  m_RootOrder: 11
+  m_RootOrder: 16
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &7212282062710643298
 MonoBehaviour:
@@ -6001,11 +6708,15 @@ MonoBehaviour:
   _highlightOnHover: 0
   _highlightColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
   _highlightSize: 0
+  _animateConnectionsOnHover: 1
+  _animationsHoverTrigger: hover
   _setMaterialOnHover: 0
   _materialToSet: {fileID: 0}
   _sfxOnClick: 0
   _sfx: 0
   _moveOnClick: 1
+  _animateConnectionsOnClick: 1
+  _animationsClickTrigger: click
   _cameraMovementTime: 3
   _popupWindowOnClick: 0
   _interaction: {fileID: 11400000, guid: 103afb2c95f25d14eb69e35911ba5a14, type: 2}

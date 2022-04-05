@@ -21,7 +21,7 @@ namespace Utility.Audio.Managers
         [SerializeField] private AudioMixerGroup _musicGroup = null;
 
         [Header("Sfx")]
-        [SerializeField] private SfxCollection _collection = null;
+        [SerializeField] private SfxMaterialLibrary _materialLibrary = null;
         [SerializeField] private AudioMixerGroup _sfxGroup = null;
         [SerializeField] private Transform _poolParent;
         [SerializeField] private int _initialPoolSize = 5;
@@ -78,7 +78,7 @@ namespace Utility.Audio.Managers
         }
 
         public void PlaySfx(SfxType type, Vector3 position = default) {
-            _collection.GetSfx(type).Play(position);
+            _materialLibrary.GetSfx(type).Play(position);
         }
 
         public SfxPoolAudioSource GetController() {

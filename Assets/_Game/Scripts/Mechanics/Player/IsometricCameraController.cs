@@ -314,6 +314,28 @@ public class IsometricCameraController : MonoBehaviour
         }
     }
 
+    Vector3 CameraBounds(Vector3 location)
+    {
+        if (location.x > _maxXValue)
+        {
+            location = new Vector3(_maxXValue, location.y, location.z);
+        }
+        if (location.z > _maxZValue)
+        {
+            location = new Vector3(location.x, location.y, _maxZValue);
+        }
+        if (transform.position.x < _minXValue)
+        {
+            location = new Vector3(_minXValue, location.y, location.z);
+        }
+        if (location.z < _minZValue)
+        {
+            location = new Vector3(location.x, location.y, _minZValue);
+        }
+
+        return location;
+    }
+
     //Reeee
     private void Update()
     {
@@ -447,10 +469,12 @@ public class IsometricCameraController : MonoBehaviour
                         Vector3 diff = _dragStart - Vector3.Lerp(_dragStart, hit.point, _clickDragSmooth);
                         diff.y = 0;
                         transform.position += diff;
+
+                        CameraBounds();
                     }
                 }
 
-                CameraBounds();
+                
             }
 
             #endregion

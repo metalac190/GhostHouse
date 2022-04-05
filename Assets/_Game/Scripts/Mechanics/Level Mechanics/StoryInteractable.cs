@@ -20,6 +20,9 @@ namespace Mechanics.Level_Mechanics
         [SerializeField] private Color _highlightColor = Color.yellow;
         [SerializeField] private float _highlightSize;
 
+        [SerializeField] private bool _animateConnectionsOnHover = true;
+        [SerializeField] private string _animationsHoverTrigger = "hover";
+
         [SerializeField] private bool _setMaterialOnHover = false;
         [SerializeField] private Material _materialToSet = null;
 
@@ -27,6 +30,8 @@ namespace Mechanics.Level_Mechanics
         [SerializeField] private bool _sfxOnClick = false;
         [SerializeField] private SfxType _sfx = SfxType.Default;
         [SerializeField] private bool _moveOnClick = true;
+        [SerializeField] private bool _animateConnectionsOnClick = true;
+        [SerializeField] private string _animationsClickTrigger = "click";
         [SerializeField] private float _cameraMovementTime = 3f;
 
         [Header("Interaction Window")]
@@ -93,6 +98,11 @@ namespace Mechanics.Level_Mechanics
                     meshRenderer.material = _materialToSet;
                 }
             }
+            if (_animateConnectionsOnHover && _interaction != null) {
+                foreach (var connectedAnimators in _interaction.ConnectedAnimators) {
+                    connectedAnimators.SetTrigger(_animationsHoverTrigger);
+                }
+            }
         }
 
         public override void OnHoverExit() {
@@ -113,8 +123,10 @@ namespace Mechanics.Level_Mechanics
         #region On Click
 
         public override void OnLeftClick(Vector3 mousePosition) {
-            if (_interaction == null && _alternateInteraction == null) { return; }
-            
+            if (_interaction == null && _alternateInteraction == null) {
+                return;
+            }
+
             if (_sfxOnClick) {
                 SoundManager.Instance.PlaySfx(_sfx, mousePosition);
             }
@@ -127,13 +139,17 @@ namespace Mechanics.Level_Mechanics
                 ModalWindowController.Singleton.EnableModalWindow(_closeMenuText, callback, _interactionText, altCallback, _alternateInteractionText, points, altPoints);
             }
             else if (!_popupWindowOnClick && _interaction != null) {
-                if (_interaction.Cost <= DataManager.Instance.remainingSpiritPoints)
-                {
+                if (_interaction.Cost <= DataManager.Instance.remainingSpiritPoints) {
                     _interaction.Interact();
                 }
             }
             if (_moveOnClick) {
                 IsometricCameraController.Singleton.MoveToPosition(mousePosition, _cameraMovementTime);
+            }
+            if (_animateConnectionsOnClick && _interaction != null) {
+                foreach (var connectedAnimators in _interaction.ConnectedAnimators) {
+                    connectedAnimators.SetTrigger(_animationsClickTrigger);
+                }
             }
 
             //if (_moveOnClick)
