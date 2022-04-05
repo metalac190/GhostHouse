@@ -71,8 +71,15 @@ public class DataManager : MonoBehaviour
             filePath = Path.Combine(Application.persistentDataPath, "savedata.json");
 
             // Load all file information in Awake so other game-objects can call it in Start.
-            SetDefaultValues();
-            LoadFile();
+            if(!SaveFileExists())
+            {
+                SetDefaultValues();
+                WriteFile();
+            }
+            else
+            {
+                LoadFile();
+            }
         }
         else
         {
@@ -125,44 +132,41 @@ public class DataManager : MonoBehaviour
             string fileContents = File.ReadAllText(filePath);
             JsonUtility.FromJsonOverwrite(fileContents, saveData);
 
-            level = saveData.level;
-
-            cousinsEndingPoints = saveData.cousinsEndingPoints;
-            sistersEndingPoints = saveData.sistersEndingPoints;
-            trueEndingPoints = saveData.trueEndingPoints;
-
-            // Repopulate dictionary from saved arrays
-            for(int i = 0; i < 48; i++)
-            {
-                interactions[saveData.interactionNames[i]] = saveData.interactionStates[i];
-            }
-
-            settingsLeftClickInteract = saveData.settings.leftClickInteract;
-            settingsCameraWASD = saveData.settings.cameraWASD;
-            settingsCameraArrowKeys = saveData.settings.cameraArrowKeys;
-            settingsClickDrag = saveData.settings.clickDrag;
-            settingsSensitivity = saveData.settings.sensitivity;
-            settingsMusicVolume = saveData.settings.musicVolume;
-            settingsSFXVolume = saveData.settings.sfxVolume;
-            settingsDialogueVolume = saveData.settings.dialogueVolume;
-            settingsAmbienceVolume = saveData.settings.ambienceVolume;
-            settingsWindowMode = saveData.settings.windowMode;
-            settingsContrast = saveData.settings.contrast;
-            settingsBrightness = saveData.settings.brightness;
-            settingsLargeGUI = saveData.settings.largeGUIFont;
-            settingsLargeText = saveData.settings.largeTextFont;
-            settingsTextFont = saveData.settings.textFont;
-
             try
             {
+                level = saveData.level;
+
+                cousinsEndingPoints = saveData.cousinsEndingPoints;
+                sistersEndingPoints = saveData.sistersEndingPoints;
+                trueEndingPoints = saveData.trueEndingPoints;
+
+                // Repopulate dictionary from saved arrays
+                for(int i = 0; i < 48; i++)
+                {
+                    interactions[saveData.interactionNames[i]] = saveData.interactionStates[i];
+                }
+
+                settingsLeftClickInteract = saveData.settings.leftClickInteract;
+                settingsCameraWASD = saveData.settings.cameraWASD;
+                settingsCameraArrowKeys = saveData.settings.cameraArrowKeys;
+                settingsClickDrag = saveData.settings.clickDrag;
+                settingsSensitivity = saveData.settings.sensitivity;
+                settingsMusicVolume = saveData.settings.musicVolume;
+                settingsSFXVolume = saveData.settings.sfxVolume;
+                settingsDialogueVolume = saveData.settings.dialogueVolume;
+                settingsAmbienceVolume = saveData.settings.ambienceVolume;
+                settingsWindowMode = saveData.settings.windowMode;
+                settingsContrast = saveData.settings.contrast;
+                settingsBrightness = saveData.settings.brightness;
+                settingsLargeGUI = saveData.settings.largeGUIFont;
+                settingsLargeText = saveData.settings.largeTextFont;
+                settingsTextFont = saveData.settings.textFont;
+
                 saveData.journalUnlocks.CopyTo(journalUnlocks, 0);
             }
             catch
             {
-                for(int i = 0; i < journalUnlocks.Length; i++)
-                {
-                    journalUnlocks[i] = saveData.journalUnlocks[i];
-                }
+                Debug.Log("Some error loading save file");
             }
         }
         else
@@ -219,6 +223,28 @@ public class DataManager : MonoBehaviour
         File.WriteAllText(filePath, jsonString);
     }
 
+    public void WriteSettings()
+    {
+        saveData.settings.leftClickInteract = settingsLeftClickInteract;
+        saveData.settings.cameraWASD = settingsCameraWASD;
+        saveData.settings.cameraArrowKeys = settingsCameraArrowKeys;
+        saveData.settings.clickDrag = settingsClickDrag;
+        saveData.settings.sensitivity = settingsSensitivity;
+        saveData.settings.musicVolume = settingsMusicVolume;
+        saveData.settings.sfxVolume = settingsSFXVolume;
+        saveData.settings.dialogueVolume = settingsDialogueVolume;
+        saveData.settings.ambienceVolume = settingsAmbienceVolume;
+        saveData.settings.windowMode = settingsWindowMode;
+        saveData.settings.contrast = settingsContrast;
+        saveData.settings.brightness = settingsBrightness;
+        saveData.settings.largeGUIFont = settingsLargeGUI;
+        saveData.settings.largeTextFont = settingsLargeText;
+        saveData.settings.textFont = settingsTextFont;
+
+        string jsonString = JsonUtility.ToJson(saveData, true);
+        File.WriteAllText(filePath, jsonString);
+    }
+
     // Interactables call this on their Start() to initialize themselves in the interactions dictionary
     public void SetDefaultInteraction(string name) {
         if (interactions.ContainsKey(name)) return;
@@ -255,6 +281,8 @@ public class DataManager : MonoBehaviour
         settingsClickDrag = clickDrag;
         settingsSensitivity = sensitivity;
 
+        WriteSettings();
+
         SetControlSettings();
     }
 
@@ -278,6 +306,8 @@ public class DataManager : MonoBehaviour
         settingsDialogueVolume = dialogueVol;
         settingsAmbienceVolume = ambVol;
 
+        WriteSettings();
+
         SetAudioSettings();
     }
 
@@ -300,6 +330,8 @@ public class DataManager : MonoBehaviour
         settingsLargeGUI = largeGUIFont;
         settingsLargeText = largeTextFont;
         settingsTextFont = textFont;
+
+        WriteSettings();
 
         SetVisualSettings();
     }
@@ -373,5 +405,11 @@ public class DataManager : MonoBehaviour
     public void ResetData()
     {
         interactions.Clear();
+    }
+
+    // Return whether or not the save file exists
+    public bool SaveFileExists()
+    {
+        return System.IO.File.Exists(filePath);
     }
 }
