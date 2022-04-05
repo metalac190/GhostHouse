@@ -87,7 +87,7 @@ public class DataManager : MonoBehaviour
         settingsCameraArrowKeys = true;
         settingsClickDrag = false;
         settingsSensitivity = 75;
-        settingsMusicVolume = 100;
+        settingsMusicVolume = 75;
         settingsSFXVolume = 75;
         settingsDialogueVolume = 75;
         settingsAmbienceVolume = 75;
