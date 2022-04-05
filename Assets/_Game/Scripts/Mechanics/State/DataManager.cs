@@ -223,6 +223,28 @@ public class DataManager : MonoBehaviour
         File.WriteAllText(filePath, jsonString);
     }
 
+    public void WriteSettings()
+    {
+        saveData.settings.leftClickInteract = settingsLeftClickInteract;
+        saveData.settings.cameraWASD = settingsCameraWASD;
+        saveData.settings.cameraArrowKeys = settingsCameraArrowKeys;
+        saveData.settings.clickDrag = settingsClickDrag;
+        saveData.settings.sensitivity = settingsSensitivity;
+        saveData.settings.musicVolume = settingsMusicVolume;
+        saveData.settings.sfxVolume = settingsSFXVolume;
+        saveData.settings.dialogueVolume = settingsDialogueVolume;
+        saveData.settings.ambienceVolume = settingsAmbienceVolume;
+        saveData.settings.windowMode = settingsWindowMode;
+        saveData.settings.contrast = settingsContrast;
+        saveData.settings.brightness = settingsBrightness;
+        saveData.settings.largeGUIFont = settingsLargeGUI;
+        saveData.settings.largeTextFont = settingsLargeText;
+        saveData.settings.textFont = settingsTextFont;
+
+        string jsonString = JsonUtility.ToJson(saveData, true);
+        File.WriteAllText(filePath, jsonString);
+    }
+
     // Interactables call this on their Start() to initialize themselves in the interactions dictionary
     public void SetDefaultInteraction(string name) {
         if (interactions.ContainsKey(name)) return;
@@ -259,7 +281,7 @@ public class DataManager : MonoBehaviour
         settingsClickDrag = clickDrag;
         settingsSensitivity = sensitivity;
 
-        WriteFile();
+        WriteSettings();
 
         SetControlSettings();
     }
@@ -284,7 +306,7 @@ public class DataManager : MonoBehaviour
         settingsDialogueVolume = dialogueVol;
         settingsAmbienceVolume = ambVol;
 
-        WriteFile();
+        WriteSettings();
 
         SetAudioSettings();
     }
@@ -309,7 +331,7 @@ public class DataManager : MonoBehaviour
         settingsLargeText = largeTextFont;
         settingsTextFont = textFont;
 
-        WriteFile();
+        WriteSettings();
 
         SetVisualSettings();
     }
