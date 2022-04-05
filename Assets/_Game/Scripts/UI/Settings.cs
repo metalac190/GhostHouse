@@ -127,6 +127,7 @@ public class Settings : MonoBehaviour
     // Update audio mixer controller with audio values
     private void SetAudioSettings()
     {
+        if(audioMixerController == null) return;
         // Assuming 0 to 100 instead of 0 to 1
         audioMixerController.SetMusicVolume(music * 0.01f);
         audioMixerController.SetSfxVolume(SFX * 0.01f);
