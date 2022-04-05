@@ -19,6 +19,7 @@ namespace Utility.Audio.Clips
         [SerializeField] private AudioMixerGroup _mixerGroup = null;
         [SerializeField] private SfxPriorityLevel _priority = SfxPriorityLevel.Highest;
         [SerializeField, Range(0, 1)] private float _volume = 1;
+        [SerializeField, Range(0, 1)] private float _pauseVolume = 1;
 
         [Header("Fade Settings")]
         [SerializeField] private float _fadeInTime = 1;
@@ -39,9 +40,14 @@ namespace Utility.Audio.Clips
         }
 
         public override SfxProperties GetSourceProperties() {
+            return GetSourceProperties(false);
+        }
+
+        public SfxProperties GetSourceProperties(bool pausedTrack) {
             if (TrackIsNull) return new SfxProperties(true);
-            var p = new SfxProperties(_track, _mixerGroup, (int)_priority, _volume, 1, 0, 1, Vector3.zero, false,
-                0, AudioRolloffMode.Linear, 100, 100, 0, 1);
+            var track = pausedTrack && _trackWhenPaused != null ? _trackWhenPaused : _track;
+            var p = new SfxProperties(track, _mixerGroup, (int)_priority, pausedTrack ? _pauseVolume : _volume, 1, 0, 1,
+                Vector3.zero, false, 0, AudioRolloffMode.Linear, 100, 100, 0, 1);
             return p;
         }
 
