@@ -7,6 +7,8 @@ public class Entry : MonoBehaviour
     [SerializeField] private GameObject _locked = null;
     [SerializeField] private GameObject _unlocked = null;
 
+    public Interactable Interactable => _interactable;
+
     private void OnEnable() {
         if (_interactable == null) return;
         bool unlocked = GetUnlocked(_interactable.name);
