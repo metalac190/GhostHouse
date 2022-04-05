@@ -167,6 +167,8 @@ public class DataManager : MonoBehaviour
             catch
             {
                 Debug.Log("Some error loading save file");
+                SetDefaultValues();
+                WriteFile();
             }
         }
         else
