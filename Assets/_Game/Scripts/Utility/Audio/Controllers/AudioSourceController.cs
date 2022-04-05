@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using UnityEngine;
+using UnityEngine.Audio;
 using Utility.Audio.Controllers.Base;
 using Utility.Audio.Helper;
 using Utility.Buttons;
@@ -12,6 +13,7 @@ namespace Utility.Audio.Controllers
     {
         [SerializeField] private bool _enableSounds = true;
         [SerializeField] private SfxReference _sfx = new SfxReference();
+        [SerializeField] private AudioMixerGroup _overrideMixer = null;
         [SerializeField] private bool _playOnStart = true;
         [SerializeField] private bool _looping = true;
         [SerializeField, MinMaxRange(0, 100)] private RangedFloat _loopDelay = new RangedFloat(0, 0);
@@ -48,6 +50,9 @@ namespace Utility.Audio.Controllers
             if (_sfx == null) return;
 
             SetSourceProperties(_sfx.GetSourceProperties());
+            if (_overrideMixer != null) {
+                Source.outputAudioMixerGroup = _overrideMixer;
+            }
             if (_playOnStart) {
                 if (_looping) {
                     if (_loopDelay.MaxValue > 0) {

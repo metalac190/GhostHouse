@@ -49,7 +49,7 @@ namespace Utility.Audio.Managers
             _timeToLoop = _currentController.PlayMusic(musicClip, delay);
             // Paused Track
             _currentPauseController = _poolManager.GetObject();
-            _currentPauseController.PlayMusic(musicClip, delay);
+            _currentPauseController.PlayMusic(musicClip, delay, true);
             // Play Tracks
             SetMusicVolume();
             _playingTrack = true;

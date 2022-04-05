@@ -16,9 +16,9 @@ namespace Utility.Audio.Controllers
             Source.outputAudioMixerGroup = SoundManager.MusicGroup;
         }
 
-        public float PlayMusic(MusicTrack track, float delay) {
+        public float PlayMusic(MusicTrack track, float delay, bool pausedTrack = false) {
             _current = track;
-            SetSourceProperties(track.GetSourceProperties());
+            SetSourceProperties(track.GetSourceProperties(pausedTrack));
             StartCoroutine(FadeRoutine(track.FadeInTime, true, delay));
             return Time.time + delay + track.TrackLength - track.FadeOutTime;
         }
