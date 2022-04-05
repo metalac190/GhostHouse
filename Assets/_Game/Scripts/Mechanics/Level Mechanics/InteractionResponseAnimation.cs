@@ -5,11 +5,9 @@ public class InteractionResponseAnimation : InteractableResponseBase
     [SerializeField] private Animator _animator;
 
     private void Awake() {
-        if (_animator == null) {
-            _animator = GetComponent<Animator>();
-        }
-        if (_animator == null) {
-            Debug.LogError("Interaction Response Animation hooked up to object without any Animator!", gameObject);
+        if (_animator == null)
+        {
+            _animator = GetAnimator();
         }
     }
 
@@ -31,8 +29,9 @@ public class InteractionResponseAnimation : InteractableResponseBase
     }
 
     private void OnValidate() {
-        if (_animator == null) {
-            _animator = GetComponent<Animator>();
+        if (_animator == null)
+        {
+            _animator = GetAnimator();
         }
     }
 

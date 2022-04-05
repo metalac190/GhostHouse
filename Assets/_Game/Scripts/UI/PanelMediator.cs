@@ -13,6 +13,16 @@ public class PanelMediator : MonoBehaviour
     {
     }
 
+    private void OnEnable() {
+        DragSpeedSlider.value = Settings.Instance.dragSpeed;
+        MusicSlider.value = Settings.Instance.music;
+        SFXSlider.value = Settings.Instance.SFX;
+        DialogSlider.value = Settings.Instance.dialog;
+        AmbienceSlider.value = Settings.Instance.ambience;
+        ContrastSlider.value = Settings.Instance.contrast;
+        BrightnessSlider.value = Settings.Instance.brightness;
+    }
+
     //Methods to save UI values
     public void SaveControls()
     {

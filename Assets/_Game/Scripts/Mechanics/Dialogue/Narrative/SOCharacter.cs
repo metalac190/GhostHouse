@@ -60,6 +60,9 @@ namespace Mechanics.Dialog
                 case "surprised":
                     return CharacterEmotion.Surprised;
 
+                case "sad":
+                    return CharacterEmotion.Sad;
+
                 default:
                     Debug.LogWarning($"Unable to find CharacterEmotion for {str}");
                     return CharacterEmotion.Sad;

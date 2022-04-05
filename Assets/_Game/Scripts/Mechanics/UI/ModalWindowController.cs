@@ -19,6 +19,7 @@ public class ModalWindowController : MonoBehaviour
 
     //Actual Connections to Window
     [SerializeField] private GameObject _modalWindow = null;
+    [SerializeField] private GameObject _raycastBlock = null;
     [SerializeField] private SfxUiLibrary _sfxUiLibrary = null;
     [SerializeField] private Button _mainInteractionButton = null;
     [SerializeField] private TextMeshProUGUI _mainInteractionText = null;
@@ -119,6 +120,7 @@ public class ModalWindowController : MonoBehaviour
         }
 
         _modalWindow.SetActive(true);
+        if (_raycastBlock != null) _raycastBlock.SetActive(true);
         _enabled = true;
         PauseMenu.Singleton.PreventPausing(false);
         _sfxUiLibrary.OnInteractionWindowOpen();
@@ -134,6 +136,7 @@ public class ModalWindowController : MonoBehaviour
         _alternateInteractionButton.onClick.RemoveAllListeners();
         _alternateInteractionText.text = "Interact";
         _modalWindow.SetActive(false);
+        if (_raycastBlock != null) _raycastBlock.SetActive(false);
         _enabled = false;
         if (PauseMenu.Singleton != null) {
             PauseMenu.Singleton.PreventPausing(true);
