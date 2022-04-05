@@ -10,6 +10,7 @@ namespace Utility.Audio.Controllers
     {
         private MusicTrack _current;
         private bool _routineActive;
+        private float _musicVolume;
 
         public void ResetSource() {
             Source.outputAudioMixerGroup = SoundManager.MusicGroup;
@@ -19,8 +20,43 @@ namespace Utility.Audio.Controllers
             _current = track;
             SetSourceProperties(track.GetSourceProperties());
             StartCoroutine(FadeRoutine(track.FadeInTime, true, delay));
-            Play();
-            return Time.time + track.TrackLength - track.FadeOutTime;
+            return Time.time + delay + track.TrackLength - track.FadeOutTime;
+        }
+
+        public void SetMusicVolume(float volume) {
+            _musicVolume = volume;
+            if (!_routineActive) SetCustomVolume(_musicVolume);
+        }
+
+        public void StopMusic() {
+            StartCoroutine(FadeRoutine(_current.FadeOutTime, false));
+        }
+
+        private IEnumerator FadeRoutine(float fadeLength, bool fadeIn, float delay = 0) {
+            for (float t = 0; t < delay; t += Time.deltaTime) {
+                yield return null;
+            }
+            if (_routineActive) {
+                yield return null;
+            }
+            if (fadeIn) {
+                Play();
+            }
+            _routineActive = true;
+            for (float t = 0; t < fadeLength; t += Time.deltaTime) {
+                float delta = t / fadeLength;
+                SetCustomVolume(_current.Evaluate(delta, fadeIn) * _musicVolume);
+                yield return null;
+            }
+            _routineActive = false;
+            if (!fadeIn) {
+                Stop();
+            }
+        }
+
+        public override void Stop() {
+            base.Stop();
+            SoundManager.MusicManager.ReturnController(this);
         }
 
         /*
@@ -43,33 +79,5 @@ namespace Utility.Audio.Controllers
             Play();
         }
         */
-
-        public void StopMusic() {
-            StartCoroutine(FadeRoutine(_current.FadeOutTime, false));
-        }
-
-        private IEnumerator FadeRoutine(float fadeLength, bool fadeIn, float delay = 0, float startTime = 0) {
-            if (_routineActive) {
-                yield return null;
-            }
-            for (float t = 0; t < delay; t += Time.deltaTime) {
-                yield return null;
-            }
-            _routineActive = true;
-            for (float t = startTime; t < fadeLength; t += Time.time) {
-                float delta = t / fadeLength;
-                SetCustomVolume(_current.Evaluate(delta, fadeIn));
-                yield return null;
-            }
-            _routineActive = false;
-            if (!fadeIn) {
-                Stop();
-            }
-        }
-
-        public override void Stop() {
-            base.Stop();
-            SoundManager.MusicManager.ReturnController(this);
-        }
     }
 }
