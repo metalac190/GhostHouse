@@ -120,7 +120,7 @@ public class ModalWindowController : MonoBehaviour
         }
 
         _modalWindow.SetActive(true);
-        _raycastBlock.SetActive(true);
+        if (_raycastBlock != null) _raycastBlock.SetActive(true);
         _enabled = true;
         PauseMenu.Singleton.PreventPausing(false);
         _sfxUiLibrary.OnInteractionWindowOpen();
@@ -136,7 +136,7 @@ public class ModalWindowController : MonoBehaviour
         _alternateInteractionButton.onClick.RemoveAllListeners();
         _alternateInteractionText.text = "Interact";
         _modalWindow.SetActive(false);
-        _raycastBlock.SetActive(false);
+        if (_raycastBlock != null) _raycastBlock.SetActive(false);
         _enabled = false;
         if (PauseMenu.Singleton != null) {
             PauseMenu.Singleton.PreventPausing(true);
