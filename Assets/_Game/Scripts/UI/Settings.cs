@@ -106,11 +106,13 @@ public class Settings : MonoBehaviour
     [Button(Mode = ButtonMode.NotPlaying)]
     public void SaveAudioSettings() {
         DataManager.Instance.SaveAudioSettings(music, SFX, dialog, ambience);
+        SetAudioSettings();
     }
 
     [Button(Mode = ButtonMode.NotPlaying)]
     public void SaveVisualSettings() {
         DataManager.Instance.SaveVisualSettings(isWindowed, contrast, brightness, largeGUIFont, largeTextFont, textFont);
+        SetVisualSettings();
     }
 
     // Update the camera controller with the new settings
