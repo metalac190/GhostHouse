@@ -18,6 +18,8 @@ public class IsometricCameraController : MonoBehaviour
     DialogueRunner _dialogueRunner = null;
 
 
+    [ReadOnly] public bool gamePaused = false;
+
 
     [Header("Traditional Camera Movement Settings")]
     [SerializeField] public bool _enableWASDMovement = true;
@@ -357,7 +359,7 @@ public class IsometricCameraController : MonoBehaviour
 
 
 
-        if (!_interacting)
+        if (!_interacting && !gamePaused)
         {
             if (_enableWASDMovement && !_dialogueRunner.IsDialogueRunning) { HandleInput(); }
 
