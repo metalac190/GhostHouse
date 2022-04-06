@@ -8,34 +8,28 @@ namespace Mechanics.Feedback
     {
         [Header("Buttons")]
         [SerializeField] private SfxReference _hoverOverButton = new SfxReference(true);
-        [SerializeField] private SfxReference _hoverOffButton = new SfxReference(true);
         [SerializeField] private SfxReference _clickButtonGeneric = new SfxReference(true);
 
-        public void OnHoverOverButton() => _hoverOverButton.Play();
-        public void OnHoverOffButton() => _hoverOffButton.Play();
-        public void OnClickButtonGeneric() => _clickButtonGeneric.Play();
+        public void OnButtonHover() => _hoverOverButton.Play();
+        public void OnButtonClick() => _clickButtonGeneric.Play();
 
         [Header("Sliders")]
-        [SerializeField] private SfxReference _hoverOverSlider = new SfxReference(true);
-        [SerializeField] private SfxReference _hoverOffSlider = new SfxReference(true);
         [SerializeField] private SfxReference _startDraggingSlider = new SfxReference(true);
         [SerializeField] private SfxReference _dragSlider = new SfxReference(true);
-        [SerializeField] private SfxReference _stopDraggingSlider = new SfxReference(true);
-
-        public void OnHoverOverSlider() => _hoverOverSlider.Play();
-        public void OnHoverOffSlider() => _hoverOffSlider.Play();
-        public void OnStartDraggingSlider() => _startDraggingSlider.Play();
-        public void OnDragSlider() => _dragSlider.Play();
-        public void OnStopDraggingSlider() => _stopDraggingSlider.Play();
+        
+        public void OnSliderClick() => _startDraggingSlider.Play();
+        public void OnSliderDrag() => _dragSlider.Play();
 
         [Header("Spirit Points")]
         [SerializeField] private SfxReference _spendSpiritPoint = new SfxReference(true);
         [SerializeField] private SfxReference _noSpiritPointsLeft = new SfxReference(true);
         [SerializeField] private SfxReference _interactionWindowOpen = new SfxReference(true);
+        [SerializeField] private SfxReference _interactionWindowClose = new SfxReference(true);
 
         public void OnSpendSpiritPoint() => _spendSpiritPoint.Play();
         public void OnNoSpiritPointsLeft() => _noSpiritPointsLeft.Play();
         public void OnInteractionWindowOpen() => _interactionWindowOpen.Play();
+        public void OnInteractionWindowClose() => _interactionWindowClose.Play();
 
         [Header("Main Menu")]
         [SerializeField] private SfxReference _startGame = new SfxReference(true);
@@ -54,14 +48,14 @@ namespace Mechanics.Feedback
         [SerializeField] private SfxReference _closeJournal = new SfxReference(true);
         [SerializeField] private SfxReference _switchPageLeft = new SfxReference(true);
         [SerializeField] private SfxReference _switchPageRight = new SfxReference(true);
-        [SerializeField] private SfxReference _clickTab = new SfxReference(true);
+        [SerializeField] private SfxReference _hoverTab = new SfxReference(true);
 
         public void OnJournalNotification() => _journalNotification.Play();
-        public void OnOpenJournal() => _openJournal.Play();
-        public void OnCloseJournal() => _closeJournal.Play();
-        public void OnSwitchPageLeft() => _switchPageLeft.Play();
-        public void OnSwitchPageRight() => _switchPageRight.Play();
-        public void OnClickTab() => _clickTab.Play();
+        public void OnJournalOpen() => _openJournal.Play();
+        public void OnJournalClose() => _closeJournal.Play();
+        public void OnJournalPageLeft() => _switchPageLeft.Play();
+        public void OnJournalPageRight() => _switchPageRight.Play();
+        public void OnJournalHoverTab() => _hoverTab.Play();
 
         [Header("Dialogue")]
         [SerializeField] private SfxReference _dialogueWindowAppears = new SfxReference(true);

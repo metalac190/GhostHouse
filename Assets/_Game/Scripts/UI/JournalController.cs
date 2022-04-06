@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using Mechanics.Feedback;
 using UnityEngine;
 using UnityEngine.UI;
+using Utility.Audio.Helper;
 using Utility.ReadOnly;
 
 public class JournalController : MonoBehaviour
@@ -12,6 +14,7 @@ public class JournalController : MonoBehaviour
     [SerializeField] private List<GameObject> _settingsPages = new List<GameObject>();
     [SerializeField] private List<GameObject> _pausePages = new List<GameObject>();
     [SerializeField] private GameObject _quitConfirmation = null;
+    [SerializeField] private bool _hideButtonsOnPausePage = true;
 
     [Header("Seasonal Pages")]
     [SerializeField] private List<GameObject> _springPages = new List<GameObject>();
@@ -31,6 +34,12 @@ public class JournalController : MonoBehaviour
     [SerializeField, ReadOnly] private PageEnum _currentPage = PageEnum.PauseMenu;
     [SerializeField, ReadOnly] private int _currentPageNum = 0;
 
+    [Header("Sfx")]
+    [SerializeField] private SfxReference _journalOpen = new SfxReference(true);
+    [SerializeField] private SfxReference _journalClose = new SfxReference(true);
+    [SerializeField] private SfxReference _journalPageLeft = new SfxReference(true);
+    [SerializeField] private SfxReference _journalPageRight = new SfxReference(true);
+
     public void OpenSettings(int pageNum = 0) => OpenPage(PageEnum.Settings, pageNum);
     public void OpenPauseMenu(int pageNum = 0) => OpenPage(PageEnum.PauseMenu, pageNum);
     public void OpenSpring(int pageNum = 0) => OpenPage(PageEnum.Spring, pageNum);
@@ -40,11 +49,24 @@ public class JournalController : MonoBehaviour
     public void OpenCharacters(int pageNum = 0) => OpenPage(PageEnum.Characters, pageNum);
     public void OpenEndings(int pageNum = 0) => OpenPage(PageEnum.Endings, pageNum);
 
+    public void OpenJournal() {
+        _journalOpen.Play();
+        OpenPage(PageEnum.PauseMenu);
+    }
+
     public bool OpenPage(PageEnum pageEnum, int pageNum = 0) {
         var pageList = GetPageList(pageEnum);
         if (!CheckPageValid(pageList, pageNum)) return false;
         if (pageEnum == _currentPage && pageNum == _currentPageNum) {
-            return NextPage(false);
+            return NextPageWithinSection();
+        }
+
+        bool pageRight = 10 * (int)pageEnum + pageNum > 10 * (int)_currentPage + _currentPageNum;
+        if (pageRight) {
+            _journalPageLeft.Play();
+        }
+        else {
+            _journalPageRight.Play();
         }
 
         CloseAll();
@@ -57,14 +79,9 @@ public class JournalController : MonoBehaviour
         return true;
     }
 
-    public void NextPage() => NextPage(true);
-    public bool NextPage(bool canUseNextSection) {
-        int pageNum = _currentPageNum + 1;
-        if (OpenPage(_currentPage, pageNum)) {
+    public bool NextPage() {
+        if (NextPageWithinSection()) {
             return true;
-        }
-        if (!canUseNextSection) {
-            return false;
         }
         var nextPage = GetNextPage(_currentPage);
         if (nextPage == _currentPage) {
@@ -72,6 +89,11 @@ public class JournalController : MonoBehaviour
             return false;
         }
         return OpenPage(nextPage);
+    }
+
+    public bool NextPageWithinSection() {
+        int pageNum = _currentPageNum + 1;
+        return OpenPage(_currentPage, pageNum);
     }
 
     public void PreviousPage() {
@@ -95,6 +117,7 @@ public class JournalController : MonoBehaviour
                 _quitConfirmation.SetActive(false);
                 return false;
             }
+            _journalClose.Play();
             return true;
         }
         OpenPauseMenu();
@@ -102,9 +125,10 @@ public class JournalController : MonoBehaviour
     }
 
     private void SetNavigationButtons() {
-        bool pageCheck = !(_currentPage == PageEnum.Settings || _currentPage == PageEnum.PauseMenu);
-        _previousButton.gameObject.SetActive(pageCheck);
-        bool lastCheck = !(_currentPage == PageEnum.Endings && _currentPageNum < GetPageList(_currentPage).Count);
+        bool pageCheck = !(_hideButtonsOnPausePage && _currentPage == PageEnum.PauseMenu);
+        bool firstCheck = !(_currentPage == PageEnum.Settings && _currentPageNum == 0);
+        _previousButton.gameObject.SetActive(pageCheck && firstCheck);
+        bool lastCheck = !(_currentPage == PageEnum.Endings && _currentPageNum >= GetPageList(_currentPage).Count - 1);
         _nextButton.gameObject.SetActive(pageCheck && lastCheck);
     }
 

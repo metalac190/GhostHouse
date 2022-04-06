@@ -26,7 +26,6 @@ public class Tab : MonoBehaviour
     public void OpenPage()
     {
         journal.ActivatePage(associatedPage);
-        if (journal.SfxUiLibrary != null) journal.SfxUiLibrary.OnClickTab();
 
         //Move appropiate tabs when this happens
         journal.UpdateTabs();

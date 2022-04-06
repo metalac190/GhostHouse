@@ -10,8 +10,7 @@ public class Entry : MonoBehaviour
     public Interactable Interactable => _interactable;
 
     private void OnEnable() {
-        if (_interactable == null) return;
-        bool unlocked = GetUnlocked(_interactable.name);
+        bool unlocked = _interactable != null && GetUnlocked(_interactable.name);
 
         if (_locked != null) _locked.gameObject.SetActive(!unlocked);
         if (_unlocked != null) _unlocked.gameObject.SetActive(unlocked);
