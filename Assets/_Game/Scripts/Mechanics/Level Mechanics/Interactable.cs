@@ -38,7 +38,7 @@ namespace Mechanics.Level_Mechanics
         [SerializeField] private SfxReference _sfxOnInteract = new SfxReference();
 
         public List<MeshRenderer> ConnectedMeshRenderers { get; set; }
-        public List<Animator> ConnectedAnimators { get; set; }
+        public List<Animator> ConnectedAnimators { get; set; } = new List<Animator>();
 
         public int Cost => _cost;
 
