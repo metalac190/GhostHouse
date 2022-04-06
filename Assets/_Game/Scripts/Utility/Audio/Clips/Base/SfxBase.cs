@@ -7,7 +7,8 @@ namespace Utility.Audio.Clips.Base
 {
     public abstract class SfxBase : ScriptableObject
     {
-        public SfxPoolAudioSource Play(Vector3 position = default) {
+        public void Play() => Play(Vector3.zero);
+        public SfxPoolAudioSource Play(Vector3 position) {
             var sourceProperties = GetSourceProperties();
             return AudioHelper.PlayClip(sourceProperties, position);
         }

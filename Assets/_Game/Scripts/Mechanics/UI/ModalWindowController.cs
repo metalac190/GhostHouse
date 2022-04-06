@@ -7,6 +7,7 @@ using TMPro;
 using System;
 using Mechanics.Feedback;
 using UI;
+using Utility.Audio.Helper;
 
 public class ModalWindowController : MonoBehaviour
 {
@@ -20,7 +21,6 @@ public class ModalWindowController : MonoBehaviour
     //Actual Connections to Window
     [SerializeField] private GameObject _modalWindow = null;
     [SerializeField] private GameObject _raycastBlock = null;
-    [SerializeField] private SfxUiLibrary _sfxUiLibrary = null;
     [SerializeField] private Button _mainInteractionButton = null;
     [SerializeField] private TextMeshProUGUI _mainInteractionText = null;
     [SerializeField] private List<Image> _spiritPoints = new List<Image>();
@@ -33,6 +33,14 @@ public class ModalWindowController : MonoBehaviour
 
     [Header("HUD")]
     [SerializeField] private PlayerHUD _playerHud = null;
+
+    [Header("Sfx")]
+    [SerializeField] private SfxReference _openWindow = new SfxReference(true);
+    [SerializeField] private SfxReference _cancelOrCloseWindow = new SfxReference(true);
+    [SerializeField] private SfxReference _journalNotification = new SfxReference(true);
+    [SerializeField] private SfxReference _spendSpiritPoint = new SfxReference(true);
+    [SerializeField] private SfxReference _spendAllSpiritPoints = new SfxReference(true);
+
 
     public static event Action OnInteractStart = delegate { };
     public static event Action OnInteractEnd = delegate { };
@@ -98,7 +106,7 @@ public class ModalWindowController : MonoBehaviour
             _mainInteractionButton.interactable = canSpendPoints;
             if (canSpendPoints) {
                 _mainInteractionButton.onClick.AddListener(callback.Invoke);
-                _mainInteractionButton.onClick.AddListener(DisableModalWindow);
+                _mainInteractionButton.onClick.AddListener(InteractionCloseWindow);
             }
             if (!string.IsNullOrEmpty(interactButtonText)) {
                 _mainInteractionText.text = interactButtonText;
@@ -112,7 +120,7 @@ public class ModalWindowController : MonoBehaviour
             _alternateInteractionButton.interactable = canSpendAltPoints;
             if (canSpendAltPoints) {
                 _alternateInteractionButton.onClick.AddListener(altCallback.Invoke);
-                _alternateInteractionButton.onClick.AddListener(DisableModalWindow);
+                _alternateInteractionButton.onClick.AddListener(InteractionCloseWindow);
             }
             if (!string.IsNullOrEmpty(altInteractButtonText)) {
                 _alternateInteractionText.text = altInteractButtonText;
@@ -123,10 +131,14 @@ public class ModalWindowController : MonoBehaviour
         if (_raycastBlock != null) _raycastBlock.SetActive(true);
         _enabled = true;
         PauseMenu.Singleton.PreventPausing(false);
-        _sfxUiLibrary.OnInteractionWindowOpen();
+        _openWindow.Play();
     }
 
-    public void DisableModalWindow() {
+    public void InteractionCloseWindow() {
+        DisableModalWindow(false);
+    }
+
+    public void DisableModalWindow(bool playSound = true) {
         if (_playerHud != null) _playerHud.UpdateSpiritPoints();
         OnInteractEnd?.Invoke();
         _mainInteractionButton.gameObject.SetActive(false);
@@ -144,11 +156,13 @@ public class ModalWindowController : MonoBehaviour
         if (IsometricCameraController.Singleton != null) {
             IsometricCameraController.Singleton._interacting = false;
         }
+        if (playSound) _cancelOrCloseWindow.Play();
     }
 
     public void AddJournalNotification() {
-        if (_sfxUiLibrary != null) _sfxUiLibrary.OnJournalNotification();
-        if (_playerHud != null) _playerHud.AddJournalNotification();
+        if (_playerHud == null) return;
+        _playerHud.AddJournalNotification();
+        _journalNotification.Play();
     }
 
     public void HideHudOnPause(bool pause) {
@@ -159,10 +173,10 @@ public class ModalWindowController : MonoBehaviour
 
     public void PlaySpiritPointSpentSounds(bool usedAll) {
         if (usedAll) {
-            _sfxUiLibrary.OnNoSpiritPointsLeft();
+            _spendAllSpiritPoints.Play();
         }
         else {
-            _sfxUiLibrary.OnSpendSpiritPoint();
+            _spendSpiritPoint.Play();
         }
     }
 

@@ -11,7 +11,6 @@ public class PauseMenu : MonoBehaviour
 
     //Menu Panels
     [SerializeField] JournalController journal = null;
-    [SerializeField] SfxUiLibrary sfxUiLibrary = null;
 
     private void Awake()
     {
@@ -59,6 +58,10 @@ public class PauseMenu : MonoBehaviour
         if (journal != null)
         {
             journal.gameObject.SetActive(isPaused);
+            if (isPaused) {
+                // TODO: Open to Journal Notification!
+                journal.OpenJournal();
+            }
         }
         //Time.timeScale = isPaused ? 0f : 1f;
     }
@@ -67,7 +70,6 @@ public class PauseMenu : MonoBehaviour
     {
         if (!canPause || isPaused) return;
         isPaused = true;
-        sfxUiLibrary.OnOpenJournal();
         UpdatePaused();
     }
 
@@ -76,7 +78,6 @@ public class PauseMenu : MonoBehaviour
         if (!isPaused) return;
         if (journal.ClosePage()) {
             isPaused = false;
-            sfxUiLibrary.OnCloseJournal();
             UpdatePaused();
         }
     }
