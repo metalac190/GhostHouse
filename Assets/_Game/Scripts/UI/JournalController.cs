@@ -79,16 +79,16 @@ public class JournalController : MonoBehaviour
         return true;
     }
 
-    public bool NextPage() {
+    public void NextPage() {
         if (NextPageWithinSection()) {
-            return true;
+            return;
         }
         var nextPage = GetNextPage(_currentPage);
         if (nextPage == _currentPage) {
             // No next page exists
-            return false;
+            return;
         }
-        return OpenPage(nextPage);
+        OpenPage(nextPage);
     }
 
     public bool NextPageWithinSection() {
