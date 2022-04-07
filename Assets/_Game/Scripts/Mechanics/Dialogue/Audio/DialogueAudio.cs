@@ -76,6 +76,13 @@ namespace Mechanics.Dialog
             _speaker = _characterAudioPool.GetCharacter(line.CharacterName);
             _playLastClip = false;
 
+            if (_speaker.PrimaryClip == null && _speaker.SecondaryClip == null
+                && _speaker.TertiaryClip == null && _speaker.QuaternaryClip == null)
+            {
+                Debug.LogWarning($"\"{line.CharacterName}\" has no dialog audio.");
+                return;
+            }
+
             _indexOfLastWord = line.TextWithoutCharacterName.Text.TrimEnd().LastIndexOf(" ");
             if (_indexOfLastWord < 0)
             {

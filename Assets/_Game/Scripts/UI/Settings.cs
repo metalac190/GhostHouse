@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using Utility.Buttons;
+using Utility.Audio.Managers;
 
 //Settings menus change settings values
 public class Settings : MonoBehaviour
@@ -35,10 +36,24 @@ public class Settings : MonoBehaviour
     [Range(0, 2)]
     public int textFont = 0;
 
+    // Lazy load the Camera Controller
+    private IsometricCameraController cameraController;
+    private IsometricCameraController CameraController
+    {
+        get
+        {
+            if(cameraController == null) cameraController = FindObjectOfType<IsometricCameraController>();
+            return cameraController;
+        }
+    }
+
+    // Reference to AudioMixerController to control volume levels
+    AudioMixerController audioMixerController = null;
 
     private void Awake() {
         if (Instance == null) {
             Instance = this;
+            audioMixerController = GetComponent<AudioMixerController>();
             DontDestroyOnLoad(this.gameObject);
         }
         else {
@@ -85,15 +100,51 @@ public class Settings : MonoBehaviour
     [Button(Spacing = 10, Mode = ButtonMode.NotPlaying)]
     public void SaveControlSettings() {
         DataManager.Instance.SaveControlSettings(leftClickInteract, useWASD, useArrowKeys, useClickNDrag, dragSpeed);
+        SetControlSettings();
     }
 
     [Button(Mode = ButtonMode.NotPlaying)]
     public void SaveAudioSettings() {
         DataManager.Instance.SaveAudioSettings(music, SFX, dialog, ambience);
+        SetAudioSettings();
     }
 
     [Button(Mode = ButtonMode.NotPlaying)]
     public void SaveVisualSettings() {
         DataManager.Instance.SaveVisualSettings(isWindowed, contrast, brightness, largeGUIFont, largeTextFont, textFont);
+        SetVisualSettings();
+    }
+
+    // Update the camera controller with the new settings
+    private void SetControlSettings()
+    {
+        // Set Control settings on camera controller
+        if(CameraController == null) return;
+        CameraController._enableWASDMovement = useWASD;
+        CameraController._enableClickDragMovement = useClickNDrag;
+    }
+
+    // Update audio mixer controller with audio values
+    private void SetAudioSettings()
+    {
+        if(audioMixerController == null) return;
+        // Assuming 0 to 100 instead of 0 to 1
+        audioMixerController.SetMusicVolume(music * 0.01f);
+        audioMixerController.SetSfxVolume(SFX * 0.01f);
+        audioMixerController.SetDialogueVolume(dialog * 0.01f);
+        audioMixerController.SetAmbienceVolume(ambience * 0.01f);
+    }
+
+    // Update visual settings in the font manager and elsewhere
+    private void SetVisualSettings()
+    {
+        // set font
+        FontManager fontManager = FontManager.Instance;
+        fontManager.UpdateAllText((FontMode)textFont);
+
+        // set post-processing volume
+        GraphicsController.ScreenMode = isWindowed ? FullScreenMode.FullScreenWindow : FullScreenMode.ExclusiveFullScreen;
+        GraphicsController.Exposure = brightness;
+        GraphicsController.Contrast = contrast;
     }
 }

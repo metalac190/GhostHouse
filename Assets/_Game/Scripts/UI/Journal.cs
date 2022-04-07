@@ -43,14 +43,14 @@ public class Journal : MonoBehaviour
     public void NextPage()
     {
         int currentIndex = activePage.index;
-        if (_sfxUiLibrary != null) _sfxUiLibrary.OnSwitchPageRight();
+        if (_sfxUiLibrary != null) _sfxUiLibrary.OnJournalPageRight();
         ActivatePage(currentIndex + 1);
     }
 
     public void PreviousPage()
     {
         int currentIndex = activePage.index;
-        if (_sfxUiLibrary != null) _sfxUiLibrary.OnSwitchPageLeft();
+        if (_sfxUiLibrary != null) _sfxUiLibrary.OnJournalPageLeft();
         ActivatePage(currentIndex - 1);
     }
 

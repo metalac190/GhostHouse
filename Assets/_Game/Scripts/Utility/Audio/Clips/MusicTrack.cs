@@ -12,13 +12,14 @@ namespace Utility.Audio.Clips
         [Header("Music Track Settings")]
         [SerializeField] private AudioClip _track = null;
         [SerializeField, ReadOnly] private float _trackTime;
-        [SerializeField] private AudioClip _trackWhenPaused = null;
-        [SerializeField, ReadOnly] private float _pausedTrackTime;
+        [SerializeField, Range(0, 1)] private float _volume = 1;
+        [SerializeField] private AudioMixerGroup _mixerGroup = null;
 
         [Header("Volume Settings")]
-        [SerializeField] private AudioMixerGroup _mixerGroup = null;
-        [SerializeField] private SfxPriorityLevel _priority = SfxPriorityLevel.Highest;
-        [SerializeField, Range(0, 1)] private float _volume = 1;
+        [SerializeField] private AudioClip _trackWhenPaused = null;
+        [SerializeField, ReadOnly] private float _pausedTrackTime;
+        [SerializeField, Range(0, 1)] private float _pauseVolume = 1;
+        [SerializeField] private AudioMixerGroup _pausedMixerGroup = null;
 
         [Header("Fade Settings")]
         [SerializeField] private float _fadeInTime = 1;
@@ -39,9 +40,15 @@ namespace Utility.Audio.Clips
         }
 
         public override SfxProperties GetSourceProperties() {
+            return GetSourceProperties(false);
+        }
+
+        public SfxProperties GetSourceProperties(bool pausedTrack) {
             if (TrackIsNull) return new SfxProperties(true);
-            var p = new SfxProperties(_track, _mixerGroup, (int)_priority, _volume, 1, 0, 1, Vector3.zero, false,
-                0, AudioRolloffMode.Linear, 100, 100, 0, 1);
+            var track = pausedTrack && _trackWhenPaused != null ? _trackWhenPaused : _track;
+            var mixer = pausedTrack && _pausedMixerGroup != null ? _pausedMixerGroup : _mixerGroup;
+            var p = new SfxProperties(track, mixer, (int)SfxPriorityLevel.Highest, pausedTrack ? _pauseVolume : _volume, 1, 0, 1,
+                Vector3.zero, false, 0, AudioRolloffMode.Linear, 100, 100, 0, 1);
             return p;
         }
 
