@@ -10,6 +10,11 @@ namespace Game
     {
         [SerializeField] private Image _fadeToBlack = null;
         [SerializeField] private CanvasGroup _titleBanner = null;
+        [SerializeField] private GameObject _raycastBlock = null;
+
+        [Header("Spirit Points")]
+        [SerializeField] private int _spiritPointsForLevel = 3;
+        //[SerializeField] private Integer _spiritPoints = null;
 
         [Header("On Scene Load")]
         [SerializeField] private bool _fadeIn = true;
@@ -35,16 +40,18 @@ namespace Game
         }
 
         private void Start() {
+            // Set Spirit Points
+            DataManager.Instance.remainingSpiritPoints = _spiritPointsForLevel;
+            //if (_spiritPoints != null) _spiritPoints.value = _spiritPointsForLevel;
+
+            // Intro Sequence
+            if (_raycastBlock != null) _raycastBlock.gameObject.SetActive(true);
             if (_fadeIn) {
                 FadeFromBlack();
             }
             else if (_showTitleText) {
                 TitleText();
             }
-        }
-
-        public void SetNextScene(string scene) {
-            _nextScene = scene;
         }
 
         public void Transition() {
@@ -57,7 +64,11 @@ namespace Game
         }
 
         private void FadeFromBlack() {
-            if (_fadeToBlack == null) return;
+            if (_fadeToBlack == null) {
+                if (_showTitleText) TitleText();
+                else StartDialogue();
+                return;
+            }
             StartCoroutine(FadeFromBlack(_fadeInTime));
         }
 
@@ -70,10 +81,14 @@ namespace Game
             }
             _fadeToBlack.gameObject.SetActive(false);
             if (_showTitleText) TitleText();
+            else StartDialogue();
         }
 
         private void TitleText() {
-            if (_titleBanner == null) return;
+            if (_titleBanner == null) {
+                StartDialogue();
+                return;
+            }
             StartCoroutine(FadeTitleText(_titleTextTime));
         }
 
@@ -89,11 +104,12 @@ namespace Game
         }
 
         private void StartDialogue() {
-            DialogueRunner.StartDialogue(_dialogueOnStart);
+            _raycastBlock.gameObject.SetActive(false);
+            if (!string.IsNullOrEmpty(_dialogueOnStart)) DialogueRunner.StartDialogue(_dialogueOnStart);
         }
 
         private IEnumerator FadeToBlack(float time) {
-            _fadeToBlack.gameObject.SetActive(true);
+            if (_raycastBlock != null) _fadeToBlack.gameObject.SetActive(true);
             for (float t = 0; t < time; t += Time.deltaTime) {
                 float delta = t / time;
                 _fadeToBlack.color = new Color(0, 0, 0, delta);
@@ -104,6 +120,7 @@ namespace Game
 
         private void NextScene() {
             DataManager.Instance.level = _nextScene;
+            DataManager.Instance.WriteFile();
             SceneManager.LoadScene(_nextScene);
         }
     }

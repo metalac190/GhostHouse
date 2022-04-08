@@ -1,36 +1,25 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using UnityEngine;
 using Utility.Buttons;
-using Utility.Audio.Managers;
 
 public class DataManager : MonoBehaviour
 {
-    // public instance reference to this script
-    public static DataManager Instance = null;
+    public static DataManager Instance = null;  // Singleton instance
 
-    // Reference to AudioMixerController to control volume levels
-    [SerializeField] AudioMixerController audioMixerController = null;
+    private string filePath; // save file for saving & loading
 
-    // Lazy load the Camera Controller
-    private IsometricCameraController cameraController;
-    private IsometricCameraController CameraController {
-        get {
-            if (cameraController == null) cameraController = FindObjectOfType<IsometricCameraController>();
-            return cameraController;
-        }
-    }
-
-    // string to hold the path to the savefile
-    private string filePath;
-
-    // reference to SaveData object, will hold values to save
+    // reference to SaveData object, will hold values to save to file
     private SaveData saveData = new SaveData();
 
-    // Save Data fields saved in DataManager
-    public string level { get; set; }
-    public int remainingSpiritPoints { get; set; }
+    public string level { get; set; }       // Current level season
+    public int remainingSpiritPoints { get; set; }  // Current points left to spend
+
+    // Points earned towards the various endings
+    public int cousinsEndingPoints { get; set; }
+    public int sistersEndingPoints { get; set; }
+    public int trueEndingPoints { get; set; }
 
     // Dictionary to hold state of each interactable
     public Dictionary<string, bool> interactions;
@@ -63,8 +52,21 @@ public class DataManager : MonoBehaviour
             Instance = this;
             DontDestroyOnLoad(this.gameObject);
 
+            interactions = new Dictionary<string, bool>();
+            journalUnlocks = new bool[24];      // Initializes array of all false entries
+
+            filePath = Path.Combine(Application.persistentDataPath, "savedata.json");
+
             // Load all file information in Awake so other game-objects can call it in Start.
-            LoadFile();
+            if(!SaveFileExists())
+            {
+                SetDefaultValues();
+                WriteFile();
+            }
+            else
+            {
+                LoadFile();
+            }
         }
         else
         {
@@ -72,46 +74,40 @@ public class DataManager : MonoBehaviour
         }
     }
 
-    private void Start()
-    {
-        // Set values throughtout game on starting to reload game
-    }
-
-    private void LoadFile()
-    {
-        filePath = Path.Combine(Application.persistentDataPath, "savedata.json");
-        interactions = new Dictionary<string, bool>();
-        journalUnlocks = new bool[50];
-
-        SetDefaultValues();
-
-        ReadFile();
-
-        // Set all loaded settings for the player
-        SetControlSettings();
-        SetAudioSettings();
-        SetVisualSettings();
-    }
-
+    // Set the values to their default values at the start of Spring on a fresh save
     private void SetDefaultValues()
     {
         level = "Spring";
         remainingSpiritPoints = 3;
+        cousinsEndingPoints = 0;
+        sistersEndingPoints = 0;
+        trueEndingPoints = 0;
         settingsLeftClickInteract = true;
         settingsCameraWASD = true;
         settingsCameraArrowKeys = true;
-        settingsClickDrag = true;
+        settingsClickDrag = false;
         settingsSensitivity = 75;
-        settingsMusicVolume = 100;
+        settingsMusicVolume = 75;
         settingsSFXVolume = 75;
         settingsDialogueVolume = 75;
         settingsAmbienceVolume = 75;
-        settingsWindowMode = true;  // placeholder
-        settingsContrast = 1;       // placeholder
-        settingsBrightness = 1;     // placeholder
+        settingsWindowMode = true;
+        settingsContrast = -20;
+        settingsBrightness = 0;
         settingsLargeGUI = true;    // placeholder
         settingsLargeText = true;   // placeholder
-        settingsTextFont = 0;       // placeholder
+        settingsTextFont = 0;
+    }
+
+    // Load the game from file and set up the game
+    private void LoadFile()
+    {
+        ReadFile();
+
+        // Set all loaded settings for the player
+        //SetControlSettings();
+        //SetAudioSettings();
+        //SetVisualSettings();
     }
 
     // Read data from the save file into the game
@@ -123,32 +119,44 @@ public class DataManager : MonoBehaviour
             string fileContents = File.ReadAllText(filePath);
             JsonUtility.FromJsonOverwrite(fileContents, saveData);
 
-            level = saveData.level;
-            remainingSpiritPoints = saveData.remainingSpiritPoints;
-
-            // Repopulate dictionary from saved arrays
-            for(int i = 0; i < 50; i++)
+            try
             {
-                interactions[saveData.interactionNames[i]] = saveData.interactionStates[i];
+                level = saveData.level;
+
+                cousinsEndingPoints = saveData.cousinsEndingPoints;
+                sistersEndingPoints = saveData.sistersEndingPoints;
+                trueEndingPoints = saveData.trueEndingPoints;
+
+                // Repopulate dictionary from saved arrays
+                for(int i = 0; i < 48; i++)
+                {
+                    interactions[saveData.interactionNames[i]] = saveData.interactionStates[i];
+                }
+
+                settingsLeftClickInteract = saveData.settings.leftClickInteract;
+                settingsCameraWASD = saveData.settings.cameraWASD;
+                settingsCameraArrowKeys = saveData.settings.cameraArrowKeys;
+                settingsClickDrag = saveData.settings.clickDrag;
+                settingsSensitivity = saveData.settings.sensitivity;
+                settingsMusicVolume = saveData.settings.musicVolume;
+                settingsSFXVolume = saveData.settings.sfxVolume;
+                settingsDialogueVolume = saveData.settings.dialogueVolume;
+                settingsAmbienceVolume = saveData.settings.ambienceVolume;
+                settingsWindowMode = saveData.settings.windowMode;
+                settingsContrast = saveData.settings.contrast;
+                settingsBrightness = saveData.settings.brightness;
+                settingsLargeGUI = saveData.settings.largeGUIFont;
+                settingsLargeText = saveData.settings.largeTextFont;
+                settingsTextFont = saveData.settings.textFont;
+
+                saveData.journalUnlocks.CopyTo(journalUnlocks, 0);
             }
-
-            settingsLeftClickInteract = saveData.settings.leftClickInteract;
-            settingsCameraWASD = saveData.settings.cameraWASD;
-            settingsCameraArrowKeys = saveData.settings.cameraArrowKeys;
-            settingsClickDrag = saveData.settings.clickDrag;
-            settingsSensitivity = saveData.settings.sensitivity;
-            settingsMusicVolume = saveData.settings.musicVolume;
-            settingsSFXVolume = saveData.settings.sfxVolume;
-            settingsDialogueVolume = saveData.settings.dialogueVolume;
-            settingsAmbienceVolume = saveData.settings.ambienceVolume;
-            settingsWindowMode = saveData.settings.windowMode;
-            settingsContrast = saveData.settings.contrast;
-            settingsBrightness = saveData.settings.brightness;
-            settingsLargeGUI = saveData.settings.largeGUIFont;
-            settingsLargeText = saveData.settings.largeTextFont;
-            settingsTextFont = saveData.settings.textFont;
-
-            saveData.journalUnlocks.CopyTo(journalUnlocks, 0);
+            catch
+            {
+                Debug.Log("Some error loading save file");
+                SetDefaultValues();
+                WriteFile();
+            }
         }
         else
         {
@@ -160,15 +168,25 @@ public class DataManager : MonoBehaviour
     public void WriteFile()
     {
         saveData.level = level;
-        saveData.remainingSpiritPoints = remainingSpiritPoints;
+
+        saveData.cousinsEndingPoints = cousinsEndingPoints;
+        saveData.sistersEndingPoints = sistersEndingPoints;
+        saveData.trueEndingPoints = trueEndingPoints;
 
         // Unpack dictionary elements into two arrays to save
         foreach(KeyValuePair<string, bool> entry in interactions)
         {
             int i = 0;
-            saveData.interactionNames[i] = entry.Key;
-            saveData.interactionStates[i] = entry.Value;
-            i++;
+            if(i >= 48)
+            {
+                Debug.Log("Error: Unexpectedly high number of interactions");
+            }
+            else
+            {
+                saveData.interactionNames[i] = entry.Key;
+                saveData.interactionStates[i] = entry.Value;
+                i++;
+            }
         }
 
         saveData.settings.leftClickInteract = settingsLeftClickInteract;
@@ -194,6 +212,34 @@ public class DataManager : MonoBehaviour
         File.WriteAllText(filePath, jsonString);
     }
 
+    public void WriteSettings()
+    {
+        saveData.settings.leftClickInteract = settingsLeftClickInteract;
+        saveData.settings.cameraWASD = settingsCameraWASD;
+        saveData.settings.cameraArrowKeys = settingsCameraArrowKeys;
+        saveData.settings.clickDrag = settingsClickDrag;
+        saveData.settings.sensitivity = settingsSensitivity;
+        saveData.settings.musicVolume = settingsMusicVolume;
+        saveData.settings.sfxVolume = settingsSFXVolume;
+        saveData.settings.dialogueVolume = settingsDialogueVolume;
+        saveData.settings.ambienceVolume = settingsAmbienceVolume;
+        saveData.settings.windowMode = settingsWindowMode;
+        saveData.settings.contrast = settingsContrast;
+        saveData.settings.brightness = settingsBrightness;
+        saveData.settings.largeGUIFont = settingsLargeGUI;
+        saveData.settings.largeTextFont = settingsLargeText;
+        saveData.settings.textFont = settingsTextFont;
+
+        string jsonString = JsonUtility.ToJson(saveData, true);
+        File.WriteAllText(filePath, jsonString);
+    }
+
+    // Interactables call this on their Start() to initialize themselves in the interactions dictionary
+    public void SetDefaultInteraction(string name) {
+        if (interactions.ContainsKey(name)) return;
+        interactions.Add(name, false);
+    }
+
     // Set interaction state
     public void SetInteraction(string name, bool interacted)
     {
@@ -209,11 +255,13 @@ public class DataManager : MonoBehaviour
         }
         else
         {
+            // This shouldn't happen if interactions initialize correctly
             Debug.Log("Interaction not stored");
             return false;
         }
     }
 
+    // Save settings from the control settings menu
     public void SaveControlSettings(bool leftClick, bool useWASD, bool useArrows, bool clickDrag, int sensitivity)
     {
         settingsLeftClickInteract = leftClick;
@@ -222,16 +270,10 @@ public class DataManager : MonoBehaviour
         settingsClickDrag = clickDrag;
         settingsSensitivity = sensitivity;
 
-        SetControlSettings();
+        WriteSettings();
     }
 
-    private void SetControlSettings()
-    {
-        // Set Control settings on camera controller
-        CameraController._traditionalMovementEnabled = settingsCameraWASD;
-        CameraController._clickDragMovementEnabled = settingsClickDrag;
-    }
-
+    // Save settings from the audio settings menu
     public void SaveAudioSettings(int musicVol, int sfxVol, int dialogueVol, int ambVol)
     {
         settingsMusicVolume = musicVol;
@@ -239,18 +281,10 @@ public class DataManager : MonoBehaviour
         settingsDialogueVolume = dialogueVol;
         settingsAmbienceVolume = ambVol;
 
-        SetAudioSettings();
+        WriteSettings();
     }
 
-    private void SetAudioSettings()
-    {
-        // Assuming 0 to 100 instead of 0 to 1
-        audioMixerController.SetMusicVolume(settingsMusicVolume * 0.01f);
-        audioMixerController.SetSfxVolume(settingsSFXVolume * 0.01f);
-        audioMixerController.SetDialogueVolume(settingsDialogueVolume * 0.01f);
-        audioMixerController.SetAmbienceVolume(settingsAmbienceVolume * 0.01f);
-    }
-
+    // Save settings from the visual settings menu
     public void SaveVisualSettings(bool windowMode, int contrast, int brightness, bool largeGUIFont, bool largeTextFont, int textFont)
     {
         settingsWindowMode = windowMode;
@@ -260,12 +294,7 @@ public class DataManager : MonoBehaviour
         settingsLargeText = largeTextFont;
         settingsTextFont = textFont;
 
-        SetVisualSettings();
-    }
-
-    private void SetVisualSettings()
-    {
-        // Set visual settings wherever
+        WriteSettings();
     }
 
     // Dump all data to the console
@@ -274,6 +303,9 @@ public class DataManager : MonoBehaviour
         string outstr = "Data Dump";
         outstr += "\nLevel: " + level.ToString();
         outstr += "\nSpirit Points: " + remainingSpiritPoints.ToString();
+        outstr += "\nCousins Ending Points: " + cousinsEndingPoints.ToString();
+        outstr += "\nSisters Ending Points: " + sistersEndingPoints.ToString();
+        outstr += "\nTrue Ending Points: " + trueEndingPoints.ToString();
         outstr += "\nInteractables:";
         foreach(KeyValuePair<string, bool> entry in interactions)
         {
@@ -321,5 +353,11 @@ public class DataManager : MonoBehaviour
     public void ResetData()
     {
         interactions.Clear();
+    }
+
+    // Return whether or not the save file exists
+    public bool SaveFileExists()
+    {
+        return System.IO.File.Exists(filePath);
     }
 }

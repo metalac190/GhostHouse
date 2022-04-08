@@ -1,6 +1,12 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
+using Utility.ReadOnly;
+using Yarn.Unity;
+
+
+
 
 public class IsometricCameraController : MonoBehaviour
 {
@@ -9,23 +15,29 @@ public class IsometricCameraController : MonoBehaviour
     [Header("Camera Connections")]
     [SerializeField] Camera _mainCamera = null;
     [SerializeField] Rigidbody _rigidbody = null;
+    DialogueRunner _dialogueRunner = null;
+
+
+    [ReadOnly] public bool gamePaused = false;
+
 
     [Header("Traditional Camera Movement Settings")]
-    [SerializeField] public bool _traditionalMovementEnabled = false;
+    [SerializeField] public bool _enableWASDMovement = true;
     [SerializeField] public float _cameraMoveSpeed = 10f;
     public bool _interacting = false;
     bool _clicked = false;
 
     [Header("Click And Drag Movement Settings")]
-    [SerializeField] public bool _clickDragMovementEnabled = true;
+    [SerializeField] public bool _enableClickDragMovement = false;
     [SerializeField] public float _panningSpeed = 25f;
     [SerializeField] private float _exposedField = 10f;
     [SerializeField] private LayerMask _groundLayer = 0;
     [SerializeField, Range(0, 1)] private float _clickDragSmooth = 0.5f;
     private Vector3 _dragStart;
+    [ReadOnly] public bool _dragging;
 
     [Header("Mouse Motivated Movement Settings (League of Legends)")]
-    [SerializeField] public bool _mouseMotivatedMovementEnabled = false;
+    [SerializeField] public bool _enableMouseBorderMovement = false;
     [SerializeField] public float _mMPanningSpeed = 25f;
     [SerializeField] public float _panBorderThickness = 50f;
 
@@ -67,7 +79,17 @@ public class IsometricCameraController : MonoBehaviour
         get { return new Vector2(Input.GetAxis("Mouse X"), Input.GetAxis("Mouse Y")); }
     }
 
-    private bool drag = false;
+    // Checks if mouse is over UI
+    public static bool IsMouseOverUi
+    {
+        get
+        {
+            var events = EventSystem.current;
+            return events != null && events.IsPointerOverGameObject();
+        }
+    }
+
+    private bool drag;
 
 
     #region Singleton Pattern
@@ -77,6 +99,8 @@ public class IsometricCameraController : MonoBehaviour
     {
         if (Singleton == null) { Singleton = this; }
         else { Destroy(gameObject); }
+
+        _dialogueRunner = FindObjectOfType<DialogueRunner>();
     }
     #endregion
 
@@ -292,6 +316,28 @@ public class IsometricCameraController : MonoBehaviour
         }
     }
 
+    Vector3 CameraBounds(Vector3 location)
+    {
+        if (location.x > _maxXValue)
+        {
+            location = new Vector3(_maxXValue, location.y, location.z);
+        }
+        if (location.z > _maxZValue)
+        {
+            location = new Vector3(location.x, location.y, _maxZValue);
+        }
+        if (transform.position.x < _minXValue)
+        {
+            location = new Vector3(_minXValue, location.y, location.z);
+        }
+        if (location.z < _minZValue)
+        {
+            location = new Vector3(location.x, location.y, _minZValue);
+        }
+
+        return location;
+    }
+
     //Reeee
     private void Update()
     {
@@ -313,12 +359,12 @@ public class IsometricCameraController : MonoBehaviour
 
 
 
-        if (!_interacting)
+        if (!_interacting && !gamePaused)
         {
-            if (_traditionalMovementEnabled) { HandleInput(); }
+            if (_enableWASDMovement && !_dialogueRunner.IsDialogueRunning) { HandleInput(); }
 
             #region Mouse Motivated Movement
-            if (_mouseMotivatedMovementEnabled)
+            if (_enableMouseBorderMovement && !_dialogueRunner.IsDialogueRunning)
             {
                 Vector3 upMovement = new Vector3();
                 Vector3 rightMovement = new Vector3();
@@ -402,24 +448,36 @@ public class IsometricCameraController : MonoBehaviour
 
             #region Click and Drag but Sad
 
-            if (Input.GetMouseButtonDown(0))
+            if (_enableClickDragMovement && !_dialogueRunner.IsDialogueRunning)
             {
-                Ray ray = _mainCamera.ScreenPointToRay(Input.mousePosition);
-                if (Physics.Raycast(ray, out var hit, _groundLayer))
+                if (Input.GetMouseButtonDown(0) && !IsMouseOverUi)
                 {
-                    _dragStart = hit.point;
+                    Ray ray = _mainCamera.ScreenPointToRay(Input.mousePosition);
+                    if (Physics.Raycast(ray, out var hit, _groundLayer))
+                    {
+                        _dragging = true;
+                        _dragStart = hit.point;
+                    }
                 }
-            }
-            else if (Input.GetMouseButton(0))
-            {
-                Ray ray = _mainCamera.ScreenPointToRay(Input.mousePosition);
-                if (Physics.Raycast(ray, out var hit, _groundLayer))
+                else if (Input.GetMouseButtonUp(0))
                 {
-                    Vector3 diff = _dragStart - Vector3.Lerp(_dragStart, hit.point, _clickDragSmooth);
-                    transform.position += diff;
+                    _dragging = false;
                 }
+                else if (Input.GetMouseButton(0) && _dragging)
+                {
+                    Ray ray = _mainCamera.ScreenPointToRay(Input.mousePosition);
+                    if (Physics.Raycast(ray, out var hit, _groundLayer))
+                    {
+                        Vector3 diff = _dragStart - Vector3.Lerp(_dragStart, hit.point, _clickDragSmooth);
+                        diff.y = 0;
+                        transform.position += diff;
+
+                        CameraBounds();
+                    }
+                }
+
+                
             }
-            CameraBounds();
 
             #endregion
         }
