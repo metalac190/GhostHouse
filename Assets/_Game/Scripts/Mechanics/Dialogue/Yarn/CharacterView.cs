@@ -3,6 +3,7 @@ using System.Collections;
 using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
+using System.Linq;
 
 namespace Mechanics.Dialog
 {
@@ -62,6 +63,19 @@ namespace Mechanics.Dialog
         [Tooltip("Typewrite effect speed in characters per second.")]
         float _typewriterEffectSpeed = 120f;
 
+        [Header("Character Styles")]
+        [SerializeField]
+        string[] _alternateCharacters = new string[0];
+
+        [SerializeField]
+        Image _dialogImage = null;
+
+        [SerializeField]
+        Sprite _alternateDialogSprite = null;
+
+        [SerializeField]
+        Color _alternateDialogColor = Color.white;
+
         [Header("UI References")]
         [SerializeField]
         TextMeshProUGUI _lineText = null;
@@ -71,6 +85,9 @@ namespace Mechanics.Dialog
 
         [SerializeField]
         SOCharacterPool _charactersData = null;
+
+        [SerializeField]
+        GameObject _characterNameObject = null;
 
         [SerializeField]
         TextMeshProUGUI _characterNameText = null;
@@ -96,9 +113,20 @@ namespace Mechanics.Dialog
         Yarn.Markup.MarkupAttribute _markup;
 
         float _lineStartStamp = -1;
+        Sprite _defaultDialogSprite;
+        Color _defaultDialogColor;
         #endregion
 
         #region Monobehaviour
+        void Awake()
+        {
+            if (_dialogImage != null)
+            {
+                _defaultDialogSprite = _dialogImage.sprite;
+                _defaultDialogColor = _dialogImage.color;
+            }
+        }
+
         public void Start()
         {
             _canvasGroup = GetComponent<CanvasGroup>();
@@ -209,6 +237,7 @@ namespace Mechanics.Dialog
         public override void RunLine(Yarn.Unity.LocalizedLine dialogueLine, Action onDialogueLineFinished)
         {
             _currentLine = dialogueLine;
+            bool isAlternateCharacter = _alternateCharacters.Any(character => character.ToLower() == dialogueLine.CharacterName.ToLower());
 
             #region MARKUP: [interaction/]
             bool skipThisView = dialogueLine.Text.TryGetAttributeWithName("interaction", out _markup);
@@ -235,7 +264,11 @@ namespace Mechanics.Dialog
 
                     if (character == null)
                     {
-                        Debug.LogWarning($"Unable to find character \"{dialogueLine.CharacterName}\".");
+                        if (!isAlternateCharacter)
+                        {
+                            Debug.LogWarning($"Unable to find character \"{dialogueLine.CharacterName}\".");
+                        }
+
                         _characterPortraitImage.enabled = false;
                     }
                     else
@@ -267,6 +300,24 @@ namespace Mechanics.Dialog
             }
             #endregion
 
+            // show the correct dialog box
+            #region dialog box style
+            if (_dialogImage != null)
+            {
+                if (isAlternateCharacter)
+                {
+                    _dialogImage.sprite = _alternateDialogSprite;
+                    _dialogImage.color = _alternateDialogColor;
+                }
+                else
+                {
+                    _dialogImage.sprite = _defaultDialogSprite;
+                    _dialogImage.color = _defaultDialogColor;
+                }
+            }
+            #endregion
+
+            // show continue button
             if (_continueButton != null)
             {
                 _continueButton.SetActive(false);
@@ -274,6 +325,7 @@ namespace Mechanics.Dialog
 
             _interruptionFlag.Clear();
 
+            // show character name
             if (_characterNameText == null)
             {
                 if (_characterNameInLine)
@@ -287,6 +339,17 @@ namespace Mechanics.Dialog
             }
             else
             {
+                // alternate characters do not show their name
+                if (isAlternateCharacter)
+                {
+                    _characterNameObject.SetActive(false);
+                }
+                // show the name
+                else
+                {
+                    _characterNameObject.SetActive(true);
+                }
+
                 _characterNameText.text = dialogueLine.CharacterName;
                 _lineText.text = dialogueLine.TextWithoutCharacterName.Text;
             }
