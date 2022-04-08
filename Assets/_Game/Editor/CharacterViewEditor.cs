@@ -19,9 +19,15 @@ namespace _Game.Editor
         SerializedProperty useTypewriterEffectProperty;
         SerializedProperty typewriterEffectSpeedProperty;
 
+        SerializedProperty dialogImageProperty;
+        SerializedProperty alternateCharactersProperty;
+        SerializedProperty alternateDialogSpriteProperty;
+        SerializedProperty alternateDialogColorProperty;
+
         SerializedProperty continueKeyCodeProperty;
 
         SerializedProperty lineTextProperty;
+        SerializedProperty characterNameObjectProperty;
         SerializedProperty characterNameTextProperty;
         SerializedProperty characterPortraitImageProperty;
         SerializedProperty characterDataProperty;
@@ -40,11 +46,17 @@ namespace _Game.Editor
             useTypewriterEffectProperty = serializedObject.FindProperty("_useTypewriterEffect");
             typewriterEffectSpeedProperty = serializedObject.FindProperty("_typewriterEffectSpeed");
 
+            dialogImageProperty = serializedObject.FindProperty("_dialogImage");
+            alternateCharactersProperty = serializedObject.FindProperty("_alternateCharacters");
+            alternateDialogSpriteProperty = serializedObject.FindProperty("_alternateDialogSprite");
+            alternateDialogColorProperty = serializedObject.FindProperty("_alternateDialogColor");
+
             continueKeyCodeProperty = serializedObject.FindProperty("_continueKeyCode");
 
             lineTextProperty = serializedObject.FindProperty("_lineText");
             characterPortraitImageProperty = serializedObject.FindProperty("_characterPortraitImage");
             characterDataProperty = serializedObject.FindProperty("_charactersData");
+            characterNameObjectProperty = serializedObject.FindProperty("_characterNameObject");
             characterNameTextProperty = serializedObject.FindProperty("_characterNameText");
             characterNameInLineProperty = serializedObject.FindProperty("_characterNameInLine");
             continueButtonProperty = serializedObject.FindProperty("_continueButton");
@@ -75,13 +87,26 @@ namespace _Game.Editor
                 EditorGUI.indentLevel -= 1;
             }
 
+            // alternate styles
+            EditorGUILayout.PropertyField(alternateCharactersProperty);
+            EditorGUILayout.PropertyField(dialogImageProperty);
+
+            if (dialogImageProperty.objectReferenceValue != null)
+            {
+                EditorGUI.indentLevel += 1;
+                EditorGUILayout.PropertyField(alternateDialogSpriteProperty);
+                EditorGUILayout.PropertyField(alternateDialogColorProperty);
+                EditorGUI.indentLevel -= 1;
+            }
+
             // continue mode
             EditorGUILayout.PropertyField(continueKeyCodeProperty);
 
             // UI references
             EditorGUILayout.PropertyField(lineTextProperty);
-
+            EditorGUILayout.PropertyField(characterNameObjectProperty);
             EditorGUILayout.PropertyField(characterPortraitImageProperty);
+
             if (characterPortraitImageProperty.objectReferenceValue != null)
             {
                 EditorGUI.indentLevel += 1;
