@@ -484,7 +484,7 @@ public class IsometricCameraController : MonoBehaviour
 
         //HandleInput();
 
-        //CameraBounds();
+        CameraBounds();
 
 
     }
