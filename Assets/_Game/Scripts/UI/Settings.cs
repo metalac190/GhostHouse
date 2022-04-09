@@ -28,15 +28,17 @@ public class Settings : MonoBehaviour
     public int dragSpeed = 75;
 
     //Audio Settings
-    public int music = 100;
-    public int SFX = 100;
-    public int dialog = 100;
-    public int ambience = 100;
+    public int music = 75;
+    public int SFX = 75;
+    public int dialog = 75;
+    public int ambience = 75;
 
     //Visual Settings
     public bool isWindowed = false;
-    public int contrast = 75;
-    public int brightness = 75;
+    public int contrast;
+    [SerializeField] int contrastScale = 10;
+    public int brightness;
+    [SerializeField] int brightnessScale = 10;
     public bool largeGUIFont = false;
     public bool largeTextFont = false;
 
@@ -152,7 +154,7 @@ public class Settings : MonoBehaviour
 
         // set post-processing volume
         GraphicsController.ScreenMode = isWindowed ? FullScreenMode.FullScreenWindow : FullScreenMode.ExclusiveFullScreen;
-        GraphicsController.Exposure = brightness;
-        GraphicsController.Contrast = contrast;
+        GraphicsController.Exposure = brightnessScale * brightness;
+        GraphicsController.Contrast = contrastScale * contrast;
     }
 }

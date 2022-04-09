@@ -8,7 +8,7 @@ using TMPro;
 //Communication between the Settings UI and Settings singleton
 public class PanelMediator : MonoBehaviour
 {
-    [SerializeField] private bool SaveOnChange = true; 
+    [SerializeField] private bool SaveOnChange = true;
 
     // References to UI values
     // Automatically hooks up connections
@@ -41,17 +41,30 @@ public class PanelMediator : MonoBehaviour
     [SerializeField] Button ClickDragOff = null;
 
     // Update All Values from Settings
-    private void OnEnable()
+    private void OnEnable() {
+        UpdateSettings();
+    }
+
+    public void UpdateSettings()
     {
-        SetWindowed(Settings.Instance.isWindowed);
+        SetWindowed(Settings.Instance.isWindowed, false);
 
         ContrastSlider.value = Settings.Instance.contrast;
+        ContrastLabel.text = Settings.Instance.contrast.ToString();
         BrightnessSlider.value = Settings.Instance.brightness;
+        BrightnessLabel.text = Settings.Instance.brightness.ToString();
 
         MusicSlider.value = Settings.Instance.music;
+        MusicLabel.text = Settings.Instance.music.ToString();
         SFXSlider.value = Settings.Instance.SFX;
+        SFXLabel.text = Settings.Instance.SFX.ToString();
         DialogSlider.value = Settings.Instance.dialog;
+        DialogLabel.text = Settings.Instance.dialog.ToString();
         AmbienceSlider.value = Settings.Instance.ambience;
+        AmbienceLabel.text = Settings.Instance.ambience.ToString();
+
+        SetFontStyle(Settings.Instance.textFont, false);
+        SetClickAndDrag(Settings.Instance.useClickNDrag, false);
     }
 
     // Add Listeners to update settings when changed
@@ -80,12 +93,12 @@ public class PanelMediator : MonoBehaviour
     public void SetFullscreen() => SetWindowed(false);
     public void SetWindowed() => SetWindowed(true);
 
-    public void SetWindowed(bool windowed)
+    public void SetWindowed(bool windowed, bool canSave = true)
     {
         Settings.Instance.isWindowed = windowed;
         FullscreenButton.interactable = windowed;
         WindowedButton.interactable = !windowed;
-        if (SaveOnChange) SaveVisuals();
+        if (canSave && SaveOnChange) SaveVisuals();
     }
 
     public void ChangeContrast(float value)
@@ -138,10 +151,13 @@ public class PanelMediator : MonoBehaviour
     public void SetFontNormal() => SetFontStyle(1);
     public void SetFontDyslexia() => SetFontStyle(2);
 
-    public void SetFontStyle(int fontStyle)
+    public void SetFontStyle(int fontStyle, bool canSave = true)
     {
         Settings.Instance.textFont = fontStyle;
-        if (SaveOnChange) SaveVisuals();
+        FancyFontButton.interactable = fontStyle == 0;
+        NormalFontButton.interactable = fontStyle == 1;
+        DyslexiaFontButton.interactable = fontStyle == 2;
+        if (canSave && SaveOnChange) SaveVisuals();
     }
 
     // ----------- Camera Movement -----------
@@ -149,10 +165,12 @@ public class PanelMediator : MonoBehaviour
     public void EnableClickNDrag() => SetClickAndDrag(true);
     public void DisableClickNDrag() => SetClickAndDrag(false);
 
-    public void SetClickAndDrag(bool useClickNDrag)
+    public void SetClickAndDrag(bool useClickNDrag, bool canSave = true)
     {
         Settings.Instance.useClickNDrag = useClickNDrag;
-        if (SaveOnChange) SaveControls();
+        ClickDragOff.interactable = useClickNDrag;
+        ClickDragOn.interactable = !useClickNDrag;
+        if (canSave && SaveOnChange) SaveControls();
     }
 
 
