@@ -16,6 +16,7 @@ namespace Utility.Audio.Clips.Base
         public void Play(ASC_Base controller) {
             var sourceProperties = GetSourceProperties();
             controller.SetSourceProperties(sourceProperties);
+            controller.Source.loop = false;
             controller.Play();
         }
 
