@@ -44,6 +44,7 @@ public class ModalWindowController : MonoBehaviour
 
     public static event Action OnInteractStart = delegate { };
     public static event Action OnInteractEnd = delegate { };
+    private Action _callback;
 
     private bool _enabled;
 
@@ -68,8 +69,13 @@ public class ModalWindowController : MonoBehaviour
     }
 
     private void Update() {
-        if (_enabled && Input.GetKeyDown(KeyCode.Escape)) {
-            DisableModalWindow();
+        if (_enabled) {
+            if (Input.GetKeyDown(KeyCode.Escape)) {
+                DisableModalWindow();
+            } else if ((Input.GetKeyDown(KeyCode.Return) || Input.GetKeyDown(KeyCode.Space)) && _callback != null) {
+                _callback.Invoke();
+                _callback = null;
+            }
         }
     }
 
@@ -101,6 +107,7 @@ public class ModalWindowController : MonoBehaviour
         IsometricCameraController.Singleton._interacting = true;
         OnInteractStart?.Invoke();
 
+        _callback = callback;
         if (callback != null) {
             _mainInteractionButton.gameObject.SetActive(true);
             _mainInteractionButton.interactable = canSpendPoints;
@@ -150,13 +157,18 @@ public class ModalWindowController : MonoBehaviour
         _modalWindow.SetActive(false);
         if (_raycastBlock != null) _raycastBlock.SetActive(false);
         _enabled = false;
-        if (PauseMenu.Singleton != null) {
-            PauseMenu.Singleton.PreventPausing(true);
-        }
+        StartCoroutine(CanPauseNextFrame());
         if (IsometricCameraController.Singleton != null) {
             IsometricCameraController.Singleton._interacting = false;
         }
         if (playSound) _cancelOrCloseWindow.Play();
+    }
+
+    public IEnumerator CanPauseNextFrame() {
+        yield return null;
+        if (PauseMenu.Singleton != null) {
+            PauseMenu.Singleton.PreventPausing(true);
+        }
     }
 
     public void AddJournalNotification() {
