@@ -154,9 +154,9 @@ public class PanelMediator : MonoBehaviour
     public void SetFontStyle(int fontStyle, bool canSave = true)
     {
         Settings.Instance.textFont = fontStyle;
-        FancyFontButton.interactable = fontStyle == 0;
-        NormalFontButton.interactable = fontStyle == 1;
-        DyslexiaFontButton.interactable = fontStyle == 2;
+        FancyFontButton.interactable = fontStyle != 0;
+        NormalFontButton.interactable = fontStyle != 1;
+        DyslexiaFontButton.interactable = fontStyle != 2;
         if (canSave && SaveOnChange) SaveVisuals();
     }
 
