@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.IO;
+using Mechanics.Level_Mechanics;
 using UnityEngine;
 using Utility.Buttons;
 
@@ -57,20 +58,35 @@ public class DataManager : MonoBehaviour
 
             filePath = Path.Combine(Application.persistentDataPath, "savedata.json");
 
-            // Load all file information in Awake so other game-objects can call it in Start.
-            if(!SaveFileExists())
-            {
-                SetDefaultValues();
-                WriteFile();
-            }
-            else
-            {
-                LoadFile();
-            }
+            LoadFile();
         }
         else
         {
             Destroy(this.gameObject);
+        }
+    }
+
+    public void OnNewGame() {
+        ResetData();
+    }
+
+    public void OnContinueGame() {
+        // TODO: LOAD ALL INTERACTIONS FROM PREVIOUS ENDING
+    }
+
+    public Season GetSeason() {
+        switch (level) {
+            case "spring":
+                return Season.Spring;
+            case "summer":
+                return Season.Summer;
+            case "fall":
+                return Season.Fall;
+            case "winter":
+                return Season.Winter;
+            default:
+                Debug.LogWarning("Season accessed on Invalid Level", gameObject);
+                return Season.Universal;
         }
     }
 
@@ -92,7 +108,7 @@ public class DataManager : MonoBehaviour
         settingsDialogueVolume = 75;
         settingsAmbienceVolume = 75;
         settingsWindowMode = true;
-        settingsContrast = -20;
+        settingsContrast = 0;
         settingsBrightness = 0;
         settingsLargeGUI = true;    // placeholder
         settingsLargeText = true;   // placeholder
@@ -102,12 +118,15 @@ public class DataManager : MonoBehaviour
     // Load the game from file and set up the game
     private void LoadFile()
     {
-        ReadFile();
-
-        // Set all loaded settings for the player
-        //SetControlSettings();
-        //SetAudioSettings();
-        //SetVisualSettings();
+        if (!SaveFileExists())
+        {
+            SetDefaultValues();
+            WriteFile();
+        }
+        else
+        {
+            ReadFile();
+        }
     }
 
     // Read data from the save file into the game
