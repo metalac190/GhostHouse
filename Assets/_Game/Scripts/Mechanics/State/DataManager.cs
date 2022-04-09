@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.IO;
+using Mechanics.Level_Mechanics;
 using UnityEngine;
 using Utility.Buttons;
 
@@ -57,21 +58,20 @@ public class DataManager : MonoBehaviour
 
             filePath = Path.Combine(Application.persistentDataPath, "savedata.json");
 
-            // Load all file information in Awake so other game-objects can call it in Start.
-            if(!SaveFileExists())
-            {
-                SetDefaultValues();
-                WriteFile();
-            }
-            else
-            {
-                LoadFile();
-            }
+            LoadFile();
         }
         else
         {
             Destroy(this.gameObject);
         }
+    }
+
+    public void OnNewGame() {
+        ResetData();
+    }
+
+    public void OnContinueGame() {
+        // TODO: LOAD ALL INTERACTIONS FROM PREVIOUS ENDING
     }
 
     // Set the values to their default values at the start of Spring on a fresh save
@@ -102,12 +102,15 @@ public class DataManager : MonoBehaviour
     // Load the game from file and set up the game
     private void LoadFile()
     {
-        ReadFile();
-
-        // Set all loaded settings for the player
-        //SetControlSettings();
-        //SetAudioSettings();
-        //SetVisualSettings();
+        if (!SaveFileExists())
+        {
+            SetDefaultValues();
+            WriteFile();
+        }
+        else
+        {
+            ReadFile();
+        }
     }
 
     // Read data from the save file into the game
