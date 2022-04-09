@@ -11,14 +11,14 @@ public class Journal : MonoBehaviour
     public List<Page> pages = new List<Page>();
 
     [SerializeField]
-    Page activePage, pausePage, lastPage;
+    Page activePage = null, pausePage = null, lastPage = null;
 
-    public Button nextBtn, previousBtn;
+    public Button nextBtn = null, previousBtn = null;
 
     [SerializeField] private SfxUiLibrary _sfxUiLibrary = null;
     public SfxUiLibrary SfxUiLibrary => _sfxUiLibrary;
 
-    int tabIndex = 0;
+    int tabIndex;
 
     private void Start()
     {
