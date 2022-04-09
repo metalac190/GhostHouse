@@ -8,7 +8,15 @@ using Utility.Audio.Managers;
 public class Settings : MonoBehaviour
 {
     //Singleton pattern
-    public static Settings Instance = null;
+    private static Settings _instanceReference;
+    public static Settings Instance {
+        get {
+            if (_instanceReference == null) {
+                _instanceReference = FindObjectOfType<Settings>();
+            }
+            return _instanceReference;
+        }
+    }
 
     //Interact Button
     public bool leftClickInteract = true;
@@ -51,8 +59,8 @@ public class Settings : MonoBehaviour
     AudioMixerController audioMixerController = null;
 
     private void Awake() {
-        if (Instance == null) {
-            Instance = this;
+        if (_instanceReference == null) {
+            _instanceReference = this;
             audioMixerController = GetComponent<AudioMixerController>();
             DontDestroyOnLoad(this.gameObject);
         }
