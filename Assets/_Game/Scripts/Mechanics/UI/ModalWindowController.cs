@@ -65,7 +65,7 @@ public class ModalWindowController : MonoBehaviour
     }
 
     private void Start() {
-        DisableModalWindow();
+        DisableModalWindow(false);
     }
 
     private void Update() {

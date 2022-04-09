@@ -85,14 +85,14 @@ public class DataManager : MonoBehaviour
         settingsLeftClickInteract = true;
         settingsCameraWASD = true;
         settingsCameraArrowKeys = true;
-        settingsClickDrag = false;
+        settingsClickDrag = true;
         settingsSensitivity = 75;
         settingsMusicVolume = 75;
         settingsSFXVolume = 75;
         settingsDialogueVolume = 75;
         settingsAmbienceVolume = 75;
         settingsWindowMode = true;
-        settingsContrast = -20;
+        settingsContrast = 0;
         settingsBrightness = 0;
         settingsLargeGUI = true;    // placeholder
         settingsLargeText = true;   // placeholder
