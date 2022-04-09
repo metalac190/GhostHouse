@@ -74,6 +74,22 @@ public class DataManager : MonoBehaviour
         // TODO: LOAD ALL INTERACTIONS FROM PREVIOUS ENDING
     }
 
+    public Season GetSeason() {
+        switch (level) {
+            case "spring":
+                return Season.Spring;
+            case "summer":
+                return Season.Summer;
+            case "fall":
+                return Season.Fall;
+            case "winter":
+                return Season.Winter;
+            default:
+                Debug.LogWarning("Season accessed on Invalid Level", gameObject);
+                return Season.Universal;
+        }
+    }
+
     // Set the values to their default values at the start of Spring on a fresh save
     private void SetDefaultValues()
     {

@@ -12,13 +12,15 @@ namespace Mechanics.Level_Mechanics
     {
         [SerializeField, TextArea] private string _interactableDescription = "Default Description";
 
+        public string Description => _interactableDescription;
+
         [Header("Interaction Settings")]
         [SerializeField, Tooltip("Type in the name inside the dialogue yarn file.")]
         private string _dialogeYarnNode = "";
         [SerializeField, Tooltip("Click this if you want the interaction to happen multiple times.")]
         private bool _canInteractMultipleTimes = false;
         [SerializeField, Tooltip("Click this if you want the interaction to unlock an entry in the Journal.")]
-        private bool _opensJournalUnlock = false;
+        private bool _opensJournalUnlock;
         [SerializeField, Tooltip("Click this if you want to use random dialogue per every interaction.")]
         private bool _useRandomDialogue = false;
         [SerializeField, Tooltip("Type in the names inside the dialogue yarn files that you want to be used.")]

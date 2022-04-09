@@ -6,6 +6,8 @@ public class DataTestController : MonoBehaviour
 {
     int level;
     int sp;
+
+    public int Level => level;
  
     // Start is called before the first frame update
     void Start()

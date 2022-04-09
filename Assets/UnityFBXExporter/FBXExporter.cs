@@ -625,10 +625,7 @@ namespace UnityFBXExporter
 		/// <returns>a string that is formated always to be 1.0 and never 1,0</returns>
 		public static string FBXFormat(float val)
 		{
-			if(false) // SET TO TRUE IF YOU USE PERIODS FOR DECIMALS IN YOUR COUNTRY AND ONLY IF (to get a slight reduction in process time)
-				return val.ToString();
-
-			string stringValue = val.ToString();
+            string stringValue = val.ToString();
 
 			int index = CheckForCommaInsteadOfDecimal(ref stringValue);
 			if(index > -1)
