@@ -77,6 +77,7 @@ public class Settings : MonoBehaviour
         //Debug.Log(DataManager.Instance.settingsLeftClickInteract);
 
         LoadSettings();
+        SaveAllSettings();
     }
 
     [Button(Spacing = 25, Mode = ButtonMode.NotPlaying)]
