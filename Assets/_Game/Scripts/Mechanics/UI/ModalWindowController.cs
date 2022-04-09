@@ -145,7 +145,8 @@ public class ModalWindowController : MonoBehaviour
         DisableModalWindow(false);
     }
 
-    public void DisableModalWindow(bool playSound = true, bool updateCanPause = true) {
+    public void DisableModalWindow() => DisableModalWindow(true);
+    public void DisableModalWindow(bool playSound, bool updateCanPause = true) {
         if (_playerHud != null) _playerHud.UpdateSpiritPoints();
         OnInteractEnd?.Invoke();
         _mainInteractionButton.gameObject.SetActive(false);
