@@ -65,7 +65,7 @@ public class ModalWindowController : MonoBehaviour
     }
 
     private void Start() {
-        DisableModalWindow(false);
+        DisableModalWindow(false, false);
     }
 
     private void Update() {
@@ -145,7 +145,7 @@ public class ModalWindowController : MonoBehaviour
         DisableModalWindow(false);
     }
 
-    public void DisableModalWindow(bool playSound = true) {
+    public void DisableModalWindow(bool playSound = true, bool updateCanPause = true) {
         if (_playerHud != null) _playerHud.UpdateSpiritPoints();
         OnInteractEnd?.Invoke();
         _mainInteractionButton.gameObject.SetActive(false);
@@ -157,7 +157,7 @@ public class ModalWindowController : MonoBehaviour
         _modalWindow.SetActive(false);
         if (_raycastBlock != null) _raycastBlock.SetActive(false);
         _enabled = false;
-        StartCoroutine(CanPauseNextFrame());
+        if (updateCanPause) StartCoroutine(CanPauseNextFrame());
         if (IsometricCameraController.Singleton != null) {
             IsometricCameraController.Singleton._interacting = false;
         }
