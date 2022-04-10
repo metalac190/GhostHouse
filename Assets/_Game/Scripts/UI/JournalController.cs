@@ -12,6 +12,7 @@ public class JournalController : MonoBehaviour
 
     [Header("Main Pages")]
     [SerializeField] private List<GameObject> _settingsPages = new List<GameObject>();
+    [SerializeField] private PanelMediator _settingsController = null;
     [SerializeField] private List<GameObject> _pausePages = new List<GameObject>();
     [SerializeField] private GameObject _quitConfirmation = null;
     [SerializeField] private bool _hideButtonsOnPausePage = true;
@@ -74,21 +75,25 @@ public class JournalController : MonoBehaviour
         _currentPage = pageEnum;
         _currentPageNum = pageNum;
 
+        if (pageEnum == PageEnum.Settings && _settingsController != null) {
+            _settingsController.UpdateSettings();
+        }
+
         SetNavigationButtons();
         if (_tabSwitcher != null) _tabSwitcher.SetPage(_currentPage);
         return true;
     }
 
-    public bool NextPage() {
+    public void NextPage() {
         if (NextPageWithinSection()) {
-            return true;
+            return;
         }
         var nextPage = GetNextPage(_currentPage);
         if (nextPage == _currentPage) {
             // No next page exists
-            return false;
+            return;
         }
-        return OpenPage(nextPage);
+        OpenPage(nextPage);
     }
 
     public bool NextPageWithinSection() {

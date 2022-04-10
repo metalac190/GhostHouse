@@ -12,10 +12,13 @@ public class JournalHint : MonoBehaviour
     public Interactable InteractableShowUntil => _showUntil;
 
     private void OnEnable() {
+        var season = DataManager.Instance.GetSeason();
+        bool seasonCheck = _season == season || season == Season.Universal;
+
         bool after = _showAfter != null && GetUnlocked(_showAfter.name);
         bool until = _showUntil != null && GetUnlocked(_showUntil.name);
 
-        bool unlocked = after && !until;
+        bool unlocked = seasonCheck && after && !until;
 
         if (_hint != null) _hint.gameObject.SetActive(unlocked);
     }
