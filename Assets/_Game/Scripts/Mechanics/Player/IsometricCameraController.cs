@@ -30,7 +30,6 @@ public class IsometricCameraController : MonoBehaviour
     [Header("Click And Drag Movement Settings")]
     [SerializeField] public bool _enableClickDragMovement = false;
     [SerializeField] public float _panningSpeed = 25f;
-    [SerializeField] private float _exposedField = 10f;
     [SerializeField] private LayerMask _groundLayer = 0;
     [SerializeField, Range(0, 1)] private float _clickDragSmooth = 0.5f;
     private Vector3 _dragStart;
@@ -484,7 +483,7 @@ public class IsometricCameraController : MonoBehaviour
 
         //HandleInput();
 
-        //CameraBounds();
+        CameraBounds();
 
 
     }

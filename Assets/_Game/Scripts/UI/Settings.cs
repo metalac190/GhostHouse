@@ -8,7 +8,15 @@ using Utility.Audio.Managers;
 public class Settings : MonoBehaviour
 {
     //Singleton pattern
-    public static Settings Instance = null;
+    private static Settings _instanceReference;
+    public static Settings Instance {
+        get {
+            if (_instanceReference == null) {
+                _instanceReference = FindObjectOfType<Settings>();
+            }
+            return _instanceReference;
+        }
+    }
 
     //Interact Button
     public bool leftClickInteract = true;
@@ -20,15 +28,17 @@ public class Settings : MonoBehaviour
     public int dragSpeed = 75;
 
     //Audio Settings
-    public int music = 100;
-    public int SFX = 100;
-    public int dialog = 100;
-    public int ambience = 100;
+    public int music = 75;
+    public int SFX = 75;
+    public int dialog = 75;
+    public int ambience = 75;
 
     //Visual Settings
     public bool isWindowed = false;
-    public int contrast = 75;
-    public int brightness = 75;
+    public int contrast;
+    [SerializeField] int contrastScale = 10;
+    public int brightness;
+    [SerializeField] int brightnessScale = 10;
     public bool largeGUIFont = false;
     public bool largeTextFont = false;
 
@@ -51,8 +61,8 @@ public class Settings : MonoBehaviour
     AudioMixerController audioMixerController = null;
 
     private void Awake() {
-        if (Instance == null) {
-            Instance = this;
+        if (_instanceReference == null) {
+            _instanceReference = this;
             audioMixerController = GetComponent<AudioMixerController>();
             DontDestroyOnLoad(this.gameObject);
         }
@@ -67,6 +77,7 @@ public class Settings : MonoBehaviour
         //Debug.Log(DataManager.Instance.settingsLeftClickInteract);
 
         LoadSettings();
+        SaveAllSettings();
     }
 
     [Button(Spacing = 25, Mode = ButtonMode.NotPlaying)]
@@ -144,7 +155,7 @@ public class Settings : MonoBehaviour
 
         // set post-processing volume
         GraphicsController.ScreenMode = isWindowed ? FullScreenMode.FullScreenWindow : FullScreenMode.ExclusiveFullScreen;
-        GraphicsController.Exposure = brightness;
-        GraphicsController.Contrast = contrast;
+        GraphicsController.Exposure = brightnessScale * brightness;
+        GraphicsController.Contrast = contrastScale * contrast;
     }
 }

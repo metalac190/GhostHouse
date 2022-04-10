@@ -48,9 +48,11 @@ namespace Game
             if (_raycastBlock != null) _raycastBlock.gameObject.SetActive(true);
             if (_fadeIn) {
                 FadeFromBlack();
+                PauseGame(true);
             }
             else if (_showTitleText) {
                 TitleText();
+                PauseGame(true);
             }
         }
 
@@ -106,6 +108,12 @@ namespace Game
         private void StartDialogue() {
             _raycastBlock.gameObject.SetActive(false);
             if (!string.IsNullOrEmpty(_dialogueOnStart)) DialogueRunner.StartDialogue(_dialogueOnStart);
+            PauseGame(false);
+        }
+
+        private void PauseGame(bool paused) {
+            IsometricCameraController.Singleton.gamePaused = paused;
+            PauseMenu.Singleton.PreventPausing(!paused);
         }
 
         private IEnumerator FadeToBlack(float time) {

@@ -1,6 +1,7 @@
 ﻿using Mechanics.Feedback;
 using UnityEngine;
 using Utility.Audio.Managers;
+using Yarn.Unity;
 
 public class PauseMenu : MonoBehaviour
 {
@@ -12,9 +13,12 @@ public class PauseMenu : MonoBehaviour
     //Menu Panels
     [SerializeField] JournalController journal = null;
 
+    private DialogueRunner dialogueRunner;
+
     private void Awake()
     {
         Singleton = this;
+        dialogueRunner = FindObjectOfType<DialogueRunner>();
     }
 
     // Start is called before the first frame update
@@ -29,6 +33,9 @@ public class PauseMenu : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.P) || Input.GetKeyDown(KeyCode.Escape))
         {
+            if (dialogueRunner != null && dialogueRunner.IsDialogueRunning && !isPaused) {
+                return;
+            }
             if (isPaused)
             {
                 ResumeGame();
@@ -37,8 +44,7 @@ public class PauseMenu : MonoBehaviour
             {
                 PauseGame();
             }
-        }
-        if (isPaused) {
+        } else if (isPaused) {
             if (Input.GetKeyDown(KeyCode.LeftArrow))
             {
                 journal.PreviousPage();
@@ -54,7 +60,9 @@ public class PauseMenu : MonoBehaviour
     {
         ModalWindowController.Singleton.HideHudOnPause(isPaused);
         SoundManager.MusicManager.SetPaused(isPaused);
-        IsometricCameraController.Singleton.gamePaused = isPaused;
+        if (canPause) {
+            IsometricCameraController.Singleton.gamePaused = isPaused;
+        }
         if (journal != null)
         {
             journal.gameObject.SetActive(isPaused);
