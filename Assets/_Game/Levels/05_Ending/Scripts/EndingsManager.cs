@@ -1,21 +1,22 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class EndingsManager : MonoBehaviour
 {
     [SerializeField]
-    Ending trueEnding;
+    Ending trueEnding = null;
 
     [SerializeField]
-    Ending cousinEnding;
+    Ending cousinEnding = null;
 
     [SerializeField]
-    Ending sisterEnding;
+    Ending sisterEnding = null;
 
     [SerializeField]
     [Tooltip("Threshold for this ending is ignored.")]
-    Ending badEnding;
+    Ending badEnding = null;
 
     [SerializeField]
     Game.TransitionManager transitionManager = null;
@@ -55,6 +56,11 @@ public class EndingsManager : MonoBehaviour
                 end.Visuals?.SetActive(false);
             }
         }
+    }
+
+    public void GoToScene(string nextScene)
+    {
+        SceneManager.LoadScene(nextScene);
     }
 
     [System.Serializable]
