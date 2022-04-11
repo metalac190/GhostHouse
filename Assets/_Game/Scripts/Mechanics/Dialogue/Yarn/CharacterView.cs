@@ -207,6 +207,7 @@ namespace Mechanics.Dialog
 
         public override void OnLineStatusChanged(Yarn.Unity.LocalizedLine dialogueLine)
         {
+            if (dialogueLine == null) return;
             switch (dialogueLine.Status)
             {
                 case Yarn.Unity.LineStatus.Presenting:
