@@ -75,6 +75,7 @@ public class ModalWindowController : MonoBehaviour
             } else if ((Input.GetKeyDown(KeyCode.Return) || Input.GetKeyDown(KeyCode.Space)) && _callback != null) {
                 _callback.Invoke();
                 _callback = null;
+                DisableModalWindow();
             }
         }
     }
