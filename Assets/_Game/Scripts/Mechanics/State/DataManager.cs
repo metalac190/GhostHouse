@@ -76,7 +76,7 @@ public class DataManager : MonoBehaviour
     }
 
     public Season GetSeason() {
-        switch (level) {
+        switch (level.ToLower()) {
             case "spring":
                 return Season.Spring;
             case "summer":
