@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 [RequireComponent(typeof(VerticalLayoutGroup), typeof(CanvasGroup))]
 public class CreditsManager : MonoBehaviour
@@ -101,12 +102,7 @@ public class CreditsManager : MonoBehaviour
         StartCoroutine(Mechanics.Dialog.Tweens.WaitBefore(_timeBeforeEnd,
         () =>
         {
-            Debug.Log("Credits are done.");
-            StartCoroutine(Mechanics.Dialog.Tweens.WaitBefore(3f,
-            () =>
-            {
-                Debug.LogWarning("Seriously... go home!");
-            }));
+            SceneManager.LoadScene("MainMenu");
         }));
 
         yield break;
