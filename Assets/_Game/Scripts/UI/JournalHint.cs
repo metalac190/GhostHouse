@@ -15,7 +15,7 @@ public class JournalHint : MonoBehaviour
         var season = DataManager.Instance.GetSeason();
         bool seasonCheck = _season == season || season == Season.Universal;
 
-        bool after = _showAfter != null && GetUnlocked(_showAfter.name);
+        bool after = _showAfter == null || GetUnlocked(_showAfter.name);
         bool until = _showUntil != null && GetUnlocked(_showUntil.name);
 
         bool unlocked = seasonCheck && after && !until;
