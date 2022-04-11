@@ -452,7 +452,7 @@ public class IsometricCameraController : MonoBehaviour
                 if (Input.GetMouseButtonDown(0) && !IsMouseOverUi)
                 {
                     Ray ray = _mainCamera.ScreenPointToRay(Input.mousePosition);
-                    if (Physics.Raycast(ray, out var hit, _groundLayer))
+                    if (Physics.Raycast(ray, out var hit, Mathf.Infinity, _groundLayer))
                     {
                         _dragging = true;
                         _dragStart = hit.point;
@@ -465,7 +465,7 @@ public class IsometricCameraController : MonoBehaviour
                 else if (Input.GetMouseButton(0) && _dragging)
                 {
                     Ray ray = _mainCamera.ScreenPointToRay(Input.mousePosition);
-                    if (Physics.Raycast(ray, out var hit, _groundLayer))
+                    if (Physics.Raycast(ray, out var hit, Mathf.Infinity, _groundLayer))
                     {
                         Vector3 diff = _dragStart - Vector3.Lerp(_dragStart, hit.point, _clickDragSmooth);
                         diff.y = 0;
