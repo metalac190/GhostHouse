@@ -22,7 +22,7 @@ namespace Game
         [SerializeField] private bool _showTitleText = true;
         [SerializeField] private float _titleTextTime = 1;
         [SerializeField] private AnimationCurve _titleTextVisibility = new AnimationCurve(new Keyframe(0, 0), new Keyframe(0.25f, 1), new Keyframe(0.75f, 1), new Keyframe(1, 0));
-        [SerializeField] private string _dialogueOnStart = "";
+        public string _dialogueOnStart = "";
 
         [Header("On Scene End")]
         [SerializeField] private string _nextScene = "MainMenu";
@@ -112,8 +112,12 @@ namespace Game
         }
 
         private void PauseGame(bool paused) {
-            IsometricCameraController.Singleton.gamePaused = paused;
-            PauseMenu.Singleton.PreventPausing(!paused);
+            if (IsometricCameraController.Singleton != null) {
+                IsometricCameraController.Singleton.gamePaused = paused;
+            }
+            if (PauseMenu.Singleton != null) {
+                PauseMenu.Singleton.PreventPausing(!paused);
+            }
         }
 
         private IEnumerator FadeToBlack(float time) {
