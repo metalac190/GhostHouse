@@ -16,6 +16,8 @@ public class SquashStretchAnimation : MonoBehaviour
     [SerializeField] private float _squashAmount = 1f;
     [SerializeField] private float _stretchAmount = 1f;
 
+    public float StretchAmount => _stretchAmount;
+
     private Animator _animator;
 
     private AnimatorController _controller;

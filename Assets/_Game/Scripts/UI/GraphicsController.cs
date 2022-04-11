@@ -88,8 +88,10 @@ public class GraphicsController : MonoBehaviour
 
         Instance = null;
 
-        _colorAdjustments.postExposure.value = _initExposure;
-        _colorAdjustments.contrast.value = _initContrast;
+        if (_colorAdjustments != null) {
+            _colorAdjustments.postExposure.value = _initExposure;
+            _colorAdjustments.contrast.value = _initContrast;
+        }
     }
 
     public static void UpdateScreenMode()
