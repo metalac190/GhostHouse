@@ -72,6 +72,7 @@ public class DataManager : MonoBehaviour
 
     public void OnContinueGame() {
         // TODO: LOAD ALL INTERACTIONS FROM PREVIOUS ENDING
+        ReadFile();
     }
 
     public Season GetSeason() {
