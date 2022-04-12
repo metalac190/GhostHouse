@@ -65,7 +65,6 @@ public class Settings : MonoBehaviour
         if (_instanceReference == null) {
             _instanceReference = this;
             audioMixerController = GetComponent<AudioMixerController>();
-            SceneManager.activeSceneChanged += (Scene before, Scene after) => SaveAllSettings();
             DontDestroyOnLoad(this.gameObject);
         }
         else if (_instanceReference != this) {
@@ -78,8 +77,12 @@ public class Settings : MonoBehaviour
         //Debug.Log(Application.persistentDataPath);
         //Debug.Log(DataManager.Instance.settingsLeftClickInteract);
 
+        SceneManager.activeSceneChanged += (Scene before, Scene after) => SaveAllSettings();
+
         LoadSettings();
-        SaveAllSettings();
+        SetControlSettings();
+        SetAudioSettings();
+        SetVisualSettings();
     }
 
     [Button(Spacing = 25, Mode = ButtonMode.NotPlaying)]
