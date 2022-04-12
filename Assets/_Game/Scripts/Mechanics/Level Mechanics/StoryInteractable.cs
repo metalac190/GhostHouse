@@ -77,7 +77,7 @@ namespace Mechanics.Level_Mechanics
         }
 
         private void OnDisable() {
-            if (_particles) {
+            if (_particles && InteractableParticlePool.Instance != null) {
                 InteractableParticlePool.Instance.UnregisterParticle(_particleSystem, _particleType);
             }
         }
