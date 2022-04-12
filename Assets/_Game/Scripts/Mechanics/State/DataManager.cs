@@ -373,6 +373,9 @@ public class DataManager : MonoBehaviour
     public void ResetData()
     {
         interactions.Clear();
+        cousinsEndingPoints = 0;
+        sistersEndingPoints = 0;
+        trueEndingPoints = 0;
     }
 
     // Return whether or not the save file exists
