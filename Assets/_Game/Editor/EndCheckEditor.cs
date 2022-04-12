@@ -66,6 +66,12 @@ public class EndCheckEditor : Editor
         foreach (var i in cousinInt) {
             EditorGUILayout.ObjectField(i, typeof(Interactable), true);
         }
+        GUILayout.Space(10);
+        GUIStyle style = new GUIStyle {
+            wordWrap = true
+        };
+        GUILayout.Label("To force update this object, in the project search bar, type \'t:Interactable\' and select all of them." +
+                        "Then come back to this object and it should work. No clue why this is needed.", style);
     }
 }
 #endif
