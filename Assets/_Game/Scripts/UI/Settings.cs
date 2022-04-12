@@ -68,7 +68,7 @@ public class Settings : MonoBehaviour
             SceneManager.activeSceneChanged += (Scene before, Scene after) => SaveAllSettings();
             DontDestroyOnLoad(this.gameObject);
         }
-        else {
+        else if (_instanceReference != this) {
             Destroy(this.gameObject);
         }
     }
