@@ -56,6 +56,7 @@ public class DataManager : MonoBehaviour
             interactions = new Dictionary<string, bool>();
             journalUnlocks = new bool[24];      // Initializes array of all false entries
 
+            saveData = new SaveData();
             filePath = Path.Combine(Application.persistentDataPath, "savedata.json");
 
             LoadFile();
@@ -96,9 +97,6 @@ public class DataManager : MonoBehaviour
     {
         level = "Spring";
         remainingSpiritPoints = 3;
-        cousinsEndingPoints = 0;
-        sistersEndingPoints = 0;
-        trueEndingPoints = 0;
         settingsLeftClickInteract = true;
         settingsCameraWASD = true;
         settingsCameraArrowKeys = true;
@@ -122,6 +120,7 @@ public class DataManager : MonoBehaviour
         if (!SaveFileExists())
         {
             SetDefaultValues();
+            ResetData();
             WriteFile();
         }
         else
@@ -148,10 +147,11 @@ public class DataManager : MonoBehaviour
                 trueEndingPoints = saveData.trueEndingPoints;
 
                 // Repopulate dictionary from saved arrays
-                for(int i = 0; i < 160; i++)
+                for(int i = 0; i < saveData.interactionNames.Length; i++)
                 {
                     interactions[saveData.interactionNames[i]] = saveData.interactionStates[i];
                 }
+                interactions.Remove("");
 
                 settingsLeftClickInteract = saveData.settings.leftClickInteract;
                 settingsCameraWASD = saveData.settings.cameraWASD;
@@ -175,6 +175,7 @@ public class DataManager : MonoBehaviour
             {
                 Debug.Log("Some error loading save file");
                 SetDefaultValues();
+                ResetData();
                 WriteFile();
             }
         }
@@ -195,6 +196,8 @@ public class DataManager : MonoBehaviour
 
         // Unpack dictionary elements into two arrays to save
         int ind = 0;
+        saveData.interactionNames = new string[160];
+        saveData.interactionStates = new bool[160];
         foreach (KeyValuePair<string, bool> entry in interactions)
         {
             if(ind >= 160)
@@ -207,6 +210,10 @@ public class DataManager : MonoBehaviour
                 saveData.interactionStates[ind] = entry.Value;
                 ind++;
             }
+        }
+        for (int i = ind; i < 160; i++) {
+            saveData.interactionNames[i] = "";
+            saveData.interactionStates[i] = false;
         }
 
         saveData.settings.leftClickInteract = settingsLeftClickInteract;
@@ -229,6 +236,7 @@ public class DataManager : MonoBehaviour
 
         // Save data as json string and write to file
         string jsonString = JsonUtility.ToJson(saveData, true);
+        Debug.Log("File saved to " + filePath);
         File.WriteAllText(filePath, jsonString);
     }
 
