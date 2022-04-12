@@ -204,7 +204,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &4883441079807438438
 Transform:
   m_ObjectHideFlags: 0
@@ -232,6 +232,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ef8ba7c8d7876444cbdd449add52f354, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _particles: 1
+  _particleOffset: {x: -0.06, y: 1.24, z: -0.88}
+  _particleSize: {x: 5, y: 1.5, z: 3}
+  _particleType: 0
   _textOnHover: 1
   _hoverTextUseObjectName: 0
   _hoverText: Oven
@@ -298,6 +302,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ef8ba7c8d7876444cbdd449add52f354, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _particles: 1
+  _particleOffset: {x: -1, y: 1.25, z: 0}
+  _particleSize: {x: 2, y: 2, z: 6}
+  _particleType: 0
   _textOnHover: 1
   _hoverTextUseObjectName: 0
   _hoverText: Piano
@@ -427,7 +435,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &6132529003367683926
 Transform:
   m_ObjectHideFlags: 0
@@ -458,6 +466,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ef8ba7c8d7876444cbdd449add52f354, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _particles: 1
+  _particleOffset: {x: 0, y: 0, z: 0}
+  _particleSize: {x: 3, y: 2, z: 3}
+  _particleType: 0
   _textOnHover: 1
   _hoverTextUseObjectName: 0
   _hoverText: Wrapping Paper
@@ -1005,7 +1017,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &4199643140833532304
 Transform:
   m_ObjectHideFlags: 0
@@ -1033,6 +1045,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ef8ba7c8d7876444cbdd449add52f354, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _particles: 1
+  _particleOffset: {x: 0, y: 1, z: 0}
+  _particleSize: {x: 3, y: 3, z: 3}
+  _particleType: 2
   _textOnHover: 1
   _hoverTextUseObjectName: 0
   _hoverText: Polly's Cage
@@ -1123,6 +1139,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1589552547398249886}
   - component: {fileID: 5420887621230503590}
+  - component: {fileID: 3424658823417797265}
   m_Layer: 0
   m_Name: Winter_Interactables
   m_TagString: Untagged
@@ -1175,6 +1192,35 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _documentationText: {fileID: 4900000, guid: 75a3778141247d74dbf14e8cd11242ab, type: 3}
+--- !u!114 &3424658823417797265
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1589552547398249887}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7fbe48a40e4c7f7458125fac5f670d92, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _objectsToDisable:
+  - {fileID: 5619547589346116019}
+  - {fileID: 4054197540033919039}
+  - {fileID: 7383065016793218050}
+  - {fileID: 2661458913584547455}
+  - {fileID: 3258335889098617418}
+  - {fileID: 701858674191686079}
+  - {fileID: 2448147590017338203}
+  - {fileID: 3837718879168328856}
+  - {fileID: 7964965958227804085}
+  - {fileID: 6781780530186647552}
+  - {fileID: 5416604768320897443}
+  - {fileID: 8219844443366005015}
+  - {fileID: 6913599564693868065}
+  - {fileID: 619105806791544934}
+  - {fileID: 1761874451786291577}
+  - {fileID: 1359494457759611204}
 --- !u!1 &1613617395365129790
 GameObject:
   m_ObjectHideFlags: 0
@@ -1343,7 +1389,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &2671228158144136023
 Transform:
   m_ObjectHideFlags: 0
@@ -1371,6 +1417,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ef8ba7c8d7876444cbdd449add52f354, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _particles: 1
+  _particleOffset: {x: -1, y: 1.25, z: 0}
+  _particleSize: {x: 2, y: 2, z: 6}
+  _particleType: 0
   _textOnHover: 1
   _hoverTextUseObjectName: 0
   _hoverText: Piano
@@ -1438,6 +1488,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ef8ba7c8d7876444cbdd449add52f354, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _particles: 1
+  _particleOffset: {x: 0, y: 0.25, z: 0}
+  _particleSize: {x: 4, y: 3.5, z: 3}
+  _particleType: 2
   _textOnHover: 1
   _hoverTextUseObjectName: 0
   _hoverText: Giant Panda
@@ -1691,6 +1745,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ef8ba7c8d7876444cbdd449add52f354, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _particles: 1
+  _particleOffset: {x: 0.5, y: 0, z: 0}
+  _particleSize: {x: 5, y: 1, z: 4}
+  _particleType: 0
   _textOnHover: 1
   _hoverTextUseObjectName: 0
   _hoverText: Presents
@@ -1916,7 +1974,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &5544968671687578839
 Transform:
   m_ObjectHideFlags: 0
@@ -1944,6 +2002,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ef8ba7c8d7876444cbdd449add52f354, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _particles: 1
+  _particleOffset: {x: -0.96, y: -1.32, z: 8.21}
+  _particleSize: {x: 2, y: 1, z: 2}
+  _particleType: 0
   _textOnHover: 1
   _hoverTextUseObjectName: 0
   _hoverText: Wrap Gift
@@ -2169,7 +2231,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &2305834304777977257
 Transform:
   m_ObjectHideFlags: 0
@@ -2197,6 +2259,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ef8ba7c8d7876444cbdd449add52f354, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _particles: 1
+  _particleOffset: {x: 0, y: 0.5, z: 0}
+  _particleSize: {x: 2, y: 2, z: 2}
+  _particleType: 0
   _textOnHover: 1
   _hoverTextUseObjectName: 0
   _hoverText: Lambie
@@ -2422,7 +2488,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &4402495194111232283
 Transform:
   m_ObjectHideFlags: 0
@@ -2450,6 +2516,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ef8ba7c8d7876444cbdd449add52f354, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _particles: 1
+  _particleOffset: {x: 0, y: 1, z: 0}
+  _particleSize: {x: 3, y: 3, z: 3}
+  _particleType: 0
   _textOnHover: 1
   _hoverTextUseObjectName: 0
   _hoverText: Polly's Cage
@@ -2767,7 +2837,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &4136517785638089323
 Transform:
   m_ObjectHideFlags: 0
@@ -2795,6 +2865,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ef8ba7c8d7876444cbdd449add52f354, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _particles: 1
+  _particleOffset: {x: 0, y: 0, z: 0}
+  _particleSize: {x: 1, y: 1, z: 1}
+  _particleType: 0
   _textOnHover: 1
   _hoverTextUseObjectName: 0
   _hoverText: Wrapped Gift
@@ -2862,6 +2936,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ef8ba7c8d7876444cbdd449add52f354, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _particles: 1
+  _particleOffset: {x: 0, y: 0.3, z: 0}
+  _particleSize: {x: 3, y: 3, z: 1}
+  _particleType: 0
   _textOnHover: 1
   _hoverTextUseObjectName: 0
   _hoverText: Grandpa's Jacket
@@ -2899,7 +2977,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &6090104693996142344
 Transform:
   m_ObjectHideFlags: 0
@@ -3811,7 +3889,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &9074742281743898081
 Transform:
   m_ObjectHideFlags: 0
@@ -3839,6 +3917,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ef8ba7c8d7876444cbdd449add52f354, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _particles: 1
+  _particleOffset: {x: 0, y: 0, z: 0}
+  _particleSize: {x: 1, y: 1, z: 1}
+  _particleType: 0
   _textOnHover: 1
   _hoverTextUseObjectName: 0
   _hoverText: Decorations
@@ -4093,6 +4175,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ef8ba7c8d7876444cbdd449add52f354, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _particles: 1
+  _particleOffset: {x: 0, y: 1, z: 0}
+  _particleSize: {x: 3, y: 3, z: 3}
+  _particleType: 0
   _textOnHover: 1
   _hoverTextUseObjectName: 0
   _hoverText: Polly's Cage
@@ -4130,7 +4216,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &4989579693072806357
 Transform:
   m_ObjectHideFlags: 0
@@ -4301,6 +4387,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ef8ba7c8d7876444cbdd449add52f354, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _particles: 1
+  _particleOffset: {x: 0.71, y: 0, z: -0.14}
+  _particleSize: {x: 5, y: 4, z: 5}
+  _particleType: 0
   _textOnHover: 1
   _hoverTextUseObjectName: 0
   _hoverText: Nathan & Morgan
@@ -4403,6 +4493,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ef8ba7c8d7876444cbdd449add52f354, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _particles: 1
+  _particleOffset: {x: 0, y: 0, z: 0}
+  _particleSize: {x: 10, y: 5, z: 4}
+  _particleType: 2
   _textOnHover: 1
   _hoverTextUseObjectName: 0
   _hoverText: Fireplace
@@ -4561,6 +4655,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ef8ba7c8d7876444cbdd449add52f354, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _particles: 1
+  _particleOffset: {x: -2.9, y: -0.14, z: -16.27}
+  _particleSize: {x: 1.5, y: 2.5, z: 1}
+  _particleType: 0
   _textOnHover: 1
   _hoverTextUseObjectName: 0
   _hoverText: Stockings
@@ -4707,6 +4805,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ef8ba7c8d7876444cbdd449add52f354, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _particles: 1
+  _particleOffset: {x: 0, y: 0, z: 0}
+  _particleSize: {x: 1, y: 1, z: 1}
+  _particleType: 2
   _textOnHover: 1
   _hoverTextUseObjectName: 0
   _hoverText: Paperwork
@@ -4773,6 +4875,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ef8ba7c8d7876444cbdd449add52f354, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _particles: 1
+  _particleOffset: {x: 0, y: 1, z: 0}
+  _particleSize: {x: 2, y: 5, z: 2}
+  _particleType: 0
   _textOnHover: 1
   _hoverTextUseObjectName: 0
   _hoverText: Val
@@ -4974,7 +5080,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &2315816754261249092
 Transform:
   m_ObjectHideFlags: 0
@@ -5002,6 +5108,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ef8ba7c8d7876444cbdd449add52f354, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _particles: 1
+  _particleOffset: {x: 0, y: 0, z: 0}
+  _particleSize: {x: 1, y: 1, z: 1}
+  _particleType: 0
   _textOnHover: 1
   _hoverTextUseObjectName: 0
   _hoverText: Kids open gift
@@ -5109,7 +5219,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1216995536881415676
 Transform:
   m_ObjectHideFlags: 0
@@ -5137,6 +5247,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ef8ba7c8d7876444cbdd449add52f354, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _particles: 1
+  _particleOffset: {x: 0, y: 0, z: 0}
+  _particleSize: {x: 1, y: 1, z: 1}
+  _particleType: 0
   _textOnHover: 1
   _hoverTextUseObjectName: 0
   _hoverText: Ornament
@@ -5616,7 +5730,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &6133787151577065869
 Transform:
   m_ObjectHideFlags: 0
@@ -5644,6 +5758,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ef8ba7c8d7876444cbdd449add52f354, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _particles: 1
+  _particleOffset: {x: 0, y: 0, z: 0}
+  _particleSize: {x: 1, y: 2.5, z: 1}
+  _particleType: 0
   _textOnHover: 1
   _hoverTextUseObjectName: 0
   _hoverText: Empty Roll
@@ -6020,7 +6138,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &310499114509906258
 Transform:
   m_ObjectHideFlags: 0
@@ -6048,6 +6166,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ef8ba7c8d7876444cbdd449add52f354, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _particles: 1
+  _particleOffset: {x: 0, y: 0, z: 0}
+  _particleSize: {x: 1, y: 1, z: 1}
+  _particleType: 0
   _textOnHover: 1
   _hoverTextUseObjectName: 0
   _hoverText: Val opens gift
@@ -6114,6 +6236,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ef8ba7c8d7876444cbdd449add52f354, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _particles: 1
+  _particleOffset: {x: 0, y: 0, z: 0}
+  _particleSize: {x: 4, y: 8, z: 4}
+  _particleType: 0
   _textOnHover: 1
   _hoverTextUseObjectName: 0
   _hoverText: Christmas Tree
@@ -6273,6 +6399,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ef8ba7c8d7876444cbdd449add52f354, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _particles: 1
+  _particleOffset: {x: 0, y: 1, z: 0}
+  _particleSize: {x: 3, y: 9, z: 3}
+  _particleType: 0
   _textOnHover: 1
   _hoverTextUseObjectName: 0
   _hoverText: Next Season
@@ -6311,7 +6441,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1716533444002139391
 Transform:
   m_ObjectHideFlags: 0
@@ -6339,6 +6469,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ef8ba7c8d7876444cbdd449add52f354, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _particles: 1
+  _particleOffset: {x: 0, y: 0, z: 0}
+  _particleSize: {x: 4, y: 8, z: 4}
+  _particleType: 0
   _textOnHover: 1
   _hoverTextUseObjectName: 0
   _hoverText: Christmas Tree
@@ -6961,6 +7095,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ef8ba7c8d7876444cbdd449add52f354, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _particles: 1
+  _particleOffset: {x: 0, y: 0, z: 0}
+  _particleSize: {x: 2, y: 5, z: 2}
+  _particleType: 0
   _textOnHover: 1
   _hoverTextUseObjectName: 0
   _hoverText: Jaqueline cooking
@@ -7027,6 +7165,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ef8ba7c8d7876444cbdd449add52f354, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _particles: 1
+  _particleOffset: {x: -0.15, y: 0, z: 0}
+  _particleSize: {x: 0.75, y: 3, z: 6}
+  _particleType: 0
   _textOnHover: 1
   _hoverTextUseObjectName: 0
   _hoverText: '"Welcome Home"'

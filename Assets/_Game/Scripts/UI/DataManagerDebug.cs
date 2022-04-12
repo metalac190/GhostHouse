@@ -5,6 +5,7 @@ using UnityEngine;
 public class DataManagerDebug : MonoBehaviour
 {
     [SerializeField] private TextMeshProUGUI _text = null;
+    [SerializeField] private GameObject _parent = null;
 
     private static bool _debugActive;
 
@@ -30,6 +31,6 @@ public class DataManagerDebug : MonoBehaviour
 
     private void SetDebugActive(bool active) {
         _debugActive = active;
-        _text.gameObject.SetActive(active);
+        _parent.SetActive(active);
     }
 }

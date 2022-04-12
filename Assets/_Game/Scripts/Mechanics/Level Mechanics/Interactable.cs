@@ -45,6 +45,9 @@ namespace Mechanics.Level_Mechanics
         public List<Animator> ConnectedAnimators { get; set; } = new List<Animator>();
 
         public int Cost => _cost;
+        public int SisterEndPoints => _sisterEndingPoints;
+        public int CousinEndingPoints => _cousinEndingPoints;
+        public int TrueEndingPoints => _trueEndingPoints;
 
         static DialogueRunner _dialogueRunner;
         static DialogueRunner DialogueRunner {
