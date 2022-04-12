@@ -194,18 +194,18 @@ public class DataManager : MonoBehaviour
         saveData.trueEndingPoints = trueEndingPoints;
 
         // Unpack dictionary elements into two arrays to save
-        foreach(KeyValuePair<string, bool> entry in interactions)
+        int ind = 0;
+        foreach (KeyValuePair<string, bool> entry in interactions)
         {
-            int i = 0;
-            if(i >= 160)
+            if(ind >= 160)
             {
                 Debug.Log("Error: Unexpectedly high number of interactions");
             }
             else
             {
-                saveData.interactionNames[i] = entry.Key;
-                saveData.interactionStates[i] = entry.Value;
-                i++;
+                saveData.interactionNames[ind] = entry.Key;
+                saveData.interactionStates[ind] = entry.Value;
+                ind++;
             }
         }
 
