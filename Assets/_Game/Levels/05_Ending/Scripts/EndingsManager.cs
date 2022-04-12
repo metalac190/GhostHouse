@@ -30,6 +30,7 @@ public class EndingsManager : MonoBehaviour
         if (data.trueEndingPoints > trueEnding.Threshold)
         {
             selectedEnding = trueEnding;
+            data.UnlockEnding(0);
         }
         else if (data.sistersEndingPoints > sisterEnding.Threshold)
         {
@@ -38,10 +39,17 @@ public class EndingsManager : MonoBehaviour
         else if (data.cousinsEndingPoints > cousinEnding.Threshold)
         {
             selectedEnding = cousinEnding;
+            data.UnlockEnding(2);
+        }
+        else if (data.sistersEndingPoints > sisterEnding.Threshold)
+        {
+            selectedEnding = sisterEnding;
+            data.UnlockEnding(3);
         }
         else
         {
             selectedEnding = badEnding;
+            data.UnlockEnding(1);
         }
 
         foreach (Ending end in new List<Ending>() { trueEnding, cousinEnding, sisterEnding, badEnding })
