@@ -46,6 +46,7 @@ public class DataManager : MonoBehaviour
     // Boolean of what has been unlocked in journal
     [HideInInspector]
     public bool[] journalUnlocks;
+    public bool[] endingUnlocks;
 
     private void Awake()
     {
@@ -56,6 +57,7 @@ public class DataManager : MonoBehaviour
 
             interactions = new Dictionary<string, bool>();
             journalUnlocks = new bool[24];      // Initializes array of all false entries
+            endingUnlocks = new bool[4];
 
             saveData = new SaveData();
             filePath = Path.Combine(Application.persistentDataPath, "savedata.json");
@@ -71,7 +73,9 @@ public class DataManager : MonoBehaviour
                 ReadFile();
 
 #if UNITY_EDITOR
-                if (SceneManager.GetActiveScene().name.ToLower() != "mainmenu") {
+                var season = SceneManager.GetActiveScene().name;
+                if (season != "MainMenu") {
+                    level = season;
                     ResetData();
                 }
 #endif
@@ -95,14 +99,14 @@ public class DataManager : MonoBehaviour
     }
 
     public Season GetSeason() {
-        switch (level.ToLower()) {
-            case "spring":
+        switch (level) {
+            case "Spring":
                 return Season.Spring;
-            case "summer":
+            case "Summer":
                 return Season.Summer;
-            case "fall":
+            case "Fall":
                 return Season.Fall;
-            case "winter":
+            case "Winter":
                 return Season.Winter;
             default:
                 Debug.LogWarning("Season accessed on Invalid Level", gameObject);
@@ -175,6 +179,7 @@ public class DataManager : MonoBehaviour
                 settingsTextFont = saveData.settings.textFont;
 
                 saveData.journalUnlocks.CopyTo(journalUnlocks, 0);
+                saveData.endingUnlocks.CopyTo(endingUnlocks, 0);
 
                 Debug.Log("Successful read");
             }
@@ -240,6 +245,7 @@ public class DataManager : MonoBehaviour
         saveData.settings.textFont = settingsTextFont;
 
         journalUnlocks.CopyTo(saveData.journalUnlocks, 0);
+        endingUnlocks.CopyTo(saveData.endingUnlocks, 0);
 
         // Save data as json string and write to file
         string jsonString = JsonUtility.ToJson(saveData, true);
@@ -368,6 +374,14 @@ public class DataManager : MonoBehaviour
                 outstr += i.ToString() + " ";
             }
         }
+        outstr += "\nEnding Unlocks: ";
+        for (int i = 0; i < endingUnlocks.Length; i++)
+        {
+            if (endingUnlocks[i])
+            {
+                outstr += i.ToString() + " ";
+            }
+        }
         Debug.Log(outstr);
     }
 
@@ -381,6 +395,11 @@ public class DataManager : MonoBehaviour
     public void UnlockJournalEntry(int index)
     {
         journalUnlocks[index] = true;
+    }
+
+    public void UnlockEnding(int index)
+    {
+        endingUnlocks[index] = true;
     }
 
     // For now, just resets interactions. Will need to clear save file eventually
