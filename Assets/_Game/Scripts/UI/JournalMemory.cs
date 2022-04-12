@@ -3,25 +3,25 @@
 public class JournalMemory : MonoBehaviour
 {
     [SerializeField] private JournalMemoryType _ending = JournalMemoryType.True;
-    [SerializeField] private GameObject _obj;
+    [SerializeField] private GameObject _obj = null;
 
     private void OnEnable() {
         bool unlocked = true;
         switch (_ending) {
             case JournalMemoryType.True:
-                //unlocked = DataManager.Instance.trueEndingUnlocked;
+                unlocked = DataManager.Instance.endingUnlocks[0];
                 break;
             case JournalMemoryType.Bad:
-                //unlocked = DataManager.Instance.badEndingUnlocked;
+                unlocked = DataManager.Instance.endingUnlocks[1];
                 break;
             case JournalMemoryType.Sister:
-                //unlocked = DataManager.Instance.sisterEndingUnlocked;
+                unlocked = DataManager.Instance.endingUnlocks[2];
                 break;
             case JournalMemoryType.Cousin:
-                //unlocked = DataManager.Instance.cousinEndingUnlocked;
+                unlocked = DataManager.Instance.endingUnlocks[3];
                 break;
         }
-        _obj.SetActive(unlocked);
+        if (_obj != null) _obj.SetActive(unlocked);
     }
 }
 

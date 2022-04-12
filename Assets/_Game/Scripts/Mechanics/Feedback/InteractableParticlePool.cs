@@ -9,7 +9,7 @@ public class InteractableParticlePool : MonoBehaviour
         get {
             if (_instance == null) {
                 _instance = FindObjectOfType<InteractableParticlePool>();
-                _instance.InitSystems();
+                if (_instance != null) _instance.InitSystems();
             }
             return _instance;
         }
