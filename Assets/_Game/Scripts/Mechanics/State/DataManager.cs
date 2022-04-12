@@ -73,6 +73,8 @@ public class DataManager : MonoBehaviour
 
     public void OnContinueGame() {
         // TODO: LOAD ALL INTERACTIONS FROM PREVIOUS ENDING
+        Debug.Log("Continuing from previous save file");
+        ResetData();
         ReadFile();
     }
 
