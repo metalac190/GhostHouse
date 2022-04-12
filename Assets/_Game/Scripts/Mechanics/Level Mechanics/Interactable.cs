@@ -1,9 +1,11 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using UnityEngine;
 using Utility.Audio.Helper;
 using Utility.Buttons;
 using Utility.ReadOnly;
 using Yarn.Unity;
+using Random = UnityEngine.Random;
 
 namespace Mechanics.Level_Mechanics
 {
@@ -96,14 +98,27 @@ namespace Mechanics.Level_Mechanics
             DataManager.Instance.sistersEndingPoints += _sisterEndingPoints;
 
             if (!string.IsNullOrEmpty(_dialogeYarnNode)) {
-                DialogueRunner.StartDialogue(_dialogeYarnNode);
+                try {
+                    DialogueRunner.StartDialogue(_dialogeYarnNode);
+                }
+                catch (Exception e) {
+                    Debug.LogWarning("Invalid Dialogue Yarn Node (" + _dialogeYarnNode + ") connected to " + name);
+                }
             }
             else if (_useRandomDialogue) {
                 if (_randomDialoguePool.Count == 0) {
                     Debug.LogWarning("The Random Dialogue Pool has no dialogues in it...");
                 }
                 else {
-                    DialogueRunner.StartDialogue(_randomDialoguePool[Random.Range(0, _randomDialoguePool.Count)]);
+                    var dialogue = _randomDialoguePool[Random.Range(0, _randomDialoguePool.Count)];
+                    try
+                    {
+                        DialogueRunner.StartDialogue(dialogue);
+                    }
+                    catch (Exception e)
+                    {
+                        Debug.LogWarning("Invalid Dialogue Yarn Node (" + dialogue + ") connected to " + name);
+                    }
                 }
             }
         }
