@@ -71,14 +71,6 @@ public class DataManager : MonoBehaviour
             else
             {
                 ReadFile();
-
-#if UNITY_EDITOR
-                var season = SceneManager.GetActiveScene().name;
-                if (season != "MainMenu") {
-                    level = season;
-                    ResetData();
-                }
-#endif
             }
         }
         else
