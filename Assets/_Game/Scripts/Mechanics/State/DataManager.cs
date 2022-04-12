@@ -95,14 +95,14 @@ public class DataManager : MonoBehaviour
     }
 
     public Season GetSeason() {
-        switch (level.ToLower()) {
-            case "spring":
+        switch (level) {
+            case "Spring":
                 return Season.Spring;
-            case "summer":
+            case "Summer":
                 return Season.Summer;
-            case "fall":
+            case "Fall":
                 return Season.Fall;
-            case "winter":
+            case "Winter":
                 return Season.Winter;
             default:
                 Debug.LogWarning("Season accessed on Invalid Level", gameObject);
