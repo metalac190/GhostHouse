@@ -130,7 +130,10 @@ public class Settings : MonoBehaviour
     private void SetControlSettings()
     {
         // Set Control settings on camera controller
-        if(CameraController == null) return;
+        if (CameraController == null) {
+            Debug.LogWarning("No Camera Controller", gameObject);
+            return;
+        }
         CameraController._enableWASDMovement = useWASD;
         CameraController._enableClickDragMovement = useClickNDrag;
     }
@@ -138,7 +141,10 @@ public class Settings : MonoBehaviour
     // Update audio mixer controller with audio values
     private void SetAudioSettings()
     {
-        if(audioMixerController == null) return;
+        if (audioMixerController == null) {
+            Debug.LogWarning("No Audio Mixer Controller", gameObject);
+            return;
+        }
         // Assuming 0 to 100 instead of 0 to 1
         audioMixerController.SetMusicVolume(music * 0.01f);
         audioMixerController.SetSfxVolume(SFX * 0.01f);
