@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using Utility.Buttons;
 using Utility.Audio.Managers;
 
@@ -64,6 +65,7 @@ public class Settings : MonoBehaviour
         if (_instanceReference == null) {
             _instanceReference = this;
             audioMixerController = GetComponent<AudioMixerController>();
+            SceneManager.activeSceneChanged += (Scene before, Scene after) => SaveAllSettings();
             DontDestroyOnLoad(this.gameObject);
         }
         else {
