@@ -103,6 +103,7 @@ namespace Mechanics.Level_Mechanics
                 }
                 catch (Exception e) {
                     Debug.LogWarning("Invalid Dialogue Yarn Node (" + _dialogeYarnNode + ") connected to " + name);
+                    DialogueRunner.Stop();
                 }
             }
             else if (_useRandomDialogue) {
@@ -118,6 +119,7 @@ namespace Mechanics.Level_Mechanics
                     catch (Exception e)
                     {
                         Debug.LogWarning("Invalid Dialogue Yarn Node (" + dialogue + ") connected to " + name);
+                        DialogueRunner.Stop();
                     }
                 }
             }
