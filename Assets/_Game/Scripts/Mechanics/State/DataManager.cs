@@ -82,11 +82,11 @@ public class DataManager : MonoBehaviour
         switch (level.ToLower()) {
             case "spring":
                 return Season.Spring;
-            case "Summer":
+            case "summer":
                 return Season.Summer;
-            case "Fall":
+            case "fall":
                 return Season.Fall;
-            case "Winter":
+            case "winter":
                 return Season.Winter;
             default:
                 Debug.LogWarning("Season accessed on Invalid Level", gameObject);
@@ -137,7 +137,9 @@ public class DataManager : MonoBehaviour
         if (File.Exists(filePath))
         {
             // Unpack file text as JSON
+            Debug.Log("Unpacking file into savedata");
             string fileContents = File.ReadAllText(filePath);
+            saveData = new SaveData();
             JsonUtility.FromJsonOverwrite(fileContents, saveData);
 
             try
@@ -172,6 +174,8 @@ public class DataManager : MonoBehaviour
                 settingsTextFont = saveData.settings.textFont;
 
                 saveData.journalUnlocks.CopyTo(journalUnlocks, 0);
+
+                Debug.Log("Successful read");
             }
             catch
             {
