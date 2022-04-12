@@ -1,13 +1,23 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using Utility.Buttons;
+using Utility.Audio.Managers;
 
 //Settings menus change settings values
 public class Settings : MonoBehaviour
 {
     //Singleton pattern
-    public static Settings Instance = null;
+    private static Settings _instanceReference;
+    public static Settings Instance {
+        get {
+            if (_instanceReference == null) {
+                _instanceReference = FindObjectOfType<Settings>();
+            }
+            return _instanceReference;
+        }
+    }
 
     //Interact Button
     public bool leftClickInteract = true;
@@ -19,15 +29,17 @@ public class Settings : MonoBehaviour
     public int dragSpeed = 75;
 
     //Audio Settings
-    public int music = 100;
-    public int SFX = 100;
-    public int dialog = 100;
-    public int ambience = 100;
+    public int music = 75;
+    public int SFX = 75;
+    public int dialog = 75;
+    public int ambience = 75;
 
     //Visual Settings
     public bool isWindowed = false;
-    public int contrast = 75;
-    public int brightness = 75;
+    public int contrast;
+    [SerializeField] int contrastScale = 10;
+    public int brightness;
+    [SerializeField] int brightnessScale = 10;
     public bool largeGUIFont = false;
     public bool largeTextFont = false;
 
@@ -35,13 +47,27 @@ public class Settings : MonoBehaviour
     [Range(0, 2)]
     public int textFont = 0;
 
+    // Lazy load the Camera Controller
+    private IsometricCameraController cameraController;
+    private IsometricCameraController CameraController
+    {
+        get
+        {
+            if(cameraController == null) cameraController = FindObjectOfType<IsometricCameraController>();
+            return cameraController;
+        }
+    }
+
+    // Reference to AudioMixerController to control volume levels
+    AudioMixerController audioMixerController = null;
 
     private void Awake() {
-        if (Instance == null) {
-            Instance = this;
+        if (_instanceReference == null) {
+            _instanceReference = this;
+            audioMixerController = GetComponent<AudioMixerController>();
             DontDestroyOnLoad(this.gameObject);
         }
-        else {
+        else if (_instanceReference != this) {
             Destroy(this.gameObject);
         }
     }
@@ -51,7 +77,12 @@ public class Settings : MonoBehaviour
         //Debug.Log(Application.persistentDataPath);
         //Debug.Log(DataManager.Instance.settingsLeftClickInteract);
 
+        SceneManager.activeSceneChanged += (Scene before, Scene after) => SaveAllSettings();
+
         LoadSettings();
+        SetControlSettings();
+        SetAudioSettings();
+        SetVisualSettings();
     }
 
     [Button(Spacing = 25, Mode = ButtonMode.NotPlaying)]
@@ -85,15 +116,57 @@ public class Settings : MonoBehaviour
     [Button(Spacing = 10, Mode = ButtonMode.NotPlaying)]
     public void SaveControlSettings() {
         DataManager.Instance.SaveControlSettings(leftClickInteract, useWASD, useArrowKeys, useClickNDrag, dragSpeed);
+        SetControlSettings();
     }
 
     [Button(Mode = ButtonMode.NotPlaying)]
     public void SaveAudioSettings() {
         DataManager.Instance.SaveAudioSettings(music, SFX, dialog, ambience);
+        SetAudioSettings();
     }
 
     [Button(Mode = ButtonMode.NotPlaying)]
     public void SaveVisualSettings() {
         DataManager.Instance.SaveVisualSettings(isWindowed, contrast, brightness, largeGUIFont, largeTextFont, textFont);
+        SetVisualSettings();
+    }
+
+    // Update the camera controller with the new settings
+    private void SetControlSettings()
+    {
+        // Set Control settings on camera controller
+        if (CameraController == null) {
+            Debug.LogWarning("No Camera Controller", gameObject);
+            return;
+        }
+        CameraController._enableWASDMovement = useWASD;
+        CameraController._enableClickDragMovement = useClickNDrag;
+    }
+
+    // Update audio mixer controller with audio values
+    private void SetAudioSettings()
+    {
+        if (audioMixerController == null) {
+            Debug.LogWarning("No Audio Mixer Controller", gameObject);
+            return;
+        }
+        // Assuming 0 to 100 instead of 0 to 1
+        audioMixerController.SetMusicVolume(music * 0.01f);
+        audioMixerController.SetSfxVolume(SFX * 0.01f);
+        audioMixerController.SetDialogueVolume(dialog * 0.01f);
+        audioMixerController.SetAmbienceVolume(ambience * 0.01f);
+    }
+
+    // Update visual settings in the font manager and elsewhere
+    private void SetVisualSettings()
+    {
+        // set font
+        FontManager fontManager = FontManager.Instance;
+        fontManager.UpdateAllText((FontMode)textFont);
+
+        // set post-processing volume
+        GraphicsController.ScreenMode = isWindowed ? FullScreenMode.FullScreenWindow : FullScreenMode.ExclusiveFullScreen;
+        GraphicsController.Exposure = brightnessScale * brightness;
+        GraphicsController.Contrast = contrastScale * contrast;
     }
 }

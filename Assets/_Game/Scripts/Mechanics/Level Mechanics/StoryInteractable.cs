@@ -11,6 +11,13 @@ namespace Mechanics.Level_Mechanics
 {
     public class StoryInteractable : InteractableBase
     {
+        [Header("Particles")]
+        [SerializeField] private bool _particles = true;
+        [SerializeField] private Vector3 _particleOffset = Vector3.zero;
+        [SerializeField] private Vector3 _particleSize = Vector3.one;
+        [SerializeField] private ParticleSystemType _particleType = ParticleSystemType.Major;
+        private ParticleSystem _particleSystem;
+
         [Header("On Hover")]
         [SerializeField] private bool _textOnHover = false;
         [SerializeField] private bool _hoverTextUseObjectName = false;
@@ -20,6 +27,9 @@ namespace Mechanics.Level_Mechanics
         [SerializeField] private Color _highlightColor = Color.yellow;
         [SerializeField] private float _highlightSize;
 
+        [SerializeField] private bool _animateConnectionsOnHover = true;
+        [SerializeField] private string _animationsHoverTrigger = "hover";
+
         [SerializeField] private bool _setMaterialOnHover = false;
         [SerializeField] private Material _materialToSet = null;
 
@@ -27,6 +37,8 @@ namespace Mechanics.Level_Mechanics
         [SerializeField] private bool _sfxOnClick = false;
         [SerializeField] private SfxType _sfx = SfxType.Default;
         [SerializeField] private bool _moveOnClick = true;
+        [SerializeField] private bool _animateConnectionsOnClick = true;
+        [SerializeField] private string _animationsClickTrigger = "click";
         [SerializeField] private float _cameraMovementTime = 3f;
 
         [Header("Interaction Window")]
@@ -43,6 +55,9 @@ namespace Mechanics.Level_Mechanics
         //[SerializeField] private Collider _specificCollider = null;
         //private Collider colliderToUse = null;
 
+        public Interactable Interaction => _interaction;
+        public Interactable AltInteraction => _alternateInteraction;
+
         private List<MeshRenderer> _meshRenderers;
         private List<Material> _baseMaterial;
 
@@ -51,13 +66,52 @@ namespace Mechanics.Level_Mechanics
 
         #region Unity Functions
 
+        private void OnEnable() {
+            if (_particles) {
+                _particleSystem = InteractableParticlePool.Instance.RegisterParticle(_particleType);
+                _particleSystem.gameObject.SetActive(true);
+                _particleSystem.transform.position = transform.position + _particleOffset;
+                _particleSystem.transform.localScale = _particleSize;
+                _particleSystem.Play();
+            }
+        }
+
+        private void OnDisable() {
+            if (_particles && InteractableParticlePool.Instance != null) {
+                InteractableParticlePool.Instance.UnregisterParticle(_particleSystem, _particleType);
+            }
+        }
+
         private void Start() {
             if (TextHoverController.Singleton == null) {
                 _missingHoverUi = true;
                 Debug.LogWarning("Missing Text Hover Controller in Scene!");
             }
-            if (_interaction != null) _interaction.LoadInteraction();
-            if (_alternateInteraction != null) _alternateInteraction.LoadInteraction();
+            if (_interaction != null) {
+                DataManager.Instance.SetDefaultInteraction(_interaction.name);
+                //Debug.Log(_interaction.name + ": " + _interaction.CanInteract);
+            }
+            if (_alternateInteraction != null) {
+                DataManager.Instance.SetDefaultInteraction(_alternateInteraction.name);
+                //Debug.Log(_alternateInteraction.name + ": " + _alternateInteraction.CanInteract);
+            }
+        }
+
+        private void OnDrawGizmos() {
+            if (_particles) {
+                switch (_particleType) {
+                    case ParticleSystemType.Major:
+                        Gizmos.color = Color.cyan;
+                        break;
+                    case ParticleSystemType.Minor:
+                        Gizmos.color = Color.green;
+                        break;
+                    case ParticleSystemType.Misleading:
+                        Gizmos.color = Color.magenta;
+                        break;
+                }
+                Gizmos.DrawWireCube(transform.position + _particleOffset, _particleSize);
+            }
         }
 
         #endregion
@@ -84,6 +138,11 @@ namespace Mechanics.Level_Mechanics
                     meshRenderer.material = _materialToSet;
                 }
             }
+            if (_animateConnectionsOnHover && _interaction != null) {
+                foreach (var connectedAnimators in _interaction.ConnectedAnimators) {
+                    connectedAnimators.SetTrigger(_animationsHoverTrigger);
+                }
+            }
         }
 
         public override void OnHoverExit() {
@@ -104,20 +163,33 @@ namespace Mechanics.Level_Mechanics
         #region On Click
 
         public override void OnLeftClick(Vector3 mousePosition) {
+            if (_interaction == null && _alternateInteraction == null) {
+                return;
+            }
+
             if (_sfxOnClick) {
                 SoundManager.Instance.PlaySfx(_sfx, mousePosition);
             }
-            if (_popupWindowOnClick && !(IsometricCameraController.Singleton._interacting)) {
+            if (_popupWindowOnClick && !(IsometricCameraController.Singleton._dragging)) {
                 Action callback = _interaction != null && _interaction.CanInteract ? (Action)Interact : null;
                 Action altCallback = (_alternateInteraction != null && _alternateInteraction.CanInteract) ? (Action)AltInteract : null;
+                int points = _interaction != null ? _interaction.Cost : 0;
+                int altPoints = _alternateInteraction != null ? _alternateInteraction.Cost : 0;
 
-                ModalWindowController.Singleton.EnableModalWindow(_closeMenuText, callback, _interactionText, altCallback, _alternateInteractionText);
+                ModalWindowController.Singleton.EnableModalWindow(_closeMenuText, callback, _interactionText, altCallback, _alternateInteractionText, points, altPoints);
             }
-            else if (_interaction != null) {
+            else if (!_popupWindowOnClick && _interaction != null) {
+                if (_interaction.Cost <= DataManager.Instance.remainingSpiritPoints) {
                     _interaction.Interact();
+                }
             }
             if (_moveOnClick) {
                 IsometricCameraController.Singleton.MoveToPosition(mousePosition, _cameraMovementTime);
+            }
+            if (_animateConnectionsOnClick && _interaction != null) {
+                foreach (var connectedAnimators in _interaction.ConnectedAnimators) {
+                    connectedAnimators.SetTrigger(_animationsClickTrigger);
+                }
             }
 
             //if (_moveOnClick)

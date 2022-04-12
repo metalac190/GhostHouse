@@ -1,8 +1,7 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
+﻿using Mechanics.Feedback;
 using UnityEngine;
-using UnityEngine.SceneManagement;
+using Utility.Audio.Managers;
+using Yarn.Unity;
 
 public class PauseMenu : MonoBehaviour
 {
@@ -12,14 +11,14 @@ public class PauseMenu : MonoBehaviour
     private bool canPause = true;
 
     //Menu Panels
-    [SerializeField] GameObject pauseMenu = null;
-    [SerializeField] Page[] pages; //Only 1 page active at a time
-    [SerializeField] Page activePage;
-    [SerializeField] GameObject tabs = null;
+    [SerializeField] JournalController journal = null;
+
+    private DialogueRunner dialogueRunner;
 
     private void Awake()
     {
         Singleton = this;
+        dialogueRunner = FindObjectOfType<DialogueRunner>();
     }
 
     // Start is called before the first frame update
@@ -34,6 +33,9 @@ public class PauseMenu : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.P) || Input.GetKeyDown(KeyCode.Escape))
         {
+            if (dialogueRunner != null && dialogueRunner.IsDialogueRunning && !isPaused) {
+                return;
+            }
             if (isPaused)
             {
                 ResumeGame();
@@ -42,40 +44,58 @@ public class PauseMenu : MonoBehaviour
             {
                 PauseGame();
             }
+        } else if (isPaused) {
+            if (Input.GetKeyDown(KeyCode.LeftArrow))
+            {
+                journal.PreviousPage();
+            }
+            else if (Input.GetKeyDown(KeyCode.RightArrow))
+            {
+                journal.NextPage();
+            }
         }
     }
 
     private void UpdatePaused()
     {
-        if (pauseMenu != null)
+        ModalWindowController.Singleton.HideHudOnPause(isPaused);
+        SoundManager.MusicManager.SetPaused(isPaused);
+        if (canPause) {
+            IsometricCameraController.Singleton.gamePaused = isPaused;
+        }
+        if (journal != null)
         {
-            pauseMenu.SetActive(isPaused);
-            tabs.SetActive(isPaused);
+            journal.gameObject.SetActive(isPaused);
+            if (isPaused) {
+                // TODO: Open to Journal Notification!
+                journal.OpenJournal();
+            }
         }
         //Time.timeScale = isPaused ? 0f : 1f;
     }
 
     public void PauseGame()
     {
-        if (!canPause) return;
+        if (!canPause || isPaused) return;
         isPaused = true;
         UpdatePaused();
     }
 
     public void ResumeGame()
     {
-        isPaused = false;
-        UpdatePaused();
+        if (!isPaused) return;
+        if (journal.ClosePage()) {
+            isPaused = false;
+            UpdatePaused();
+        }
     }
 
-    public void PreventPausing(bool canPause)
+    public void PreventPausing(bool updateCanPause)
     {
-        this.canPause = canPause;
-        UpdatePaused();
-    }
-
-    public void SetActivePage(GameObject page)
-    {
-        activePage = page.GetComponent<Page>();
+        // If no longer able to pause but also currently paused, resume
+        if (!updateCanPause && isPaused) {
+            ResumeGame();
+        }
+        canPause = updateCanPause;
     }
 }

@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Game.Dialog
+namespace Mechanics.Dialog
 {
     [CreateAssetMenu(menuName = "Narrative/Character Pool")]
     public class SOCharacterPool : ScriptableObject

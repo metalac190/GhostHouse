@@ -12,26 +12,27 @@ namespace Utility.Audio.Clips
         [Header("Music Track Settings")]
         [SerializeField] private AudioClip _track = null;
         [SerializeField, ReadOnly] private float _trackTime;
-        [SerializeField] private AudioClip _trackWhenPaused = null;
-        [SerializeField, ReadOnly] private float _pausedTrackTime;
+        [SerializeField, Range(0, 1)] private float _volume = 1;
+        [SerializeField] private AudioMixerGroup _mixerGroup = null;
 
         [Header("Volume Settings")]
-        [SerializeField] private AudioMixerGroup _mixerGroup = null;
-        [SerializeField] private SfxPriorityLevel _priority = SfxPriorityLevel.Highest;
-        [SerializeField, Range(0, 1)] private float _volume = 1;
+        [SerializeField] private AudioClip _trackWhenPaused = null;
+        [SerializeField, ReadOnly] private float _pausedTrackTime;
+        [SerializeField, Range(0, 1)] private float _pauseVolume = 1;
+        [SerializeField] private AudioMixerGroup _pausedMixerGroup = null;
 
         [Header("Fade Settings")]
-        [SerializeField] private float _fadeInTime = 0;
+        [SerializeField] private float _fadeInTime = 1;
         [SerializeField] private AnimationCurve _fadeIn = AnimationCurve.Linear(0, 0, 1, 1);
-        [SerializeField] private float _fadeOutTime = 0;
-        [SerializeField] private float _crossFadeInOverlap = 0;
+        [SerializeField] private float _fadeOutTime = 1;
+        [SerializeField] private float _delayNextSong = 0;
         [SerializeField] private AnimationCurve _fadeOut = AnimationCurve.Linear(0, 1, 1, 0);
 
         public bool TrackIsNull => _track == null;
         public float TrackLength => _track.length;
         public float FadeInTime => _fadeInTime;
         public float FadeOutTime => _fadeOutTime;
-        public float CrossFadeInOverlap => _crossFadeInOverlap;
+        public float DelayNextSong => _delayNextSong;
 
         private void OnValidate() {
             _trackTime = _track != null ? _track.length : 0;
@@ -39,9 +40,15 @@ namespace Utility.Audio.Clips
         }
 
         public override SfxProperties GetSourceProperties() {
+            return GetSourceProperties(false);
+        }
+
+        public SfxProperties GetSourceProperties(bool pausedTrack) {
             if (TrackIsNull) return new SfxProperties(true);
-            var p = new SfxProperties(_track, _mixerGroup, (int)_priority, _volume, 1, 0, 1, Vector3.zero, false,
-                0, AudioRolloffMode.Linear, 100, 100, 0, 1);
+            var track = pausedTrack && _trackWhenPaused != null ? _trackWhenPaused : _track;
+            var mixer = pausedTrack && _pausedMixerGroup != null ? _pausedMixerGroup : _mixerGroup;
+            var p = new SfxProperties(track, mixer, (int)SfxPriorityLevel.Highest, pausedTrack ? _pauseVolume : _volume, 1, 0, 1,
+                Vector3.zero, false, 0, AudioRolloffMode.Linear, 100, 100, 0, 1);
             return p;
         }
 
