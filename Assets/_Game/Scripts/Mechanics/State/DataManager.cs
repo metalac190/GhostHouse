@@ -79,11 +79,11 @@ public class DataManager : MonoBehaviour
         switch (level.ToLower()) {
             case "spring":
                 return Season.Spring;
-            case "summer":
+            case "Summer":
                 return Season.Summer;
-            case "fall":
+            case "Fall":
                 return Season.Fall;
-            case "winter":
+            case "Winter":
                 return Season.Winter;
             default:
                 Debug.LogWarning("Season accessed on Invalid Level", gameObject);
@@ -148,7 +148,7 @@ public class DataManager : MonoBehaviour
                 trueEndingPoints = saveData.trueEndingPoints;
 
                 // Repopulate dictionary from saved arrays
-                for(int i = 0; i < 48; i++)
+                for(int i = 0; i < 160; i++)
                 {
                     interactions[saveData.interactionNames[i]] = saveData.interactionStates[i];
                 }
@@ -197,7 +197,7 @@ public class DataManager : MonoBehaviour
         foreach(KeyValuePair<string, bool> entry in interactions)
         {
             int i = 0;
-            if(i >= 48)
+            if(i >= 160)
             {
                 Debug.Log("Error: Unexpectedly high number of interactions");
             }
