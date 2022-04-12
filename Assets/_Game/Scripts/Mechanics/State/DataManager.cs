@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using Mechanics.Level_Mechanics;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using Utility.Buttons;
 
 public class DataManager : MonoBehaviour
@@ -59,7 +60,22 @@ public class DataManager : MonoBehaviour
             saveData = new SaveData();
             filePath = Path.Combine(Application.persistentDataPath, "savedata.json");
 
-            LoadFile();
+            if (!SaveFileExists())
+            {
+                SetDefaultValues();
+                ResetData();
+                WriteFile();
+            }
+            else
+            {
+                ReadFile();
+
+#if UNITY_EDITOR
+                if (SceneManager.GetActiveScene().name.ToLower() != "mainmenu") {
+                    ResetData();
+                }
+#endif
+            }
         }
         else
         {
@@ -114,21 +130,6 @@ public class DataManager : MonoBehaviour
         settingsLargeGUI = true;    // placeholder
         settingsLargeText = true;   // placeholder
         settingsTextFont = 0;
-    }
-
-    // Load the game from file and set up the game
-    private void LoadFile()
-    {
-        if (!SaveFileExists())
-        {
-            SetDefaultValues();
-            ResetData();
-            WriteFile();
-        }
-        else
-        {
-            ReadFile();
-        }
     }
 
     // Read data from the save file into the game
