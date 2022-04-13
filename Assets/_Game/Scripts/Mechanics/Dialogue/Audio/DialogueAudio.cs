@@ -24,9 +24,24 @@ namespace Mechanics.Dialog
         [Tooltip("")]
         List<Playable> _toggleableSfx = new List<Playable>();
 
-        [SerializeField]
-        [Tooltip("The CharacterView UI this match up to.")]
-        CharacterView _characterView = null;
+        CharacterView _characterView
+        {
+            get
+            {
+                if (_characterViewInstance == null)
+                {
+                    _characterViewInstance = FindObjectOfType<CharacterView>();
+                }
+
+                if (_characterViewInstance == null)
+                {
+                    Debug.LogError("Unable to find character view");
+                }
+
+                return _characterViewInstance;
+            }
+        }
+        CharacterView _characterViewInstance = null;
 
         AudioSourceController _audioSource = null;
 
@@ -49,7 +64,6 @@ namespace Mechanics.Dialog
         {
             if (_characterView == null)
             {
-                Debug.LogWarning($"No CharacterView was provided. Disabling \"{name}\" DialogueAudio component.");
                 this.enabled = false;
                 return;
             }
