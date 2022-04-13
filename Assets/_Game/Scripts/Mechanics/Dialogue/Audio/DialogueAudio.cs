@@ -9,6 +9,8 @@ namespace Mechanics.Dialog
     [RequireComponent(typeof(AudioSourceController))]
     public class DialogueAudio : MonoBehaviour
     {
+        public bool CanPlay { get; private set; } = false;
+
         #region private variables
         [SerializeField]
         [Tooltip("After playing the primary audio clip, this is the chance of the secondary clip playing and 1-this is the chance of the tertiary clip playing.")]
@@ -22,10 +24,12 @@ namespace Mechanics.Dialog
         CharacterView _characterView = null;
 
         AudioSourceController _audioSource = null;
-        Yarn.Unity.LocalizedLine _line = null;
+
         SOCharacterAudio _speaker = null;
-        bool _playLastClip = false;
+        NextClip _nextClip = NextClip.None;
         int _indexOfLastWord = -1;
+        float _waitLength = 0;
+        float _waitAccumulator = 0;
         #endregion
 
         #region Monobehaviour
@@ -40,29 +44,89 @@ namespace Mechanics.Dialog
             {
                 Debug.LogWarning($"No CharacterView was provided. Disabling \"{name}\" DialogueAudio component.");
                 this.enabled = false;
+                return;
             }
-            else
-            {
-                _characterView.OnLineStarted += OnLineStart;
-                _characterView.OnCharacterTyped += OnLineUpdate;
-                _characterView.OnLineEnd += OnLineEnd;
-            }
-
-            if (_characterAudioPool == null)
+            else if (_characterAudioPool == null)
             {
                 Debug.LogWarning($"\"{name}\" is unable to play dialogue audio. No SOCharacterAudioPool was provided to _characterAudioPool.");
                 this.enabled = false;
+                return;
             }
+
+            _characterView.OnLineStarted += OnLineStart;
+            _characterView.OnCharacterTyped += OnLineUpdate;
+            _characterView.OnLineEnd += OnLineEnd;
+            PauseMenu.PauseUpdated += Pause;
         }
 
         void OnDisable()
         {
-            if (_characterView != null)
+            if (_characterView == null && _characterAudioPool == null) return;
+
+            _characterView.OnLineStarted -= OnLineStart;
+            _characterView.OnCharacterTyped -= OnLineUpdate;
+            _characterView.OnLineEnd -= OnLineEnd;
+            PauseMenu.PauseUpdated -= Pause;
+        }
+
+        void Pause(bool paused)
+        {
+            if (paused)
             {
-                _characterView.OnLineStarted -= OnLineStart;
-                _characterView.OnCharacterTyped -= OnLineUpdate;
-                _characterView.OnLineEnd -= OnLineEnd;
+                _audioSource.Source.Pause();
+                CanPlay = false;
             }
+            else
+            {
+                _audioSource.Source.UnPause();
+                CanPlay = true;
+            }
+        }
+
+        void Update()
+        {
+            if (!CanPlay || _nextClip == NextClip.None) return;
+
+            // increment time
+            _waitAccumulator += Time.deltaTime;
+
+            // The current clip is still playing, so wait till it ends
+            if (_waitAccumulator < _waitLength) return;
+
+            // play next clip
+            switch (_nextClip)
+            {
+                case NextClip.Primary:
+                    PlayClip(_speaker.PrimaryClip);
+                    _nextClip = NextClip.Secondary;
+                    break;
+
+                case NextClip.Secondary:
+                    SfxBase clip = Random.Range(0f, 1f) < _secondaryChance ? _speaker.SecondaryClip : _speaker.TertiaryClip;
+                    PlayClip(clip);
+                    _nextClip = NextClip.Primary;
+                    break;
+
+                case NextClip.Quaternary:
+                    PlayClip(_speaker.QuaternaryClip);
+                    _nextClip = NextClip.None;
+                    CanPlay = false;
+                    break;
+
+                case NextClip.None:
+                    CanPlay = false;
+                    return;
+
+                default:
+                    Debug.LogError("Dialog Audio is an unknown state.");
+                    CanPlay = false;
+                    _audioSource.Stop();
+                    return;
+            }
+
+            _waitLength = _audioSource.Source.clip == null ? 0 : _audioSource.Source.clip.length;
+            _waitAccumulator = 0f;
+
         }
         #endregion
 
@@ -72,9 +136,11 @@ namespace Mechanics.Dialog
         /// <param name="line"> Line of dialogue being played. </param>
         void OnLineStart(Yarn.Unity.LocalizedLine line)
         {
-            _line = line;
+            CanPlay = true;
             _speaker = _characterAudioPool.GetCharacter(line.CharacterName);
-            _playLastClip = false;
+            _nextClip = NextClip.Primary;
+            _waitLength = 0;
+            _waitAccumulator = float.MaxValue;
 
             if (_speaker.PrimaryClip == null && _speaker.SecondaryClip == null
                 && _speaker.TertiaryClip == null && _speaker.QuaternaryClip == null)
@@ -93,10 +159,7 @@ namespace Mechanics.Dialog
             if (_speaker == null)
             {
                 Debug.LogWarning($"Unable to find character \"{line.CharacterName}\". Dialog audio will not be played for this line.");
-                _line = null;
             }
-
-            StartCoroutine(PlayAudioLoop());
         }
 
         /// <summary>
@@ -105,9 +168,9 @@ namespace Mechanics.Dialog
         /// <param name="index"></param>
         void OnLineUpdate(int index)
         {
-            if (index > _indexOfLastWord && !_playLastClip)
+            if (index > _indexOfLastWord && _nextClip != NextClip.Quaternary)
             {
-                _playLastClip = true;
+                _nextClip = NextClip.Quaternary;
             }
         }
 
@@ -116,78 +179,24 @@ namespace Mechanics.Dialog
         /// </summary>
         void OnLineEnd()
         {
-            StopAllCoroutines();
+            CanPlay = false;
+            _nextClip = NextClip.None;
         }
 
-        IEnumerator PlayAudioLoop()
+        void PlayClip(SfxBase clip)
         {
-            while (!_playLastClip)
+            _audioSource.SetSourceProperties(clip.GetSourceProperties());
+            _audioSource.Play();
+
+            if (_audioSource.Source.clip == null)
             {
-                yield return StartCoroutine(PlayPrimaryClip());
-                yield return StartCoroutine(PlaySecondaryClip());
+                Debug.LogWarning($"SfxBase object, {clip.name}, has a null clip. Please correct this.");
             }
+        }
 
-            PlayClip(_speaker.QuaternaryClip);
-            yield break;
-
-            IEnumerator PlayPrimaryClip()
-            {
-                if (_speaker.PrimaryClip != null)
-                {
-                    float waitTime = PlayClip(_speaker.PrimaryClip);
-                    yield return new WaitForSeconds(waitTime);
-                }
-                else
-                {
-                    Debug.LogWarning($"{_speaker.name}'s primary clip is null, so it will skipped.");
-                }
-                yield break;
-            }
-
-            IEnumerator PlaySecondaryClip()
-            {
-                SfxBase clip;
-                if (Random.Range(0f, 1f) < _secondaryChance)
-                {
-                    clip = _speaker.SecondaryClip;
-
-                    if (clip == null)
-                    {
-                        Debug.LogWarning($"{_speaker.name}'s secondary clip is null, so it will skipped.");
-                        yield break;
-                    }
-                }
-                else
-                {
-                    clip = _speaker.TertiaryClip;
-
-                    if (clip == null)
-                    {
-                        Debug.LogWarning($"{_speaker.name}'s tertiary clip is null, so it will skipped.");
-                        yield break;
-                    }
-                }
-
-                float waitTime = PlayClip(clip);
-                yield return new WaitForSeconds(waitTime);
-                yield break;
-            }
-
-            float PlayClip(SfxBase clip)
-            {
-                _audioSource.SetSourceProperties(clip.GetSourceProperties());
-                _audioSource.Play();
-
-                if (_audioSource.Source.clip == null)
-                {
-                    Debug.LogWarning($"SfxBase object, {clip.name}, has a null clip. Please correct this.");
-                    return 0;
-                }
-                else
-                {
-                    return _audioSource.Source.clip.length;
-                }
-            }
+        enum NextClip
+        {
+            None, Primary, Secondary, Quaternary
         }
     }
 }
