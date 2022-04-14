@@ -1,5 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 using Utility.Audio.Clips.Base;
 using Utility.Audio.Controllers;
@@ -9,6 +8,8 @@ namespace Mechanics.Dialog
     [RequireComponent(typeof(AudioSourceController))]
     public class DialogueAudio : MonoBehaviour
     {
+        public static DialogueAudio Instance = null;
+
         public bool CanPlay { get; private set; } = false;
 
         #region private variables
@@ -20,14 +21,35 @@ namespace Mechanics.Dialog
         SOCharacterAudioPool _characterAudioPool = null;
 
         [SerializeField]
-        [Tooltip("The CharacterView UI this match up to.")]
-        CharacterView _characterView = null;
+        [Tooltip("")]
+        List<Playable> _toggleableSfx = new List<Playable>();
+
+        CharacterView _characterView
+        {
+            get
+            {
+                if (_characterViewInstance == null)
+                {
+                    _characterViewInstance = FindObjectOfType<CharacterView>();
+                }
+
+                if (_characterViewInstance == null)
+                {
+                    Debug.LogError("Unable to find character view");
+                }
+
+                return _characterViewInstance;
+            }
+        }
+        CharacterView _characterViewInstance = null;
 
         AudioSourceController _audioSource = null;
 
         SOCharacterAudio _speaker = null;
-        NextClip _nextClip = NextClip.None;
+        List<TimedEffect> _timedEffects = new List<TimedEffect>();
         int _indexOfLastWord = -1;
+
+        NextClip _nextClip = NextClip.None;
         float _waitLength = 0;
         float _waitAccumulator = 0;
         #endregion
@@ -42,7 +64,6 @@ namespace Mechanics.Dialog
         {
             if (_characterView == null)
             {
-                Debug.LogWarning($"No CharacterView was provided. Disabling \"{name}\" DialogueAudio component.");
                 this.enabled = false;
                 return;
             }
@@ -67,20 +88,6 @@ namespace Mechanics.Dialog
             _characterView.OnCharacterTyped -= OnLineUpdate;
             _characterView.OnLineEnd -= OnLineEnd;
             PauseMenu.PauseUpdated -= Pause;
-        }
-
-        void Pause(bool paused)
-        {
-            if (paused)
-            {
-                _audioSource.Source.Pause();
-                CanPlay = false;
-            }
-            else
-            {
-                _audioSource.Source.UnPause();
-                CanPlay = true;
-            }
         }
 
         void Update()
@@ -126,9 +133,22 @@ namespace Mechanics.Dialog
 
             _waitLength = _audioSource.Source.clip == null ? 0 : _audioSource.Source.clip.length;
             _waitAccumulator = 0f;
-
         }
         #endregion
+
+        void Pause(bool paused)
+        {
+            if (paused)
+            {
+                _audioSource.Source.Pause();
+                CanPlay = false;
+            }
+            else
+            {
+                _audioSource.Source.UnPause();
+                CanPlay = true;
+            }
+        }
 
         /// <summary>
         /// Begin audio loop.
@@ -160,6 +180,19 @@ namespace Mechanics.Dialog
             {
                 Debug.LogWarning($"Unable to find character \"{line.CharacterName}\". Dialog audio will not be played for this line.");
             }
+
+            _timedEffects = new List<TimedEffect>();
+            foreach (var attrib in line.Text.Attributes)
+            {
+                if (attrib.Name == "sfx")
+                {
+                    _timedEffects.Add(new TimedEffect(
+                        attrib.Properties["sfx"].StringValue,
+                        attrib.Properties["active"].BoolValue,
+                        attrib.Position
+                    ));
+                }
+            }
         }
 
         /// <summary>
@@ -171,6 +204,31 @@ namespace Mechanics.Dialog
             if (index > _indexOfLastWord && _nextClip != NextClip.Quaternary)
             {
                 _nextClip = NextClip.Quaternary;
+            }
+
+            for (int i = _timedEffects.Count - 1; i >= 0; i--)
+            {
+                var effect = _timedEffects[i];
+                if (index > effect.Index)
+                {
+                    // toggle effect
+                    foreach (var toggleable in _toggleableSfx)
+                    {
+                        if (!toggleable.Identifer.ToLower().Equals(effect.Identifer.ToLower())) continue;
+
+                        if (effect.Active)
+                        {
+                            toggleable.Controller.Enable();
+                            toggleable.Controller.Play();
+                        }
+                        else
+                        {
+                            toggleable.Controller.Disable();
+                        }
+                    }
+
+                    _timedEffects.RemoveAt(i);
+                }
             }
         }
 
@@ -197,6 +255,32 @@ namespace Mechanics.Dialog
         enum NextClip
         {
             None, Primary, Secondary, Quaternary
+        }
+
+        [System.Serializable]
+        class Playable
+        {
+            public string Identifer = string.Empty;
+            public AudioSourceController Controller = null;
+        }
+    }
+
+    public class TimedEffect
+    {
+        public string Identifer;
+        public bool Active;
+        public int Index;
+
+        public TimedEffect(string identifer, bool active, int index)
+        {
+            Identifer = identifer;
+            Active = active;
+            Index = index;
+        }
+
+        public override string ToString()
+        {
+            return $"sfx - {Identifer} - {Active} - {Index}";
         }
     }
 }
