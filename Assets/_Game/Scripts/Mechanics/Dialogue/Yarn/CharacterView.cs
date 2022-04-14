@@ -408,7 +408,7 @@ namespace Mechanics.Dialog
                 StartCoroutine(Tweens.SimpleTypewriter(_lineText, _typewriterEffectSpeed, OnCharacterTyped, interruption: _interruptionFlag,
                 onComplete: () =>
                 {
-                    OnLineEnd();
+                    OnLineEnd?.Invoke();
                     onDialogueLineFinished();
                 }));
             }

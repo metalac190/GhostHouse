@@ -27,21 +27,25 @@ public class EndingsManager : MonoBehaviour
         DataManager data = DataManager.Instance;
         Ending selectedEnding;
 
-        if (data.trueEndingPoints > -1)//trueEnding.Threshold)
+        if (data.trueEndingPoints > trueEnding.Threshold)
         {
             selectedEnding = trueEnding;
-        }
-        else if (data.cousinsEndingPoints > cousinEnding.Threshold)
-        {
-            selectedEnding = cousinEnding;
+            data.UnlockEnding(0);
         }
         else if (data.sistersEndingPoints > sisterEnding.Threshold)
         {
             selectedEnding = sisterEnding;
+            data.UnlockEnding(3);
+        }
+        else if (data.cousinsEndingPoints > cousinEnding.Threshold)
+        {
+            selectedEnding = cousinEnding;
+            data.UnlockEnding(2);
         }
         else
         {
             selectedEnding = badEnding;
+            data.UnlockEnding(1);
         }
 
         foreach (Ending end in new List<Ending>() { trueEnding, cousinEnding, sisterEnding, badEnding })
