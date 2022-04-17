@@ -150,11 +150,11 @@ public class ModalWindowController : MonoBehaviour
     public void DisableModalWindow(bool playSound, bool updateCanPause = true) {
         if (_playerHud != null) _playerHud.UpdateSpiritPoints();
         OnInteractEnd?.Invoke();
-        _mainInteractionButton.gameObject.SetActive(false);
         _mainInteractionButton.onClick.RemoveAllListeners();
+        _mainInteractionButton.gameObject.SetActive(false);
         _mainInteractionText.text = "Interact";
-        _alternateInteractionButton.gameObject.SetActive(false);
         _alternateInteractionButton.onClick.RemoveAllListeners();
+        _alternateInteractionButton.gameObject.SetActive(false);
         _alternateInteractionText.text = "Interact";
         _modalWindow.SetActive(false);
         if (_raycastBlock != null) _raycastBlock.SetActive(false);
