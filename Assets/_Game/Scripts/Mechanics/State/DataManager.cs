@@ -71,6 +71,13 @@ public class DataManager : MonoBehaviour
             else
             {
                 ReadFile();
+
+                // When Starting from a scene (not main menu), reset interactions / data
+#if UNITY_EDITOR
+                if (SceneManager.GetActiveScene().name.ToLower() != "mainmenu") {
+                    ResetData();
+                }
+#endif
             }
         }
         else
