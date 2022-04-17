@@ -11,6 +11,13 @@ namespace Mechanics.Level_Mechanics
 {
     public class StoryInteractable : InteractableBase
     {
+        [Header("Particles")]
+        [SerializeField] private bool _particles = true;
+        [SerializeField] private Vector3 _particleOffset = Vector3.zero;
+        [SerializeField] private Vector3 _particleSize = Vector3.one;
+        [SerializeField] private ParticleSystemType _particleType = ParticleSystemType.Major;
+        private ParticleSystem _particleSystem;
+
         [Header("On Hover")]
         [SerializeField] private bool _textOnHover = false;
         [SerializeField] private bool _hoverTextUseObjectName = false;
@@ -59,6 +66,22 @@ namespace Mechanics.Level_Mechanics
 
         #region Unity Functions
 
+        private void OnEnable() {
+            if (_particles) {
+                _particleSystem = InteractableParticlePool.Instance.RegisterParticle(_particleType);
+                _particleSystem.gameObject.SetActive(true);
+                _particleSystem.transform.position = transform.position + _particleOffset;
+                _particleSystem.transform.localScale = _particleSize;
+                _particleSystem.Play();
+            }
+        }
+
+        private void OnDisable() {
+            if (_particles && InteractableParticlePool.Instance != null) {
+                InteractableParticlePool.Instance.UnregisterParticle(_particleSystem, _particleType);
+            }
+        }
+
         private void Start() {
             if (TextHoverController.Singleton == null) {
                 _missingHoverUi = true;
@@ -71,6 +94,23 @@ namespace Mechanics.Level_Mechanics
             if (_alternateInteraction != null) {
                 DataManager.Instance.SetDefaultInteraction(_alternateInteraction.name);
                 //Debug.Log(_alternateInteraction.name + ": " + _alternateInteraction.CanInteract);
+            }
+        }
+
+        private void OnDrawGizmos() {
+            if (_particles) {
+                switch (_particleType) {
+                    case ParticleSystemType.Major:
+                        Gizmos.color = Color.cyan;
+                        break;
+                    case ParticleSystemType.Minor:
+                        Gizmos.color = Color.green;
+                        break;
+                    case ParticleSystemType.Misleading:
+                        Gizmos.color = Color.magenta;
+                        break;
+                }
+                Gizmos.DrawWireCube(transform.position + _particleOffset, _particleSize);
             }
         }
 
