@@ -255,8 +255,7 @@ namespace Mechanics.Dialog
                 if (_charactersData != null)
                 {
                     bool characterNotFound = character == null;
-                    bool characterShouldNotBeShown = !character.ShowPortrait;
-                    if (characterNotFound || characterShouldNotBeShown)
+                    if (characterNotFound || !character.ShowPortrait)
                     {
                         // hide portrait
                         _characterPortraitImage.enabled = false;
@@ -301,7 +300,7 @@ namespace Mechanics.Dialog
             #region dialog box style
             if (_dialogImage != null)
             {
-                if (character.UseAlternateBoxStyle)
+                if (character != null && character.UseAlternateBoxStyle)
                 {
                     _dialogImage.sprite = character.AlternateBoxSprite;
                     _dialogImage.color = character.AlternateBoxColor;
@@ -336,7 +335,7 @@ namespace Mechanics.Dialog
             }
             else
             {
-                _characterNameObject.SetActive(character.ShowName);
+                _characterNameObject.SetActive(character != null ? character.ShowName : true);
 
                 _characterNameText.text = dialogueLine.CharacterName;
                 _lineText.text = dialogueLine.TextWithoutCharacterName.Text;
@@ -391,7 +390,7 @@ namespace Mechanics.Dialog
 
             void StartTypewriter()
             {
-                if (character.PlayAudio)
+                if (character != null ? character.PlayAudio : true)
                 {
                     OnLineStarted(dialogueLine);
                     StartCoroutine(Tweens.SimpleTypewriter(_lineText, _typewriterEffectSpeed, OnCharacterTyped, interruption: _interruptionFlag,
