@@ -16,6 +16,17 @@ namespace Mechanics.Dialog
         [SerializeField]
         List<Sprite> _sprites = null;
 
+        [Header("Options")]
+        public bool ShowPortrait = true;
+        public bool ShowName = true;
+        public bool PlayAudio = true;
+
+        [Header("Alternate Options")]
+        [Tooltip("If unchecked, the default dialog box sprite and color will be used and the below variables will be ignored.")]
+        public bool UseAlternateBoxStyle = false;
+        public Sprite AlternateBoxSprite = null;
+        public Color AlternateBoxColor = Color.white;
+
         /// <summary>
         /// Finds the corresponding sprite for <paramref name="emotion"/> from <see cref="_sprites"/>.
         /// </summary>

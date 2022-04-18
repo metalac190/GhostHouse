@@ -44,6 +44,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ef8ba7c8d7876444cbdd449add52f354, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _particles: 1
+  _particleOffset: {x: 0, y: 0.5, z: 0}
+  _particleSize: {x: 1.5, y: 1, z: 1.5}
+  _particleType: 0
   _textOnHover: 1
   _hoverTextUseObjectName: 0
   _hoverText: Ouija Board
@@ -66,100 +70,6 @@ MonoBehaviour:
   _alternateInteraction: {fileID: 0}
   _alternateInteractionText: Alt Interact
   _closeMenuText: Close
---- !u!1 &106234329050761616
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 8949429539951254081}
-  - component: {fileID: 6179412822230873433}
-  - component: {fileID: 2836787181166076113}
-  - component: {fileID: 1489000564625484718}
-  m_Layer: 0
-  m_Name: geo_jacket_moved
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 0
---- !u!4 &8949429539951254081
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 106234329050761616}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 35, y: 0, z: -22.14}
-  m_LocalScale: {x: 1, y: 3, z: 3}
-  m_Children: []
-  m_Father: {fileID: 2801922260022834707}
-  m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!33 &6179412822230873433
-MeshFilter:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 106234329050761616}
-  m_Mesh: {fileID: 10208, guid: 0000000000000000e000000000000000, type: 0}
---- !u!23 &2836787181166076113
-MeshRenderer:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 106234329050761616}
-  m_Enabled: 1
-  m_CastShadows: 1
-  m_ReceiveShadows: 1
-  m_DynamicOccludee: 1
-  m_MotionVectors: 1
-  m_LightProbeUsage: 1
-  m_ReflectionProbeUsage: 1
-  m_RayTracingMode: 2
-  m_RenderingLayerMask: 1
-  m_RendererPriority: 0
-  m_Materials:
-  - {fileID: 2100000, guid: 45f379d53371d264e94a028d9f3d09af, type: 2}
-  m_StaticBatchInfo:
-    firstSubMesh: 0
-    subMeshCount: 0
-  m_StaticBatchRoot: {fileID: 0}
-  m_ProbeAnchor: {fileID: 0}
-  m_LightProbeVolumeOverride: {fileID: 0}
-  m_ScaleInLightmap: 1
-  m_ReceiveGI: 1
-  m_PreserveUVs: 0
-  m_IgnoreNormalsForChartDetection: 0
-  m_ImportantGI: 0
-  m_StitchLightmapSeams: 1
-  m_SelectedEditorRenderState: 3
-  m_MinimumChartSize: 4
-  m_AutoUVMaxDistance: 0.5
-  m_AutoUVMaxAngle: 89
-  m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
-  m_SortingOrder: 0
---- !u!136 &1489000564625484718
-CapsuleCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 106234329050761616}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 0
-  m_Radius: 0.5
-  m_Height: 2
-  m_Direction: 1
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &398578052129680882
 GameObject:
   m_ObjectHideFlags: 0
@@ -204,6 +114,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ef8ba7c8d7876444cbdd449add52f354, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _particles: 1
+  _particleOffset: {x: -0.75, y: 0, z: 0}
+  _particleSize: {x: 1, y: 3, z: 2.5}
+  _particleType: 1
   _textOnHover: 1
   _hoverTextUseObjectName: 0
   _hoverText: Power breaker
@@ -270,6 +184,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ef8ba7c8d7876444cbdd449add52f354, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _particles: 1
+  _particleOffset: {x: 0, y: 0, z: 0}
+  _particleSize: {x: 12, y: 6, z: 1}
+  _particleType: 2
   _textOnHover: 1
   _hoverTextUseObjectName: 0
   _hoverText: Window
@@ -302,6 +220,7 @@ GameObject:
   m_Component:
   - component: {fileID: 769131272477587401}
   - component: {fileID: -4241952879534688028}
+  - component: {fileID: 1815236345766565327}
   m_Layer: 0
   m_Name: Spring_Interactables
   m_TagString: Untagged
@@ -344,6 +263,30 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _documentationText: {fileID: 4900000, guid: 75a3778141247d74dbf14e8cd11242ab, type: 3}
+--- !u!114 &1815236345766565327
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 769131272477587398}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7fbe48a40e4c7f7458125fac5f670d92, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _objectsToDisable:
+  - {fileID: 4954517176667441116}
+  - {fileID: 6403367028381414794}
+  - {fileID: 5106053565998677322}
+  - {fileID: 7579037382700772108}
+  - {fileID: 5952642882573492930}
+  - {fileID: 9117969048503781501}
+  - {fileID: 5508323747449759634}
+  - {fileID: 3355440250480669022}
+  - {fileID: 2024180434993169778}
+  - {fileID: 1281947991932695126}
+  - {fileID: 8942720807090405489}
 --- !u!1 &827158848647850377
 GameObject:
   m_ObjectHideFlags: 0
@@ -388,6 +331,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ef8ba7c8d7876444cbdd449add52f354, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _particles: 1
+  _particleOffset: {x: 0, y: 0, z: 0}
+  _particleSize: {x: 2, y: 2, z: 2}
+  _particleType: 0
   _textOnHover: 1
   _hoverTextUseObjectName: 0
   _hoverText: Graduation Photo
@@ -616,6 +563,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ef8ba7c8d7876444cbdd449add52f354, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _particles: 1
+  _particleOffset: {x: -0.9, y: 1.8, z: -0.7}
+  _particleSize: {x: 6, y: 1, z: 6}
+  _particleType: 0
   _textOnHover: 1
   _hoverTextUseObjectName: 0
   _hoverText: Moving Boxes
@@ -712,7 +663,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &3974517680144153439
 Transform:
   m_ObjectHideFlags: 0
@@ -740,6 +691,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ef8ba7c8d7876444cbdd449add52f354, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _particles: 1
+  _particleOffset: {x: 0, y: 0.75, z: 0}
+  _particleSize: {x: 3, y: 3, z: 3}
+  _particleType: 2
   _textOnHover: 1
   _hoverTextUseObjectName: 0
   _hoverText: Polly's Cage
@@ -788,13 +743,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1322959296549256974}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 3, z: 3}
+  m_LocalRotation: {x: -0.15668753, y: 0.33226958, z: -0.30598432, w: 0.87830496}
+  m_LocalPosition: {x: 3.662, y: -0.758, z: 2.033}
+  m_LocalScale: {x: 1, y: 1.8, z: 3.4}
   m_Children: []
   m_Father: {fileID: 2801922260022834707}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: -4.123, y: 42.947002, z: -40.037003}
 --- !u!33 &7110254293087832015
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -810,7 +765,7 @@ MeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1322959296549256974}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
@@ -1662,7 +1617,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &601120311133678331
 Transform:
   m_ObjectHideFlags: 0
@@ -1691,6 +1646,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ef8ba7c8d7876444cbdd449add52f354, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _particles: 1
+  _particleOffset: {x: 0, y: 0.5, z: 0}
+  _particleSize: {x: 1.5, y: 1, z: 1.5}
+  _particleType: 0
   _textOnHover: 1
   _hoverTextUseObjectName: 0
   _hoverText: Batteries
@@ -1713,100 +1672,6 @@ MonoBehaviour:
   _alternateInteraction: {fileID: 0}
   _alternateInteractionText: Alt Interact
   _closeMenuText: Close
---- !u!1 &2070518498869332318
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 5688471367002832292}
-  - component: {fileID: 791250615502708614}
-  - component: {fileID: 6629003118741563376}
-  - component: {fileID: 1609060450359563141}
-  m_Layer: 0
-  m_Name: geo_jacket
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &5688471367002832292
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2070518498869332318}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 3, z: 3}
-  m_Children: []
-  m_Father: {fileID: 9117969048503781442}
-  m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!33 &791250615502708614
-MeshFilter:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2070518498869332318}
-  m_Mesh: {fileID: 10208, guid: 0000000000000000e000000000000000, type: 0}
---- !u!23 &6629003118741563376
-MeshRenderer:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2070518498869332318}
-  m_Enabled: 1
-  m_CastShadows: 1
-  m_ReceiveShadows: 1
-  m_DynamicOccludee: 1
-  m_MotionVectors: 1
-  m_LightProbeUsage: 1
-  m_ReflectionProbeUsage: 1
-  m_RayTracingMode: 2
-  m_RenderingLayerMask: 1
-  m_RendererPriority: 0
-  m_Materials:
-  - {fileID: 2100000, guid: 45f379d53371d264e94a028d9f3d09af, type: 2}
-  m_StaticBatchInfo:
-    firstSubMesh: 0
-    subMeshCount: 0
-  m_StaticBatchRoot: {fileID: 0}
-  m_ProbeAnchor: {fileID: 0}
-  m_LightProbeVolumeOverride: {fileID: 0}
-  m_ScaleInLightmap: 1
-  m_ReceiveGI: 1
-  m_PreserveUVs: 0
-  m_IgnoreNormalsForChartDetection: 0
-  m_ImportantGI: 0
-  m_StitchLightmapSeams: 1
-  m_SelectedEditorRenderState: 3
-  m_MinimumChartSize: 4
-  m_AutoUVMaxDistance: 0.5
-  m_AutoUVMaxAngle: 89
-  m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
-  m_SortingOrder: 0
---- !u!136 &1609060450359563141
-CapsuleCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2070518498869332318}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  m_Radius: 0.5
-  m_Height: 2
-  m_Direction: 1
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &2122153051374566128
 GameObject:
   m_ObjectHideFlags: 0
@@ -1945,6 +1810,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ef8ba7c8d7876444cbdd449add52f354, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _particles: 1
+  _particleOffset: {x: 0, y: 0, z: 0}
+  _particleSize: {x: 1, y: 1, z: 1}
+  _particleType: 0
   _textOnHover: 1
   _hoverTextUseObjectName: 0
   _hoverText: Next Season
@@ -2437,7 +2306,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &2801922260022834707
 Transform:
   m_ObjectHideFlags: 0
@@ -2450,7 +2319,6 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 3784679283339945779}
-  - {fileID: 8949429539951254081}
   m_Father: {fileID: 8636088010422205773}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -2466,6 +2334,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ef8ba7c8d7876444cbdd449add52f354, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _particles: 1
+  _particleOffset: {x: 3.66, y: 0, z: 1.82}
+  _particleSize: {x: 2, y: 2, z: 2}
+  _particleType: 0
   _textOnHover: 1
   _hoverTextUseObjectName: 0
   _hoverText: Old Jacket
@@ -2936,6 +2808,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ef8ba7c8d7876444cbdd449add52f354, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _particles: 1
+  _particleOffset: {x: 0, y: 0.5, z: 0}
+  _particleSize: {x: 1.5, y: 1, z: 1.5}
+  _particleType: 0
   _textOnHover: 1
   _hoverTextUseObjectName: 0
   _hoverText: Crayon drawing
@@ -2974,7 +2850,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &3776313441970907114
 Transform:
   m_ObjectHideFlags: 0
@@ -3002,6 +2878,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ef8ba7c8d7876444cbdd449add52f354, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _particles: 1
+  _particleOffset: {x: 0, y: 0.5, z: 0}
+  _particleSize: {x: 3, y: 3, z: 3}
+  _particleType: 0
   _textOnHover: 1
   _hoverTextUseObjectName: 0
   _hoverText: Nathan
@@ -3069,6 +2949,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ef8ba7c8d7876444cbdd449add52f354, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _particles: 1
+  _particleOffset: {x: -0.5, y: 0.5, z: -0.5}
+  _particleSize: {x: 2, y: 5, z: 2}
+  _particleType: 1
   _textOnHover: 1
   _hoverTextUseObjectName: 0
   _hoverText: Sisters Fighting
@@ -3085,7 +2969,7 @@ MonoBehaviour:
   _animateConnectionsOnClick: 1
   _animationsClickTrigger: click
   _cameraMovementTime: 3
-  _popupWindowOnClick: 1
+  _popupWindowOnClick: 0
   _interaction: {fileID: 11400000, guid: c3f2e42cff51dd543a40e7aea44d6a15, type: 2}
   _interactionText: Listen
   _alternateInteraction: {fileID: 0}
@@ -3371,100 +3255,6 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 0.8514544, y: 9.184013, z: 1}
   m_Center: {x: 0.15325552, y: 4.0920067, z: 0.03855117}
---- !u!1 &4113077672590973906
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 4948086736897064553}
-  - component: {fileID: 6028595577913073808}
-  - component: {fileID: 2764140616863592682}
-  - component: {fileID: 2603213527148508359}
-  m_Layer: 0
-  m_Name: geo_jacket_moved
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 0
---- !u!4 &4948086736897064553
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4113077672590973906}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 35, y: 0, z: -22.14}
-  m_LocalScale: {x: 1, y: 3, z: 3}
-  m_Children: []
-  m_Father: {fileID: 9117969048503781442}
-  m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!33 &6028595577913073808
-MeshFilter:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4113077672590973906}
-  m_Mesh: {fileID: 10208, guid: 0000000000000000e000000000000000, type: 0}
---- !u!23 &2764140616863592682
-MeshRenderer:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4113077672590973906}
-  m_Enabled: 1
-  m_CastShadows: 1
-  m_ReceiveShadows: 1
-  m_DynamicOccludee: 1
-  m_MotionVectors: 1
-  m_LightProbeUsage: 1
-  m_ReflectionProbeUsage: 1
-  m_RayTracingMode: 2
-  m_RenderingLayerMask: 1
-  m_RendererPriority: 0
-  m_Materials:
-  - {fileID: 2100000, guid: 45f379d53371d264e94a028d9f3d09af, type: 2}
-  m_StaticBatchInfo:
-    firstSubMesh: 0
-    subMeshCount: 0
-  m_StaticBatchRoot: {fileID: 0}
-  m_ProbeAnchor: {fileID: 0}
-  m_LightProbeVolumeOverride: {fileID: 0}
-  m_ScaleInLightmap: 1
-  m_ReceiveGI: 1
-  m_PreserveUVs: 0
-  m_IgnoreNormalsForChartDetection: 0
-  m_ImportantGI: 0
-  m_StitchLightmapSeams: 1
-  m_SelectedEditorRenderState: 3
-  m_MinimumChartSize: 4
-  m_AutoUVMaxDistance: 0.5
-  m_AutoUVMaxAngle: 89
-  m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
-  m_SortingOrder: 0
---- !u!136 &2603213527148508359
-CapsuleCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4113077672590973906}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 0
-  m_Radius: 0.5
-  m_Height: 2
-  m_Direction: 1
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &4245308232018129365
 GameObject:
   m_ObjectHideFlags: 0
@@ -3884,6 +3674,28 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 0}
+        m_MethodName: SetActive
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
+      - m_Target: {fileID: 0}
+        m_MethodName: SetActive
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &4822069469522584285
 GameObject:
   m_ObjectHideFlags: 0
@@ -4021,6 +3833,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ef8ba7c8d7876444cbdd449add52f354, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _particles: 1
+  _particleOffset: {x: 0, y: 0, z: 0}
+  _particleSize: {x: 1, y: 1, z: 1}
+  _particleType: 0
   _textOnHover: 1
   _hoverTextUseObjectName: 0
   _hoverText: Teacup
@@ -4059,7 +3875,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &7377989691362454866
 Transform:
   m_ObjectHideFlags: 0
@@ -4087,6 +3903,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ef8ba7c8d7876444cbdd449add52f354, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _particles: 1
+  _particleOffset: {x: -0.75, y: 0, z: 0}
+  _particleSize: {x: 1, y: 3, z: 2.5}
+  _particleType: 0
   _textOnHover: 1
   _hoverTextUseObjectName: 0
   _hoverText: Power breaker
@@ -4161,7 +3981,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &2803803263872880063
 Transform:
   m_ObjectHideFlags: 0
@@ -4303,7 +4123,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1272165550388306369
 Transform:
   m_ObjectHideFlags: 0
@@ -4331,6 +4151,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ef8ba7c8d7876444cbdd449add52f354, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _particles: 1
+  _particleOffset: {x: 0, y: 0, z: 0}
+  _particleSize: {x: 1, y: 1, z: 1}
+  _particleType: 0
   _textOnHover: 1
   _hoverTextUseObjectName: 0
   _hoverText: Nathan's RC Car
@@ -4534,7 +4358,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &4143930113198058974
 Transform:
   m_ObjectHideFlags: 0
@@ -4562,6 +4386,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ef8ba7c8d7876444cbdd449add52f354, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _particles: 1
+  _particleOffset: {x: 0, y: 0, z: 0}
+  _particleSize: {x: 1, y: 1, z: 1}
+  _particleType: 0
   _textOnHover: 1
   _hoverTextUseObjectName: 0
   _hoverText: Picture of Girl
@@ -4868,7 +4696,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &260911005643961663
 Transform:
   m_ObjectHideFlags: 0
@@ -4896,6 +4724,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ef8ba7c8d7876444cbdd449add52f354, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _particles: 1
+  _particleOffset: {x: 0, y: 0.75, z: 0}
+  _particleSize: {x: 3, y: 3, z: 3}
+  _particleType: 0
   _textOnHover: 1
   _hoverTextUseObjectName: 0
   _hoverText: Polly's Cage
@@ -4998,6 +4830,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ef8ba7c8d7876444cbdd449add52f354, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _particles: 1
+  _particleOffset: {x: 0, y: 1, z: 0}
+  _particleSize: {x: 2, y: 2, z: 2}
+  _particleType: 0
   _textOnHover: 1
   _hoverTextUseObjectName: 0
   _hoverText: Radio
@@ -5147,6 +4983,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ef8ba7c8d7876444cbdd449add52f354, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _particles: 1
+  _particleOffset: {x: 0, y: 0.5, z: 0}
+  _particleSize: {x: 1.5, y: 1, z: 1.5}
+  _particleType: 0
   _textOnHover: 1
   _hoverTextUseObjectName: 0
   _hoverText: Paperwork
@@ -5493,6 +5333,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ef8ba7c8d7876444cbdd449add52f354, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _particles: 1
+  _particleOffset: {x: 0, y: 0.5, z: 0}
+  _particleSize: {x: 1.5, y: 1, z: 1.5}
+  _particleType: 2
   _textOnHover: 1
   _hoverTextUseObjectName: 0
   _hoverText: Letter
@@ -5559,6 +5403,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ef8ba7c8d7876444cbdd449add52f354, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _particles: 1
+  _particleOffset: {x: 0, y: 0.5, z: 0}
+  _particleSize: {x: 1.5, y: 1, z: 1.5}
+  _particleType: 0
   _textOnHover: 1
   _hoverTextUseObjectName: 0
   _hoverText: Worn Sketchbook
@@ -5689,7 +5537,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &8319231608959859494
 Transform:
   m_ObjectHideFlags: 0
@@ -5868,6 +5716,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ef8ba7c8d7876444cbdd449add52f354, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _particles: 1
+  _particleOffset: {x: 0, y: 0.5, z: 0}
+  _particleSize: {x: 3, y: 3, z: 3}
+  _particleType: 0
   _textOnHover: 1
   _hoverTextUseObjectName: 0
   _hoverText: Nathan
@@ -6521,6 +6373,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ef8ba7c8d7876444cbdd449add52f354, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _particles: 1
+  _particleOffset: {x: 0, y: 1, z: 0}
+  _particleSize: {x: 5, y: 1, z: 2}
+  _particleType: 0
   _textOnHover: 1
   _hoverTextUseObjectName: 0
   _hoverText: Crying Girl
@@ -6587,6 +6443,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ef8ba7c8d7876444cbdd449add52f354, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _particles: 1
+  _particleOffset: {x: 0, y: 0.75, z: 0}
+  _particleSize: {x: 3, y: 3, z: 3}
+  _particleType: 2
   _textOnHover: 1
   _hoverTextUseObjectName: 0
   _hoverText: Polly's Cage
@@ -6653,6 +6513,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ef8ba7c8d7876444cbdd449add52f354, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _particles: 1
+  _particleOffset: {x: 0, y: 0.75, z: 0}
+  _particleSize: {x: 3, y: 3, z: 3}
+  _particleType: 1
   _textOnHover: 1
   _hoverTextUseObjectName: 0
   _hoverText: Polly's Cage
@@ -6719,6 +6583,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ef8ba7c8d7876444cbdd449add52f354, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _particles: 1
+  _particleOffset: {x: 0, y: 0.75, z: 0}
+  _particleSize: {x: 3, y: 3, z: 3}
+  _particleType: 0
   _textOnHover: 1
   _hoverTextUseObjectName: 0
   _hoverText: Polly's Cage
@@ -6757,7 +6625,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &349187437780612166
 Transform:
   m_ObjectHideFlags: 0
@@ -6785,6 +6653,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ef8ba7c8d7876444cbdd449add52f354, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _particles: 1
+  _particleOffset: {x: 0, y: 0, z: 0}
+  _particleSize: {x: 12, y: 6, z: 1}
+  _particleType: 2
   _textOnHover: 1
   _hoverTextUseObjectName: 0
   _hoverText: Escape Window
@@ -6807,6 +6679,100 @@ MonoBehaviour:
   _alternateInteraction: {fileID: 0}
   _alternateInteractionText: Alt Interact
   _closeMenuText: Close
+--- !u!1 &8977850578397514240
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1524501401651721485}
+  - component: {fileID: 6342078036261305365}
+  - component: {fileID: 2034289266502848664}
+  - component: {fileID: 594200412676164326}
+  m_Layer: 0
+  m_Name: geo_jacket
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1524501401651721485
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8977850578397514240}
+  m_LocalRotation: {x: -0.15668753, y: 0.33226958, z: -0.30598432, w: 0.87830496}
+  m_LocalPosition: {x: 3.662, y: -0.7579999, z: 2.033}
+  m_LocalScale: {x: 1, y: 1.8, z: 3.3999996}
+  m_Children: []
+  m_Father: {fileID: 9117969048503781442}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: -4.123, y: 42.947002, z: -40.037003}
+--- !u!33 &6342078036261305365
+MeshFilter:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8977850578397514240}
+  m_Mesh: {fileID: 10208, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!23 &2034289266502848664
+MeshRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8977850578397514240}
+  m_Enabled: 0
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_DynamicOccludee: 1
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 2100000, guid: 45f379d53371d264e94a028d9f3d09af, type: 2}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 3
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+--- !u!136 &594200412676164326
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8977850578397514240}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  m_Radius: 0.5
+  m_Height: 2
+  m_Direction: 1
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &9054916737105778343
 GameObject:
   m_ObjectHideFlags: 0
@@ -6917,7 +6883,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &9117969048503781442
 Transform:
   m_ObjectHideFlags: 0
@@ -6929,8 +6895,7 @@ Transform:
   m_LocalPosition: {x: -3, y: 3, z: -14}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
-  - {fileID: 5688471367002832292}
-  - {fileID: 4948086736897064553}
+  - {fileID: 1524501401651721485}
   m_Father: {fileID: 8636088010422205773}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -6946,6 +6911,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ef8ba7c8d7876444cbdd449add52f354, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _particles: 1
+  _particleOffset: {x: 3.66, y: 0, z: 1.82}
+  _particleSize: {x: 2, y: 2, z: 2}
+  _particleType: 0
   _textOnHover: 1
   _hoverTextUseObjectName: 0
   _hoverText: Grandpa's Jacket

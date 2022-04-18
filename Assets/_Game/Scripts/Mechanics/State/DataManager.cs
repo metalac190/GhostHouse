@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using Mechanics.Level_Mechanics;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using Utility.Buttons;
 
 public class DataManager : MonoBehaviour
@@ -44,7 +45,8 @@ public class DataManager : MonoBehaviour
 
     // Boolean of what has been unlocked in journal
     [HideInInspector]
-    public bool[] journalUnlocks;
+    public Dictionary<string, bool> journalUnlocks;
+    public bool[] endingUnlocks;
 
     private void Awake()
     {
@@ -54,11 +56,29 @@ public class DataManager : MonoBehaviour
             DontDestroyOnLoad(this.gameObject);
 
             interactions = new Dictionary<string, bool>();
-            journalUnlocks = new bool[24];      // Initializes array of all false entries
+            journalUnlocks = new Dictionary<string, bool>();
+            endingUnlocks = new bool[4];
 
+            saveData = new SaveData();
             filePath = Path.Combine(Application.persistentDataPath, "savedata.json");
 
-            LoadFile();
+            if (!SaveFileExists())
+            {
+                SetDefaultValues();
+                ResetData();
+                WriteFile();
+            }
+            else
+            {
+                ReadFile();
+
+                // When Starting from a scene (not main menu), reset interactions / data
+#if UNITY_EDITOR
+                if (SceneManager.GetActiveScene().name.ToLower() != "mainmenu") {
+                    ResetData();
+                }
+#endif
+            }
         }
         else
         {
@@ -72,18 +92,20 @@ public class DataManager : MonoBehaviour
 
     public void OnContinueGame() {
         // TODO: LOAD ALL INTERACTIONS FROM PREVIOUS ENDING
+        Debug.Log("Continuing from previous save file");
+        ResetData();
         ReadFile();
     }
 
     public Season GetSeason() {
-        switch (level.ToLower()) {
-            case "spring":
+        switch (level) {
+            case "Spring":
                 return Season.Spring;
-            case "summer":
+            case "Summer":
                 return Season.Summer;
-            case "fall":
+            case "Fall":
                 return Season.Fall;
-            case "winter":
+            case "Winter":
                 return Season.Winter;
             default:
                 Debug.LogWarning("Season accessed on Invalid Level", gameObject);
@@ -96,9 +118,6 @@ public class DataManager : MonoBehaviour
     {
         level = "Spring";
         remainingSpiritPoints = 3;
-        cousinsEndingPoints = 0;
-        sistersEndingPoints = 0;
-        trueEndingPoints = 0;
         settingsLeftClickInteract = true;
         settingsCameraWASD = true;
         settingsCameraArrowKeys = true;
@@ -116,27 +135,15 @@ public class DataManager : MonoBehaviour
         settingsTextFont = 0;
     }
 
-    // Load the game from file and set up the game
-    private void LoadFile()
-    {
-        if (!SaveFileExists())
-        {
-            SetDefaultValues();
-            WriteFile();
-        }
-        else
-        {
-            ReadFile();
-        }
-    }
-
     // Read data from the save file into the game
     public void ReadFile()
     {
         if (File.Exists(filePath))
         {
             // Unpack file text as JSON
+            Debug.Log("Unpacking file into savedata");
             string fileContents = File.ReadAllText(filePath);
+            saveData = new SaveData();
             JsonUtility.FromJsonOverwrite(fileContents, saveData);
 
             try
@@ -148,10 +155,11 @@ public class DataManager : MonoBehaviour
                 trueEndingPoints = saveData.trueEndingPoints;
 
                 // Repopulate dictionary from saved arrays
-                for(int i = 0; i < 48; i++)
+                for(int i = 0; i < saveData.interactionNames.Length; i++)
                 {
                     interactions[saveData.interactionNames[i]] = saveData.interactionStates[i];
                 }
+                interactions.Remove("");
 
                 settingsLeftClickInteract = saveData.settings.leftClickInteract;
                 settingsCameraWASD = saveData.settings.cameraWASD;
@@ -169,12 +177,21 @@ public class DataManager : MonoBehaviour
                 settingsLargeText = saveData.settings.largeTextFont;
                 settingsTextFont = saveData.settings.textFont;
 
-                saveData.journalUnlocks.CopyTo(journalUnlocks, 0);
+                for (int i = 0; i < saveData.journalInteractionNames.Length; i++)
+                {
+                    journalUnlocks[saveData.journalInteractionNames[i]] = saveData.journalUnlocks[i];
+                }
+                journalUnlocks.Remove("");
+
+                saveData.endingUnlocks.CopyTo(endingUnlocks, 0);
+
+                Debug.Log("Successful read");
             }
             catch
             {
                 Debug.Log("Some error loading save file");
                 SetDefaultValues();
+                ResetData();
                 WriteFile();
             }
         }
@@ -194,19 +211,25 @@ public class DataManager : MonoBehaviour
         saveData.trueEndingPoints = trueEndingPoints;
 
         // Unpack dictionary elements into two arrays to save
-        foreach(KeyValuePair<string, bool> entry in interactions)
+        int ind = 0;
+        saveData.interactionNames = new string[160];
+        saveData.interactionStates = new bool[160];
+        foreach (KeyValuePair<string, bool> entry in interactions)
         {
-            int i = 0;
-            if(i >= 48)
+            if(ind >= 160)
             {
                 Debug.Log("Error: Unexpectedly high number of interactions");
             }
             else
             {
-                saveData.interactionNames[i] = entry.Key;
-                saveData.interactionStates[i] = entry.Value;
-                i++;
+                saveData.interactionNames[ind] = entry.Key;
+                saveData.interactionStates[ind] = entry.Value;
+                ind++;
             }
+        }
+        for (int i = ind; i < 160; i++) {
+            saveData.interactionNames[i] = "";
+            saveData.interactionStates[i] = false;
         }
 
         saveData.settings.leftClickInteract = settingsLeftClickInteract;
@@ -225,10 +248,33 @@ public class DataManager : MonoBehaviour
         saveData.settings.largeTextFont = settingsLargeText;
         saveData.settings.textFont = settingsTextFont;
 
-        journalUnlocks.CopyTo(saveData.journalUnlocks, 0);
+        ind = 0;
+        saveData.journalInteractionNames = new string[160];
+        saveData.journalUnlocks = new bool[160];
+        foreach (KeyValuePair<string, bool> entry in journalUnlocks)
+        {
+            if (ind >= 160)
+            {
+                Debug.Log("Error: Unexpectedly high number of interactions");
+            }
+            else
+            {
+                saveData.journalInteractionNames[ind] = entry.Key;
+                saveData.journalUnlocks[ind] = entry.Value;
+                ind++;
+            }
+        }
+        for (int i = ind; i < 160; i++)
+        {
+            saveData.journalInteractionNames[i] = "";
+            saveData.journalUnlocks[i] = false;
+        }
+
+        endingUnlocks.CopyTo(saveData.endingUnlocks, 0);
 
         // Save data as json string and write to file
         string jsonString = JsonUtility.ToJson(saveData, true);
+        Debug.Log("File saved to " + filePath);
         File.WriteAllText(filePath, jsonString);
     }
 
@@ -258,12 +304,17 @@ public class DataManager : MonoBehaviour
     public void SetDefaultInteraction(string name) {
         if (interactions.ContainsKey(name)) return;
         interactions.Add(name, false);
+        if (!journalUnlocks.ContainsKey(name))
+        {
+            journalUnlocks.Add(name, false);
+        }
     }
 
     // Set interaction state
     public void SetInteraction(string name, bool interacted)
     {
         interactions[name] = interacted;
+        journalUnlocks[name] = interacted;
     }
 
     // Get interaction state of an interaction
@@ -348,8 +399,15 @@ public class DataManager : MonoBehaviour
         outstr += "\n\tLarge Text Font: " + settingsLargeText.ToString();
         outstr += "\n\tText Font Style: " + settingsTextFont.ToString();
         outstr += "\nJournal Unlocks: ";
-        for (int i = 0; i < journalUnlocks.Length; i++) {
-            if (journalUnlocks[i]) {
+        foreach (KeyValuePair<string, bool> entry in journalUnlocks)
+        {
+            outstr += "\n\tJournal Entry " + entry.Key + ": " + entry.Value;
+        }
+        outstr += "\nEnding Unlocks: ";
+        for (int i = 0; i < endingUnlocks.Length; i++)
+        {
+            if (endingUnlocks[i])
+            {
                 outstr += i.ToString() + " ";
             }
         }
@@ -362,10 +420,9 @@ public class DataManager : MonoBehaviour
         Debug.Log(File.ReadAllText(filePath));
     }
 
-    // Mark a journal entry as unlocked
-    public void UnlockJournalEntry(int index)
+    public void UnlockEnding(int index)
     {
-        journalUnlocks[index] = true;
+        endingUnlocks[index] = true;
     }
 
     // For now, just resets interactions. Will need to clear save file eventually
@@ -373,6 +430,9 @@ public class DataManager : MonoBehaviour
     public void ResetData()
     {
         interactions.Clear();
+        cousinsEndingPoints = 0;
+        sistersEndingPoints = 0;
+        trueEndingPoints = 0;
     }
 
     // Return whether or not the save file exists
