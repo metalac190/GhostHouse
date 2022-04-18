@@ -19,14 +19,10 @@ namespace _Game.Editor
         SerializedProperty useTypewriterEffectProperty;
         SerializedProperty typewriterEffectSpeedProperty;
 
-        SerializedProperty dialogImageProperty;
-        SerializedProperty alternateCharactersProperty;
-        SerializedProperty alternateDialogSpriteProperty;
-        SerializedProperty alternateDialogColorProperty;
-
         SerializedProperty continueKeyCodeProperty;
 
         SerializedProperty lineTextProperty;
+        SerializedProperty dialogImageProperty;
         SerializedProperty characterNameObjectProperty;
         SerializedProperty characterNameTextProperty;
         SerializedProperty characterPortraitImageProperty;
@@ -46,14 +42,10 @@ namespace _Game.Editor
             useTypewriterEffectProperty = serializedObject.FindProperty("_useTypewriterEffect");
             typewriterEffectSpeedProperty = serializedObject.FindProperty("_typewriterEffectSpeed");
 
-            dialogImageProperty = serializedObject.FindProperty("_dialogImage");
-            alternateCharactersProperty = serializedObject.FindProperty("_alternateCharacters");
-            alternateDialogSpriteProperty = serializedObject.FindProperty("_alternateDialogSprite");
-            alternateDialogColorProperty = serializedObject.FindProperty("_alternateDialogColor");
-
             continueKeyCodeProperty = serializedObject.FindProperty("_continueKeyCode");
 
             lineTextProperty = serializedObject.FindProperty("_lineText");
+            dialogImageProperty = serializedObject.FindProperty("_dialogImage");
             characterPortraitImageProperty = serializedObject.FindProperty("_characterPortraitImage");
             characterDataProperty = serializedObject.FindProperty("_charactersData");
             characterNameObjectProperty = serializedObject.FindProperty("_characterNameObject");
@@ -87,23 +79,12 @@ namespace _Game.Editor
                 EditorGUI.indentLevel -= 1;
             }
 
-            // alternate styles
-            EditorGUILayout.PropertyField(alternateCharactersProperty);
-            EditorGUILayout.PropertyField(dialogImageProperty);
-
-            if (dialogImageProperty.objectReferenceValue != null)
-            {
-                EditorGUI.indentLevel += 1;
-                EditorGUILayout.PropertyField(alternateDialogSpriteProperty);
-                EditorGUILayout.PropertyField(alternateDialogColorProperty);
-                EditorGUI.indentLevel -= 1;
-            }
-
             // continue mode
             EditorGUILayout.PropertyField(continueKeyCodeProperty);
 
             // UI references
             EditorGUILayout.PropertyField(lineTextProperty);
+            EditorGUILayout.PropertyField(dialogImageProperty);
             EditorGUILayout.PropertyField(characterNameObjectProperty);
             EditorGUILayout.PropertyField(characterPortraitImageProperty);
 
