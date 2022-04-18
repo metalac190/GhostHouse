@@ -33,11 +33,6 @@ namespace Mechanics.Dialog
                     _characterViewInstance = FindObjectOfType<CharacterView>();
                 }
 
-                if (_characterViewInstance == null)
-                {
-                    Debug.LogError("Unable to find character view");
-                }
-
                 return _characterViewInstance;
             }
         }
@@ -84,9 +79,13 @@ namespace Mechanics.Dialog
         {
             if (_characterView == null && _characterAudioPool == null) return;
 
-            _characterView.OnLineStarted -= OnLineStart;
-            _characterView.OnCharacterTyped -= OnLineUpdate;
-            _characterView.OnLineEnd -= OnLineEnd;
+            if (_characterView != null)
+            {
+                _characterView.OnLineStarted -= OnLineStart;
+                _characterView.OnCharacterTyped -= OnLineUpdate;
+                _characterView.OnLineEnd -= OnLineEnd;
+            }
+
             PauseMenu.PauseUpdated -= Pause;
         }
 
@@ -276,11 +275,6 @@ namespace Mechanics.Dialog
             Identifer = identifer;
             Active = active;
             Index = index;
-        }
-
-        public override string ToString()
-        {
-            return $"sfx - {Identifer} - {Active} - {Index}";
         }
     }
 }
