@@ -82,23 +82,30 @@ namespace Mechanics.Level_Mechanics
             //The same for loop as before, but this one goes backwards to make sure that deleting/removing a interactableResponse doesn't
             //cause any errors.
 
+            // Ignore on secondary interactions
+            if (!Interacted) {
+                if (_cost > 0) {
+                    DataManager.Instance.remainingSpiritPoints -= _cost;
+                    ModalWindowController.Singleton.PlaySpiritPointSpentSounds(DataManager.Instance.remainingSpiritPoints <= 0);
+                }
+
+                DataManager.Instance.trueEndingPoints += _trueEndingPoints;
+                DataManager.Instance.cousinsEndingPoints += _cousinEndingPoints;
+                DataManager.Instance.sistersEndingPoints += _sisterEndingPoints;
+
+                DataManager.Instance.SetInteraction(name, true);
+
+                // Debug.Log("Interacted with " + name);
+            }
+            else {
+                // Debug.Log("Second Interact " + name);
+            }
 
             for (int i = _interactableResponses.Count - 1; i >= 0; i--) {
                 _interactableResponses[i].Invoke();
             }
 
-            if (_cost > 0) {
-                // TODO: Apply Spirit Point Cost
-                DataManager.Instance.remainingSpiritPoints -= _cost;
-                ModalWindowController.Singleton.PlaySpiritPointSpentSounds(DataManager.Instance.remainingSpiritPoints <= 0);
-            }
-
             _sfxOnInteract.Play();
-            DataManager.Instance.SetInteraction(name, true);
-
-            DataManager.Instance.trueEndingPoints += _trueEndingPoints;
-            DataManager.Instance.cousinsEndingPoints += _cousinEndingPoints;
-            DataManager.Instance.sistersEndingPoints += _sisterEndingPoints;
 
             if (!string.IsNullOrEmpty(_dialogeYarnNode)) {
                 try {

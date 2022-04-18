@@ -45,7 +45,7 @@ public class DataManager : MonoBehaviour
 
     // Boolean of what has been unlocked in journal
     [HideInInspector]
-    public bool[] journalUnlocks;
+    public Dictionary<string, bool> journalUnlocks;
     public bool[] endingUnlocks;
 
     private void Awake()
@@ -56,7 +56,7 @@ public class DataManager : MonoBehaviour
             DontDestroyOnLoad(this.gameObject);
 
             interactions = new Dictionary<string, bool>();
-            journalUnlocks = new bool[24];      // Initializes array of all false entries
+            journalUnlocks = new Dictionary<string, bool>();
             endingUnlocks = new bool[4];
 
             saveData = new SaveData();
@@ -71,6 +71,13 @@ public class DataManager : MonoBehaviour
             else
             {
                 ReadFile();
+
+                // When Starting from a scene (not main menu), reset interactions / data
+#if UNITY_EDITOR
+                if (SceneManager.GetActiveScene().name.ToLower() != "mainmenu") {
+                    ResetData();
+                }
+#endif
             }
         }
         else
@@ -170,7 +177,12 @@ public class DataManager : MonoBehaviour
                 settingsLargeText = saveData.settings.largeTextFont;
                 settingsTextFont = saveData.settings.textFont;
 
-                saveData.journalUnlocks.CopyTo(journalUnlocks, 0);
+                for (int i = 0; i < saveData.journalInteractionNames.Length; i++)
+                {
+                    journalUnlocks[saveData.journalInteractionNames[i]] = saveData.journalUnlocks[i];
+                }
+                journalUnlocks.Remove("");
+
                 saveData.endingUnlocks.CopyTo(endingUnlocks, 0);
 
                 Debug.Log("Successful read");
@@ -236,7 +248,28 @@ public class DataManager : MonoBehaviour
         saveData.settings.largeTextFont = settingsLargeText;
         saveData.settings.textFont = settingsTextFont;
 
-        journalUnlocks.CopyTo(saveData.journalUnlocks, 0);
+        ind = 0;
+        saveData.journalInteractionNames = new string[160];
+        saveData.journalUnlocks = new bool[160];
+        foreach (KeyValuePair<string, bool> entry in journalUnlocks)
+        {
+            if (ind >= 160)
+            {
+                Debug.Log("Error: Unexpectedly high number of interactions");
+            }
+            else
+            {
+                saveData.journalInteractionNames[ind] = entry.Key;
+                saveData.journalUnlocks[ind] = entry.Value;
+                ind++;
+            }
+        }
+        for (int i = ind; i < 160; i++)
+        {
+            saveData.journalInteractionNames[i] = "";
+            saveData.journalUnlocks[i] = false;
+        }
+
         endingUnlocks.CopyTo(saveData.endingUnlocks, 0);
 
         // Save data as json string and write to file
@@ -271,12 +304,17 @@ public class DataManager : MonoBehaviour
     public void SetDefaultInteraction(string name) {
         if (interactions.ContainsKey(name)) return;
         interactions.Add(name, false);
+        if (!journalUnlocks.ContainsKey(name))
+        {
+            journalUnlocks.Add(name, false);
+        }
     }
 
     // Set interaction state
     public void SetInteraction(string name, bool interacted)
     {
         interactions[name] = interacted;
+        journalUnlocks[name] = interacted;
     }
 
     // Get interaction state of an interaction
@@ -361,10 +399,9 @@ public class DataManager : MonoBehaviour
         outstr += "\n\tLarge Text Font: " + settingsLargeText.ToString();
         outstr += "\n\tText Font Style: " + settingsTextFont.ToString();
         outstr += "\nJournal Unlocks: ";
-        for (int i = 0; i < journalUnlocks.Length; i++) {
-            if (journalUnlocks[i]) {
-                outstr += i.ToString() + " ";
-            }
+        foreach (KeyValuePair<string, bool> entry in journalUnlocks)
+        {
+            outstr += "\n\tJournal Entry " + entry.Key + ": " + entry.Value;
         }
         outstr += "\nEnding Unlocks: ";
         for (int i = 0; i < endingUnlocks.Length; i++)
@@ -381,12 +418,6 @@ public class DataManager : MonoBehaviour
     public void DumpFileContents()
     {
         Debug.Log(File.ReadAllText(filePath));
-    }
-
-    // Mark a journal entry as unlocked
-    public void UnlockJournalEntry(int index)
-    {
-        journalUnlocks[index] = true;
     }
 
     public void UnlockEnding(int index)
