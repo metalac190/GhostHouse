@@ -27,17 +27,17 @@ public class EndingsManager : MonoBehaviour
         DataManager data = DataManager.Instance;
         Ending selectedEnding;
 
-        if (data.trueEndingPoints > trueEnding.Threshold)
+        if (data.trueEndingPoints >= trueEnding.Threshold)
         {
             selectedEnding = trueEnding;
             data.UnlockEnding(0);
         }
-        else if (data.sistersEndingPoints > sisterEnding.Threshold)
+        else if (data.sistersEndingPoints >= sisterEnding.Threshold)
         {
             selectedEnding = sisterEnding;
             data.UnlockEnding(3);
         }
-        else if (data.cousinsEndingPoints > cousinEnding.Threshold)
+        else if (data.cousinsEndingPoints >= cousinEnding.Threshold)
         {
             selectedEnding = cousinEnding;
             data.UnlockEnding(2);
