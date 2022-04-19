@@ -756,72 +756,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _interactable: {fileID: 11400000, guid: 8b76da788635d0b4381f4853236a541e, type: 2}
   _animator: {fileID: 1958589384035950255}
---- !u!1 &3530032808149133836
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 7052010252475446599}
-  - component: {fileID: 3651950455505919321}
-  - component: {fileID: 4585013644603597615}
-  m_Layer: 0
-  m_Name: Children's Toilet
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &7052010252475446599
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3530032808149133836}
-  m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
-  m_LocalPosition: {x: -41.2, y: -0.01, z: -8.42}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children:
-  - {fileID: 800594544293493617}
-  m_Father: {fileID: 4833522613030863259}
-  m_RootOrder: 10
-  m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
---- !u!95 &3651950455505919321
-Animator:
-  serializedVersion: 3
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3530032808149133836}
-  m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: afc71abe2e2b8f840a1327ea93da50c3, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorControllerStateOnDisable: 0
---- !u!114 &4585013644603597615
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3530032808149133836}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 857108f1cc9766945b6ef10cd5c2dedb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _interactable: {fileID: 11400000, guid: 1de69f48c760fcd438f4cde9bdf5cc08, type: 2}
-  _animator: {fileID: 3651950455505919321}
 --- !u!1 &3605026206739619298
 GameObject:
   m_ObjectHideFlags: 0
@@ -1146,6 +1080,7 @@ Transform:
   - {fileID: 7562157565688357655}
   - {fileID: 8376462863069790187}
   - {fileID: 2131003029961237605}
+  - {fileID: 3517659000440683395}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1626,10 +1561,25 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 4833522613030863259}
     m_Modifications:
+    - target: {fileID: 261111134933323458, guid: 96c39270db237f643a010000938c9004,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4070934570291634111, guid: 96c39270db237f643a010000938c9004,
         type: 3}
       propertyPath: m_Name
       value: Children's Toilet
+      objectReference: {fileID: 0}
+    - target: {fileID: 6088742661814759621, guid: 96c39270db237f643a010000938c9004,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6741967181056437761, guid: 96c39270db237f643a010000938c9004,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
       objectReference: {fileID: 0}
     - target: {fileID: 7592552994543304948, guid: 96c39270db237f643a010000938c9004,
         type: 3}
@@ -2658,6 +2608,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1847dabe65158fa4a9b6702df7a9e097, type: 3}
+--- !u!4 &6952223128159673956 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 3278253078454039702, guid: 1847dabe65158fa4a9b6702df7a9e097,
+    type: 3}
+  m_PrefabInstance: {fileID: 5550110222965746418}
+  m_PrefabAsset: {fileID: 0}
 --- !u!95 &8408743014774131808 stripped
 Animator:
   m_CorrespondingSourceObject: {fileID: 4157993366741313170, guid: 1847dabe65158fa4a9b6702df7a9e097,
@@ -2667,12 +2623,6 @@ Animator:
 --- !u!1 &7723834668562646238 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 2753213824158215724, guid: 1847dabe65158fa4a9b6702df7a9e097,
-    type: 3}
-  m_PrefabInstance: {fileID: 5550110222965746418}
-  m_PrefabAsset: {fileID: 0}
---- !u!4 &6952223128159673956 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 3278253078454039702, guid: 1847dabe65158fa4a9b6702df7a9e097,
     type: 3}
   m_PrefabInstance: {fileID: 5550110222965746418}
   m_PrefabAsset: {fileID: 0}
@@ -2967,15 +2917,15 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 5721003140704764277}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &7186054583277549997 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 3232714382484535512, guid: 66ee7f00273caf3458ee7d90c26be583,
-    type: 3}
-  m_PrefabInstance: {fileID: 5721003140704764277}
-  m_PrefabAsset: {fileID: 0}
 --- !u!95 &4472640583627635053 stripped
 Animator:
   m_CorrespondingSourceObject: {fileID: 8176026611347683352, guid: 66ee7f00273caf3458ee7d90c26be583,
+    type: 3}
+  m_PrefabInstance: {fileID: 5721003140704764277}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &7186054583277549997 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3232714382484535512, guid: 66ee7f00273caf3458ee7d90c26be583,
     type: 3}
   m_PrefabInstance: {fileID: 5721003140704764277}
   m_PrefabAsset: {fileID: 0}
