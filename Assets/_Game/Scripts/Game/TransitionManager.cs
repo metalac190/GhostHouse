@@ -17,6 +17,7 @@ namespace Game
         //[SerializeField] private Integer _spiritPoints = null;
 
         [Header("On Scene Load")]
+        [SerializeField] private string _currentScene = "Spring";
         [SerializeField] private bool _fadeIn = true;
         [SerializeField] private float _fadeInTime = 1;
         [SerializeField] private bool _showTitleText = true;
@@ -42,6 +43,7 @@ namespace Game
         private void Start() {
             // Set Spirit Points
             DataManager.Instance.remainingSpiritPoints = _spiritPointsForLevel;
+            DataManager.Instance.level = _currentScene;
             //if (_spiritPoints != null) _spiritPoints.value = _spiritPointsForLevel;
 
             // Intro Sequence
