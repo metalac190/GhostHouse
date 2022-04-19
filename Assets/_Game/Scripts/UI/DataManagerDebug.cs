@@ -1,6 +1,7 @@
 ﻿using System.Linq;
 using TMPro;
 using UnityEngine;
+using System.Collections;
 
 public class DataManagerDebug : MonoBehaviour
 {
@@ -11,6 +12,11 @@ public class DataManagerDebug : MonoBehaviour
     static string myLog = "";
     private string output;
     private string stack;
+    private float fps;
+    private float updateInterval = 0.5f;
+    private float accum = 0.0f;
+    private int frames = 0;
+    private float timeleft;
 
     private void Start() {
         SetDebugActive(_debugActive);
@@ -30,6 +36,7 @@ public class DataManagerDebug : MonoBehaviour
     {
         if (_debugActive) {
             myLog = GUI.TextArea(new Rect(10, 400, 320, Screen.height - 410), myLog);
+            GUI.Label(new Rect(10, 10, 120, 32), "FPS: " + fps);
         }
     }
 
@@ -50,6 +57,17 @@ public class DataManagerDebug : MonoBehaviour
             debug += "\n<b><u>Interactions</u></b>\n";
             debug += interactions.Aggregate("", (current, interaction) => current + (interaction.Key + " - " + interaction.Value + "\n"));
             _text.text = debug;
+        }
+        timeleft -= Time.deltaTime;
+        accum += Time.timeScale / Time.deltaTime;
+        ++frames;
+
+        if (timeleft <= 0.0)
+        {
+            fps = (accum / frames);
+            timeleft = updateInterval;
+            accum = 0.0f;
+            frames = 0;
         }
     }
 
