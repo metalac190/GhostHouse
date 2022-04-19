@@ -119,17 +119,22 @@ namespace Mechanics.Level_Mechanics
             else
             {
                 InvokeResponses();
+                _sfxOnInteract.Play();
+                PlayDialogue();
             }
-
-            _sfxOnInteract.Play();
-            PlayDialogue();
         }
 
         private IEnumerator FadeToBlack()
         {
             yield return SimpleFadeToBlack.Singleton.FadeOut(_fadeOutTime);
             InvokeResponses();
-            SimpleFadeToBlack.Singleton.WaitFadeIn(_fadeHoldTime, _fadeInTime);
+            for (float t = 0; t < _fadeHoldTime; t += Time.deltaTime)
+            {
+                yield return null;
+            }
+            _sfxOnInteract.Play();
+            yield return SimpleFadeToBlack.Singleton.FadeIn(_fadeInTime);
+            PlayDialogue();
         }
 
         private void InvokeResponses() {
@@ -146,6 +151,7 @@ namespace Mechanics.Level_Mechanics
             {
                 try
                 {
+                    DialogueRunner.Stop();
                     DialogueRunner.StartDialogue(_dialogeYarnNode);
                 }
                 catch (Exception)
