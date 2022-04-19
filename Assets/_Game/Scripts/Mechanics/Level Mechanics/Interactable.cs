@@ -87,6 +87,7 @@ namespace Mechanics.Level_Mechanics
                 if (_cost > 0) {
                     DataManager.Instance.remainingSpiritPoints -= _cost;
                     ModalWindowController.Singleton.PlaySpiritPointSpentSounds(DataManager.Instance.remainingSpiritPoints <= 0);
+                    ModalWindowController.Singleton.ForceUpdateHudSpiritPoints();
                 }
 
                 DataManager.Instance.trueEndingPoints += _trueEndingPoints;
