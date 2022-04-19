@@ -171,7 +171,7 @@ namespace Mechanics.Dialog
             _indexOfLastWord = line.TextWithoutCharacterName.Text.TrimEnd().LastIndexOf(" ");
             if (_indexOfLastWord < 0)
             {
-                Debug.LogWarning("Unable to find the starting index of the last word. This line's dialog audio will not end with the quaternary clip.");
+                //Debug.LogWarning("Unable to find the starting index of the last word. This line's dialog audio will not end with the quaternary clip.");
                 _indexOfLastWord = line.TextWithoutCharacterName.Text.Length;
             }
 
