@@ -17,6 +17,7 @@ public class DataManager : MonoBehaviour
 
     public string level { get; set; }       // Current level season
     public int remainingSpiritPoints { get; set; }  // Current points left to spend
+    public int totalUsedSpiritPoints { get; set; }  // Current points left to spend
 
     // Points earned towards the various endings
     public int cousinsEndingPoints { get; set; }

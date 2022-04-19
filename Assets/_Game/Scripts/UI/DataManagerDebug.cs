@@ -19,12 +19,15 @@ public class DataManagerDebug : MonoBehaviour
         }
         if (_debugActive) {
             var interactions = DataManager.Instance.interactions;
-            string debug = "Debug\n";
-            debug += interactions.Aggregate("", (current, interaction) => current + (interaction.Key + " - " + interaction.Value + "\n"));
-            debug += "\nEndings\n";
+            string debug = "<b><u>Spirit Points</u></b>\n";
+            debug += "Remaining: " + DataManager.Instance.remainingSpiritPoints + "\n";
+            debug += "Total Used: " + DataManager.Instance.totalUsedSpiritPoints + "\n";
+            debug += "\n<b><u>Endings</u></b>\n";
             debug += "True: " + DataManager.Instance.trueEndingPoints + "\n";
             debug += "Sisters: " + DataManager.Instance.sistersEndingPoints + "\n";
             debug += "Cousins: " + DataManager.Instance.cousinsEndingPoints + "\n";
+            debug += "\n<b><u>Interactions</u></b>\n";
+            debug += interactions.Aggregate("", (current, interaction) => current + (interaction.Key + " - " + interaction.Value + "\n"));
             _text.text = debug;
         }
     }
