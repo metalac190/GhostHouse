@@ -1,5 +1,6 @@
 ﻿using Game;
-﻿using System.Collections;
+using Mechanics.Level_Mechanics;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -60,8 +61,7 @@ public class EndingsManager : MonoBehaviour
             if (end == selectedEnding)
             {
                 end.Visuals?.SetActive(true);
-                TransitionManager.DialogueRunner.StartDialogue(end.Dialog);
-                //transitionManager._dialogueOnStart = end.Dialog;
+                _transitionManager._interactionOnStart = end.Dialog;
                 _musicManager.PlayMusic(end.MusicTrack);
             }
             else
@@ -82,7 +82,7 @@ public class EndingsManager : MonoBehaviour
         [Min(0)]
         public int Threshold = 0;
 
-        public string Dialog = string.Empty;
+        public Interactable Dialog = null;
         public GameObject Visuals = null;
         public MusicTrack MusicTrack = null;
     }

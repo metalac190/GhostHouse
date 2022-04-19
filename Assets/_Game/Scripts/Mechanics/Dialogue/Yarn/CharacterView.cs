@@ -193,6 +193,7 @@ namespace Mechanics.Dialog
         public override void DialogueStarted()
         {
             _currentView = _rightView;
+            _currentView.Txt_characterName.text = String.Empty;
         }
 
         public override void RunLine(Yarn.Unity.LocalizedLine dialogueLine, Action onDialogueLineFinished)
@@ -203,17 +204,21 @@ namespace Mechanics.Dialog
             // flip between dialog views
             if (character != null && character.ShowPortrait)
             {
-                if (_currentView == _rightView)
+                // this is not the previous character
+                if (_currentView == null || !_currentView.Txt_characterName.text.ToLower().Equals(character.name.ToLower()))
                 {
-                    _rightView.gameObject.SetActive(false);
-                    _leftView.gameObject.SetActive(true);
-                    _currentView = _leftView;
-                }
-                else
-                {
-                    _leftView.gameObject.SetActive(false);
-                    _rightView.gameObject.SetActive(true);
-                    _currentView = _rightView;
+                    if (_currentView == _rightView)
+                    {
+                        _rightView.gameObject.SetActive(false);
+                        _leftView.gameObject.SetActive(true);
+                        _currentView = _leftView;
+                    }
+                    else
+                    {
+                        _leftView.gameObject.SetActive(false);
+                        _rightView.gameObject.SetActive(true);
+                        _currentView = _rightView;
+                    }
                 }
             }
 
