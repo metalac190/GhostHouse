@@ -89,7 +89,7 @@ GameObject:
   - component: {fileID: 6679147712922239868}
   - component: {fileID: 7892459671951616864}
   m_Layer: 5
-  m_Name: EndingManager
+  m_Name: Ending_Manager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -131,23 +131,28 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 88406b09005ac8346ad37c0fca42e14e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  trueEnding:
+  _trueEnding:
     Threshold: 4
     Dialog: Ending_1
     Visuals: {fileID: 5980639185801339035}
-  cousinEnding:
+    MusicTrack: {fileID: 11400000, guid: 61f0e5b950312de4aa9712e1b9f89ad2, type: 2}
+  _cousinEnding:
     Threshold: 3
     Dialog: Ending_3
     Visuals: {fileID: 5980639186914502130}
-  sisterEnding:
+    MusicTrack: {fileID: 11400000, guid: 27f9b45d31686d641aa496eff4fe3409, type: 2}
+  _sisterEnding:
     Threshold: 3
     Dialog: Ending_2
     Visuals: {fileID: 5980639187347673389}
+    MusicTrack: {fileID: 11400000, guid: 1dac70c1143ec644c8ba82c98d42c33c, type: 2}
   badEnding:
     Threshold: 0
     Dialog: Ending_4
     Visuals: {fileID: 5980639186341539469}
-  transitionManager: {fileID: 0}
+    MusicTrack: {fileID: 11400000, guid: 4d457df590f3dee48aaa1125dfd41738, type: 2}
+  _transitionManager: {fileID: 0}
+  _musicManager: {fileID: 0}
 --- !u!1 &4493457829399113362
 GameObject:
   m_ObjectHideFlags: 0
