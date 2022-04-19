@@ -6,6 +6,8 @@ using Yarn.Unity;
 public class GrandfatherClockNotice : MonoBehaviour
 {
     [SerializeField] private GameObject _noticeSound = null;
+    [SerializeField] private bool _moveToClock = false;
+    [SerializeField] private float _moveToClockTime = 1;
 
     private DialogueRunner _dialogueRunner;
     private bool _check = true;
@@ -28,5 +30,9 @@ public class GrandfatherClockNotice : MonoBehaviour
     [Button(Mode = ButtonMode.NotPlaying)]
     public void SpentAllPointsNotice() {
         _noticeSound.SetActive(true);
+        if (_moveToClock)
+        {
+            IsometricCameraController.Singleton.MoveToPosition(transform.position, _moveToClockTime);
+        }
     }
 }
