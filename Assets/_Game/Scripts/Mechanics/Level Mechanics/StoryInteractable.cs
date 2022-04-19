@@ -49,6 +49,9 @@ namespace Mechanics.Level_Mechanics
         [SerializeField] private string _alternateInteractionText = "Alt Interact";
         [SerializeField] private string _closeMenuText = "Close";
 
+        [Header("Open other Interactable After This")]
+        [SerializeField] private StoryInteractable _openAfterDialogue = null; 
+
         //[Header("Collision Information")]
         //[SerializeField] private bool _confirmUseChildCollider = false;
         //[SerializeField] private bool _confirmUseSpecificCollider = false;
@@ -190,6 +193,9 @@ namespace Mechanics.Level_Mechanics
                 foreach (var connectedAnimators in _interaction.ConnectedAnimators) {
                     connectedAnimators.SetTrigger(_animationsClickTrigger);
                 }
+            }
+            if (_openAfterDialogue != null && AfterDialogueInteraction.Singleton != null) {
+                AfterDialogueInteraction.Singleton.SetNextInteraction(_openAfterDialogue);
             }
 
             //if (_moveOnClick)
