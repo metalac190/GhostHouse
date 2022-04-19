@@ -1,7 +1,9 @@
-﻿using System.Collections;
+﻿using Game;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using Yarn.Unity;
 
 public class EndingsManager : MonoBehaviour
 {
@@ -53,7 +55,8 @@ public class EndingsManager : MonoBehaviour
             if (end == selectedEnding)
             {
                 end.Visuals?.SetActive(true);
-                transitionManager._dialogueOnStart = end.Dialog;
+                TransitionManager.DialogueRunner.StartDialogue(end.Dialog);
+                //transitionManager._dialogueOnStart = end.Dialog;
             }
             else
             {
