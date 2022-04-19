@@ -201,7 +201,10 @@ public class ModalWindowController : MonoBehaviour
     }
 
     public void ForceUpdateHudSpiritPoints() {
-        if (!_enabled) _playerHud.UpdateSpiritPoints();
+        if (!_enabled) {
+            _playerHud.TestMaxSpiritPoints(DataManager.Instance.remainingSpiritPoints);
+            _playerHud.UpdateSpiritPoints();
+        }
     }
 
     #endregion
