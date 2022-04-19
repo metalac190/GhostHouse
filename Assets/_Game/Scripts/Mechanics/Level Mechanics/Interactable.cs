@@ -86,6 +86,7 @@ namespace Mechanics.Level_Mechanics
             if (!Interacted) {
                 if (_cost > 0) {
                     DataManager.Instance.remainingSpiritPoints -= _cost;
+                    DataManager.Instance.totalUsedSpiritPoints += _cost;
                     ModalWindowController.Singleton.PlaySpiritPointSpentSounds(DataManager.Instance.remainingSpiritPoints <= 0);
                     ModalWindowController.Singleton.ForceUpdateHudSpiritPoints();
                 }
