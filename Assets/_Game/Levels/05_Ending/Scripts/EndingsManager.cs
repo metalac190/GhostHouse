@@ -2,24 +2,30 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using Utility.Audio.Clips;
+using Utility.Audio.Managers;
 
 public class EndingsManager : MonoBehaviour
 {
     [SerializeField]
-    Ending trueEnding = null;
+    Ending _trueEnding = null;
 
     [SerializeField]
-    Ending cousinEnding = null;
+    Ending _cousinEnding = null;
 
     [SerializeField]
-    Ending sisterEnding = null;
+    Ending _sisterEnding = null;
 
     [SerializeField]
     [Tooltip("Threshold for this ending is ignored.")]
     Ending badEnding = null;
 
+    [Space]
     [SerializeField]
-    Game.TransitionManager transitionManager = null;
+    Game.TransitionManager _transitionManager = null;
+
+    [SerializeField]
+    MusicManager _musicManager = null;
     
 
     void Start()
@@ -27,19 +33,19 @@ public class EndingsManager : MonoBehaviour
         DataManager data = DataManager.Instance;
         Ending selectedEnding;
 
-        if (data.trueEndingPoints >= trueEnding.Threshold)
+        if (data.trueEndingPoints >= _trueEnding.Threshold)
         {
-            selectedEnding = trueEnding;
+            selectedEnding = _trueEnding;
             data.UnlockEnding(0);
         }
-        else if (data.sistersEndingPoints >= sisterEnding.Threshold)
+        else if (data.sistersEndingPoints >= _sisterEnding.Threshold)
         {
-            selectedEnding = sisterEnding;
+            selectedEnding = _sisterEnding;
             data.UnlockEnding(3);
         }
-        else if (data.cousinsEndingPoints >= cousinEnding.Threshold)
+        else if (data.cousinsEndingPoints >= _cousinEnding.Threshold)
         {
-            selectedEnding = cousinEnding;
+            selectedEnding = _cousinEnding;
             data.UnlockEnding(2);
         }
         else
@@ -48,12 +54,13 @@ public class EndingsManager : MonoBehaviour
             data.UnlockEnding(1);
         }
 
-        foreach (Ending end in new List<Ending>() { trueEnding, cousinEnding, sisterEnding, badEnding })
+        foreach (Ending end in new List<Ending>() { _trueEnding, _cousinEnding, _sisterEnding, badEnding })
         {
             if (end == selectedEnding)
             {
                 end.Visuals?.SetActive(true);
-                transitionManager._dialogueOnStart = end.Dialog;
+                _transitionManager._dialogueOnStart = end.Dialog;
+                _musicManager.PlayMusic(end.MusicTrack);
             }
             else
             {
@@ -75,12 +82,6 @@ public class EndingsManager : MonoBehaviour
 
         public string Dialog = string.Empty;
         public GameObject Visuals = null;
-
-        public Ending(int threshold, string dialog, GameObject visuals)
-        {
-            Threshold = threshold;
-            Dialog = dialog;
-            Visuals = visuals;
-        }
+        public MusicTrack MusicTrack = null;
     }
 }
