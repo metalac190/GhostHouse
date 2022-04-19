@@ -44,6 +44,7 @@ public class ModalWindowController : MonoBehaviour
 
     public static event Action OnInteractStart = delegate { };
     public static event Action OnInteractEnd = delegate { };
+    private Action _callback;
 
     private bool _enabled;
 
@@ -64,12 +65,18 @@ public class ModalWindowController : MonoBehaviour
     }
 
     private void Start() {
-        DisableModalWindow();
+        DisableModalWindow(false, false);
     }
 
     private void Update() {
-        if (_enabled && Input.GetKeyDown(KeyCode.Escape)) {
-            DisableModalWindow();
+        if (_enabled) {
+            if (Input.GetKeyDown(KeyCode.Escape)) {
+                DisableModalWindow();
+            } else if ((Input.GetKeyDown(KeyCode.Return) || Input.GetKeyDown(KeyCode.Space)) && _callback != null) {
+                _callback.Invoke();
+                _callback = null;
+                DisableModalWindow();
+            }
         }
     }
 
@@ -90,8 +97,8 @@ public class ModalWindowController : MonoBehaviour
         if (canSpendAltPoints && altPointsToSpend > maxPointsToSpend) {
             maxPointsToSpend = altPointsToSpend;
         }
-        for (var i = 0; i < _spiritPoints.Count; i++) {
-            _spiritPoints[i].sprite = canSpendAltPoints ? _spiritPointSpend : _spiritPointCannotSpend;
+        for (var i = 0; i < _altSpiritPoints.Count; i++) {
+            _altSpiritPoints[i].sprite = canSpendAltPoints ? _spiritPointSpend : _spiritPointCannotSpend;
             _altSpiritPoints[i].transform.parent.gameObject.SetActive(i < pointsToSpend);
         }
 
@@ -105,6 +112,7 @@ public class ModalWindowController : MonoBehaviour
             _mainInteractionButton.gameObject.SetActive(true);
             _mainInteractionButton.interactable = canSpendPoints;
             if (canSpendPoints) {
+                _callback = callback;
                 _mainInteractionButton.onClick.AddListener(callback.Invoke);
                 _mainInteractionButton.onClick.AddListener(InteractionCloseWindow);
             }
@@ -138,25 +146,31 @@ public class ModalWindowController : MonoBehaviour
         DisableModalWindow(false);
     }
 
-    public void DisableModalWindow(bool playSound = true) {
+    public void DisableModalWindow() => DisableModalWindow(true);
+    public void DisableModalWindow(bool playSound, bool updateCanPause = true) {
         if (_playerHud != null) _playerHud.UpdateSpiritPoints();
         OnInteractEnd?.Invoke();
-        _mainInteractionButton.gameObject.SetActive(false);
         _mainInteractionButton.onClick.RemoveAllListeners();
+        _mainInteractionButton.gameObject.SetActive(false);
         _mainInteractionText.text = "Interact";
-        _alternateInteractionButton.gameObject.SetActive(false);
         _alternateInteractionButton.onClick.RemoveAllListeners();
+        _alternateInteractionButton.gameObject.SetActive(false);
         _alternateInteractionText.text = "Interact";
         _modalWindow.SetActive(false);
         if (_raycastBlock != null) _raycastBlock.SetActive(false);
         _enabled = false;
-        if (PauseMenu.Singleton != null) {
-            PauseMenu.Singleton.PreventPausing(true);
-        }
+        if (updateCanPause) StartCoroutine(CanPauseNextFrame());
         if (IsometricCameraController.Singleton != null) {
             IsometricCameraController.Singleton._interacting = false;
         }
         if (playSound) _cancelOrCloseWindow.Play();
+    }
+
+    public IEnumerator CanPauseNextFrame() {
+        yield return null;
+        if (PauseMenu.Singleton != null) {
+            PauseMenu.Singleton.PreventPausing(true);
+        }
     }
 
     public void AddJournalNotification() {
@@ -184,6 +198,13 @@ public class ModalWindowController : MonoBehaviour
 
     public void MainWorked() {
         Debug.Log("Main Interaction Is Done");
+    }
+
+    public void ForceUpdateHudSpiritPoints() {
+        if (!_enabled && _playerHud != null) {
+            _playerHud.TestMaxSpiritPoints(DataManager.Instance.remainingSpiritPoints);
+            _playerHud.UpdateSpiritPoints();
+        }
     }
 
     #endregion

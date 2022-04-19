@@ -11,6 +11,13 @@ namespace Mechanics.Level_Mechanics
 {
     public class StoryInteractable : InteractableBase
     {
+        [Header("Particles")]
+        [SerializeField] private bool _particles = true;
+        [SerializeField] private Vector3 _particleOffset = Vector3.zero;
+        [SerializeField] private Vector3 _particleSize = Vector3.one;
+        [SerializeField] private ParticleSystemType _particleType = ParticleSystemType.MajorCost;
+        private ParticleSystem _particleSystem;
+
         [Header("On Hover")]
         [SerializeField] private bool _textOnHover = false;
         [SerializeField] private bool _hoverTextUseObjectName = false;
@@ -42,6 +49,9 @@ namespace Mechanics.Level_Mechanics
         [SerializeField] private string _alternateInteractionText = "Alt Interact";
         [SerializeField] private string _closeMenuText = "Close";
 
+        [Header("Open other Interactable After This")]
+        [SerializeField] private StoryInteractable _openAfterDialogue = null; 
+
         //[Header("Collision Information")]
         //[SerializeField] private bool _confirmUseChildCollider = false;
         //[SerializeField] private bool _confirmUseSpecificCollider = false;
@@ -59,6 +69,22 @@ namespace Mechanics.Level_Mechanics
 
         #region Unity Functions
 
+        private void OnEnable() {
+            if (_particles) {
+                _particleSystem = InteractableParticlePool.Instance.RegisterParticle(_particleType);
+                _particleSystem.gameObject.SetActive(true);
+                _particleSystem.transform.position = transform.position + _particleOffset;
+                _particleSystem.transform.localScale = _particleSize;
+                _particleSystem.Play();
+            }
+        }
+
+        private void OnDisable() {
+            if (_particles && InteractableParticlePool.Instance != null) {
+                InteractableParticlePool.Instance.UnregisterParticle(_particleSystem, _particleType);
+            }
+        }
+
         private void Start() {
             if (TextHoverController.Singleton == null) {
                 _missingHoverUi = true;
@@ -71,6 +97,23 @@ namespace Mechanics.Level_Mechanics
             if (_alternateInteraction != null) {
                 DataManager.Instance.SetDefaultInteraction(_alternateInteraction.name);
                 //Debug.Log(_alternateInteraction.name + ": " + _alternateInteraction.CanInteract);
+            }
+        }
+
+        private void OnDrawGizmos() {
+            if (_particles) {
+                switch (_particleType) {
+                    case ParticleSystemType.MajorCost:
+                        Gizmos.color = Color.cyan;
+                        break;
+                    case ParticleSystemType.Minor:
+                        Gizmos.color = Color.green;
+                        break;
+                    case ParticleSystemType.MajorNoCost:
+                        Gizmos.color = Color.magenta;
+                        break;
+                }
+                Gizmos.DrawWireCube(transform.position + _particleOffset, _particleSize);
             }
         }
 
@@ -139,7 +182,7 @@ namespace Mechanics.Level_Mechanics
                 ModalWindowController.Singleton.EnableModalWindow(_closeMenuText, callback, _interactionText, altCallback, _alternateInteractionText, points, altPoints);
             }
             else if (!_popupWindowOnClick && _interaction != null) {
-                if (_interaction.Cost <= DataManager.Instance.remainingSpiritPoints) {
+                if (_interaction.Cost <= 0 || _interaction.Cost <= DataManager.Instance.remainingSpiritPoints) {
                     _interaction.Interact();
                 }
             }
@@ -150,6 +193,9 @@ namespace Mechanics.Level_Mechanics
                 foreach (var connectedAnimators in _interaction.ConnectedAnimators) {
                     connectedAnimators.SetTrigger(_animationsClickTrigger);
                 }
+            }
+            if (_openAfterDialogue != null && AfterDialogueInteraction.Singleton != null) {
+                AfterDialogueInteraction.Singleton.SetNextInteraction(_openAfterDialogue);
             }
 
             //if (_moveOnClick)

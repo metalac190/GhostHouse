@@ -38,13 +38,17 @@ public class SaveData
     public Settings settings;
 
     // Boolean array of journal unlocks
+    public string[] journalInteractionNames;
     public bool[] journalUnlocks;
+    public bool[] endingUnlocks;
 
     // Constructor to initialize arrays
     public SaveData()
     {
-        interactionNames = new string[48];
-        interactionStates = new bool[48];
-        journalUnlocks = new bool[24];
+        interactionNames = new string[160];
+        interactionStates = new bool[160];
+        journalInteractionNames = new string[160];
+        journalUnlocks = new bool[160];
+        endingUnlocks = new bool[4];
     }
 }

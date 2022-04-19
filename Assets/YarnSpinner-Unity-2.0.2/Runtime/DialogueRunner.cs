@@ -1238,7 +1238,7 @@ namespace Yarn.Unity
         private void UpdateLineStatus(LocalizedLine line, LineStatus newStatus)
         {
             // Update the state of the line and let the views know.
-            line.Status = newStatus;
+            if (line != null) line.Status = newStatus;
 
             foreach (var dialogueView in dialogueViews)
             {

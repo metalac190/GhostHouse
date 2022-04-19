@@ -19,6 +19,10 @@ namespace UI
         [SerializeField] private IntegerVariable _startingSP = null;
         [SerializeField] private IntegerVariable _currentSP = null;
 
+        [Header("Journal Icon")]
+        [SerializeField] private GameObject _journalNormal = null;
+        [SerializeField] private GameObject _journalNotification = null;
+
         private int _maxPoints;
 
         private int SpiritPointsStart => _startingSP != null ? _startingSP.value : DataManager.Instance.remainingSpiritPoints;
@@ -30,6 +34,13 @@ namespace UI
 
         private void Start() {
             SetMaxSpiritPoints(SpiritPointsStart);
+            SetJournalNotification(false);
+        }
+
+        public void TestMaxSpiritPoints(int newMax) {
+            if (newMax > _maxPoints) {
+                SetMaxSpiritPoints(newMax);
+            }
         }
 
         // Call this on Start() to setup spirit points
@@ -63,6 +74,7 @@ namespace UI
                 }
                 else {
                     _spiritPoints[i].enabled = true;
+                    _spiritPoints[i].gameObject.SetActive(true);
                     _spiritPoints[i].sprite = _spiritPointBright;
                 }
             }
@@ -70,9 +82,17 @@ namespace UI
         }
 
         public void AddJournalNotification() {
+            SetJournalNotification(true);
+            // TODO: Add functionality for which page to open?
         }
 
         public void ClearJournalNotification() {
+            SetJournalNotification(false);
+        }
+
+        private void SetJournalNotification(bool notification) {
+            _journalNormal.SetActive(!notification);
+            _journalNotification.SetActive(notification);
         }
 
         public void OpenJournal() {

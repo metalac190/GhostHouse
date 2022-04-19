@@ -32,6 +32,8 @@ namespace Mechanics.Dialog
         /// <returns></returns>
         public static IEnumerator SimpleTypewriter(TextMeshProUGUI text, float lettersPerSecond, Action<int> onCharacterTyped = null, Action onComplete = null, InterruptionFlag interruption = null)
         {
+            bool paused = false;
+            PauseMenu.PauseUpdated += Pause;
             text.maxVisibleCharacters = 0;
 
             // Wait a single frame to let the text component process its
@@ -54,6 +56,13 @@ namespace Mechanics.Dialog
             var accumulator = Time.deltaTime;
             while (text.maxVisibleCharacters < characterCount)
             {
+                // pause effect if in the pause menu
+                if (paused)
+                {
+                    yield return null;
+                    continue;
+                }
+
                 // rush the animation if the interruption flag has been raised
                 if (interruption?.Interrupted == true) break;
 
@@ -69,7 +78,13 @@ namespace Mechanics.Dialog
             }
 
             text.maxVisibleCharacters = characterCount;
+            PauseMenu.PauseUpdated -= Pause;
             onComplete?.Invoke();
+
+            void Pause(bool isPaused)
+            {
+                paused = isPaused;
+            }
         }
 
         /// <summary>
