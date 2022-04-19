@@ -37,6 +37,12 @@ namespace UI
             SetJournalNotification(false);
         }
 
+        public void TestMaxSpiritPoints(int newMax) {
+            if (newMax > _maxPoints) {
+                SetMaxSpiritPoints(newMax);
+            }
+        }
+
         // Call this on Start() to setup spirit points
         public void SetMaxSpiritPoints(int maxPoints) {
             //Debug.Log(maxPoints);
@@ -68,6 +74,7 @@ namespace UI
                 }
                 else {
                     _spiritPoints[i].enabled = true;
+                    _spiritPoints[i].gameObject.SetActive(true);
                     _spiritPoints[i].sprite = _spiritPointBright;
                 }
             }
