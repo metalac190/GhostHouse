@@ -3,6 +3,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using Yarn.Unity;
+using Mechanics.Level_Mechanics;
 
 namespace Game
 {
@@ -23,7 +24,7 @@ namespace Game
         [SerializeField] private bool _showTitleText = true;
         [SerializeField] private float _titleTextTime = 1;
         [SerializeField] private AnimationCurve _titleTextVisibility = new AnimationCurve(new Keyframe(0, 0), new Keyframe(0.25f, 1), new Keyframe(0.75f, 1), new Keyframe(1, 0));
-        public string _dialogueOnStart = "";
+        public Interactable _interactionOnStart = null;
 
         [Header("On Scene End")]
         [SerializeField] private string _nextScene = "MainMenu";
@@ -31,7 +32,7 @@ namespace Game
         [SerializeField] private float _fadeOutTime = 1;
 
         private static DialogueRunner _dialogueRunner;
-        private static DialogueRunner DialogueRunner {
+        public static DialogueRunner DialogueRunner {
             get {
                 if (_dialogueRunner == null) {
                     _dialogueRunner = FindObjectOfType<DialogueRunner>();
@@ -109,7 +110,10 @@ namespace Game
 
         private void StartDialogue() {
             _raycastBlock.gameObject.SetActive(false);
-            if (!string.IsNullOrEmpty(_dialogueOnStart)) DialogueRunner.StartDialogue(_dialogueOnStart);
+            if (_interactionOnStart != null)
+            {
+                _interactionOnStart.Interact();
+            }
             PauseGame(false);
         }
 

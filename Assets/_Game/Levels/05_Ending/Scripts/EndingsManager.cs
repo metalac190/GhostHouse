@@ -1,3 +1,4 @@
+﻿using Game;
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -59,7 +60,8 @@ public class EndingsManager : MonoBehaviour
             if (end == selectedEnding)
             {
                 end.Visuals?.SetActive(true);
-                _transitionManager._dialogueOnStart = end.Dialog;
+                TransitionManager.DialogueRunner.StartDialogue(end.Dialog);
+                //transitionManager._dialogueOnStart = end.Dialog;
                 _musicManager.PlayMusic(end.MusicTrack);
             }
             else
