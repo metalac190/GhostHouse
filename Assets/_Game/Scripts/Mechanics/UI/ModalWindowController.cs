@@ -97,8 +97,8 @@ public class ModalWindowController : MonoBehaviour
         if (canSpendAltPoints && altPointsToSpend > maxPointsToSpend) {
             maxPointsToSpend = altPointsToSpend;
         }
-        for (var i = 0; i < _spiritPoints.Count; i++) {
-            _spiritPoints[i].sprite = canSpendAltPoints ? _spiritPointSpend : _spiritPointCannotSpend;
+        for (var i = 0; i < _altSpiritPoints.Count; i++) {
+            _altSpiritPoints[i].sprite = canSpendAltPoints ? _spiritPointSpend : _spiritPointCannotSpend;
             _altSpiritPoints[i].transform.parent.gameObject.SetActive(i < pointsToSpend);
         }
 
