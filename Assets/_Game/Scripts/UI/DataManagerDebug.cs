@@ -8,9 +8,29 @@ public class DataManagerDebug : MonoBehaviour
     [SerializeField] private GameObject _parent = null;
 
     private static bool _debugActive;
+    static string myLog = "";
+    private string output;
+    private string stack;
 
     private void Start() {
         SetDebugActive(_debugActive);
+    }
+
+    private void OnEnable()
+    {
+        Application.logMessageReceived += Log;
+    }
+
+    private void OnDisable()
+    {
+        Application.logMessageReceived -= Log;
+    }
+    
+    private void OnGUI()
+    {
+        if (_debugActive) {
+            myLog = GUI.TextArea(new Rect(10, 400, 320, Screen.height - 410), myLog);
+        }
     }
 
     private void Update() {
@@ -34,6 +54,7 @@ public class DataManagerDebug : MonoBehaviour
     }
 
     public void GiveSpiritPoint() {
+        if (DataManager.Instance.remainingSpiritPoints >= 10) return;
         DataManager.Instance.remainingSpiritPoints += 1;
         ModalWindowController.Singleton.ForceUpdateHudSpiritPoints();
     }
@@ -41,5 +62,16 @@ public class DataManagerDebug : MonoBehaviour
     private void SetDebugActive(bool active) {
         _debugActive = active;
         _parent.SetActive(active);
+    }
+
+    public void Log(string logString, string stackTrace, LogType type)
+    {
+        output = logString;
+        stack = stackTrace;
+        myLog = output + "\n" + myLog;
+        if (myLog.Length > 5000)
+        {
+            myLog = myLog.Substring(0, 4000);
+        }
     }
 }
