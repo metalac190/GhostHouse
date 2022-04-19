@@ -179,7 +179,7 @@ namespace Mechanics.Level_Mechanics
                 ModalWindowController.Singleton.EnableModalWindow(_closeMenuText, callback, _interactionText, altCallback, _alternateInteractionText, points, altPoints);
             }
             else if (!_popupWindowOnClick && _interaction != null) {
-                if (_interaction.Cost <= DataManager.Instance.remainingSpiritPoints) {
+                if (_interaction.Cost <= 0 || _interaction.Cost <= DataManager.Instance.remainingSpiritPoints) {
                     _interaction.Interact();
                 }
             }
