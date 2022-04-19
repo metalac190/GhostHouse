@@ -58,7 +58,8 @@ namespace UI
         // Call this each time the number of spirit points changes
         public void SetSpiritPoints(int points, int aboutToSpend = 0) {
             //Debug.Log("Spirit Points: " + points + ". About to Spend " + aboutToSpend + ".");
-            for (var i = 0; i < _maxPoints; i++) {
+            for (var i = 0; i < points; i++) {
+                if (i > _spiritPoints.Count) break;
                 if (i >= points) {
                     _spiritPoints[i].enabled = false;
                 }
