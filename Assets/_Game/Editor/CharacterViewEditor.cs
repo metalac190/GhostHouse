@@ -21,16 +21,10 @@ namespace _Game.Editor
 
         SerializedProperty continueKeyCodeProperty;
 
-        SerializedProperty lineTextProperty;
-        SerializedProperty dialogImageProperty;
-        SerializedProperty characterNameObjectProperty;
-        SerializedProperty characterNameTextProperty;
-        SerializedProperty characterPortraitImageProperty;
         SerializedProperty characterDataProperty;
         SerializedProperty characterNameInLineProperty;
-        SerializedProperty continueButtonProperty;
-        SerializedProperty uiParentProperty;
-        SerializedProperty progressbarProperty;
+        SerializedProperty leftViewProperty;
+        SerializedProperty rightViewProperty;
 
         public void OnEnable()
         {
@@ -44,16 +38,10 @@ namespace _Game.Editor
 
             continueKeyCodeProperty = serializedObject.FindProperty("_continueKeyCode");
 
-            lineTextProperty = serializedObject.FindProperty("_lineText");
-            dialogImageProperty = serializedObject.FindProperty("_dialogImage");
-            characterPortraitImageProperty = serializedObject.FindProperty("_characterPortraitImage");
-            characterDataProperty = serializedObject.FindProperty("_charactersData");
-            characterNameObjectProperty = serializedObject.FindProperty("_characterNameObject");
-            characterNameTextProperty = serializedObject.FindProperty("_characterNameText");
+            characterDataProperty = serializedObject.FindProperty("_characterData");
             characterNameInLineProperty = serializedObject.FindProperty("_characterNameInLine");
-            continueButtonProperty = serializedObject.FindProperty("_continueButton");
-            uiParentProperty = serializedObject.FindProperty("_uiParent");
-            progressbarProperty = serializedObject.FindProperty("_progressbar");
+            leftViewProperty = serializedObject.FindProperty("_leftView");
+            rightViewProperty = serializedObject.FindProperty("_rightView");
         }
 
         public override void OnInspectorGUI()
@@ -83,27 +71,10 @@ namespace _Game.Editor
             EditorGUILayout.PropertyField(continueKeyCodeProperty);
 
             // UI references
-            EditorGUILayout.PropertyField(lineTextProperty);
-            EditorGUILayout.PropertyField(dialogImageProperty);
-            EditorGUILayout.PropertyField(characterNameObjectProperty);
-            EditorGUILayout.PropertyField(characterPortraitImageProperty);
-
-            if (characterPortraitImageProperty.objectReferenceValue != null)
-            {
-                EditorGUI.indentLevel += 1;
-                EditorGUILayout.PropertyField(characterDataProperty);
-                EditorGUI.indentLevel -= 1;
-            }
-
-            EditorGUILayout.PropertyField(characterNameTextProperty);
-            if (characterNameTextProperty.objectReferenceValue == null)
-            {
-                EditorGUILayout.PropertyField(characterNameInLineProperty);
-            }
-
-            EditorGUILayout.PropertyField(continueButtonProperty);
-            EditorGUILayout.PropertyField(uiParentProperty);
-            EditorGUILayout.PropertyField(progressbarProperty);
+            EditorGUILayout.PropertyField(characterDataProperty);
+            EditorGUILayout.PropertyField(characterNameInLineProperty);
+            EditorGUILayout.PropertyField(leftViewProperty);
+            EditorGUILayout.PropertyField(rightViewProperty);
 
             serializedObject.ApplyModifiedProperties();
         }
