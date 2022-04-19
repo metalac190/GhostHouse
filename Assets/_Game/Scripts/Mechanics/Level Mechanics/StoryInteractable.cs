@@ -15,7 +15,7 @@ namespace Mechanics.Level_Mechanics
         [SerializeField] private bool _particles = true;
         [SerializeField] private Vector3 _particleOffset = Vector3.zero;
         [SerializeField] private Vector3 _particleSize = Vector3.one;
-        [SerializeField] private ParticleSystemType _particleType = ParticleSystemType.Major;
+        [SerializeField] private ParticleSystemType _particleType = ParticleSystemType.MajorCost;
         private ParticleSystem _particleSystem;
 
         [Header("On Hover")]
@@ -100,13 +100,13 @@ namespace Mechanics.Level_Mechanics
         private void OnDrawGizmos() {
             if (_particles) {
                 switch (_particleType) {
-                    case ParticleSystemType.Major:
+                    case ParticleSystemType.MajorCost:
                         Gizmos.color = Color.cyan;
                         break;
                     case ParticleSystemType.Minor:
                         Gizmos.color = Color.green;
                         break;
-                    case ParticleSystemType.Misleading:
+                    case ParticleSystemType.MajorNoCost:
                         Gizmos.color = Color.magenta;
                         break;
                 }
