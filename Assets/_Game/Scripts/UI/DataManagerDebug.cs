@@ -29,6 +29,10 @@ public class DataManagerDebug : MonoBehaviour
         }
     }
 
+    public void GiveSpiritPoint() {
+        DataManager.Instance.remainingSpiritPoints += 1;
+    }
+
     private void SetDebugActive(bool active) {
         _debugActive = active;
         _parent.SetActive(active);
