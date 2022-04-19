@@ -106,18 +106,19 @@ namespace Mechanics.Level_Mechanics
 
                 DataManager.Instance.SetInteraction(name, true);
 
-
-                if (_fadeToBlack && SimpleFadeToBlack.Singleton != null)
-                {
-                    SimpleFadeToBlack.Singleton.StartCoroutine(FadeToBlack());
-                }
-                else {
-                    InvokeResponses();
-                }
                 Debug.Log("Interacted with " + name);
             }
             else {
                 Debug.Log("Second Interact " + name);
+            }
+
+            if (_fadeToBlack && SimpleFadeToBlack.Singleton != null)
+            {
+                SimpleFadeToBlack.Singleton.StartCoroutine(FadeToBlack());
+            }
+            else
+            {
+                InvokeResponses();
             }
 
             _sfxOnInteract.Play();
