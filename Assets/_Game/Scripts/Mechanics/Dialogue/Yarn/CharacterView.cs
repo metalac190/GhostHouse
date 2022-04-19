@@ -392,7 +392,7 @@ namespace Mechanics.Dialog
             {
                 if (character != null ? character.PlayAudio : true)
                 {
-                    OnLineStarted(dialogueLine);
+                    OnLineStarted?.Invoke(dialogueLine);
                     StartCoroutine(Tweens.SimpleTypewriter(_lineText, _typewriterEffectSpeed, OnCharacterTyped, interruption: _interruptionFlag,
                     onComplete: () =>
                     {
