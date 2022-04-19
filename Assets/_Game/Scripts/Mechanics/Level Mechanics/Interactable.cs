@@ -51,6 +51,8 @@ namespace Mechanics.Level_Mechanics
         public List<MeshRenderer> ConnectedMeshRenderers { get; set; }
         public List<Animator> ConnectedAnimators { get; set; } = new List<Animator>();
 
+        public Action OnInteracted = delegate {};
+
         public int Cost => _cost;
         public int SisterEndPoints => _sisterEndingPoints;
         public int CousinEndingPoints => _cousinEndingPoints;
@@ -134,6 +136,7 @@ namespace Mechanics.Level_Mechanics
             {
                 _interactableResponses[i].Invoke();
             }
+            OnInteracted?.Invoke();
         }
 
         private void PlayDialogue()

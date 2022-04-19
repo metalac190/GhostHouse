@@ -19,7 +19,8 @@ public class DataManagerDebug : MonoBehaviour
         }
         if (_debugActive) {
             var interactions = DataManager.Instance.interactions;
-            string debug = "<b><u>Spirit Points</u></b>\n";
+            string debug = "Season: " + DataManager.Instance.level + "\n";
+            debug += "\n<b><u>Spirit Points</u></b>\n";
             debug += "Remaining: " + DataManager.Instance.remainingSpiritPoints + "\n";
             debug += "Total Used: " + DataManager.Instance.totalUsedSpiritPoints + "\n";
             debug += "\n<b><u>Endings</u></b>\n";
