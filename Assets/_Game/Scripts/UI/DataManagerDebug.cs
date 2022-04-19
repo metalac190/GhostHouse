@@ -31,6 +31,7 @@ public class DataManagerDebug : MonoBehaviour
 
     public void GiveSpiritPoint() {
         DataManager.Instance.remainingSpiritPoints += 1;
+        ModalWindowController.Singleton.ForceUpdateHudSpiritPoints();
     }
 
     private void SetDebugActive(bool active) {

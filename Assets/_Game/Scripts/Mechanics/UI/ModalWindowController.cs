@@ -200,5 +200,9 @@ public class ModalWindowController : MonoBehaviour
         Debug.Log("Main Interaction Is Done");
     }
 
+    public void ForceUpdateHudSpiritPoints() {
+        if (!_enabled) _playerHud.UpdateSpiritPoints();
+    }
+
     #endregion
 }
