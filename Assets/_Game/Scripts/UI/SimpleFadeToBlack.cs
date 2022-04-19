@@ -16,6 +16,7 @@ public class SimpleFadeToBlack : MonoBehaviour
     private Color _color;
     private Color _transparent;
     private float _delta;
+    private Coroutine _currentRoutine;
 
     private void Awake() {
         if (_singleton) {
@@ -42,30 +43,45 @@ public class SimpleFadeToBlack : MonoBehaviour
     }
 
     [Button(Spacing = 10, Mode = ButtonMode.NotPlaying)]
-    public void FadeInOut() {
-        FadeInOut(_fadeOutTime, _fadeHoldTime, _fadeInTime);
+    public void FadeOutIn() {
+        FadeOutIn(_fadeOutTime, _fadeHoldTime, _fadeInTime);
     }
-    public void FadeInOut(float fadeOutTime, float fadeHoldTime, float fadeInTime) {
-        StopAllCoroutines();
-        StartCoroutine(FadeToBlack(fadeOutTime, true, fadeHoldTime, fadeInTime));
+    public Coroutine FadeOutIn(float fadeOutTime, float fadeHoldTime, float fadeInTime) {
+        StopCurrentRoutine();
+        _currentRoutine = StartCoroutine(FadeToBlack(fadeOutTime, true, fadeHoldTime, fadeInTime));
+        return _currentRoutine;
     }
 
     [Button(Mode = ButtonMode.NotPlaying)]
     public void FadeOut() {
         FadeOut(_fadeOutTime);
     }
-    public void FadeOut(float fadeOutTime) {
-        StopAllCoroutines();
-        StartCoroutine(FadeToBlack(fadeOutTime));
+    public Coroutine FadeOut(float fadeOutTime) {
+        StopCurrentRoutine();
+        _currentRoutine = StartCoroutine(FadeToBlack(fadeOutTime));
+        return _currentRoutine;
+    }
+
+    public Coroutine WaitFadeIn(float fadeWaitTime, float fadeInTime) {
+        StopCurrentRoutine();
+        _currentRoutine = StartCoroutine(FadeHold(fadeWaitTime, fadeInTime));
+        return _currentRoutine;
     }
 
     [Button(Mode = ButtonMode.NotPlaying)]
     public void FadeIn() {
         FadeIn(_fadeInTime);
     }
-    public void FadeIn(float fadeInTime) {
-        StopAllCoroutines();
-        StartCoroutine(FadeFromBlack(fadeInTime));
+    public Coroutine FadeIn(float fadeInTime) {
+        StopCurrentRoutine();
+        _currentRoutine = StartCoroutine(FadeFromBlack(fadeInTime));
+        return _currentRoutine;
+    }
+
+    private void StopCurrentRoutine() {
+        if (_currentRoutine != null) {
+            StopCoroutine(_currentRoutine);
+        }
     }
 
     private IEnumerator FadeToBlack(float time, bool fadeFromAfter = false, float waitTime = 0, float fadeFromTime = 0) {
@@ -78,16 +94,14 @@ public class SimpleFadeToBlack : MonoBehaviour
             yield return null;
         }
         SetImageAlpha(1);
-        if (fadeFromAfter) {
-            StartCoroutine(FadeHold(waitTime, fadeFromTime));
-        }
+        _currentRoutine = fadeFromAfter ? StartCoroutine(FadeHold(waitTime, fadeFromTime)) : null;
     }
 
     private IEnumerator FadeHold(float waitTime, float fadeTime) {
         for (float t = 0; t < waitTime; t += Time.deltaTime) {
             yield return null;
         }
-        StartCoroutine(FadeFromBlack(fadeTime));
+        _currentRoutine = StartCoroutine(FadeFromBlack(fadeTime));
     }
 
     private IEnumerator FadeFromBlack(float time) {
@@ -100,6 +114,7 @@ public class SimpleFadeToBlack : MonoBehaviour
         }
         SetImageAlpha(0);
         _image.enabled = false;
+        _currentRoutine = null;
     }
 
     private void SetImageAlpha(float delta) {
