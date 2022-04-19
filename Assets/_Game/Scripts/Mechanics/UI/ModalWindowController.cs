@@ -108,11 +108,11 @@ public class ModalWindowController : MonoBehaviour
         IsometricCameraController.Singleton._interacting = true;
         OnInteractStart?.Invoke();
 
-        _callback = callback;
         if (callback != null) {
             _mainInteractionButton.gameObject.SetActive(true);
             _mainInteractionButton.interactable = canSpendPoints;
             if (canSpendPoints) {
+                _callback = callback;
                 _mainInteractionButton.onClick.AddListener(callback.Invoke);
                 _mainInteractionButton.onClick.AddListener(InteractionCloseWindow);
             }
