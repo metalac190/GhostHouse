@@ -22,6 +22,8 @@ namespace _Game.Editor
         SerializedProperty continueKeyCodeProperty;
 
         SerializedProperty lineTextProperty;
+        SerializedProperty dialogImageProperty;
+        SerializedProperty characterNameObjectProperty;
         SerializedProperty characterNameTextProperty;
         SerializedProperty characterPortraitImageProperty;
         SerializedProperty characterDataProperty;
@@ -43,8 +45,10 @@ namespace _Game.Editor
             continueKeyCodeProperty = serializedObject.FindProperty("_continueKeyCode");
 
             lineTextProperty = serializedObject.FindProperty("_lineText");
+            dialogImageProperty = serializedObject.FindProperty("_dialogImage");
             characterPortraitImageProperty = serializedObject.FindProperty("_characterPortraitImage");
             characterDataProperty = serializedObject.FindProperty("_charactersData");
+            characterNameObjectProperty = serializedObject.FindProperty("_characterNameObject");
             characterNameTextProperty = serializedObject.FindProperty("_characterNameText");
             characterNameInLineProperty = serializedObject.FindProperty("_characterNameInLine");
             continueButtonProperty = serializedObject.FindProperty("_continueButton");
@@ -80,8 +84,10 @@ namespace _Game.Editor
 
             // UI references
             EditorGUILayout.PropertyField(lineTextProperty);
-
+            EditorGUILayout.PropertyField(dialogImageProperty);
+            EditorGUILayout.PropertyField(characterNameObjectProperty);
             EditorGUILayout.PropertyField(characterPortraitImageProperty);
+
             if (characterPortraitImageProperty.objectReferenceValue != null)
             {
                 EditorGUI.indentLevel += 1;

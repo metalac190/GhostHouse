@@ -30,7 +30,6 @@ public class IsometricCameraController : MonoBehaviour
     [Header("Click And Drag Movement Settings")]
     [SerializeField] public bool _enableClickDragMovement = false;
     [SerializeField] public float _panningSpeed = 25f;
-    [SerializeField] private float _exposedField = 10f;
     [SerializeField] private LayerMask _groundLayer = 0;
     [SerializeField, Range(0, 1)] private float _clickDragSmooth = 0.5f;
     private Vector3 _dragStart;
@@ -453,7 +452,7 @@ public class IsometricCameraController : MonoBehaviour
                 if (Input.GetMouseButtonDown(0) && !IsMouseOverUi)
                 {
                     Ray ray = _mainCamera.ScreenPointToRay(Input.mousePosition);
-                    if (Physics.Raycast(ray, out var hit, _groundLayer))
+                    if (Physics.Raycast(ray, out var hit, Mathf.Infinity, _groundLayer))
                     {
                         _dragging = true;
                         _dragStart = hit.point;
@@ -466,7 +465,7 @@ public class IsometricCameraController : MonoBehaviour
                 else if (Input.GetMouseButton(0) && _dragging)
                 {
                     Ray ray = _mainCamera.ScreenPointToRay(Input.mousePosition);
-                    if (Physics.Raycast(ray, out var hit, _groundLayer))
+                    if (Physics.Raycast(ray, out var hit, Mathf.Infinity, _groundLayer))
                     {
                         Vector3 diff = _dragStart - Vector3.Lerp(_dragStart, hit.point, _clickDragSmooth);
                         diff.y = 0;
@@ -484,7 +483,7 @@ public class IsometricCameraController : MonoBehaviour
 
         //HandleInput();
 
-        //CameraBounds();
+        CameraBounds();
 
 
     }

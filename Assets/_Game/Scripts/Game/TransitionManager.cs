@@ -22,7 +22,7 @@ namespace Game
         [SerializeField] private bool _showTitleText = true;
         [SerializeField] private float _titleTextTime = 1;
         [SerializeField] private AnimationCurve _titleTextVisibility = new AnimationCurve(new Keyframe(0, 0), new Keyframe(0.25f, 1), new Keyframe(0.75f, 1), new Keyframe(1, 0));
-        [SerializeField] private string _dialogueOnStart = "";
+        public string _dialogueOnStart = "";
 
         [Header("On Scene End")]
         [SerializeField] private string _nextScene = "MainMenu";
@@ -48,9 +48,11 @@ namespace Game
             if (_raycastBlock != null) _raycastBlock.gameObject.SetActive(true);
             if (_fadeIn) {
                 FadeFromBlack();
+                PauseGame(true);
             }
             else if (_showTitleText) {
                 TitleText();
+                PauseGame(true);
             }
         }
 
@@ -106,6 +108,16 @@ namespace Game
         private void StartDialogue() {
             _raycastBlock.gameObject.SetActive(false);
             if (!string.IsNullOrEmpty(_dialogueOnStart)) DialogueRunner.StartDialogue(_dialogueOnStart);
+            PauseGame(false);
+        }
+
+        private void PauseGame(bool paused) {
+            if (IsometricCameraController.Singleton != null) {
+                IsometricCameraController.Singleton.gamePaused = paused;
+            }
+            if (PauseMenu.Singleton != null) {
+                PauseMenu.Singleton.PreventPausing(!paused);
+            }
         }
 
         private IEnumerator FadeToBlack(float time) {

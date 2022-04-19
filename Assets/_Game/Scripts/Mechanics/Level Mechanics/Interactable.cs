@@ -1,9 +1,11 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using UnityEngine;
 using Utility.Audio.Helper;
 using Utility.Buttons;
 using Utility.ReadOnly;
 using Yarn.Unity;
+using Random = UnityEngine.Random;
 
 namespace Mechanics.Level_Mechanics
 {
@@ -12,13 +14,15 @@ namespace Mechanics.Level_Mechanics
     {
         [SerializeField, TextArea] private string _interactableDescription = "Default Description";
 
+        public string Description => _interactableDescription;
+
         [Header("Interaction Settings")]
         [SerializeField, Tooltip("Type in the name inside the dialogue yarn file.")]
         private string _dialogeYarnNode = "";
         [SerializeField, Tooltip("Click this if you want the interaction to happen multiple times.")]
         private bool _canInteractMultipleTimes = false;
         [SerializeField, Tooltip("Click this if you want the interaction to unlock an entry in the Journal.")]
-        private bool _opensJournalUnlock = false;
+        private bool _opensJournalUnlock;
         [SerializeField, Tooltip("Click this if you want to use random dialogue per every interaction.")]
         private bool _useRandomDialogue = false;
         [SerializeField, Tooltip("Type in the names inside the dialogue yarn files that you want to be used.")]
@@ -41,6 +45,9 @@ namespace Mechanics.Level_Mechanics
         public List<Animator> ConnectedAnimators { get; set; } = new List<Animator>();
 
         public int Cost => _cost;
+        public int SisterEndPoints => _sisterEndingPoints;
+        public int CousinEndingPoints => _cousinEndingPoints;
+        public int TrueEndingPoints => _trueEndingPoints;
 
         static DialogueRunner _dialogueRunner;
         static DialogueRunner DialogueRunner {
@@ -75,33 +82,55 @@ namespace Mechanics.Level_Mechanics
             //The same for loop as before, but this one goes backwards to make sure that deleting/removing a interactableResponse doesn't
             //cause any errors.
 
+            // Ignore on secondary interactions
+            if (!Interacted) {
+                if (_cost > 0) {
+                    DataManager.Instance.remainingSpiritPoints -= _cost;
+                    ModalWindowController.Singleton.PlaySpiritPointSpentSounds(DataManager.Instance.remainingSpiritPoints <= 0);
+                }
+
+                DataManager.Instance.trueEndingPoints += _trueEndingPoints;
+                DataManager.Instance.cousinsEndingPoints += _cousinEndingPoints;
+                DataManager.Instance.sistersEndingPoints += _sisterEndingPoints;
+
+                DataManager.Instance.SetInteraction(name, true);
+
+                // Debug.Log("Interacted with " + name);
+            }
+            else {
+                // Debug.Log("Second Interact " + name);
+            }
 
             for (int i = _interactableResponses.Count - 1; i >= 0; i--) {
                 _interactableResponses[i].Invoke();
             }
 
-            if (_cost > 0) {
-                // TODO: Apply Spirit Point Cost
-                DataManager.Instance.remainingSpiritPoints -= _cost;
-                ModalWindowController.Singleton.PlaySpiritPointSpentSounds(DataManager.Instance.remainingSpiritPoints <= 0);
-            }
-
             _sfxOnInteract.Play();
-            DataManager.Instance.SetInteraction(name, true);
-
-            DataManager.Instance.trueEndingPoints += _trueEndingPoints;
-            DataManager.Instance.cousinsEndingPoints += _cousinEndingPoints;
-            DataManager.Instance.sistersEndingPoints += _sisterEndingPoints;
 
             if (!string.IsNullOrEmpty(_dialogeYarnNode)) {
-                DialogueRunner.StartDialogue(_dialogeYarnNode);
+                try {
+                    DialogueRunner.StartDialogue(_dialogeYarnNode);
+                }
+                catch (Exception) {
+                    Debug.LogWarning("Invalid Dialogue Yarn Node (" + _dialogeYarnNode + ") connected to " + name);
+                    DialogueRunner.Stop();
+                }
             }
             else if (_useRandomDialogue) {
                 if (_randomDialoguePool.Count == 0) {
                     Debug.LogWarning("The Random Dialogue Pool has no dialogues in it...");
                 }
                 else {
-                    DialogueRunner.StartDialogue(_randomDialoguePool[Random.Range(0, _randomDialoguePool.Count)]);
+                    var dialogue = _randomDialoguePool[Random.Range(0, _randomDialoguePool.Count)];
+                    try
+                    {
+                        DialogueRunner.StartDialogue(dialogue);
+                    }
+                    catch (Exception)
+                    {
+                        Debug.LogWarning("Invalid Dialogue Yarn Node (" + dialogue + ") connected to " + name);
+                        DialogueRunner.Stop();
+                    }
                 }
             }
         }

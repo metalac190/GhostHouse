@@ -3,6 +3,7 @@ using System.Collections;
 using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
+using System.Linq;
 
 namespace Mechanics.Dialog
 {
@@ -67,10 +68,16 @@ namespace Mechanics.Dialog
         TextMeshProUGUI _lineText = null;
 
         [SerializeField]
+        Image _dialogImage = null;
+
+        [SerializeField]
         Image _characterPortraitImage = null;
 
         [SerializeField]
         SOCharacterPool _charactersData = null;
+
+        [SerializeField]
+        GameObject _characterNameObject = null;
 
         [SerializeField]
         TextMeshProUGUI _characterNameText = null;
@@ -96,9 +103,20 @@ namespace Mechanics.Dialog
         Yarn.Markup.MarkupAttribute _markup;
 
         float _lineStartStamp = -1;
+        Sprite _defaultBoxSprite;
+        Color _defaultBoxColor;
         #endregion
 
         #region Monobehaviour
+        void Awake()
+        {
+            if (_dialogImage != null)
+            {
+                _defaultBoxSprite = _dialogImage.sprite;
+                _defaultBoxColor = _dialogImage.color;
+            }
+        }
+
         public void Start()
         {
             _canvasGroup = GetComponent<CanvasGroup>();
@@ -112,6 +130,11 @@ namespace Mechanics.Dialog
                         "provide character data if the sprite should be shown.");
                     _characterPortraitImage.enabled = false;
                 }
+            }
+
+            if (_charactersData == null)
+            {
+                Debug.LogWarning("No character data was provided. default presentation will be used.");
             }
 
             HideView();
@@ -179,6 +202,7 @@ namespace Mechanics.Dialog
 
         public override void OnLineStatusChanged(Yarn.Unity.LocalizedLine dialogueLine)
         {
+            if (dialogueLine == null) return;
             switch (dialogueLine.Status)
             {
                 case Yarn.Unity.LineStatus.Presenting:
@@ -209,6 +233,7 @@ namespace Mechanics.Dialog
         public override void RunLine(Yarn.Unity.LocalizedLine dialogueLine, Action onDialogueLineFinished)
         {
             _currentLine = dialogueLine;
+            SOCharacter character = _charactersData.GetCharacter(dialogueLine.CharacterName);
 
             #region MARKUP: [interaction/]
             bool skipThisView = dialogueLine.Text.TryGetAttributeWithName("interaction", out _markup);
@@ -229,19 +254,17 @@ namespace Mechanics.Dialog
             {
                 if (_charactersData != null)
                 {
-                    // find appropriate sprite
-                    // configure the ui
-                    SOCharacter character = _charactersData.GetCharacter(dialogueLine.CharacterName);
-
-                    if (character == null)
+                    bool characterNotFound = character == null;
+                    if (characterNotFound || !character.ShowPortrait)
                     {
-                        Debug.LogWarning($"Unable to find character \"{dialogueLine.CharacterName}\".");
+                        // hide portrait
                         _characterPortraitImage.enabled = false;
                     }
                     else
                     {
                         Sprite characterSprite;
 
+                        // select appropriate sprite
                         bool emotiveSprite = dialogueLine.Text.TryGetAttributeWithName("sprite", out _markup);
                         if (emotiveSprite)
                         {
@@ -250,9 +273,11 @@ namespace Mechanics.Dialog
                         }
                         else
                         {
+                            // use default sprite
                             characterSprite = character.GetSprite(CharacterEmotion.Idle);
                         }
 
+                        // configure portrait
                         if (characterSprite != null)
                         {
                             _characterPortraitImage.enabled = true;
@@ -264,9 +289,31 @@ namespace Mechanics.Dialog
                         }
                     }
                 }
+                else
+                {
+                    _characterPortraitImage.enabled = false;
+                }
             }
             #endregion
 
+            // show the correct dialog box
+            #region dialog box style
+            if (_dialogImage != null)
+            {
+                if (character != null && character.UseAlternateBoxStyle)
+                {
+                    _dialogImage.sprite = character.AlternateBoxSprite;
+                    _dialogImage.color = character.AlternateBoxColor;
+                }
+                else
+                {
+                    _dialogImage.sprite = _defaultBoxSprite;
+                    _dialogImage.color = _defaultBoxColor;
+                }
+            }
+            #endregion
+
+            // show continue button
             if (_continueButton != null)
             {
                 _continueButton.SetActive(false);
@@ -274,6 +321,7 @@ namespace Mechanics.Dialog
 
             _interruptionFlag.Clear();
 
+            // show character name
             if (_characterNameText == null)
             {
                 if (_characterNameInLine)
@@ -287,6 +335,8 @@ namespace Mechanics.Dialog
             }
             else
             {
+                _characterNameObject.SetActive(character != null ? character.ShowName : true);
+
                 _characterNameText.text = dialogueLine.CharacterName;
                 _lineText.text = dialogueLine.TextWithoutCharacterName.Text;
             }
@@ -340,13 +390,20 @@ namespace Mechanics.Dialog
 
             void StartTypewriter()
             {
-                OnLineStarted(dialogueLine);
-                StartCoroutine(Tweens.SimpleTypewriter(_lineText, _typewriterEffectSpeed, OnCharacterTyped, interruption: _interruptionFlag,
-                onComplete: () =>
+                if (character != null ? character.PlayAudio : true)
                 {
-                    OnLineEnd();
-                    onDialogueLineFinished();
-                }));
+                    OnLineStarted(dialogueLine);
+                    StartCoroutine(Tweens.SimpleTypewriter(_lineText, _typewriterEffectSpeed, OnCharacterTyped, interruption: _interruptionFlag,
+                    onComplete: () =>
+                    {
+                        OnLineEnd?.Invoke();
+                        onDialogueLineFinished();
+                    }));
+                }
+                else
+                {
+                    StartCoroutine(Tweens.SimpleTypewriter(_lineText, _typewriterEffectSpeed, interruption: _interruptionFlag, onComplete: onDialogueLineFinished));
+                }
             }
         }
 

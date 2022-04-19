@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
@@ -31,6 +31,7 @@ public class FontManager : MonoBehaviour
         else
         {
             Destroy(this);
+            return;
         }
 
         SceneManager.activeSceneChanged += UpdateAllTextInScene;
@@ -38,7 +39,7 @@ public class FontManager : MonoBehaviour
 
     void OnDestroy()
     {
-        if (Instance == null) return;
+        if (Instance != this) return;
 
         Instance = null;
         SceneManager.activeSceneChanged -= UpdateAllTextInScene;
