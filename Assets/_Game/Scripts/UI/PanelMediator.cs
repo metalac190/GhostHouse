@@ -142,8 +142,8 @@ public class PanelMediator : MonoBehaviour
     }
 
     public void SetQualityHigh() => SetQuality(0);
-    public void SetQualityMedium() => SetQuality(0);
-    public void SetQualityLow() => SetQuality(1);
+    public void SetQualityMedium() => SetQuality(1);
+    public void SetQualityLow() => SetQuality(2);
 
     public void SetQuality(int graphicsQuality, bool canSave = true)
     {

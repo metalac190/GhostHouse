@@ -106,10 +106,10 @@ namespace Mechanics.Level_Mechanics
 
                 DataManager.Instance.SetInteraction(name, true);
 
-                Debug.Log("Interacted with " + name);
+                //Debug.Log("Interacted with " + name);
             }
             else {
-                Debug.Log("Second Interact " + name);
+                //Debug.Log("Second Interact " + name);
             }
 
             if (_fadeToBlack && SimpleFadeToBlack.Singleton != null)
