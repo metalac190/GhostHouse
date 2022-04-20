@@ -140,7 +140,7 @@ public class Settings : MonoBehaviour
     {
         // Set Control settings on camera controller
         if (CameraController == null) {
-            Debug.LogWarning("No Camera Controller", gameObject);
+            //Debug.LogWarning("No Camera Controller", gameObject);
             return;
         }
         CameraController._enableWASDMovement = useWASD;
@@ -151,7 +151,7 @@ public class Settings : MonoBehaviour
     private void SetAudioSettings()
     {
         if (audioMixerController == null) {
-            Debug.LogWarning("No Audio Mixer Controller", gameObject);
+            //Debug.LogWarning("No Audio Mixer Controller", gameObject);
             return;
         }
         // Assuming 0 to 100 instead of 0 to 1

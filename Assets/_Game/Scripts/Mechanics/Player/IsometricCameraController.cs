@@ -26,7 +26,7 @@ public class IsometricCameraController : MonoBehaviour
     [SerializeField] public float _cameraMoveSpeed = 10f;
     public bool _interacting = false;
     public bool _fadeToBlackLock = false;
-    bool _clicked = false;
+    bool _clicked;
 
     [Header("Click And Drag Movement Settings")]
     [SerializeField] public bool _enableClickDragMovement = false;
@@ -150,7 +150,7 @@ public class IsometricCameraController : MonoBehaviour
     void InteractEnded()
     {
         _interacting = false;
-        _clicked = false;
+        //_clicked = false;
         _elapsedTime = 0f;
         _finalLerpPosition = transform.position;
     }
