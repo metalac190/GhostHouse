@@ -81,10 +81,12 @@ public class SimpleFadeToBlack : MonoBehaviour
     private void StopCurrentRoutine() {
         if (_currentRoutine != null) {
             StopCoroutine(_currentRoutine);
+            IsometricCameraController.Singleton._fadeToBlackLock = false;
         }
     }
 
     private IEnumerator FadeToBlack(float time, bool fadeFromAfter = false, float waitTime = 0, float fadeFromTime = 0) {
+        IsometricCameraController.Singleton._fadeToBlackLock = true;
         _image.enabled = true;
         SetImageAlpha(0);
         float start = _delta * time;
@@ -95,9 +97,11 @@ public class SimpleFadeToBlack : MonoBehaviour
         }
         SetImageAlpha(1);
         _currentRoutine = fadeFromAfter ? StartCoroutine(FadeHold(waitTime, fadeFromTime)) : null;
+        IsometricCameraController.Singleton._fadeToBlackLock = false;
     }
 
     private IEnumerator FadeHold(float waitTime, float fadeTime) {
+        IsometricCameraController.Singleton._fadeToBlackLock = true;
         for (float t = 0; t < waitTime; t += Time.deltaTime) {
             yield return null;
         }
@@ -105,6 +109,7 @@ public class SimpleFadeToBlack : MonoBehaviour
     }
 
     private IEnumerator FadeFromBlack(float time) {
+        IsometricCameraController.Singleton._fadeToBlackLock = true;
         SetImageAlpha(1);
         float start = (1 - _delta) * time;
         for (float t = start; t < time; t += Time.deltaTime) {
@@ -114,6 +119,7 @@ public class SimpleFadeToBlack : MonoBehaviour
         }
         SetImageAlpha(0);
         _image.enabled = false;
+        IsometricCameraController.Singleton._fadeToBlackLock = false;
         _currentRoutine = null;
     }
 
