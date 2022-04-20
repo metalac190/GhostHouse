@@ -443,6 +443,15 @@ namespace Mechanics.Dialog
 
             _currentView?.gameObject.SetActive(true);
 
+            if (_currentView == _leftView)
+            {
+                _rightView?.gameObject?.SetActive(false);
+            }
+            else
+            {
+                _leftView?.gameObject?.SetActive(false);
+            }
+
             // progress bar
             Slider progressbar = _currentView.Sldr_progressbar;
             if (progressbar != null)
