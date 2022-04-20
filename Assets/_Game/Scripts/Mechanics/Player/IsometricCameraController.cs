@@ -25,6 +25,7 @@ public class IsometricCameraController : MonoBehaviour
     [SerializeField] public bool _enableWASDMovement = true;
     [SerializeField] public float _cameraMoveSpeed = 10f;
     public bool _interacting = false;
+    public bool _fadeToBlackLock = false;
     bool _clicked = false;
 
     [Header("Click And Drag Movement Settings")]
@@ -375,7 +376,7 @@ public class IsometricCameraController : MonoBehaviour
         }
 
 
-        if (!_interacting && !gamePaused)
+        if (!_interacting && !gamePaused && !_fadeToBlackLock)
         {
             if (_enableWASDMovement && !_dialogueRunner.IsDialogueRunning) { HandleInput(); }
 
