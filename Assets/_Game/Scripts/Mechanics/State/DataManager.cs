@@ -43,6 +43,8 @@ public class DataManager : MonoBehaviour
     public bool settingsLargeGUI { get; set; }
     public bool settingsLargeText { get; set; }
     public int settingsTextFont { get; set; }
+    public bool settingsVSync { get; set; }
+    public int settingsGraphicsQuality { get; set; }
 
     // Boolean of what has been unlocked in journal
     [HideInInspector]
@@ -131,9 +133,11 @@ public class DataManager : MonoBehaviour
         settingsWindowMode = true;
         settingsContrast = 0;
         settingsBrightness = 0;
-        settingsLargeGUI = true;    // placeholder
-        settingsLargeText = true;   // placeholder
-        settingsTextFont = 0;
+        settingsLargeGUI = true;
+        settingsLargeText = true;
+        settingsTextFont = 2;           // open dyslexic
+        settingsVSync = true;
+        settingsGraphicsQuality = 1;    // medium graphics
     }
 
     // Read data from the save file into the game
@@ -177,6 +181,8 @@ public class DataManager : MonoBehaviour
                 settingsLargeGUI = saveData.settings.largeGUIFont;
                 settingsLargeText = saveData.settings.largeTextFont;
                 settingsTextFont = saveData.settings.textFont;
+                settingsVSync = saveData.settings.vsync;
+                settingsGraphicsQuality = saveData.settings.graphicsQuality;
 
                 for (int i = 0; i < saveData.journalInteractionNames.Length; i++)
                 {
@@ -248,6 +254,8 @@ public class DataManager : MonoBehaviour
         saveData.settings.largeGUIFont = settingsLargeGUI;
         saveData.settings.largeTextFont = settingsLargeText;
         saveData.settings.textFont = settingsTextFont;
+        saveData.settings.vsync = settingsVSync;
+        saveData.settings.graphicsQuality = settingsGraphicsQuality;
 
         ind = 0;
         saveData.journalInteractionNames = new string[160];
@@ -296,6 +304,8 @@ public class DataManager : MonoBehaviour
         saveData.settings.largeGUIFont = settingsLargeGUI;
         saveData.settings.largeTextFont = settingsLargeText;
         saveData.settings.textFont = settingsTextFont;
+        saveData.settings.vsync = settingsVSync;
+        saveData.settings.graphicsQuality = settingsGraphicsQuality;
 
         string jsonString = JsonUtility.ToJson(saveData, true);
         File.WriteAllText(filePath, jsonString);
@@ -357,7 +367,7 @@ public class DataManager : MonoBehaviour
     }
 
     // Save settings from the visual settings menu
-    public void SaveVisualSettings(bool windowMode, int contrast, int brightness, bool largeGUIFont, bool largeTextFont, int textFont)
+    public void SaveVisualSettings(bool windowMode, int contrast, int brightness, bool largeGUIFont, bool largeTextFont, int textFont, bool vsync, int graphicsQuality)
     {
         settingsWindowMode = windowMode;
         settingsContrast = contrast;
@@ -365,6 +375,8 @@ public class DataManager : MonoBehaviour
         settingsLargeGUI = largeGUIFont;
         settingsLargeText = largeTextFont;
         settingsTextFont = textFont;
+        settingsVSync = vsync;
+        settingsGraphicsQuality = graphicsQuality;
 
         WriteSettings();
     }
@@ -399,6 +411,8 @@ public class DataManager : MonoBehaviour
         outstr += "\n\tLarge GUI Font: " + settingsLargeGUI.ToString();
         outstr += "\n\tLarge Text Font: " + settingsLargeText.ToString();
         outstr += "\n\tText Font Style: " + settingsTextFont.ToString();
+        outstr += "\n\tVSync: " + settingsVSync.ToString();
+        outstr += "\n\tGraphics Quality: " + settingsGraphicsQuality.ToString();
         outstr += "\nJournal Unlocks: ";
         foreach (KeyValuePair<string, bool> entry in journalUnlocks)
         {
