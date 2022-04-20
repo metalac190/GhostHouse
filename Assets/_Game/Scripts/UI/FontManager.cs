@@ -19,7 +19,7 @@ public class FontManager : MonoBehaviour
     [SerializeField]
     TMP_FontAsset _dyslexiaFont = null;
 
-    FontMode _curFont = FontMode.Fancy;
+    FontMode _curFont = FontMode.Dyslexia;
 
     void Awake()
     {
@@ -54,14 +54,13 @@ public class FontManager : MonoBehaviour
         switch (mode)
         {
             default:
+            case FontMode.Dyslexia:
+                return _dyslexiaFont;
             case FontMode.Fancy:
                 return _fancyFont;
 
             case FontMode.Normal:
                 return _normalFont;
-
-            case FontMode.Dyslexia:
-                return _dyslexiaFont;
         }
     }
 
