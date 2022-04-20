@@ -43,6 +43,7 @@ public class Settings : MonoBehaviour
     public bool vSync = false;
     public bool largeGUIFont = false;
     public bool largeTextFont = false;
+    public int graphicsQuality; // 0 = Highest, 1 = Medium, 2 = Lowest
 
     //0 - Fancy, 1 - Normal, 2 - Dyslexia Friendly
     [Range(0, 2)]
