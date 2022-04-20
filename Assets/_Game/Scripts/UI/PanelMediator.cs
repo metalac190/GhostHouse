@@ -20,6 +20,8 @@ public class PanelMediator : MonoBehaviour
     [SerializeField] TextMeshProUGUI ContrastLabel = null;
     [SerializeField] Slider BrightnessSlider = null;
     [SerializeField] TextMeshProUGUI BrightnessLabel = null;
+    [SerializeField] Button VSyncOn = null;
+    [SerializeField] Button VSyncOff = null;
 
     [Header("Audio")]
     [SerializeField] Slider MusicSlider = null;
@@ -54,6 +56,8 @@ public class PanelMediator : MonoBehaviour
         BrightnessSlider.value = Settings.Instance.brightness;
         BrightnessLabel.text = Settings.Instance.brightness.ToString();
 
+        SetVSync(Settings.Instance.vSync, false);
+
         MusicSlider.value = Settings.Instance.music;
         MusicLabel.text = Settings.Instance.music.ToString();
         SFXSlider.value = Settings.Instance.SFX;
@@ -74,6 +78,9 @@ public class PanelMediator : MonoBehaviour
 
         ContrastSlider.onValueChanged.AddListener(ChangeContrast);
         BrightnessSlider.onValueChanged.AddListener(ChangeBrightness);
+
+        VSyncOn.onClick.AddListener(EnableVSync);
+        VSyncOff.onClick.AddListener(DisableVSync);
 
         MusicSlider.onValueChanged.AddListener(ChangeMusic);
         SFXSlider.onValueChanged.AddListener(ChangeSfx);
@@ -113,6 +120,17 @@ public class PanelMediator : MonoBehaviour
         Settings.Instance.brightness = (int)value;
         BrightnessLabel.text = ((int)value).ToString();
         if (SaveOnChange) SaveVisuals();
+    }
+
+    public void EnableVSync() => SetVSync(true);
+    public void DisableVSync() => SetVSync(false);
+
+    public void SetVSync(bool useVSync, bool canSave = true)
+    {
+        Settings.Instance.vSync = useVSync;
+        VSyncOff.interactable = useVSync;
+        VSyncOn.interactable = !useVSync;
+        if (canSave && SaveOnChange) SaveVisuals();
     }
 
     // ---------------- Audio ----------------

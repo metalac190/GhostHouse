@@ -15,44 +15,44 @@ public class InteractableParticlePool : MonoBehaviour
         }
     }
 
-    private List<ParticleSystem> _majorSystemPool;
-    [SerializeField] private ParticleSystem _majorParticles = null;
-    [SerializeField] private Transform _majorParent = null;
-    [SerializeField] private int _majorPoolSize = 5;
+    private List<ParticleSystem> _majorCostSystemPool;
+    [SerializeField] private ParticleSystem _majorCostParticles = null;
+    [SerializeField] private Transform _majorCostParent = null;
+    [SerializeField] private int _majorCostPoolSize = 5;
 
     private List<ParticleSystem> _minorSystemPool;
     [SerializeField] private ParticleSystem _minorParticles = null;
     [SerializeField] private Transform _minorParent = null;
     [SerializeField] private int _minorPoolSize = 5;
 
-    private List<ParticleSystem> _misleadingSystemPool;
-    [SerializeField] private ParticleSystem _misleadingParticles = null;
-    [SerializeField] private Transform _misleadingParent = null;
-    [SerializeField] private int _misleadingPoolSize = 5;
+    private List<ParticleSystem> _majorNoCostSystemPool;
+    [SerializeField] private ParticleSystem _majorNoCostParticles = null;
+    [SerializeField] private Transform _majorNoCostParent = null;
+    [SerializeField] private int _majorNoCostPoolSize = 5;
 
     private void Awake() {
-        ResetParticleSystem(_majorParticles);
+        ResetParticleSystem(_majorCostParticles);
         ResetParticleSystem(_minorParticles);
-        ResetParticleSystem(_misleadingParticles);
+        ResetParticleSystem(_majorNoCostParticles);
     }
 
     private void InitSystems() {
-        _majorSystemPool = new List<ParticleSystem>(_majorPoolSize);
-        BuildPool(_majorSystemPool, _majorParticles, _majorParent, _majorPoolSize);
+        _majorCostSystemPool = new List<ParticleSystem>(_majorCostPoolSize);
+        BuildPool(_majorCostSystemPool, _majorCostParticles, _majorCostParent, _majorCostPoolSize);
         _minorSystemPool = new List<ParticleSystem>(_minorPoolSize);
         BuildPool(_minorSystemPool, _minorParticles, _minorParent, _minorPoolSize);
-        _misleadingSystemPool = new List<ParticleSystem>(_misleadingPoolSize);
-        BuildPool(_misleadingSystemPool, _misleadingParticles, _misleadingParent, _misleadingPoolSize);
+        _majorNoCostSystemPool = new List<ParticleSystem>(_majorNoCostPoolSize);
+        BuildPool(_majorNoCostSystemPool, _majorNoCostParticles, _majorNoCostParent, _majorNoCostPoolSize);
     }
 
     public ParticleSystem RegisterParticle(ParticleSystemType type) {
         switch (type) {
-            case ParticleSystemType.Major:
-                return GetSystem(_majorSystemPool);
+            case ParticleSystemType.MajorCost:
+                return GetSystem(_majorCostSystemPool);
             case ParticleSystemType.Minor:
                 return GetSystem(_minorSystemPool);
-            case ParticleSystemType.Misleading:
-                return GetSystem(_misleadingSystemPool);
+            case ParticleSystemType.MajorNoCost:
+                return GetSystem(_majorNoCostSystemPool);
             default:
                 return null;
         }
@@ -66,17 +66,17 @@ public class InteractableParticlePool : MonoBehaviour
         system.Stop();
         yield return new WaitForSeconds(4);
         switch (type) {
-            case ParticleSystemType.Major:
+            case ParticleSystemType.MajorCost:
                 ResetParticleSystem(system);
-                _majorSystemPool.Add(system);
+                _majorCostSystemPool.Add(system);
                 break;
             case ParticleSystemType.Minor:
                 ResetParticleSystem(system);
                 _minorSystemPool.Add(system);
                 break;
-            case ParticleSystemType.Misleading:
+            case ParticleSystemType.MajorNoCost:
                 ResetParticleSystem(system);
-                _misleadingSystemPool.Add(system);
+                _majorNoCostSystemPool.Add(system);
                 break;
         }
     }
@@ -109,7 +109,7 @@ public class InteractableParticlePool : MonoBehaviour
 
 public enum ParticleSystemType
 {
-    Major,
+    MajorCost,
     Minor,
-    Misleading
+    MajorNoCost
 }

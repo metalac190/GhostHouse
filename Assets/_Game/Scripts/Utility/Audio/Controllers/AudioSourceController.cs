@@ -15,6 +15,7 @@ namespace Utility.Audio.Controllers
         [SerializeField] private SfxReference _sfx = new SfxReference();
         [SerializeField] private AudioMixerGroup _overrideMixer = null;
         [SerializeField] private bool _playOnStart = true;
+        [SerializeField] private bool _waitOnStart = true;
         [SerializeField] private bool _looping = true;
         [SerializeField, MinMaxRange(0, 100)] private RangedFloat _loopDelay = new RangedFloat(0, 0);
         [SerializeField, ReadOnly] private float _delay;
@@ -56,13 +57,18 @@ namespace Utility.Audio.Controllers
             if (_playOnStart) {
                 if (_looping) {
                     if (_loopDelay.MaxValue > 0) {
-                        _checkLoop = _looping;
                         Source.loop = false;
+                        if (_waitOnStart) {
+                            Delay();
+                        }
+                        else {
+                            Play();
+                            _checkLoop = true;
+                        }
                     }
                     else {
                         Source.loop = true;
                     }
-                    Delay();
                 }
                 else {
                     Play();
@@ -90,7 +96,13 @@ namespace Utility.Audio.Controllers
             _areSoundsEnabled = _enableSounds;
             if (_enableSounds) {
                 if (_looping) {
-                    Delay();
+                    if (_waitOnStart) {
+                        Delay();
+                    }
+                    else {
+                        Play();
+                        _checkLoop = true;
+                    }
                 }
                 else {
                     Play();

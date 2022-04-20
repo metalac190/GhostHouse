@@ -40,6 +40,7 @@ public class Settings : MonoBehaviour
     [SerializeField] int contrastScale = 10;
     public int brightness;
     [SerializeField] int brightnessScale = 10;
+    public bool vSync = false;
     public bool largeGUIFont = false;
     public bool largeTextFont = false;
 

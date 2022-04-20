@@ -97,8 +97,8 @@ public class ModalWindowController : MonoBehaviour
         if (canSpendAltPoints && altPointsToSpend > maxPointsToSpend) {
             maxPointsToSpend = altPointsToSpend;
         }
-        for (var i = 0; i < _spiritPoints.Count; i++) {
-            _spiritPoints[i].sprite = canSpendAltPoints ? _spiritPointSpend : _spiritPointCannotSpend;
+        for (var i = 0; i < _altSpiritPoints.Count; i++) {
+            _altSpiritPoints[i].sprite = canSpendAltPoints ? _spiritPointSpend : _spiritPointCannotSpend;
             _altSpiritPoints[i].transform.parent.gameObject.SetActive(i < pointsToSpend);
         }
 
@@ -108,11 +108,11 @@ public class ModalWindowController : MonoBehaviour
         IsometricCameraController.Singleton._interacting = true;
         OnInteractStart?.Invoke();
 
-        _callback = callback;
         if (callback != null) {
             _mainInteractionButton.gameObject.SetActive(true);
             _mainInteractionButton.interactable = canSpendPoints;
             if (canSpendPoints) {
+                _callback = callback;
                 _mainInteractionButton.onClick.AddListener(callback.Invoke);
                 _mainInteractionButton.onClick.AddListener(InteractionCloseWindow);
             }
@@ -150,11 +150,11 @@ public class ModalWindowController : MonoBehaviour
     public void DisableModalWindow(bool playSound, bool updateCanPause = true) {
         if (_playerHud != null) _playerHud.UpdateSpiritPoints();
         OnInteractEnd?.Invoke();
-        _mainInteractionButton.gameObject.SetActive(false);
         _mainInteractionButton.onClick.RemoveAllListeners();
+        _mainInteractionButton.gameObject.SetActive(false);
         _mainInteractionText.text = "Interact";
-        _alternateInteractionButton.gameObject.SetActive(false);
         _alternateInteractionButton.onClick.RemoveAllListeners();
+        _alternateInteractionButton.gameObject.SetActive(false);
         _alternateInteractionText.text = "Interact";
         _modalWindow.SetActive(false);
         if (_raycastBlock != null) _raycastBlock.SetActive(false);
@@ -198,6 +198,13 @@ public class ModalWindowController : MonoBehaviour
 
     public void MainWorked() {
         Debug.Log("Main Interaction Is Done");
+    }
+
+    public void ForceUpdateHudSpiritPoints() {
+        if (!_enabled && _playerHud != null) {
+            _playerHud.TestMaxSpiritPoints(DataManager.Instance.remainingSpiritPoints);
+            _playerHud.UpdateSpiritPoints();
+        }
     }
 
     #endregion
