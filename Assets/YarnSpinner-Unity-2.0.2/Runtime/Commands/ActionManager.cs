@@ -340,7 +340,7 @@ namespace Yarn.Unity
 
             }
 
-            Debug.Log($"Registered Commands: [{string.Join(", ", commandNames.ToArray())}]");
+            // Debug.Log($"Registered Commands: [{string.Join(", ", commandNames.ToArray())}]");
         }
 
         /// <summary>

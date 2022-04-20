@@ -104,7 +104,7 @@ public class FontManager : MonoBehaviour
             }
             catch (System.ArgumentException)
             {
-                Debug.Log("Here is mystery exception! Not sure why it bug, but it do and it don't matter :).");
+                //Debug.Log("Here is mystery exception! Not sure why it bug, but it do and it don't matter :).");
             }
         }
     }
