@@ -9,6 +9,7 @@ using Utility.Buttons;
 public class DataManager : MonoBehaviour
 {
     public static DataManager Instance = null;  // Singleton instance
+    public bool _debug = false;
 
     private string filePath; // save file for saving & loading
 
@@ -17,6 +18,7 @@ public class DataManager : MonoBehaviour
 
     public string level { get; set; }       // Current level season
     public int remainingSpiritPoints { get; set; }  // Current points left to spend
+    public int totalUsedSpiritPoints { get; set; }  // Current points left to spend
 
     // Points earned towards the various endings
     public int cousinsEndingPoints { get; set; }
@@ -42,10 +44,12 @@ public class DataManager : MonoBehaviour
     public bool settingsLargeGUI { get; set; }
     public bool settingsLargeText { get; set; }
     public int settingsTextFont { get; set; }
+    public bool settingsVSync { get; set; }
+    public int settingsGraphicsQuality { get; set; }
 
     // Boolean of what has been unlocked in journal
     [HideInInspector]
-    public bool[] journalUnlocks;
+    public Dictionary<string, bool> journalUnlocks;
     public bool[] endingUnlocks;
 
     private void Awake()
@@ -56,7 +60,7 @@ public class DataManager : MonoBehaviour
             DontDestroyOnLoad(this.gameObject);
 
             interactions = new Dictionary<string, bool>();
-            journalUnlocks = new bool[24];      // Initializes array of all false entries
+            journalUnlocks = new Dictionary<string, bool>();
             endingUnlocks = new bool[4];
 
             saveData = new SaveData();
@@ -92,7 +96,7 @@ public class DataManager : MonoBehaviour
 
     public void OnContinueGame() {
         // TODO: LOAD ALL INTERACTIONS FROM PREVIOUS ENDING
-        Debug.Log("Continuing from previous save file");
+        if (_debug) Debug.Log("Continuing from previous save file");
         ResetData();
         ReadFile();
     }
@@ -108,7 +112,7 @@ public class DataManager : MonoBehaviour
             case "Winter":
                 return Season.Winter;
             default:
-                Debug.LogWarning("Season accessed on Invalid Level", gameObject);
+                if (_debug) Debug.LogWarning("Season accessed on Invalid Level", gameObject);
                 return Season.Universal;
         }
     }
@@ -130,9 +134,11 @@ public class DataManager : MonoBehaviour
         settingsWindowMode = true;
         settingsContrast = 0;
         settingsBrightness = 0;
-        settingsLargeGUI = true;    // placeholder
-        settingsLargeText = true;   // placeholder
-        settingsTextFont = 0;
+        settingsLargeGUI = true;
+        settingsLargeText = true;
+        settingsTextFont = 2;           // open dyslexic
+        settingsVSync = true;
+        settingsGraphicsQuality = 1;    // medium graphics
     }
 
     // Read data from the save file into the game
@@ -141,7 +147,7 @@ public class DataManager : MonoBehaviour
         if (File.Exists(filePath))
         {
             // Unpack file text as JSON
-            Debug.Log("Unpacking file into savedata");
+            if (_debug) Debug.Log("Unpacking file into savedata");
             string fileContents = File.ReadAllText(filePath);
             saveData = new SaveData();
             JsonUtility.FromJsonOverwrite(fileContents, saveData);
@@ -176,15 +182,22 @@ public class DataManager : MonoBehaviour
                 settingsLargeGUI = saveData.settings.largeGUIFont;
                 settingsLargeText = saveData.settings.largeTextFont;
                 settingsTextFont = saveData.settings.textFont;
+                settingsVSync = saveData.settings.vsync;
+                settingsGraphicsQuality = saveData.settings.graphicsQuality;
 
-                saveData.journalUnlocks.CopyTo(journalUnlocks, 0);
+                for (int i = 0; i < saveData.journalInteractionNames.Length; i++)
+                {
+                    journalUnlocks[saveData.journalInteractionNames[i]] = saveData.journalUnlocks[i];
+                }
+                journalUnlocks.Remove("");
+
                 saveData.endingUnlocks.CopyTo(endingUnlocks, 0);
 
-                Debug.Log("Successful read");
+                if (_debug) Debug.Log("Successful read");
             }
             catch
             {
-                Debug.Log("Some error loading save file");
+                if (_debug) Debug.Log("Some error loading save file");
                 SetDefaultValues();
                 ResetData();
                 WriteFile();
@@ -192,7 +205,7 @@ public class DataManager : MonoBehaviour
         }
         else
         {
-            Debug.Log("No save file exists");
+            if (_debug) Debug.Log("No save file exists");
         }
     }
 
@@ -213,7 +226,7 @@ public class DataManager : MonoBehaviour
         {
             if(ind >= 160)
             {
-                Debug.Log("Error: Unexpectedly high number of interactions");
+                if (_debug) Debug.Log("Error: Unexpectedly high number of interactions");
             }
             else
             {
@@ -242,13 +255,36 @@ public class DataManager : MonoBehaviour
         saveData.settings.largeGUIFont = settingsLargeGUI;
         saveData.settings.largeTextFont = settingsLargeText;
         saveData.settings.textFont = settingsTextFont;
+        saveData.settings.vsync = settingsVSync;
+        saveData.settings.graphicsQuality = settingsGraphicsQuality;
 
-        journalUnlocks.CopyTo(saveData.journalUnlocks, 0);
+        ind = 0;
+        saveData.journalInteractionNames = new string[160];
+        saveData.journalUnlocks = new bool[160];
+        foreach (KeyValuePair<string, bool> entry in journalUnlocks)
+        {
+            if (ind >= 160)
+            {
+                if (_debug) Debug.Log("Error: Unexpectedly high number of interactions");
+            }
+            else
+            {
+                saveData.journalInteractionNames[ind] = entry.Key;
+                saveData.journalUnlocks[ind] = entry.Value;
+                ind++;
+            }
+        }
+        for (int i = ind; i < 160; i++)
+        {
+            saveData.journalInteractionNames[i] = "";
+            saveData.journalUnlocks[i] = false;
+        }
+
         endingUnlocks.CopyTo(saveData.endingUnlocks, 0);
 
         // Save data as json string and write to file
         string jsonString = JsonUtility.ToJson(saveData, true);
-        Debug.Log("File saved to " + filePath);
+        if (_debug) Debug.Log("File saved to " + filePath);
         File.WriteAllText(filePath, jsonString);
     }
 
@@ -269,6 +305,8 @@ public class DataManager : MonoBehaviour
         saveData.settings.largeGUIFont = settingsLargeGUI;
         saveData.settings.largeTextFont = settingsLargeText;
         saveData.settings.textFont = settingsTextFont;
+        saveData.settings.vsync = settingsVSync;
+        saveData.settings.graphicsQuality = settingsGraphicsQuality;
 
         string jsonString = JsonUtility.ToJson(saveData, true);
         File.WriteAllText(filePath, jsonString);
@@ -278,12 +316,17 @@ public class DataManager : MonoBehaviour
     public void SetDefaultInteraction(string name) {
         if (interactions.ContainsKey(name)) return;
         interactions.Add(name, false);
+        if (!journalUnlocks.ContainsKey(name))
+        {
+            journalUnlocks.Add(name, false);
+        }
     }
 
     // Set interaction state
     public void SetInteraction(string name, bool interacted)
     {
         interactions[name] = interacted;
+        journalUnlocks[name] = interacted;
     }
 
     // Get interaction state of an interaction
@@ -296,7 +339,7 @@ public class DataManager : MonoBehaviour
         else
         {
             // This shouldn't happen if interactions initialize correctly
-            Debug.Log("Interaction not stored");
+            if (_debug) Debug.Log("Interaction not stored");
             return false;
         }
     }
@@ -325,7 +368,7 @@ public class DataManager : MonoBehaviour
     }
 
     // Save settings from the visual settings menu
-    public void SaveVisualSettings(bool windowMode, int contrast, int brightness, bool largeGUIFont, bool largeTextFont, int textFont)
+    public void SaveVisualSettings(bool windowMode, int contrast, int brightness, bool largeGUIFont, bool largeTextFont, int textFont, bool vsync, int graphicsQuality)
     {
         settingsWindowMode = windowMode;
         settingsContrast = contrast;
@@ -333,6 +376,8 @@ public class DataManager : MonoBehaviour
         settingsLargeGUI = largeGUIFont;
         settingsLargeText = largeTextFont;
         settingsTextFont = textFont;
+        settingsVSync = vsync;
+        settingsGraphicsQuality = graphicsQuality;
 
         WriteSettings();
     }
@@ -367,11 +412,12 @@ public class DataManager : MonoBehaviour
         outstr += "\n\tLarge GUI Font: " + settingsLargeGUI.ToString();
         outstr += "\n\tLarge Text Font: " + settingsLargeText.ToString();
         outstr += "\n\tText Font Style: " + settingsTextFont.ToString();
+        outstr += "\n\tVSync: " + settingsVSync.ToString();
+        outstr += "\n\tGraphics Quality: " + settingsGraphicsQuality.ToString();
         outstr += "\nJournal Unlocks: ";
-        for (int i = 0; i < journalUnlocks.Length; i++) {
-            if (journalUnlocks[i]) {
-                outstr += i.ToString() + " ";
-            }
+        foreach (KeyValuePair<string, bool> entry in journalUnlocks)
+        {
+            outstr += "\n\tJournal Entry " + entry.Key + ": " + entry.Value;
         }
         outstr += "\nEnding Unlocks: ";
         for (int i = 0; i < endingUnlocks.Length; i++)
@@ -381,19 +427,13 @@ public class DataManager : MonoBehaviour
                 outstr += i.ToString() + " ";
             }
         }
-        Debug.Log(outstr);
+        if (_debug) Debug.Log(outstr);
     }
 
     // Dump save file contents to the console
     public void DumpFileContents()
     {
-        Debug.Log(File.ReadAllText(filePath));
-    }
-
-    // Mark a journal entry as unlocked
-    public void UnlockJournalEntry(int index)
-    {
-        journalUnlocks[index] = true;
+        if (_debug) Debug.Log(File.ReadAllText(filePath));
     }
 
     public void UnlockEnding(int index)

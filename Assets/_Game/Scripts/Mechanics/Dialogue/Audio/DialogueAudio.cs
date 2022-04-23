@@ -33,11 +33,6 @@ namespace Mechanics.Dialog
                     _characterViewInstance = FindObjectOfType<CharacterView>();
                 }
 
-                if (_characterViewInstance == null)
-                {
-                    Debug.LogError("Unable to find character view");
-                }
-
                 return _characterViewInstance;
             }
         }
@@ -84,9 +79,13 @@ namespace Mechanics.Dialog
         {
             if (_characterView == null && _characterAudioPool == null) return;
 
-            _characterView.OnLineStarted -= OnLineStart;
-            _characterView.OnCharacterTyped -= OnLineUpdate;
-            _characterView.OnLineEnd -= OnLineEnd;
+            if (_characterView != null)
+            {
+                _characterView.OnLineStarted -= OnLineStart;
+                _characterView.OnCharacterTyped -= OnLineUpdate;
+                _characterView.OnLineEnd -= OnLineEnd;
+            }
+
             PauseMenu.PauseUpdated -= Pause;
         }
 
@@ -172,7 +171,7 @@ namespace Mechanics.Dialog
             _indexOfLastWord = line.TextWithoutCharacterName.Text.TrimEnd().LastIndexOf(" ");
             if (_indexOfLastWord < 0)
             {
-                Debug.LogWarning("Unable to find the starting index of the last word. This line's dialog audio will not end with the quaternary clip.");
+                //Debug.LogWarning("Unable to find the starting index of the last word. This line's dialog audio will not end with the quaternary clip.");
                 _indexOfLastWord = line.TextWithoutCharacterName.Text.Length;
             }
 
@@ -276,11 +275,6 @@ namespace Mechanics.Dialog
             Identifer = identifer;
             Active = active;
             Index = index;
-        }
-
-        public override string ToString()
-        {
-            return $"sfx - {Identifer} - {Active} - {Index}";
         }
     }
 }

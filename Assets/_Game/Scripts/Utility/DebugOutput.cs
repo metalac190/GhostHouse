@@ -32,7 +32,7 @@ public class DebugOutput : MonoBehaviour
     private void OnGUI()
     {
         {
-            myLog = GUI.TextArea(new Rect(10, 10, 320, Screen.height - 10), myLog);
+            myLog = GUI.TextArea(new Rect(10, 400, 320, Screen.height - 410), myLog);
         }
     }
 }

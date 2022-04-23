@@ -17,6 +17,6 @@ public class Entry : MonoBehaviour
     }
 
     private static bool GetUnlocked(string interaction) {
-        return DataManager.Instance.interactions.ContainsKey(interaction) && DataManager.Instance.interactions[interaction];
+        return DataManager.Instance.journalUnlocks.ContainsKey(interaction) && DataManager.Instance.journalUnlocks[interaction];
     }
 }
