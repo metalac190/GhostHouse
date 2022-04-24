@@ -40,12 +40,14 @@ public class Settings : MonoBehaviour
     [SerializeField] int contrastScale = 10;
     public int brightness;
     [SerializeField] int brightnessScale = 10;
+    public bool vSync = false;
     public bool largeGUIFont = false;
     public bool largeTextFont = false;
+    public int graphicsQuality; // 0 = Highest, 1 = Medium, 2 = Lowest
 
     //0 - Fancy, 1 - Normal, 2 - Dyslexia Friendly
     [Range(0, 2)]
-    public int textFont = 0;
+    public int textFont = 2;
 
     // Lazy load the Camera Controller
     private IsometricCameraController cameraController;
@@ -104,6 +106,8 @@ public class Settings : MonoBehaviour
         largeGUIFont = DataManager.Instance.settingsLargeGUI;
         largeTextFont = DataManager.Instance.settingsLargeText;
         textFont = DataManager.Instance.settingsTextFont;
+        vSync = DataManager.Instance.settingsVSync;
+        graphicsQuality = DataManager.Instance.settingsGraphicsQuality;
     }
 
     [Button(Spacing = 20, Mode = ButtonMode.NotPlaying)]
@@ -127,7 +131,7 @@ public class Settings : MonoBehaviour
 
     [Button(Mode = ButtonMode.NotPlaying)]
     public void SaveVisualSettings() {
-        DataManager.Instance.SaveVisualSettings(isWindowed, contrast, brightness, largeGUIFont, largeTextFont, textFont);
+        DataManager.Instance.SaveVisualSettings(isWindowed, contrast, brightness, largeGUIFont, largeTextFont, textFont, vSync, graphicsQuality);
         SetVisualSettings();
     }
 
@@ -136,7 +140,7 @@ public class Settings : MonoBehaviour
     {
         // Set Control settings on camera controller
         if (CameraController == null) {
-            Debug.LogWarning("No Camera Controller", gameObject);
+            //Debug.LogWarning("No Camera Controller", gameObject);
             return;
         }
         CameraController._enableWASDMovement = useWASD;
@@ -147,7 +151,7 @@ public class Settings : MonoBehaviour
     private void SetAudioSettings()
     {
         if (audioMixerController == null) {
-            Debug.LogWarning("No Audio Mixer Controller", gameObject);
+            //Debug.LogWarning("No Audio Mixer Controller", gameObject);
             return;
         }
         // Assuming 0 to 100 instead of 0 to 1
@@ -168,5 +172,8 @@ public class Settings : MonoBehaviour
         GraphicsController.ScreenMode = isWindowed ? FullScreenMode.FullScreenWindow : FullScreenMode.ExclusiveFullScreen;
         GraphicsController.Exposure = brightnessScale * brightness;
         GraphicsController.Contrast = contrastScale * contrast;
+
+        QualitySettings.vSyncCount = vSync ? 1 : 0;
+        QualitySettings.SetQualityLevel(graphicsQuality);
     }
 }

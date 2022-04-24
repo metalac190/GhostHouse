@@ -34,6 +34,8 @@ public class SaveData
         public bool largeGUIFont;
         public bool largeTextFont;
         public int textFont;
+        public bool vsync;
+        public int graphicsQuality;
     }
     public Settings settings;
 

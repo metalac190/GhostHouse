@@ -171,6 +171,7 @@ GameObject:
   - component: {fileID: 2298808189291819634}
   - component: {fileID: 2298808188697558865}
   - component: {fileID: 2298808189291819633}
+  - component: {fileID: 362194501794011065}
   m_Layer: 0
   m_Name: Dialogue System
   m_TagString: Untagged
@@ -220,9 +221,15 @@ MonoBehaviour:
   verboseLogging: 0
   onNodeStart:
     m_PersistentCalls:
+      m_Calls: []
+  onNodeComplete:
+    m_PersistentCalls:
+      m_Calls: []
+  onDialogueComplete:
+    m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_MethodName: Play
+      - m_Target: {fileID: 362194501794011065}
+        m_MethodName: OnDialogueFinished
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -232,12 +239,6 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-  onNodeComplete:
-    m_PersistentCalls:
-      m_Calls: []
-  onDialogueComplete:
-    m_PersistentCalls:
-      m_Calls: []
   onCommand:
     m_PersistentCalls:
       m_Calls: []
@@ -255,6 +256,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   showDebug: 0
   debugTextView: {fileID: 0}
+--- !u!114 &362194501794011065
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2298808189291819636}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 02a4627d8bab3d140b78921f7903e605, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &2298808189649351910
 GameObject:
   m_ObjectHideFlags: 0
@@ -493,20 +506,25 @@ PrefabInstance:
       propertyPath: m_textInfo.lineCount
       value: 2
       objectReference: {fileID: 0}
-    - target: {fileID: 1792924762395430257, guid: 098ee75f0025e7c4a9675ff2be458a88,
+    - target: {fileID: 4096890740292849085, guid: 098ee75f0025e7c4a9675ff2be458a88,
         type: 3}
-      propertyPath: m_textInfo.characterCount
-      value: 68
+      propertyPath: m_firstOverflowCharacterIndex
+      value: -1
       objectReference: {fileID: 0}
-    - target: {fileID: 1792924762395430257, guid: 098ee75f0025e7c4a9675ff2be458a88,
+    - target: {fileID: 4096890740292849085, guid: 098ee75f0025e7c4a9675ff2be458a88,
         type: 3}
-      propertyPath: m_textInfo.spaceCount
-      value: 13
+      propertyPath: m_textInfo.lineCount
+      value: 2
       objectReference: {fileID: 0}
-    - target: {fileID: 1792924762395430257, guid: 098ee75f0025e7c4a9675ff2be458a88,
+    - target: {fileID: 7790363694649307832, guid: 098ee75f0025e7c4a9675ff2be458a88,
         type: 3}
-      propertyPath: m_textInfo.wordCount
-      value: 14
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7790363694649307832, guid: 098ee75f0025e7c4a9675ff2be458a88,
+        type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 098ee75f0025e7c4a9675ff2be458a88, type: 3}

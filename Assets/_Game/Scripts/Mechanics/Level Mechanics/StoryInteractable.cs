@@ -15,7 +15,7 @@ namespace Mechanics.Level_Mechanics
         [SerializeField] private bool _particles = true;
         [SerializeField] private Vector3 _particleOffset = Vector3.zero;
         [SerializeField] private Vector3 _particleSize = Vector3.one;
-        [SerializeField] private ParticleSystemType _particleType = ParticleSystemType.Major;
+        [SerializeField] private ParticleSystemType _particleType = ParticleSystemType.MajorCost;
         private ParticleSystem _particleSystem;
 
         [Header("On Hover")]
@@ -48,6 +48,9 @@ namespace Mechanics.Level_Mechanics
         [SerializeField] private Interactable _alternateInteraction = null;
         [SerializeField] private string _alternateInteractionText = "Alt Interact";
         [SerializeField] private string _closeMenuText = "Close";
+
+        [Header("Open other Interactable After This")]
+        [SerializeField] private StoryInteractable _openAfterDialogue = null; 
 
         //[Header("Collision Information")]
         //[SerializeField] private bool _confirmUseChildCollider = false;
@@ -100,13 +103,13 @@ namespace Mechanics.Level_Mechanics
         private void OnDrawGizmos() {
             if (_particles) {
                 switch (_particleType) {
-                    case ParticleSystemType.Major:
+                    case ParticleSystemType.MajorCost:
                         Gizmos.color = Color.cyan;
                         break;
                     case ParticleSystemType.Minor:
                         Gizmos.color = Color.green;
                         break;
-                    case ParticleSystemType.Misleading:
+                    case ParticleSystemType.MajorNoCost:
                         Gizmos.color = Color.magenta;
                         break;
                 }
@@ -179,7 +182,7 @@ namespace Mechanics.Level_Mechanics
                 ModalWindowController.Singleton.EnableModalWindow(_closeMenuText, callback, _interactionText, altCallback, _alternateInteractionText, points, altPoints);
             }
             else if (!_popupWindowOnClick && _interaction != null) {
-                if (_interaction.Cost <= DataManager.Instance.remainingSpiritPoints) {
+                if (_interaction.Cost <= 0 || _interaction.Cost <= DataManager.Instance.remainingSpiritPoints) {
                     _interaction.Interact();
                 }
             }
@@ -190,6 +193,9 @@ namespace Mechanics.Level_Mechanics
                 foreach (var connectedAnimators in _interaction.ConnectedAnimators) {
                     connectedAnimators.SetTrigger(_animationsClickTrigger);
                 }
+            }
+            if (_openAfterDialogue != null && AfterDialogueInteraction.Singleton != null) {
+                AfterDialogueInteraction.Singleton.SetNextInteraction(_openAfterDialogue);
             }
 
             //if (_moveOnClick)

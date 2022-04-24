@@ -63,36 +63,17 @@ namespace Mechanics.Dialog
         [Tooltip("Typewrite effect speed in characters per second.")]
         float _typewriterEffectSpeed = 120f;
 
-        [Header("UI References")]
         [SerializeField]
-        TextMeshProUGUI _lineText = null;
-
-        [SerializeField]
-        Image _dialogImage = null;
-
-        [SerializeField]
-        Image _characterPortraitImage = null;
-
-        [SerializeField]
-        SOCharacterPool _charactersData = null;
-
-        [SerializeField]
-        GameObject _characterNameObject = null;
-
-        [SerializeField]
-        TextMeshProUGUI _characterNameText = null;
+        SOCharacterPool _characterData = null;
 
         [SerializeField]
         bool _characterNameInLine = false;
 
         [SerializeField]
-        GameObject _continueButton = null;
+        DialogView _leftView = null;
 
         [SerializeField]
-        GameObject _uiParent = null;
-
-        [SerializeField]
-        Slider _progressbar = null;
+        DialogView _rightView = null;
         #endregion
 
         #region private variables
@@ -102,39 +83,18 @@ namespace Mechanics.Dialog
         CanvasGroup _canvasGroup;
         Yarn.Markup.MarkupAttribute _markup;
 
+        DialogView _currentView = null;
         float _lineStartStamp = -1;
-        Sprite _defaultBoxSprite;
-        Color _defaultBoxColor;
         #endregion
 
         #region Monobehaviour
-        void Awake()
-        {
-            if (_dialogImage != null)
-            {
-                _defaultBoxSprite = _dialogImage.sprite;
-                _defaultBoxColor = _dialogImage.color;
-            }
-        }
-
         public void Start()
         {
             _canvasGroup = GetComponent<CanvasGroup>();
 
-            if (_characterPortraitImage != null)
+            if (_characterData == null)
             {
-                if (_charactersData == null)
-                {
-                    Debug.LogWarning($"{name} was not provided _charactersData, but a reference to a character image component " +
-                        "was provided. The image will be hidden and any requested character sprites will not be shown. Please " +
-                        "provide character data if the sprite should be shown.");
-                    _characterPortraitImage.enabled = false;
-                }
-            }
-
-            if (_charactersData == null)
-            {
-                Debug.LogWarning("No character data was provided. default presentation will be used.");
+                Debug.LogWarning($"{name} was not provided _characterData");
             }
 
             HideView();
@@ -143,17 +103,17 @@ namespace Mechanics.Dialog
         public void Update()
         {
             // update progress bar
-            if (_progressbar != null && _lineStartStamp != -1 && _currentLine != null)
+            if (_currentView?.Sldr_progressbar != null && _lineStartStamp != -1 && _currentLine != null)
             {
                 if (_currentLine.Status == Yarn.Unity.LineStatus.Presenting)
                 {
-                    float duration = _lineText.text.Length / _typewriterEffectSpeed;
+                    float duration = _currentView.Txt_dialog.text.Length / _typewriterEffectSpeed;
                     float elapsedTime = Time.time - _lineStartStamp;
-                    _progressbar.value = elapsedTime / duration;
+                    _currentView.Sldr_progressbar.value = elapsedTime / duration;
                 }
                 else if (_currentLine.Status == Yarn.Unity.LineStatus.Interrupted || _currentLine.Status == Yarn.Unity.LineStatus.FinishedPresenting)
                 {
-                    _progressbar.value = _progressbar.maxValue;
+                    _currentView.Sldr_progressbar.value = _currentView.Sldr_progressbar.maxValue;
                 }
             }
 
@@ -215,10 +175,10 @@ namespace Mechanics.Dialog
                 case Yarn.Unity.LineStatus.FinishedPresenting:
                     // The line has finished being delivered by all views.
                     // Display the Continue button.
-                    if (_continueButton != null)
+                    if (_currentView.Btn_continue != null)
                     {
-                        _continueButton.SetActive(true);
-                        var selectable = _continueButton.GetComponentInChildren<Selectable>();
+                        _currentView.Btn_continue.SetActive(true);
+                        var selectable = _currentView.Btn_continue.GetComponentInChildren<Selectable>();
                         if (selectable != null)
                         {
                             selectable.Select();
@@ -230,10 +190,37 @@ namespace Mechanics.Dialog
             }
         }
 
+        public override void DialogueStarted()
+        {
+            _currentView = _rightView;
+            _currentView.Txt_characterName.text = String.Empty;
+        }
+
         public override void RunLine(Yarn.Unity.LocalizedLine dialogueLine, Action onDialogueLineFinished)
         {
             _currentLine = dialogueLine;
-            SOCharacter character = _charactersData.GetCharacter(dialogueLine.CharacterName);
+            SOCharacter character = _characterData.GetCharacter(dialogueLine.CharacterName);
+
+            // flip between dialog views
+            if (character != null && character.ShowPortrait)
+            {
+                // this is not the previous character
+                if (_currentView == null || !_currentView.Txt_characterName.text.ToLower().Equals(character.name.ToLower()))
+                {
+                    if (_currentView == _rightView)
+                    {
+                        _rightView.gameObject.SetActive(false);
+                        _leftView.gameObject.SetActive(true);
+                        _currentView = _leftView;
+                    }
+                    else
+                    {
+                        _leftView.gameObject.SetActive(false);
+                        _rightView.gameObject.SetActive(true);
+                        _currentView = _rightView;
+                    }
+                }
+            }
 
             #region MARKUP: [interaction/]
             bool skipThisView = dialogueLine.Text.TryGetAttributeWithName("interaction", out _markup);
@@ -250,15 +237,15 @@ namespace Mechanics.Dialog
 
             // show the character sprite
             #region MARKUP: [sprite=str/]
-            if (_characterPortraitImage != null)
+            if (_currentView.Img_portrait != null)
             {
-                if (_charactersData != null)
+                if (_characterData != null)
                 {
                     bool characterNotFound = character == null;
                     if (characterNotFound || !character.ShowPortrait)
                     {
                         // hide portrait
-                        _characterPortraitImage.enabled = false;
+                        _currentView.Img_portrait.enabled = false;
                     }
                     else
                     {
@@ -280,65 +267,66 @@ namespace Mechanics.Dialog
                         // configure portrait
                         if (characterSprite != null)
                         {
-                            _characterPortraitImage.enabled = true;
-                            _characterPortraitImage.sprite = characterSprite;
+                            _currentView.Img_portrait.enabled = true;
+                            _currentView.Img_portrait.sprite = characterSprite;
                         }
                         else
                         {
-                            _characterPortraitImage.enabled = false;
+                            _currentView.Img_portrait.enabled = false;
                         }
                     }
                 }
                 else
                 {
-                    _characterPortraitImage.enabled = false;
+                    _currentView.Img_portrait.enabled = false;
                 }
             }
             #endregion
 
             // show the correct dialog box
             #region dialog box style
-            if (_dialogImage != null)
+            Image img_dialog = _currentView.Img_dialog;
+            if (img_dialog != null)
             {
                 if (character != null && character.UseAlternateBoxStyle)
                 {
-                    _dialogImage.sprite = character.AlternateBoxSprite;
-                    _dialogImage.color = character.AlternateBoxColor;
+                    img_dialog.sprite = character.AlternateBoxSprite;
+                    img_dialog.color = character.AlternateBoxColor;
                 }
                 else
                 {
-                    _dialogImage.sprite = _defaultBoxSprite;
-                    _dialogImage.color = _defaultBoxColor;
+                    img_dialog.sprite = _currentView.DefaultBoxSprite;
+                    img_dialog.color = _currentView.DefaultBoxColor;
                 }
             }
             #endregion
 
             // show continue button
-            if (_continueButton != null)
+            if (_currentView.Btn_continue != null)
             {
-                _continueButton.SetActive(false);
+                _currentView.Btn_continue.SetActive(false);
             }
 
             _interruptionFlag.Clear();
 
             // show character name
-            if (_characterNameText == null)
+            if (_currentView.Txt_characterName == null)
             {
                 if (_characterNameInLine)
                 {
-                    _lineText.text = dialogueLine.Text.Text;
+                    _currentView.Txt_dialog.text = dialogueLine.Text.Text;
                 }
                 else
                 {
-                    _lineText.text = dialogueLine.TextWithoutCharacterName.Text;
+                    _currentView.Txt_dialog.text = dialogueLine.TextWithoutCharacterName.Text;
                 }
             }
             else
             {
-                _characterNameObject.SetActive(character != null ? character.ShowName : true);
+                _currentView.P_characterName.SetActive(character != null ? character.ShowName : true);
 
-                _characterNameText.text = dialogueLine.CharacterName;
-                _lineText.text = dialogueLine.TextWithoutCharacterName.Text;
+                _currentView.Txt_characterName.text = dialogueLine.CharacterName;
+                _currentView.Txt_dialog.text = dialogueLine.TextWithoutCharacterName.Text;
             }
 
             if (_useFadeEffect)
@@ -348,12 +336,12 @@ namespace Mechanics.Dialog
                     // If we're also using a typewriter effect, ensure that
                     // there are no visible characters so that we don't
                     // fade in on the text fully visible
-                    _lineText.maxVisibleCharacters = 0;
+                    _currentView.Txt_dialog.maxVisibleCharacters = 0;
                 }
                 else
                 {
                     // Ensure that the max visible characters is effectively unlimited.
-                    _lineText.maxVisibleCharacters = int.MaxValue;
+                    _currentView.Txt_dialog.maxVisibleCharacters = int.MaxValue;
                 }
 
                 StartCoroutine(Tweens.LerpAlpha(_canvasGroup, 0, 1, _fadeInTime, interruption: _interruptionFlag,
@@ -392,8 +380,8 @@ namespace Mechanics.Dialog
             {
                 if (character != null ? character.PlayAudio : true)
                 {
-                    OnLineStarted(dialogueLine);
-                    StartCoroutine(Tweens.SimpleTypewriter(_lineText, _typewriterEffectSpeed, OnCharacterTyped, interruption: _interruptionFlag,
+                    OnLineStarted?.Invoke(dialogueLine);
+                    StartCoroutine(Tweens.SimpleTypewriter(_currentView.Txt_dialog, _typewriterEffectSpeed, OnCharacterTyped, interruption: _interruptionFlag,
                     onComplete: () =>
                     {
                         OnLineEnd?.Invoke();
@@ -402,7 +390,7 @@ namespace Mechanics.Dialog
                 }
                 else
                 {
-                    StartCoroutine(Tweens.SimpleTypewriter(_lineText, _typewriterEffectSpeed, interruption: _interruptionFlag, onComplete: onDialogueLineFinished));
+                    StartCoroutine(Tweens.SimpleTypewriter(_currentView.Txt_dialog, _typewriterEffectSpeed, interruption: _interruptionFlag, onComplete: onDialogueLineFinished));
                 }
             }
         }
@@ -435,17 +423,13 @@ namespace Mechanics.Dialog
             _canvasGroup.alpha = 0;
             _canvasGroup.blocksRaycasts = false;
 
-            if (_uiParent != null)
-            {
-                _uiParent.SetActive(false);
-            }
+            _leftView.gameObject?.SetActive(false);
+            _rightView.gameObject?.SetActive(false);
 
             // progress bar
-            if (_progressbar != null)
-            {
-                _progressbar.gameObject.SetActive(false);
-                _lineStartStamp = -1;
-            }
+            _leftView.Sldr_progressbar.gameObject?.SetActive(false);
+            _rightView.Sldr_progressbar.gameObject?.SetActive(false);
+            _lineStartStamp = -1;
         }
 
         /// <summary>
@@ -457,16 +441,23 @@ namespace Mechanics.Dialog
             _canvasGroup.alpha = 1;
             _canvasGroup.blocksRaycasts = true;
 
-            if (_uiParent != null)
+            _currentView?.gameObject.SetActive(true);
+
+            if (_currentView == _leftView)
             {
-                _uiParent.SetActive(true);
+                _rightView?.gameObject?.SetActive(false);
+            }
+            else
+            {
+                _leftView?.gameObject?.SetActive(false);
             }
 
             // progress bar
-            if (_progressbar != null)
+            Slider progressbar = _currentView.Sldr_progressbar;
+            if (progressbar != null)
             {
-                _progressbar.gameObject.SetActive(true);
-                _progressbar.value = 0;
+                progressbar.gameObject.SetActive(true);
+                progressbar.value = 0;
                 _lineStartStamp = Time.time;
 
                 if (_useFadeEffect) _lineStartStamp += _fadeInTime + _inBufferTime;
