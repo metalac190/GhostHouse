@@ -181,5 +181,10 @@ namespace Mechanics.Level_Mechanics
                 }
             }
         }
+
+        public void TestResetAnimators()
+        {
+            ConnectedAnimators.RemoveAll(item => item == null);
+        }
     }
 }
