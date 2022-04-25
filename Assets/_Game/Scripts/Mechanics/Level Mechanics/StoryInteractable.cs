@@ -109,6 +109,9 @@ namespace Mechanics.Level_Mechanics
                     case ParticleSystemType.MajorNoCost:
                         Gizmos.color = Color.magenta;
                         break;
+                    case ParticleSystemType.clock:
+                        Gizmos.color = Color.red;
+                        break;
                 }
                 Gizmos.DrawWireCube(transform.position + _particleOffset, _particleSize);
             }

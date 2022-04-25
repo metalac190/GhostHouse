@@ -30,10 +30,16 @@ public class InteractableParticlePool : MonoBehaviour
     [SerializeField] private Transform _majorNoCostParent = null;
     [SerializeField] private int _majorNoCostPoolSize = 5;
 
+    private List<ParticleSystem> _clockSystemPool;
+    [SerializeField] private ParticleSystem _clockParticles = null;
+    [SerializeField] private Transform _clockParent = null;
+    [SerializeField] private int _clockPoolSize = 5;
+
     private void Awake() {
         ResetParticleSystem(_majorCostParticles);
         ResetParticleSystem(_minorParticles);
         ResetParticleSystem(_majorNoCostParticles);
+        ResetParticleSystem(_clockParticles);
     }
 
     private void InitSystems() {
@@ -43,6 +49,8 @@ public class InteractableParticlePool : MonoBehaviour
         BuildPool(_minorSystemPool, _minorParticles, _minorParent, _minorPoolSize);
         _majorNoCostSystemPool = new List<ParticleSystem>(_majorNoCostPoolSize);
         BuildPool(_majorNoCostSystemPool, _majorNoCostParticles, _majorNoCostParent, _majorNoCostPoolSize);
+        _clockSystemPool = new List<ParticleSystem>(_clockPoolSize);
+        BuildPool(_clockSystemPool, _clockParticles, _clockParent, _clockPoolSize);
     }
 
     public ParticleSystem RegisterParticle(ParticleSystemType type) {
@@ -53,6 +61,8 @@ public class InteractableParticlePool : MonoBehaviour
                 return GetSystem(_minorSystemPool);
             case ParticleSystemType.MajorNoCost:
                 return GetSystem(_majorNoCostSystemPool);
+            case ParticleSystemType.clock:
+                return GetSystem(_clockSystemPool);
             default:
                 return null;
         }
@@ -77,6 +87,10 @@ public class InteractableParticlePool : MonoBehaviour
             case ParticleSystemType.MajorNoCost:
                 ResetParticleSystem(system);
                 _majorNoCostSystemPool.Add(system);
+                break;
+            case ParticleSystemType.clock:
+                ResetParticleSystem(system);
+                _clockSystemPool.Add(system);
                 break;
         }
     }
@@ -111,5 +125,6 @@ public enum ParticleSystemType
 {
     MajorCost,
     Minor,
-    MajorNoCost
+    MajorNoCost,
+    clock
 }
