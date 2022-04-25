@@ -17,7 +17,7 @@ public class CreditsManager : MonoBehaviour
 
     void Update()
     {
-        if (_animator.GetBool("Done")) return;
+        if (!Input.GetKeyDown(KeyCode.Escape) && _animator.GetBool("Done")) return;
 
         SceneManager.LoadScene("MainMenu");
     }
