@@ -12,11 +12,7 @@ namespace UI
         [SerializeField] private GameObject _lampOff = null;
 
         [Header("Spirit Points")]
-        [SerializeField] private List<Image> _spiritPoints = new List<Image>();
-        [SerializeField] private Sprite _spiritPointBright = null;
-        [SerializeField] private Sprite _spiritPointDull = null;
-        [SerializeField] private IntegerVariable _startingSP = null;
-        [SerializeField] private IntegerVariable _currentSP = null;
+        [SerializeField] private List<Animator> _spiritPoints = new List<Animator>();
 
         [Header("Journal Icon")]
         [SerializeField] private GameObject _journalNormal = null;
@@ -24,8 +20,12 @@ namespace UI
 
         private int _maxPoints;
 
-        private int SpiritPointsStart => _startingSP != null ? _startingSP.value : DataManager.Instance.remainingSpiritPoints;
-        private int SpiritPointsCurrent => _currentSP != null ? _startingSP.value : DataManager.Instance.remainingSpiritPoints;
+        private static string SetBright => "add SP";
+        private static string SetDull => "setAboutToSpend";
+        private static string SetOff => "lose SP";
+
+        private static int SpiritPointsStart => DataManager.Instance.remainingSpiritPoints;
+        private static int SpiritPointsCurrent => DataManager.Instance.remainingSpiritPoints;
 
         private void Awake() {
             _spiritPoints = _spiritPoints.Where(image => image != null).ToList();
@@ -52,8 +52,11 @@ namespace UI
                 return;
             }
             for (var i = 0; i < _spiritPoints.Count; i++) {
-                _spiritPoints[i].gameObject.SetActive(i < maxPoints);
-                _spiritPoints[i].sprite = _spiritPointBright;
+                bool active = i < maxPoints;
+                _spiritPoints[i].gameObject.SetActive(active);
+                if (active) {
+                    _spiritPoints[i].SetTrigger(SetBright);
+                }
             }
             _maxPoints = maxPoints;
         }
@@ -67,16 +70,20 @@ namespace UI
             //Debug.Log("Spirit Points: " + points + ". About to Spend " + aboutToSpend + ".");
             for (var i = 0; i < _maxPoints; i++) {
                 if (i >= points) {
-                    _spiritPoints[i].enabled = false;
+                    _spiritPoints[i].ResetTrigger(SetBright);
+                    _spiritPoints[i].ResetTrigger(SetDull);
+                    _spiritPoints[i].SetTrigger(SetOff);
                 }
                 else if (i >= points - aboutToSpend) {
-                    _spiritPoints[i].enabled = true;
-                    _spiritPoints[i].sprite = _spiritPointDull;
+                    _spiritPoints[i].ResetTrigger(SetBright);
+                    _spiritPoints[i].ResetTrigger(SetOff);
+                    _spiritPoints[i].SetTrigger(SetDull);
                 }
                 else {
-                    _spiritPoints[i].enabled = true;
                     _spiritPoints[i].gameObject.SetActive(true);
-                    _spiritPoints[i].sprite = _spiritPointBright;
+                    _spiritPoints[i].ResetTrigger(SetOff);
+                    _spiritPoints[i].ResetTrigger(SetDull);
+                    _spiritPoints[i].SetTrigger(SetBright);
                 }
             }
             if (points + aboutToSpend == 0) {
