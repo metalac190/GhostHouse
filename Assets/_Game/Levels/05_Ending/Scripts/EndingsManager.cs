@@ -1,5 +1,6 @@
 ﻿using Game;
 using Mechanics.Level_Mechanics;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -25,6 +26,8 @@ public class EndingsManager : MonoBehaviour
     [Space]
     [SerializeField]
     Game.TransitionManager _transitionManager = null;
+
+    public event Action<string> OnEnd = delegate { };
 
     void Start()
     {
@@ -84,6 +87,7 @@ public class EndingsManager : MonoBehaviour
                 SoundManager.MusicManager.PlayMusic(end.MusicTrack);
                 data.SetInteraction(selectedEnding.ending.Dialog.name, true);
                 data.WriteFile();
+                OnEnd?.Invoke(end.Visuals.name);
             }
             else
             {
