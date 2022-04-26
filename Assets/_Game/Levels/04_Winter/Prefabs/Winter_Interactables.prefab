@@ -504,6 +504,17 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 6333229344867934415}
+        m_MethodName: SetActive
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &701858674191686079
 GameObject:
   m_ObjectHideFlags: 0
@@ -577,7 +588,7 @@ MonoBehaviour:
   _alternateInteraction: {fileID: 0}
   _alternateInteractionText: Alt Interact
   _closeMenuText: Close
-  _openAfterDialogue: {fileID: 0}
+  _openAfterDialogue: {fileID: 7402662031266160635}
 --- !u!1 &751877507902851094
 GameObject:
   m_ObjectHideFlags: 0
@@ -883,7 +894,7 @@ MonoBehaviour:
   _particleOffset: {x: -1, y: 1.25, z: 0}
   _particleSize: {x: 2, y: 2, z: 6}
   _particleType: 0
-  _textOnHover: 1
+  _textOnHover: 0
   _hoverTextUseObjectName: 0
   _hoverText: Piano
   _highlightOnHover: 0
@@ -916,6 +927,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5521165651799652677}
   - component: {fileID: 4693036688911136906}
+  - component: {fileID: 1589552546647183783}
   m_Layer: 0
   m_Name: Gift_ResponseENDA
   m_TagString: Untagged
@@ -997,6 +1009,30 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 1589552546647183783}
+        m_MethodName: SetNextDialogue
+        m_Mode: 2
+        m_Arguments:
+          m_ObjectArgument: {fileID: 590905482390279491}
+          m_ObjectArgumentAssemblyTypeName: Mechanics.Level_Mechanics.StoryInteractable,
+            Assembly-CSharp
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &1589552546647183783
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 982952744089677870}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c2673358576d3aa47bff3ec0b557c7fa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1318969964041759792
 GameObject:
   m_ObjectHideFlags: 0
@@ -1196,17 +1232,16 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 7106354432727088231}
-        m_MethodName: SetNextDialogue
-        m_Mode: 2
+      - m_Target: {fileID: 0}
+        m_MethodName: SetActive
+        m_Mode: 6
         m_Arguments:
-          m_ObjectArgument: {fileID: 7762087635277721739}
-          m_ObjectArgumentAssemblyTypeName: Mechanics.Level_Mechanics.StoryInteractable,
-            Assembly-CSharp
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
-          m_BoolArgument: 0
+          m_BoolArgument: 1
         m_CallState: 2
       - m_Target: {fileID: 1761874451786291577}
         m_MethodName: SetActive
@@ -1219,12 +1254,13 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 1
         m_CallState: 2
-      - m_Target: {fileID: 0}
-        m_MethodName: SetActive
-        m_Mode: 6
+      - m_Target: {fileID: 7106354432727088231}
+        m_MethodName: SetNextDialogue
+        m_Mode: 2
         m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_ObjectArgument: {fileID: 7762087635277721739}
+          m_ObjectArgumentAssemblyTypeName: Mechanics.Level_Mechanics.StoryInteractable,
+            Assembly-CSharp
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
@@ -2148,18 +2184,6 @@ MonoBehaviour:
   _event:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 7425615902576322123}
-        m_MethodName: SetNextDialogue
-        m_Mode: 2
-        m_Arguments:
-          m_ObjectArgument: {fileID: 7848196234666690827}
-          m_ObjectArgumentAssemblyTypeName: Mechanics.Level_Mechanics.StoryInteractable,
-            Assembly-CSharp
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
       - m_Target: {fileID: 0}
         m_MethodName: SetActive
         m_Mode: 6
@@ -2177,6 +2201,18 @@ MonoBehaviour:
         m_Arguments:
           m_ObjectArgument: {fileID: 7848196234666690827}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 7425615902576322123}
+        m_MethodName: SetNextDialogue
+        m_Mode: 2
+        m_Arguments:
+          m_ObjectArgument: {fileID: 7848196234666690827}
+          m_ObjectArgumentAssemblyTypeName: Mechanics.Level_Mechanics.StoryInteractable,
+            Assembly-CSharp
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
@@ -2242,8 +2278,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _particles: 1
-  _particleOffset: {x: 0.5, y: 0, z: 0}
-  _particleSize: {x: 5, y: 1, z: 4}
+  _particleOffset: {x: -0.16, y: 0.67, z: 0.45}
+  _particleSize: {x: 5, y: 2, z: 4}
   _particleType: 2
   _textOnHover: 1
   _hoverTextUseObjectName: 0
@@ -2431,7 +2467,7 @@ MonoBehaviour:
   _alternateInteraction: {fileID: 0}
   _alternateInteractionText: Alt Interact
   _closeMenuText: Close
-  _openAfterDialogue: {fileID: 0}
+  _openAfterDialogue: {fileID: 690827876833287882}
 --- !u!1 &2595812538616191648
 GameObject:
   m_ObjectHideFlags: 0
@@ -2480,18 +2516,6 @@ MonoBehaviour:
   _event:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 490663783801409062}
-        m_MethodName: SetNextDialogue
-        m_Mode: 2
-        m_Arguments:
-          m_ObjectArgument: {fileID: 7829823409996118820}
-          m_ObjectArgumentAssemblyTypeName: Mechanics.Level_Mechanics.StoryInteractable,
-            Assembly-CSharp
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
       - m_Target: {fileID: 0}
         m_MethodName: SetActive
         m_Mode: 6
@@ -2509,6 +2533,18 @@ MonoBehaviour:
         m_Arguments:
           m_ObjectArgument: {fileID: 7829823409996118820}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 490663783801409062}
+        m_MethodName: SetNextDialogue
+        m_Mode: 2
+        m_Arguments:
+          m_ObjectArgument: {fileID: 7829823409996118820}
+          m_ObjectArgumentAssemblyTypeName: Mechanics.Level_Mechanics.StoryInteractable,
+            Assembly-CSharp
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
@@ -4765,7 +4801,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &7276192218991851089
 Transform:
   m_ObjectHideFlags: 0
@@ -4796,7 +4832,7 @@ MonoBehaviour:
   _particleOffset: {x: -1, y: 1.25, z: 0}
   _particleSize: {x: 2, y: 2, z: 6}
   _particleType: 0
-  _textOnHover: 1
+  _textOnHover: 0
   _hoverTextUseObjectName: 0
   _hoverText: Piano
   _highlightOnHover: 0
@@ -5077,7 +5113,7 @@ MonoBehaviour:
   _alternateInteraction: {fileID: 0}
   _alternateInteractionText: Alt Interact
   _closeMenuText: Close
-  _openAfterDialogue: {fileID: 8800678936581857455}
+  _openAfterDialogue: {fileID: 0}
 --- !u!1 &5546622580399362707
 GameObject:
   m_ObjectHideFlags: 0
@@ -5165,7 +5201,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &227167984993553391
 Transform:
   m_ObjectHideFlags: 0
@@ -5196,7 +5232,7 @@ MonoBehaviour:
   _particleOffset: {x: -1, y: 1.25, z: 0}
   _particleSize: {x: 2, y: 2, z: 6}
   _particleType: 0
-  _textOnHover: 1
+  _textOnHover: 0
   _hoverTextUseObjectName: 0
   _hoverText: Piano
   _highlightOnHover: 0
@@ -5235,7 +5271,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &3008251006349172280
 Transform:
   m_ObjectHideFlags: 0
@@ -5266,7 +5302,7 @@ MonoBehaviour:
   _particleOffset: {x: -1, y: 1.25, z: 0}
   _particleSize: {x: 2, y: 2, z: 6}
   _particleType: 0
-  _textOnHover: 1
+  _textOnHover: 0
   _hoverTextUseObjectName: 0
   _hoverText: Piano
   _highlightOnHover: 0
@@ -6016,7 +6052,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &2727298780367482776
 Transform:
   m_ObjectHideFlags: 0
@@ -6047,7 +6083,7 @@ MonoBehaviour:
   _particleOffset: {x: -1, y: 1.25, z: 0}
   _particleSize: {x: 2, y: 2, z: 6}
   _particleType: 0
-  _textOnHover: 1
+  _textOnHover: 0
   _hoverTextUseObjectName: 0
   _hoverText: Piano
   _highlightOnHover: 0
@@ -6321,7 +6357,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &4515732789185259028
 Transform:
   m_ObjectHideFlags: 0
@@ -6352,7 +6388,7 @@ MonoBehaviour:
   _particleOffset: {x: -1, y: 1.25, z: 0}
   _particleSize: {x: 2, y: 2, z: 6}
   _particleType: 0
-  _textOnHover: 1
+  _textOnHover: 0
   _hoverTextUseObjectName: 0
   _hoverText: Piano
   _highlightOnHover: 0
@@ -7232,10 +7268,10 @@ MonoBehaviour:
   _cameraMovementTime: 3
   _popupWindowOnClick: 1
   _interaction: {fileID: 11400000, guid: d376b0fdb15144949bf9c18800dad292, type: 2}
-  _interactionText: Morgan's Music Sheet
+  _interactionText: Morgan's Music
   _alternateInteraction: {fileID: 11400000, guid: 507e061c17b82a14a9e89769c582e546,
     type: 2}
-  _alternateInteractionText: Jaq's Music Sheet
+  _alternateInteractionText: Jaq's Music
   _closeMenuText: Close
   _openAfterDialogue: {fileID: 0}
 --- !u!1 &7253574116568261588
@@ -7461,7 +7497,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 7233737885424344548}
+      - m_Target: {fileID: 0}
         m_MethodName: SetActive
         m_Mode: 6
         m_Arguments:
@@ -9443,6 +9479,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6102490416508532517}
   - component: {fileID: 1357073991673645387}
+  - component: {fileID: 1589552546647183782}
   m_Layer: 0
   m_Name: Gift_ResponseENDB
   m_TagString: Untagged
@@ -9524,6 +9561,30 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 1589552546647183782}
+        m_MethodName: SetNextDialogue
+        m_Mode: 2
+        m_Arguments:
+          m_ObjectArgument: {fileID: 5279912512696146468}
+          m_ObjectArgumentAssemblyTypeName: Mechanics.Level_Mechanics.StoryInteractable,
+            Assembly-CSharp
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &1589552546647183782
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8980177477621711194}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c2673358576d3aa47bff3ec0b557c7fa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &9139674361126819836
 GameObject:
   m_ObjectHideFlags: 0
