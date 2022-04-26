@@ -18,7 +18,7 @@ public class BackgroundSmokeAnim : MonoBehaviour
         Debug.Log("Started: " + transform.position);
         float t = 0;
         Vector3 startPos = transform.position;
-        Vector3 end = new Vector3(-213.3f, 171, 0);
+        Vector3 end = new Vector3(-150f, transform.position.y, transform.position.z);
 
         while (t < 1)
         {
@@ -31,7 +31,7 @@ public class BackgroundSmokeAnim : MonoBehaviour
 
         t = 0;
         startPos = transform.position;
-        end = new Vector3(213.3f, 171, 0);
+        end = new Vector3(150f, transform.position.y, transform.position.z);
 
 
         while (t < 1)

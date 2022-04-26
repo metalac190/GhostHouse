@@ -83,6 +83,7 @@ public class EndingsManager : MonoBehaviour
                 end.Visuals?.SetActive(true);
                 _transitionManager._interactionOnStart = end.Dialog;
                 _musicManager.PlayMusic(end.MusicTrack);
+                DataManager.Instance.endingUnlocks[selectedEnding.index] = true;
             }
             else
             {
@@ -93,7 +94,7 @@ public class EndingsManager : MonoBehaviour
 
     public void GoToScene(string nextScene)
     {
-        SceneManager.LoadScene(nextScene);
+        DataManager.SceneLoader.LoadScene(nextScene);
     }
 
     [System.Serializable]

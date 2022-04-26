@@ -9,6 +9,8 @@ using Utility.Buttons;
 public class DataManager : MonoBehaviour
 {
     public static DataManager Instance = null;  // Singleton instance
+    [SerializeField] private SceneLoader _sceneLoader = null;
+    public static SceneLoader SceneLoader => Instance._sceneLoader;
     public bool _debug = false;
 
     private string filePath; // save file for saving & loading
@@ -82,6 +84,9 @@ public class DataManager : MonoBehaviour
                     ResetData();
                 }
 #endif
+                if (_sceneLoader == null) {
+                    _sceneLoader = GetComponentInChildren<SceneLoader>();
+                }
             }
         }
         else
