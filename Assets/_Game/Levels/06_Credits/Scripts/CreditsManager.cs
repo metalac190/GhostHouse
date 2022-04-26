@@ -1,9 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using TMPro;
-using UnityEngine.UI;
-using UnityEngine.SceneManagement;
+﻿using UnityEngine;
 
 [RequireComponent(typeof(Animator))]
 public class CreditsManager : MonoBehaviour
@@ -19,6 +14,6 @@ public class CreditsManager : MonoBehaviour
     {
         if (!Input.GetKeyDown(KeyCode.Escape) && _animator.GetBool("Done")) return;
 
-        SceneManager.LoadScene("MainMenu");
+        DataManager.SceneLoader.LoadScene("MainMenu");
     }
 }
