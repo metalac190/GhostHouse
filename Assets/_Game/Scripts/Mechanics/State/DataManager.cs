@@ -122,6 +122,9 @@ public class DataManager : MonoBehaviour
     {
         level = "Spring";
         remainingSpiritPoints = 3;
+        trueEndingPoints = 0;
+        sistersEndingPoints = 0;
+        cousinsEndingPoints = 0;
         settingsLeftClickInteract = true;
         settingsCameraWASD = true;
         settingsCameraArrowKeys = true;
@@ -439,6 +442,7 @@ public class DataManager : MonoBehaviour
     public void UnlockEnding(int index)
     {
         endingUnlocks[index] = true;
+        WriteFile();
     }
 
     // For now, just resets interactions. Will need to clear save file eventually
@@ -449,6 +453,18 @@ public class DataManager : MonoBehaviour
         cousinsEndingPoints = 0;
         sistersEndingPoints = 0;
         trueEndingPoints = 0;
+    }
+
+    public void ResetAllData()
+    {
+        interactions.Clear();
+        journalUnlocks.Clear();
+        level = "Spring";
+        remainingSpiritPoints = 3;
+        trueEndingPoints = 0;
+        sistersEndingPoints = 0;
+        cousinsEndingPoints = 0;
+        WriteFile();
     }
 
     // Return whether or not the save file exists
