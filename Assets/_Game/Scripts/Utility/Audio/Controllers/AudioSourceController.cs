@@ -94,14 +94,26 @@ namespace Utility.Audio.Controllers
         private void CheckEnabled() {
             if (_enableSounds == _areSoundsEnabled) return;
             _areSoundsEnabled = _enableSounds;
-            if (_enableSounds) {
-                if (_looping) {
-                    if (_waitOnStart) {
-                        Delay();
+            if (_enableSounds)
+            {
+                if (_looping)
+                {
+                    if (_loopDelay.MaxValue > 0)
+                    {
+                        Source.loop = false;
+                        if (_waitOnStart)
+                        {
+                            Delay();
+                        }
+                        else
+                        {
+                            Play();
+                            _checkLoop = true;
+                        }
                     }
-                    else {
-                        Play();
-                        _checkLoop = true;
+                    else
+                    {
+                        Source.loop = true;
                     }
                 }
                 else {
