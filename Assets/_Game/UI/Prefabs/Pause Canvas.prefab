@@ -241,8 +241,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: Resume
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: cfab9bcc097433b47a2f09fe93ca47a9, type: 2}
-  m_sharedMaterial: {fileID: 4030978371311828227, guid: cfab9bcc097433b47a2f09fe93ca47a9,
+  m_fontAsset: {fileID: 11400000, guid: 6b88c93e2b6441b45b966c64ad5f36fa, type: 2}
+  m_sharedMaterial: {fileID: 101269190234465363, guid: 6b88c93e2b6441b45b966c64ad5f36fa,
     type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
@@ -285,7 +285,7 @@ MonoBehaviour:
   m_enableWordWrapping: 1
   m_wordWrappingRatios: 0.4
   m_overflowMode: 0
-  m_firstOverflowCharacterIndex: -1
+  m_firstOverflowCharacterIndex: 0
   m_linkedTextComponent: {fileID: 0}
   m_isLinkedTextComponent: 0
   m_isTextTruncated: 0
@@ -676,7 +676,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 1095, y: -333}
+  m_AnchoredPosition: {x: 1095, y: -320}
   m_SizeDelta: {x: 650, y: 250}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &8874308403962603463
@@ -691,7 +691,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 75f5d3ea048bd1743a3813d88ab062fb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _interactable: {fileID: 11400000, guid: 747cdd4d5ed2be1458121823a6cd26d1, type: 2}
+  _interactable: {fileID: 0}
   _locked: {fileID: 5096490856755295866}
   _unlocked: {fileID: 2921068421947466443}
 --- !u!1 &298686802844837984
@@ -796,8 +796,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: Nathan
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: cfab9bcc097433b47a2f09fe93ca47a9, type: 2}
-  m_sharedMaterial: {fileID: 4030978371311828227, guid: cfab9bcc097433b47a2f09fe93ca47a9,
+  m_fontAsset: {fileID: 11400000, guid: 6b88c93e2b6441b45b966c64ad5f36fa, type: 2}
+  m_sharedMaterial: {fileID: 101269190234465363, guid: 6b88c93e2b6441b45b966c64ad5f36fa,
     type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
@@ -887,6 +887,80 @@ MonoBehaviour:
   - {fileID: 0}
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!1 &344140996671605375
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7750322118053692513}
+  - component: {fileID: 8364789022510534339}
+  - component: {fileID: 4441877212655746707}
+  m_Layer: 5
+  m_Name: TMP SubMeshUI [OpenDyslexic3-Regular SDF Material + LiberationSans SDF
+    Atlas]
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &7750322118053692513
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 344140996671605375}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 3273316704636877171}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!222 &8364789022510534339
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 344140996671605375}
+  m_CullTransparentMesh: 0
+--- !u!114 &4441877212655746707
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 344140996671605375}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 058cba836c1846c3aa1c5fd2e28aea77, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_spriteAsset: {fileID: 0}
+  m_material: {fileID: 0}
+  m_sharedMaterial: {fileID: 0}
+  m_isDefaultMaterial: 0
+  m_padding: 0
+  m_canvasRenderer: {fileID: 8364789022510534339}
+  m_TextComponent: {fileID: 3740471194755532180}
+  m_materialReferenceIndex: 1
 --- !u!1 &408075892924197425
 GameObject:
   m_ObjectHideFlags: 0
@@ -1027,8 +1101,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: Winter
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: cfab9bcc097433b47a2f09fe93ca47a9, type: 2}
-  m_sharedMaterial: {fileID: 4030978371311828227, guid: cfab9bcc097433b47a2f09fe93ca47a9,
+  m_fontAsset: {fileID: 11400000, guid: 6b88c93e2b6441b45b966c64ad5f36fa, type: 2}
+  m_sharedMaterial: {fileID: 101269190234465363, guid: 6b88c93e2b6441b45b966c64ad5f36fa,
     type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
@@ -1071,7 +1145,7 @@ MonoBehaviour:
   m_enableWordWrapping: 1
   m_wordWrappingRatios: 0.4
   m_overflowMode: 0
-  m_firstOverflowCharacterIndex: -1
+  m_firstOverflowCharacterIndex: 0
   m_linkedTextComponent: {fileID: 0}
   m_isLinkedTextComponent: 0
   m_isTextTruncated: 0
@@ -1182,10 +1256,10 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Valerie and Jaqueline bonded over music from their childhood. '
+  m_text: Val and Jaq reminsiced over an old carol they sang.
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: cfab9bcc097433b47a2f09fe93ca47a9, type: 2}
-  m_sharedMaterial: {fileID: 4030978371311828227, guid: cfab9bcc097433b47a2f09fe93ca47a9,
+  m_fontAsset: {fileID: 11400000, guid: 6b88c93e2b6441b45b966c64ad5f36fa, type: 2}
+  m_sharedMaterial: {fileID: 101269190234465363, guid: 6b88c93e2b6441b45b966c64ad5f36fa,
     type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
@@ -1252,10 +1326,10 @@ MonoBehaviour:
   m_margin: {x: -37.658802, y: 0, z: -78.74325, w: 0}
   m_textInfo:
     textComponent: {fileID: 3084938438825224682}
-    characterCount: 62
+    characterCount: 51
     spriteCount: 0
     spaceCount: 9
-    wordCount: 9
+    wordCount: 10
     linkCount: 0
     lineCount: 3
     pageCount: 1
@@ -1340,10 +1414,10 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "I uncovered Jaqueline\u2019s latest project. "
+  m_text: I set up back up Jaq's project.
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: cfab9bcc097433b47a2f09fe93ca47a9, type: 2}
-  m_sharedMaterial: {fileID: 4030978371311828227, guid: cfab9bcc097433b47a2f09fe93ca47a9,
+  m_fontAsset: {fileID: 11400000, guid: 6b88c93e2b6441b45b966c64ad5f36fa, type: 2}
+  m_sharedMaterial: {fileID: 101269190234465363, guid: 6b88c93e2b6441b45b966c64ad5f36fa,
     type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
@@ -1410,14 +1484,14 @@ MonoBehaviour:
   m_margin: {x: 0, y: 0, z: 0, w: 0}
   m_textInfo:
     textComponent: {fileID: 3291568866622935255}
-    characterCount: 40
+    characterCount: 31
     spriteCount: 0
-    spaceCount: 5
-    wordCount: 5
+    spaceCount: 6
+    wordCount: 7
     linkCount: 0
-    lineCount: 3
+    lineCount: 2
     pageCount: 1
-    materialCount: 2
+    materialCount: 1
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_spriteAnimator: {fileID: 0}
@@ -1685,8 +1759,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: Memories
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: cfab9bcc097433b47a2f09fe93ca47a9, type: 2}
-  m_sharedMaterial: {fileID: 4030978371311828227, guid: cfab9bcc097433b47a2f09fe93ca47a9,
+  m_fontAsset: {fileID: 11400000, guid: 6b88c93e2b6441b45b966c64ad5f36fa, type: 2}
+  m_sharedMaterial: {fileID: 101269190234465363, guid: 6b88c93e2b6441b45b966c64ad5f36fa,
     type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
@@ -1986,6 +2060,8 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 6456893513913654191}
+  - {fileID: 2764195055094225145}
+  - {fileID: 6162493158349891932}
   m_Father: {fileID: 9134165263481213457}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -2059,10 +2135,10 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "I took Jaqueline\u2019s wedding photo out of storage. "
+  m_text: Uncovered Jaq's wedding photo.
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: cfab9bcc097433b47a2f09fe93ca47a9, type: 2}
-  m_sharedMaterial: {fileID: 4030978371311828227, guid: cfab9bcc097433b47a2f09fe93ca47a9,
+  m_fontAsset: {fileID: 11400000, guid: 6b88c93e2b6441b45b966c64ad5f36fa, type: 2}
+  m_sharedMaterial: {fileID: 101269190234465363, guid: 6b88c93e2b6441b45b966c64ad5f36fa,
     type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
@@ -2129,14 +2205,14 @@ MonoBehaviour:
   m_margin: {x: 0, y: 0, z: 0, w: 0}
   m_textInfo:
     textComponent: {fileID: 6489998014756642329}
-    characterCount: 49
+    characterCount: 30
     spriteCount: 0
-    spaceCount: 8
-    wordCount: 8
+    spaceCount: 3
+    wordCount: 4
     linkCount: 0
-    lineCount: 3
+    lineCount: 2
     pageCount: 1
-    materialCount: 2
+    materialCount: 1
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_spriteAnimator: {fileID: 0}
@@ -2383,14 +2459,14 @@ RectTransform:
   m_GameObject: {fileID: 804568657689113429}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.75, y: 0.75, z: 1}
   m_Children: []
   m_Father: {fileID: 8878131421214716550}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -509, y: 75}
+  m_AnchoredPosition: {x: -529, y: 10}
   m_SizeDelta: {x: 300, y: 500}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &6387013472993413363
@@ -2742,11 +2818,11 @@ RectTransform:
   - {fileID: 2804643489006340980}
   - {fileID: 2218363850553192107}
   m_Father: {fileID: 2278556733214385605}
-  m_RootOrder: 5
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 859, y: -372}
+  m_AnchoredPosition: {x: 859, y: -230}
   m_SizeDelta: {x: 650, y: 250}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &1982146459377744838
@@ -2964,7 +3040,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.82, y: 0}
   m_AnchorMax: {x: 0.87, y: 1}
-  m_AnchoredPosition: {x: 0, y: -12.5}
+  m_AnchoredPosition: {x: 0, y: -12.500061}
   m_SizeDelta: {x: 0, y: -225}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &290306930148134181
@@ -3093,10 +3169,10 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "I used Morgan\u2019s alter to contact her directly"
+  m_text: Had a nice chat with Morgan about life.
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: cfab9bcc097433b47a2f09fe93ca47a9, type: 2}
-  m_sharedMaterial: {fileID: 4030978371311828227, guid: cfab9bcc097433b47a2f09fe93ca47a9,
+  m_fontAsset: {fileID: 11400000, guid: 6b88c93e2b6441b45b966c64ad5f36fa, type: 2}
+  m_sharedMaterial: {fileID: 101269190234465363, guid: 6b88c93e2b6441b45b966c64ad5f36fa,
     type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
@@ -3139,7 +3215,7 @@ MonoBehaviour:
   m_enableWordWrapping: 1
   m_wordWrappingRatios: 0.4
   m_overflowMode: 0
-  m_firstOverflowCharacterIndex: -1
+  m_firstOverflowCharacterIndex: 28
   m_linkedTextComponent: {fileID: 0}
   m_isLinkedTextComponent: 0
   m_isTextTruncated: 0
@@ -3163,14 +3239,14 @@ MonoBehaviour:
   m_margin: {x: 0, y: 0, z: 0, w: 0}
   m_textInfo:
     textComponent: {fileID: 8443943129868933975}
-    characterCount: 45
+    characterCount: 39
     spriteCount: 0
     spaceCount: 7
     wordCount: 8
     linkCount: 0
     lineCount: 3
     pageCount: 1
-    materialCount: 2
+    materialCount: 1
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_spriteAnimator: {fileID: 0}
@@ -3251,11 +3327,10 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Maybe Morgan needs some positive reinforcement, Valerie might be too harsh
-    on her.
+  m_text: Maybe getting Morgan's attention will get her to go talk to someone.
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: cfab9bcc097433b47a2f09fe93ca47a9, type: 2}
-  m_sharedMaterial: {fileID: 4030978371311828227, guid: cfab9bcc097433b47a2f09fe93ca47a9,
+  m_fontAsset: {fileID: 11400000, guid: 6b88c93e2b6441b45b966c64ad5f36fa, type: 2}
+  m_sharedMaterial: {fileID: 101269190234465363, guid: 6b88c93e2b6441b45b966c64ad5f36fa,
     type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
@@ -3298,7 +3373,7 @@ MonoBehaviour:
   m_enableWordWrapping: 1
   m_wordWrappingRatios: 0.4
   m_overflowMode: 0
-  m_firstOverflowCharacterIndex: -1
+  m_firstOverflowCharacterIndex: 52
   m_linkedTextComponent: {fileID: 0}
   m_isLinkedTextComponent: 0
   m_isTextTruncated: 0
@@ -3322,10 +3397,10 @@ MonoBehaviour:
   m_margin: {x: 0, y: 0, z: 0, w: 0}
   m_textInfo:
     textComponent: {fileID: 5207712088543932342}
-    characterCount: 82
+    characterCount: 68
     spriteCount: 0
-    spaceCount: 12
-    wordCount: 13
+    spaceCount: 11
+    wordCount: 12
     linkCount: 0
     lineCount: 3
     pageCount: 1
@@ -3810,7 +3885,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 234, y: -456}
+  m_AnchoredPosition: {x: 234, y: -400}
   m_SizeDelta: {x: 600, y: 250}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &6351270260539226722
@@ -3843,7 +3918,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &7273364428161280189
 RectTransform:
   m_ObjectHideFlags: 0
@@ -4008,7 +4083,7 @@ MonoBehaviour:
   m_material: {fileID: 0}
   m_sharedMaterial: {fileID: 0}
   m_isDefaultMaterial: 0
-  m_padding: 1.25
+  m_padding: 0
   m_canvasRenderer: {fileID: 6279731323244990973}
   m_TextComponent: {fileID: 9160567797769842706}
   m_materialReferenceIndex: 1
@@ -4047,7 +4122,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 212.00003, y: -414}
+  m_AnchoredPosition: {x: 212.00003, y: -390}
   m_SizeDelta: {x: 650, y: 250}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &5486550711980302484
@@ -4065,6 +4140,80 @@ MonoBehaviour:
   _interactable: {fileID: 11400000, guid: 8eebb5e9ed5f22c4dafc9829336eeb7c, type: 2}
   _locked: {fileID: 8220313074114513981}
   _unlocked: {fileID: 7799125505165214403}
+--- !u!1 &1341995921935939475
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5974319062587058478}
+  - component: {fileID: 6050931625314918530}
+  - component: {fileID: 2106944258682750451}
+  m_Layer: 5
+  m_Name: TMP SubMeshUI [OpenDyslexic3-Regular SDF Material + LiberationSans SDF
+    Atlas]
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &5974319062587058478
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1341995921935939475}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 7545030255729221296}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!222 &6050931625314918530
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1341995921935939475}
+  m_CullTransparentMesh: 0
+--- !u!114 &2106944258682750451
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1341995921935939475}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 058cba836c1846c3aa1c5fd2e28aea77, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_spriteAsset: {fileID: 0}
+  m_material: {fileID: 0}
+  m_sharedMaterial: {fileID: 0}
+  m_isDefaultMaterial: 0
+  m_padding: 0
+  m_canvasRenderer: {fileID: 6050931625314918530}
+  m_TextComponent: {fileID: 9128544708834537335}
+  m_materialReferenceIndex: 1
 --- !u!1 &1348144569483255007
 GameObject:
   m_ObjectHideFlags: 0
@@ -4204,10 +4353,10 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Whatever I played it caused Valerie and Jaqueline to reconcile.
+  m_text: Seems that the song that played meant a lot to Jaqueline and Valerie.
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: cfab9bcc097433b47a2f09fe93ca47a9, type: 2}
-  m_sharedMaterial: {fileID: 4030978371311828227, guid: cfab9bcc097433b47a2f09fe93ca47a9,
+  m_fontAsset: {fileID: 11400000, guid: 6b88c93e2b6441b45b966c64ad5f36fa, type: 2}
+  m_sharedMaterial: {fileID: 101269190234465363, guid: 6b88c93e2b6441b45b966c64ad5f36fa,
     type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
@@ -4250,7 +4399,7 @@ MonoBehaviour:
   m_enableWordWrapping: 1
   m_wordWrappingRatios: 0.4
   m_overflowMode: 0
-  m_firstOverflowCharacterIndex: 40
+  m_firstOverflowCharacterIndex: 25
   m_linkedTextComponent: {fileID: 0}
   m_isLinkedTextComponent: 0
   m_isTextTruncated: 0
@@ -4274,12 +4423,12 @@ MonoBehaviour:
   m_margin: {x: 0, y: 0, z: 0, w: 0}
   m_textInfo:
     textComponent: {fileID: 8563709607978366974}
-    characterCount: 63
+    characterCount: 69
     spriteCount: 0
-    spaceCount: 9
-    wordCount: 10
+    spaceCount: 12
+    wordCount: 13
     linkCount: 0
-    lineCount: 5
+    lineCount: 6
     pageCount: 1
     materialCount: 1
   m_isUsingLegacyAnimationComponent: 0
@@ -4326,7 +4475,8 @@ RectTransform:
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 0.9, z: 1}
-  m_Children: []
+  m_Children:
+  - {fileID: 838269004677422403}
   m_Father: {fileID: 7537087746232076645}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -4362,10 +4512,10 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: There must be something I can do to cheer up Jaqueline.
+  m_text: Maybe there's something in here that will cheer her up.
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: cfab9bcc097433b47a2f09fe93ca47a9, type: 2}
-  m_sharedMaterial: {fileID: 4030978371311828227, guid: cfab9bcc097433b47a2f09fe93ca47a9,
+  m_fontAsset: {fileID: 11400000, guid: 6b88c93e2b6441b45b966c64ad5f36fa, type: 2}
+  m_sharedMaterial: {fileID: 101269190234465363, guid: 6b88c93e2b6441b45b966c64ad5f36fa,
     type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
@@ -4434,8 +4584,8 @@ MonoBehaviour:
     textComponent: {fileID: 6535692193525707024}
     characterCount: 55
     spriteCount: 0
-    spaceCount: 10
-    wordCount: 11
+    spaceCount: 9
+    wordCount: 10
     linkCount: 0
     lineCount: 2
     pageCount: 1
@@ -4446,7 +4596,7 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_subTextObjects:
   - {fileID: 0}
-  - {fileID: 0}
+  - {fileID: 6514409146392491024}
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
@@ -4823,12 +4973,12 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Son of Chris and Jaqueline. Nathan takes after his mother and has a rather
-    cheerful and bubbly personality. Despite this, his father is often away and he
-    can get rather lonely. '
+  m_text: 'Son of Chris and Jaq. Takes after his mother with a rather cheerful and
+    bubbly personality. Despite this, his father is often away and he gets rather
+    lonely. '
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: cfab9bcc097433b47a2f09fe93ca47a9, type: 2}
-  m_sharedMaterial: {fileID: 4030978371311828227, guid: cfab9bcc097433b47a2f09fe93ca47a9,
+  m_fontAsset: {fileID: 11400000, guid: 6b88c93e2b6441b45b966c64ad5f36fa, type: 2}
+  m_sharedMaterial: {fileID: 101269190234465363, guid: 6b88c93e2b6441b45b966c64ad5f36fa,
     type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
@@ -4871,7 +5021,7 @@ MonoBehaviour:
   m_enableWordWrapping: 1
   m_wordWrappingRatios: 0.4
   m_overflowMode: 0
-  m_firstOverflowCharacterIndex: -1
+  m_firstOverflowCharacterIndex: 131
   m_linkedTextComponent: {fileID: 0}
   m_isLinkedTextComponent: 0
   m_isTextTruncated: 0
@@ -4892,15 +5042,15 @@ MonoBehaviour:
   m_firstVisibleCharacter: 0
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: 0, y: 0, z: -87.09488, w: -575.1701}
+  m_margin: {x: 0, y: 0, z: -152.66325, w: -575.1701}
   m_textInfo:
     textComponent: {fileID: 4640597310799006009}
-    characterCount: 177
+    characterCount: 158
     spriteCount: 0
-    spaceCount: 31
-    wordCount: 31
+    spaceCount: 28
+    wordCount: 28
     linkCount: 0
-    lineCount: 13
+    lineCount: 10
     pageCount: 1
     materialCount: 1
   m_isUsingLegacyAnimationComponent: 0
@@ -5305,11 +5455,10 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "I attempted to reignite Morgan\u2019s love of music with Nathan as an
-    accomplice. "
+  m_text: Nathan loved Morgan playing music for him once again.
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: cfab9bcc097433b47a2f09fe93ca47a9, type: 2}
-  m_sharedMaterial: {fileID: 4030978371311828227, guid: cfab9bcc097433b47a2f09fe93ca47a9,
+  m_fontAsset: {fileID: 11400000, guid: 6b88c93e2b6441b45b966c64ad5f36fa, type: 2}
+  m_sharedMaterial: {fileID: 101269190234465363, guid: 6b88c93e2b6441b45b966c64ad5f36fa,
     type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
@@ -5352,7 +5501,7 @@ MonoBehaviour:
   m_enableWordWrapping: 1
   m_wordWrappingRatios: 0.4
   m_overflowMode: 0
-  m_firstOverflowCharacterIndex: 59
+  m_firstOverflowCharacterIndex: 38
   m_linkedTextComponent: {fileID: 0}
   m_isLinkedTextComponent: 0
   m_isTextTruncated: 0
@@ -5376,14 +5525,14 @@ MonoBehaviour:
   m_margin: {x: 0, y: 0, z: 0, w: 0}
   m_textInfo:
     textComponent: {fileID: 7685614909636571629}
-    characterCount: 77
+    characterCount: 53
     spriteCount: 0
-    spaceCount: 13
-    wordCount: 13
+    spaceCount: 8
+    wordCount: 9
     linkCount: 0
-    lineCount: 4
+    lineCount: 3
     pageCount: 1
-    materialCount: 2
+    materialCount: 1
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_spriteAnimator: {fileID: 0}
@@ -5445,7 +5594,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1527103262921729412}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 9db057f2fc070ff4eac116b01cc24743, type: 3}
   m_Name: 
@@ -5459,7 +5608,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1527103262921729412}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 9db057f2fc070ff4eac116b01cc24743, type: 3}
   m_Name: 
@@ -5535,7 +5684,7 @@ MonoBehaviour:
   m_material: {fileID: 0}
   m_sharedMaterial: {fileID: 0}
   m_isDefaultMaterial: 0
-  m_padding: 1.25
+  m_padding: 0
   m_canvasRenderer: {fileID: 4812644346171530025}
   m_TextComponent: {fileID: 8443943129868933975}
   m_materialReferenceIndex: 1
@@ -5608,7 +5757,7 @@ MonoBehaviour:
   m_material: {fileID: 0}
   m_sharedMaterial: {fileID: 0}
   m_isDefaultMaterial: 0
-  m_padding: 1.25
+  m_padding: 0
   m_canvasRenderer: {fileID: 8281984614983703854}
   m_TextComponent: {fileID: 7685614909636571629}
   m_materialReferenceIndex: 1
@@ -5720,7 +5869,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 867, y: -65}
+  m_AnchoredPosition: {x: 867, y: -30}
   m_SizeDelta: {x: 625, y: 250}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &6992694398097174839
@@ -5883,7 +6032,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 419, y: 296}
+  m_AnchoredPosition: {x: 419, y: 268}
   m_SizeDelta: {x: 200, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &6136935428356671129
@@ -5913,11 +6062,11 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "The eldest sister of the Graves family and mother to Morgan Graves. She\u2019s
-    hard-working, but can sometimes work herself too hard."
+  m_text: Older sister of Jaqueline and mother to Morgan. Hard-working, but can sometimes
+    work herself too hard.
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: cfab9bcc097433b47a2f09fe93ca47a9, type: 2}
-  m_sharedMaterial: {fileID: 4030978371311828227, guid: cfab9bcc097433b47a2f09fe93ca47a9,
+  m_fontAsset: {fileID: 11400000, guid: 6b88c93e2b6441b45b966c64ad5f36fa, type: 2}
+  m_sharedMaterial: {fileID: 101269190234465363, guid: 6b88c93e2b6441b45b966c64ad5f36fa,
     type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
@@ -5960,7 +6109,7 @@ MonoBehaviour:
   m_enableWordWrapping: 1
   m_wordWrappingRatios: 0.4
   m_overflowMode: 0
-  m_firstOverflowCharacterIndex: 92
+  m_firstOverflowCharacterIndex: 39
   m_linkedTextComponent: {fileID: 0}
   m_isLinkedTextComponent: 0
   m_isTextTruncated: 0
@@ -5981,17 +6130,17 @@ MonoBehaviour:
   m_firstVisibleCharacter: 0
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: -307.22342, y: 0, z: -66.40423, w: -116.8779}
+  m_margin: {x: -307.22342, y: 0, z: 225.25824, w: -116.8779}
   m_textInfo:
     textComponent: {fileID: 8272314992478910229}
-    characterCount: 128
+    characterCount: 102
     spriteCount: 0
-    spaceCount: 20
-    wordCount: 21
+    spaceCount: 15
+    wordCount: 16
     linkCount: 0
-    lineCount: 5
+    lineCount: 10
     pageCount: 1
-    materialCount: 2
+    materialCount: 1
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_spriteAnimator: {fileID: 0}
@@ -6076,7 +6225,7 @@ MonoBehaviour:
   m_material: {fileID: 0}
   m_sharedMaterial: {fileID: 0}
   m_isDefaultMaterial: 0
-  m_padding: 1.25
+  m_padding: 0
   m_canvasRenderer: {fileID: 893809237484687257}
   m_TextComponent: {fileID: 8272314992478910229}
   m_materialReferenceIndex: 1
@@ -6146,8 +6295,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: Spring
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: cfab9bcc097433b47a2f09fe93ca47a9, type: 2}
-  m_sharedMaterial: {fileID: 4030978371311828227, guid: cfab9bcc097433b47a2f09fe93ca47a9,
+  m_fontAsset: {fileID: 11400000, guid: 6b88c93e2b6441b45b966c64ad5f36fa, type: 2}
+  m_sharedMaterial: {fileID: 101269190234465363, guid: 6b88c93e2b6441b45b966c64ad5f36fa,
     type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
@@ -6302,11 +6451,10 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "I put the family\u2019s most treasured ornament on the top of the Christmas
-    tree. "
+  m_text: Placed our favorite ornament on the tree.
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: cfab9bcc097433b47a2f09fe93ca47a9, type: 2}
-  m_sharedMaterial: {fileID: 4030978371311828227, guid: cfab9bcc097433b47a2f09fe93ca47a9,
+  m_fontAsset: {fileID: 11400000, guid: 6b88c93e2b6441b45b966c64ad5f36fa, type: 2}
+  m_sharedMaterial: {fileID: 101269190234465363, guid: 6b88c93e2b6441b45b966c64ad5f36fa,
     type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
@@ -6349,7 +6497,7 @@ MonoBehaviour:
   m_enableWordWrapping: 1
   m_wordWrappingRatios: 0.4
   m_overflowMode: 0
-  m_firstOverflowCharacterIndex: 71
+  m_firstOverflowCharacterIndex: -1
   m_linkedTextComponent: {fileID: 0}
   m_isLinkedTextComponent: 0
   m_isTextTruncated: 0
@@ -6373,14 +6521,14 @@ MonoBehaviour:
   m_margin: {x: 0, y: 0, z: -9.336912, w: 0}
   m_textInfo:
     textComponent: {fileID: 2060128832128890676}
-    characterCount: 77
+    characterCount: 41
     spriteCount: 0
-    spaceCount: 14
-    wordCount: 14
+    spaceCount: 6
+    wordCount: 7
     linkCount: 0
-    lineCount: 5
+    lineCount: 3
     pageCount: 1
-    materialCount: 2
+    materialCount: 1
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_spriteAnimator: {fileID: 0}
@@ -6645,10 +6793,10 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Morgan mentioned being in a band. Maybe I can nudge her back into it.
+  m_text: Maybe someone can help Morgan get back into playing the clarinet.
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: cfab9bcc097433b47a2f09fe93ca47a9, type: 2}
-  m_sharedMaterial: {fileID: 4030978371311828227, guid: cfab9bcc097433b47a2f09fe93ca47a9,
+  m_fontAsset: {fileID: 11400000, guid: 6b88c93e2b6441b45b966c64ad5f36fa, type: 2}
+  m_sharedMaterial: {fileID: 101269190234465363, guid: 6b88c93e2b6441b45b966c64ad5f36fa,
     type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
@@ -6691,7 +6839,7 @@ MonoBehaviour:
   m_enableWordWrapping: 1
   m_wordWrappingRatios: 0.4
   m_overflowMode: 0
-  m_firstOverflowCharacterIndex: -1
+  m_firstOverflowCharacterIndex: 52
   m_linkedTextComponent: {fileID: 0}
   m_isLinkedTextComponent: 0
   m_isTextTruncated: 0
@@ -6715,10 +6863,10 @@ MonoBehaviour:
   m_margin: {x: 0, y: 0, z: 0, w: 0}
   m_textInfo:
     textComponent: {fileID: 2482622200879768641}
-    characterCount: 69
+    characterCount: 65
     spriteCount: 0
-    spaceCount: 13
-    wordCount: 14
+    spaceCount: 10
+    wordCount: 11
     linkCount: 0
     lineCount: 3
     pageCount: 1
@@ -6823,8 +6971,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: Are you sure you want to return to the main menu?
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: cfab9bcc097433b47a2f09fe93ca47a9, type: 2}
-  m_sharedMaterial: {fileID: 4030978371311828227, guid: cfab9bcc097433b47a2f09fe93ca47a9,
+  m_fontAsset: {fileID: 11400000, guid: 6b88c93e2b6441b45b966c64ad5f36fa, type: 2}
+  m_sharedMaterial: {fileID: 101269190234465363, guid: 6b88c93e2b6441b45b966c64ad5f36fa,
     type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
@@ -7017,8 +7165,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: Morgan's teen girl know-how perfected Nathan's pirate look.
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: cfab9bcc097433b47a2f09fe93ca47a9, type: 2}
-  m_sharedMaterial: {fileID: 4030978371311828227, guid: cfab9bcc097433b47a2f09fe93ca47a9,
+  m_fontAsset: {fileID: 11400000, guid: 6b88c93e2b6441b45b966c64ad5f36fa, type: 2}
+  m_sharedMaterial: {fileID: 101269190234465363, guid: 6b88c93e2b6441b45b966c64ad5f36fa,
     type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
@@ -7061,7 +7209,7 @@ MonoBehaviour:
   m_enableWordWrapping: 1
   m_wordWrappingRatios: 0.4
   m_overflowMode: 0
-  m_firstOverflowCharacterIndex: -1
+  m_firstOverflowCharacterIndex: 38
   m_linkedTextComponent: {fileID: 0}
   m_isLinkedTextComponent: 0
   m_isTextTruncated: 0
@@ -7090,7 +7238,7 @@ MonoBehaviour:
     spaceCount: 7
     wordCount: 8
     linkCount: 0
-    lineCount: 3
+    lineCount: 4
     pageCount: 1
     materialCount: 1
   m_isUsingLegacyAnimationComponent: 0
@@ -7174,8 +7322,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: Spring
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: cfab9bcc097433b47a2f09fe93ca47a9, type: 2}
-  m_sharedMaterial: {fileID: 4030978371311828227, guid: cfab9bcc097433b47a2f09fe93ca47a9,
+  m_fontAsset: {fileID: 11400000, guid: 6b88c93e2b6441b45b966c64ad5f36fa, type: 2}
+  m_sharedMaterial: {fileID: 101269190234465363, guid: 6b88c93e2b6441b45b966c64ad5f36fa,
     type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
@@ -7453,6 +7601,7 @@ RectTransform:
   m_Children:
   - {fileID: 3628397040832418593}
   - {fileID: 7836238133378782248}
+  - {fileID: 3109109288976916420}
   - {fileID: 2737616044574897438}
   - {fileID: 7080269035461930533}
   - {fileID: 477552163487513029}
@@ -7532,8 +7681,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: Fall
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: cfab9bcc097433b47a2f09fe93ca47a9, type: 2}
-  m_sharedMaterial: {fileID: 4030978371311828227, guid: cfab9bcc097433b47a2f09fe93ca47a9,
+  m_fontAsset: {fileID: 11400000, guid: 6b88c93e2b6441b45b966c64ad5f36fa, type: 2}
+  m_sharedMaterial: {fileID: 101269190234465363, guid: 6b88c93e2b6441b45b966c64ad5f36fa,
     type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
@@ -7690,8 +7839,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: I returned an old childhood toy to Valerie.
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: cfab9bcc097433b47a2f09fe93ca47a9, type: 2}
-  m_sharedMaterial: {fileID: 4030978371311828227, guid: cfab9bcc097433b47a2f09fe93ca47a9,
+  m_fontAsset: {fileID: 11400000, guid: 6b88c93e2b6441b45b966c64ad5f36fa, type: 2}
+  m_sharedMaterial: {fileID: 101269190234465363, guid: 6b88c93e2b6441b45b966c64ad5f36fa,
     type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
@@ -8116,10 +8265,11 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: The bad ending
+  m_text: Still grieving and spooked by the recent activity in the house, the family
+    decided to sell the house and move away.
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: cfab9bcc097433b47a2f09fe93ca47a9, type: 2}
-  m_sharedMaterial: {fileID: 4030978371311828227, guid: cfab9bcc097433b47a2f09fe93ca47a9,
+  m_fontAsset: {fileID: 11400000, guid: 6b88c93e2b6441b45b966c64ad5f36fa, type: 2}
+  m_sharedMaterial: {fileID: 101269190234465363, guid: 6b88c93e2b6441b45b966c64ad5f36fa,
     type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
@@ -8186,12 +8336,12 @@ MonoBehaviour:
   m_margin: {x: -163.62534, y: 0, z: -175.15083, w: -240.66914}
   m_textInfo:
     textComponent: {fileID: 3990035903242367588}
-    characterCount: 14
+    characterCount: 115
     spriteCount: 0
-    spaceCount: 2
-    wordCount: 3
+    spaceCount: 20
+    wordCount: 21
     linkCount: 0
-    lineCount: 1
+    lineCount: 5
     pageCount: 1
     materialCount: 1
   m_isUsingLegacyAnimationComponent: 0
@@ -8318,7 +8468,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -218, y: 281}
+  m_AnchoredPosition: {x: -218, y: 309}
   m_SizeDelta: {x: 200, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &5062347537023180861
@@ -8348,12 +8498,11 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "Valerie\u2019s youngest daughter, Morgan is going through a bit of a rebellious
-    phase. She is fascinated with the occult and is likely responsible for summoning
-    your spirit."
+  m_text: "Valerie\u2019s daughter, Morgan, rebellious teen. Fascinated with the
+    occult and is likely responsible for summoning my spirit."
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: cfab9bcc097433b47a2f09fe93ca47a9, type: 2}
-  m_sharedMaterial: {fileID: 4030978371311828227, guid: cfab9bcc097433b47a2f09fe93ca47a9,
+  m_fontAsset: {fileID: 11400000, guid: 6b88c93e2b6441b45b966c64ad5f36fa, type: 2}
+  m_sharedMaterial: {fileID: 101269190234465363, guid: 6b88c93e2b6441b45b966c64ad5f36fa,
     type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
@@ -8396,7 +8545,7 @@ MonoBehaviour:
   m_enableWordWrapping: 1
   m_wordWrappingRatios: 0.4
   m_overflowMode: 0
-  m_firstOverflowCharacterIndex: 10
+  m_firstOverflowCharacterIndex: -1
   m_linkedTextComponent: {fileID: 0}
   m_isLinkedTextComponent: 0
   m_isTextTruncated: 0
@@ -8417,17 +8566,17 @@ MonoBehaviour:
   m_firstVisibleCharacter: 0
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: -18.103243, y: 0, z: -26.613295, w: 0}
+  m_margin: {x: -76.88762, y: 0, z: -26.613295, w: -665.63086}
   m_textInfo:
     textComponent: {fileID: 1279864974710194477}
-    characterCount: 168
+    characterCount: 122
     spriteCount: 0
-    spaceCount: 26
-    wordCount: 27
+    spaceCount: 16
+    wordCount: 17
     linkCount: 0
-    lineCount: 15
+    lineCount: 12
     pageCount: 1
-    materialCount: 2
+    materialCount: 1
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_spriteAnimator: {fileID: 0}
@@ -8477,8 +8626,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 269, y: 140}
-  m_SizeDelta: {x: 1920, y: 1080}
+  m_AnchoredPosition: {x: 269, y: 131}
+  m_SizeDelta: {x: 2076, y: 1469}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &8258542981045167976
 CanvasRenderer:
@@ -8501,13 +8650,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0, g: 0, b: 0, a: 1}
+  m_Color: {r: 0.12100001, g: 0.12100001, b: 0.12100001, a: 1}
   m_RaycastTarget: 1
   m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 74c8ecfbca1da04419fbb9e2753a78b4, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 1a380bd29db8bda4ea9cc4defe524db6, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -8582,11 +8731,10 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'After giving Nathan and Morgan the wrapping paper rolls they began to
-    duel. '
+  m_text: A duel to the death! (Of boredom)
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: cfab9bcc097433b47a2f09fe93ca47a9, type: 2}
-  m_sharedMaterial: {fileID: 4030978371311828227, guid: cfab9bcc097433b47a2f09fe93ca47a9,
+  m_fontAsset: {fileID: 11400000, guid: 6b88c93e2b6441b45b966c64ad5f36fa, type: 2}
+  m_sharedMaterial: {fileID: 101269190234465363, guid: 6b88c93e2b6441b45b966c64ad5f36fa,
     type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
@@ -8653,12 +8801,12 @@ MonoBehaviour:
   m_margin: {x: 0, y: 0, z: -71.89566, w: 0}
   m_textInfo:
     textComponent: {fileID: 7180471915562995782}
-    characterCount: 76
+    characterCount: 33
     spriteCount: 0
-    spaceCount: 13
-    wordCount: 13
+    spaceCount: 6
+    wordCount: 7
     linkCount: 0
-    lineCount: 4
+    lineCount: 2
     pageCount: 1
     materialCount: 1
   m_isUsingLegacyAnimationComponent: 0
@@ -8688,7 +8836,8 @@ GameObject:
   - component: {fileID: 9104444047884397282}
   - component: {fileID: 3449811221515716307}
   m_Layer: 5
-  m_Name: TMP SubMeshUI [GhostWrite SDF Material + LiberationSans SDF Atlas]
+  m_Name: TMP SubMeshUI [OpenDyslexic3-Regular SDF Material + LiberationSans SDF
+    Atlas]
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -8745,9 +8894,83 @@ MonoBehaviour:
   m_material: {fileID: 0}
   m_sharedMaterial: {fileID: 0}
   m_isDefaultMaterial: 0
-  m_padding: 0
+  m_padding: 1.25
   m_canvasRenderer: {fileID: 9104444047884397282}
   m_TextComponent: {fileID: 6999300150381250351}
+  m_materialReferenceIndex: 1
+--- !u!1 &2415529820880006507
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 838269004677422403}
+  - component: {fileID: 7417787775481998894}
+  - component: {fileID: 6514409146392491024}
+  m_Layer: 5
+  m_Name: TMP SubMeshUI [OpenDyslexic3-Regular SDF Material + LiberationSans SDF
+    Atlas]
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &838269004677422403
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2415529820880006507}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 6500276571327115992}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!222 &7417787775481998894
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2415529820880006507}
+  m_CullTransparentMesh: 0
+--- !u!114 &6514409146392491024
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2415529820880006507}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 058cba836c1846c3aa1c5fd2e28aea77, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_spriteAsset: {fileID: 0}
+  m_material: {fileID: 0}
+  m_sharedMaterial: {fileID: 0}
+  m_isDefaultMaterial: 0
+  m_padding: 0
+  m_canvasRenderer: {fileID: 7417787775481998894}
+  m_TextComponent: {fileID: 6535692193525707024}
   m_materialReferenceIndex: 1
 --- !u!1 &2429735382202867149
 GameObject:
@@ -8865,7 +9088,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.105, y: 0}
   m_AnchorMax: {x: 0.155, y: 1}
-  m_AnchoredPosition: {x: 0, y: -12.499992}
+  m_AnchoredPosition: {x: 0, y: -12.499939}
   m_SizeDelta: {x: 0, y: -224.99998}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &3564863979323628482
@@ -9202,8 +9425,8 @@ MonoBehaviour:
   m_text: 'I swear that bird could see me. She might have some useful information
     in the future. '
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: cfab9bcc097433b47a2f09fe93ca47a9, type: 2}
-  m_sharedMaterial: {fileID: 4030978371311828227, guid: cfab9bcc097433b47a2f09fe93ca47a9,
+  m_fontAsset: {fileID: 11400000, guid: 6b88c93e2b6441b45b966c64ad5f36fa, type: 2}
+  m_sharedMaterial: {fileID: 101269190234465363, guid: 6b88c93e2b6441b45b966c64ad5f36fa,
     type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
@@ -9328,7 +9551,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 860, y: -331}
+  m_AnchoredPosition: {x: 860, y: -290}
   m_SizeDelta: {x: 625, y: 250}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &7001619852201173283
@@ -9456,6 +9679,59 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!1 &2673257908315526519
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3109109288976916420}
+  - component: {fileID: 2211265633962970607}
+  m_Layer: 5
+  m_Name: Lunch Boxes (kids)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &3109109288976916420
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2673257908315526519}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 0.85, y: 0.85, z: 1}
+  m_Children:
+  - {fileID: 9017292159582398991}
+  - {fileID: 5748402703523200672}
+  m_Father: {fileID: 2278556733214385605}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 223, y: -325}
+  m_SizeDelta: {x: 650, y: 250}
+  m_Pivot: {x: 0, y: 1}
+--- !u!114 &2211265633962970607
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2673257908315526519}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 75f5d3ea048bd1743a3813d88ab062fb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _interactable: {fileID: 11400000, guid: 3b46dd190c3927a499569f7632a64a50, type: 2}
+  _locked: {fileID: 6735104834151541372}
+  _unlocked: {fileID: 4665559431753175566}
 --- !u!1 &2756141405772496954
 GameObject:
   m_ObjectHideFlags: 0
@@ -9527,7 +9803,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 876, y: -60.75}
+  m_AnchoredPosition: {x: 876, y: -40}
   m_SizeDelta: {x: 650, y: 250}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &61154832123179586
@@ -9611,10 +9887,10 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "I should keep an eye out for Valeire\u2019s keys."
+  m_text: Maybe I can move Valerie's keys to an easier place for her to find.
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: cfab9bcc097433b47a2f09fe93ca47a9, type: 2}
-  m_sharedMaterial: {fileID: 4030978371311828227, guid: cfab9bcc097433b47a2f09fe93ca47a9,
+  m_fontAsset: {fileID: 11400000, guid: 6b88c93e2b6441b45b966c64ad5f36fa, type: 2}
+  m_sharedMaterial: {fileID: 101269190234465363, guid: 6b88c93e2b6441b45b966c64ad5f36fa,
     type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
@@ -9657,7 +9933,7 @@ MonoBehaviour:
   m_enableWordWrapping: 1
   m_wordWrappingRatios: 0.4
   m_overflowMode: 0
-  m_firstOverflowCharacterIndex: -1
+  m_firstOverflowCharacterIndex: 55
   m_linkedTextComponent: {fileID: 0}
   m_isLinkedTextComponent: 0
   m_isTextTruncated: 0
@@ -9681,14 +9957,14 @@ MonoBehaviour:
   m_margin: {x: 0, y: 0, z: 0, w: 0}
   m_textInfo:
     textComponent: {fileID: 312223378243480313}
-    characterCount: 44
+    characterCount: 67
     spriteCount: 0
-    spaceCount: 8
-    wordCount: 9
+    spaceCount: 13
+    wordCount: 14
     linkCount: 0
-    lineCount: 2
+    lineCount: 3
     pageCount: 1
-    materialCount: 2
+    materialCount: 1
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_spriteAnimator: {fileID: 0}
@@ -9752,7 +10028,8 @@ RectTransform:
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 0.9, z: 1}
-  m_Children: []
+  m_Children:
+  - {fileID: 8015398903944885958}
   m_Father: {fileID: 9080673221135610302}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -9788,11 +10065,10 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Seems like Valerie likes music, just like her daughter. Maybe I can use
-    that to cheer her up.
+  m_text: Would Val prefer the song she taught Morgan or the one she sang with Jaq?
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: cfab9bcc097433b47a2f09fe93ca47a9, type: 2}
-  m_sharedMaterial: {fileID: 4030978371311828227, guid: cfab9bcc097433b47a2f09fe93ca47a9,
+  m_fontAsset: {fileID: 11400000, guid: 6b88c93e2b6441b45b966c64ad5f36fa, type: 2}
+  m_sharedMaterial: {fileID: 101269190234465363, guid: 6b88c93e2b6441b45b966c64ad5f36fa,
     type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
@@ -9835,7 +10111,7 @@ MonoBehaviour:
   m_enableWordWrapping: 1
   m_wordWrappingRatios: 0.4
   m_overflowMode: 0
-  m_firstOverflowCharacterIndex: -1
+  m_firstOverflowCharacterIndex: 51
   m_linkedTextComponent: {fileID: 0}
   m_isLinkedTextComponent: 0
   m_isTextTruncated: 0
@@ -9859,10 +10135,10 @@ MonoBehaviour:
   m_margin: {x: 0, y: 0, z: 0, w: 0}
   m_textInfo:
     textComponent: {fileID: 8631973971654063735}
-    characterCount: 93
+    characterCount: 73
     spriteCount: 0
-    spaceCount: 17
-    wordCount: 18
+    spaceCount: 14
+    wordCount: 15
     linkCount: 0
     lineCount: 3
     pageCount: 1
@@ -9873,7 +10149,7 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_subTextObjects:
   - {fileID: 0}
-  - {fileID: 0}
+  - {fileID: 6816129169075100367}
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
@@ -10150,7 +10426,7 @@ MonoBehaviour:
   m_material: {fileID: 0}
   m_sharedMaterial: {fileID: 0}
   m_isDefaultMaterial: 0
-  m_padding: 1.25
+  m_padding: 0
   m_canvasRenderer: {fileID: 6474857124470194974}
   m_TextComponent: {fileID: 2073454829203388387}
   m_materialReferenceIndex: 1
@@ -10427,6 +10703,80 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
+--- !u!1 &3250333287091254177
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1442141826957493520}
+  - component: {fileID: 4532161359353543288}
+  - component: {fileID: 8731803812559614781}
+  m_Layer: 5
+  m_Name: TMP SubMeshUI [OpenDyslexic3-Regular SDF Material + LiberationSans SDF
+    Atlas]
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &1442141826957493520
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3250333287091254177}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 6164756732514214155}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!222 &4532161359353543288
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3250333287091254177}
+  m_CullTransparentMesh: 0
+--- !u!114 &8731803812559614781
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3250333287091254177}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 058cba836c1846c3aa1c5fd2e28aea77, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_spriteAsset: {fileID: 0}
+  m_material: {fileID: 0}
+  m_sharedMaterial: {fileID: 0}
+  m_isDefaultMaterial: 0
+  m_padding: 0
+  m_canvasRenderer: {fileID: 4532161359353543288}
+  m_TextComponent: {fileID: 6834817077737323074}
+  m_materialReferenceIndex: 1
 --- !u!1 &3261641132247451313
 GameObject:
   m_ObjectHideFlags: 0
@@ -10732,6 +11082,163 @@ RectTransform:
   m_AnchoredPosition: {x: 47.99643, y: -549.6948}
   m_SizeDelta: {x: 95.99286, y: 122.1544}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!1 &3455266823943026006
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7662253438997393894}
+  - component: {fileID: 4116983937753075491}
+  - component: {fileID: 7423131999219934590}
+  m_Layer: 5
+  m_Name: Text (TMP) (2)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &7662253438997393894
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3455266823943026006}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 2420616071513796811}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: -359, y: 400}
+  m_SizeDelta: {x: 200, y: 50}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!222 &4116983937753075491
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3455266823943026006}
+  m_CullTransparentMesh: 0
+--- !u!114 &7423131999219934590
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3455266823943026006}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_text: '? ? ? ?'
+  m_isRightToLeft: 0
+  m_fontAsset: {fileID: 11400000, guid: cfab9bcc097433b47a2f09fe93ca47a9, type: 2}
+  m_sharedMaterial: {fileID: 4030978371311828227, guid: cfab9bcc097433b47a2f09fe93ca47a9,
+    type: 2}
+  m_fontSharedMaterials: []
+  m_fontMaterial: {fileID: 0}
+  m_fontMaterials: []
+  m_fontColor32:
+    serializedVersion: 2
+    rgba: 4294967295
+  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
+  m_enableVertexGradient: 0
+  m_colorMode: 3
+  m_fontColorGradient:
+    topLeft: {r: 1, g: 1, b: 1, a: 1}
+    topRight: {r: 1, g: 1, b: 1, a: 1}
+    bottomLeft: {r: 1, g: 1, b: 1, a: 1}
+    bottomRight: {r: 1, g: 1, b: 1, a: 1}
+  m_fontColorGradientPreset: {fileID: 0}
+  m_spriteAsset: {fileID: 0}
+  m_tintAllSprites: 0
+  m_overrideHtmlColors: 0
+  m_faceColor:
+    serializedVersion: 2
+    rgba: 4294967295
+  m_outlineColor:
+    serializedVersion: 2
+    rgba: 4278190080
+  m_fontSize: 50
+  m_fontSizeBase: 50
+  m_fontWeight: 400
+  m_enableAutoSizing: 0
+  m_fontSizeMin: 18
+  m_fontSizeMax: 72
+  m_fontStyle: 1
+  m_textAlignment: 514
+  m_characterSpacing: 0
+  m_wordSpacing: 0
+  m_lineSpacing: 0
+  m_lineSpacingMax: 0
+  m_paragraphSpacing: 0
+  m_charWidthMaxAdj: 0
+  m_enableWordWrapping: 1
+  m_wordWrappingRatios: 0.4
+  m_overflowMode: 0
+  m_firstOverflowCharacterIndex: 0
+  m_linkedTextComponent: {fileID: 0}
+  m_isLinkedTextComponent: 0
+  m_isTextTruncated: 0
+  m_enableKerning: 1
+  m_enableExtraPadding: 0
+  checkPaddingRequired: 0
+  m_isRichText: 1
+  m_parseCtrlCharacters: 1
+  m_isOrthographic: 1
+  m_isCullingEnabled: 0
+  m_ignoreRectMaskCulling: 0
+  m_ignoreCulling: 1
+  m_horizontalMapping: 0
+  m_verticalMapping: 0
+  m_uvLineOffset: 0
+  m_geometrySortingOrder: 0
+  m_VertexBufferAutoSizeReduction: 1
+  m_firstVisibleCharacter: 0
+  m_useMaxVisibleDescender: 1
+  m_pageToDisplay: 1
+  m_margin: {x: 0, y: 0, z: 0, w: 0}
+  m_textInfo:
+    textComponent: {fileID: 7423131999219934590}
+    characterCount: 7
+    spriteCount: 0
+    spaceCount: 3
+    wordCount: 1
+    linkCount: 0
+    lineCount: 1
+    pageCount: 1
+    materialCount: 1
+  m_isUsingLegacyAnimationComponent: 0
+  m_isVolumetricText: 0
+  m_spriteAnimator: {fileID: 0}
+  m_hasFontAssetChanged: 0
+  m_subTextObjects:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  m_baseMaterial: {fileID: 0}
+  m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
 --- !u!1 &3458204749451216615
 GameObject:
   m_ObjectHideFlags: 0
@@ -10795,14 +11302,14 @@ RectTransform:
   m_GameObject: {fileID: 3470521052387986061}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.75, y: 0.75, z: 1}
   m_Children: []
   m_Father: {fileID: 2526037538213305117}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -498, y: 80}
+  m_AnchoredPosition: {x: -523, y: 135}
   m_SizeDelta: {x: 300, y: 500}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &185830424040623284
@@ -10982,8 +11489,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: Valerie
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: cfab9bcc097433b47a2f09fe93ca47a9, type: 2}
-  m_sharedMaterial: {fileID: 4030978371311828227, guid: cfab9bcc097433b47a2f09fe93ca47a9,
+  m_fontAsset: {fileID: 11400000, guid: 6b88c93e2b6441b45b966c64ad5f36fa, type: 2}
+  m_sharedMaterial: {fileID: 101269190234465363, guid: 6b88c93e2b6441b45b966c64ad5f36fa,
     type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
@@ -11073,6 +11580,163 @@ MonoBehaviour:
   - {fileID: 0}
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!1 &3558780209942169784
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2660140916653582538}
+  - component: {fileID: 9100419579682420445}
+  - component: {fileID: 3468304716752949813}
+  m_Layer: 5
+  m_Name: Text (TMP)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &2660140916653582538
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3558780209942169784}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 515672056852756727}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 260, y: 400}
+  m_SizeDelta: {x: 200, y: 50}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!222 &9100419579682420445
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3558780209942169784}
+  m_CullTransparentMesh: 0
+--- !u!114 &3468304716752949813
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3558780209942169784}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_text: '? ? ? ?'
+  m_isRightToLeft: 0
+  m_fontAsset: {fileID: 11400000, guid: cfab9bcc097433b47a2f09fe93ca47a9, type: 2}
+  m_sharedMaterial: {fileID: 4030978371311828227, guid: cfab9bcc097433b47a2f09fe93ca47a9,
+    type: 2}
+  m_fontSharedMaterials: []
+  m_fontMaterial: {fileID: 0}
+  m_fontMaterials: []
+  m_fontColor32:
+    serializedVersion: 2
+    rgba: 4294967295
+  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
+  m_enableVertexGradient: 0
+  m_colorMode: 3
+  m_fontColorGradient:
+    topLeft: {r: 1, g: 1, b: 1, a: 1}
+    topRight: {r: 1, g: 1, b: 1, a: 1}
+    bottomLeft: {r: 1, g: 1, b: 1, a: 1}
+    bottomRight: {r: 1, g: 1, b: 1, a: 1}
+  m_fontColorGradientPreset: {fileID: 0}
+  m_spriteAsset: {fileID: 0}
+  m_tintAllSprites: 0
+  m_overrideHtmlColors: 0
+  m_faceColor:
+    serializedVersion: 2
+    rgba: 4294967295
+  m_outlineColor:
+    serializedVersion: 2
+    rgba: 4278190080
+  m_fontSize: 50
+  m_fontSizeBase: 50
+  m_fontWeight: 400
+  m_enableAutoSizing: 0
+  m_fontSizeMin: 18
+  m_fontSizeMax: 72
+  m_fontStyle: 1
+  m_textAlignment: 514
+  m_characterSpacing: 0
+  m_wordSpacing: 0
+  m_lineSpacing: 0
+  m_lineSpacingMax: 0
+  m_paragraphSpacing: 0
+  m_charWidthMaxAdj: 0
+  m_enableWordWrapping: 1
+  m_wordWrappingRatios: 0.4
+  m_overflowMode: 0
+  m_firstOverflowCharacterIndex: 0
+  m_linkedTextComponent: {fileID: 0}
+  m_isLinkedTextComponent: 0
+  m_isTextTruncated: 0
+  m_enableKerning: 1
+  m_enableExtraPadding: 0
+  checkPaddingRequired: 0
+  m_isRichText: 1
+  m_parseCtrlCharacters: 1
+  m_isOrthographic: 1
+  m_isCullingEnabled: 0
+  m_ignoreRectMaskCulling: 0
+  m_ignoreCulling: 1
+  m_horizontalMapping: 0
+  m_verticalMapping: 0
+  m_uvLineOffset: 0
+  m_geometrySortingOrder: 0
+  m_VertexBufferAutoSizeReduction: 1
+  m_firstVisibleCharacter: 0
+  m_useMaxVisibleDescender: 1
+  m_pageToDisplay: 1
+  m_margin: {x: 0, y: 0, z: 0, w: 0}
+  m_textInfo:
+    textComponent: {fileID: 3468304716752949813}
+    characterCount: 7
+    spriteCount: 0
+    spaceCount: 3
+    wordCount: 1
+    linkCount: 0
+    lineCount: 1
+    pageCount: 1
+    materialCount: 1
+  m_isUsingLegacyAnimationComponent: 0
+  m_isVolumetricText: 0
+  m_spriteAnimator: {fileID: 0}
+  m_hasFontAssetChanged: 0
+  m_subTextObjects:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  m_baseMaterial: {fileID: 0}
+  m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
 --- !u!1 &3565253727569415459
 GameObject:
   m_ObjectHideFlags: 0
@@ -11139,10 +11803,10 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'I can use Jaqueline''s makeup to help Nathan with his costume. '
+  m_text: Someone needs to do Nathan's pirate makeup before he goes out.
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: cfab9bcc097433b47a2f09fe93ca47a9, type: 2}
-  m_sharedMaterial: {fileID: 4030978371311828227, guid: cfab9bcc097433b47a2f09fe93ca47a9,
+  m_fontAsset: {fileID: 11400000, guid: 6b88c93e2b6441b45b966c64ad5f36fa, type: 2}
+  m_sharedMaterial: {fileID: 101269190234465363, guid: 6b88c93e2b6441b45b966c64ad5f36fa,
     type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
@@ -11320,7 +11984,7 @@ MonoBehaviour:
   m_material: {fileID: 0}
   m_sharedMaterial: {fileID: 0}
   m_isDefaultMaterial: 0
-  m_padding: 1.25
+  m_padding: 0
   m_canvasRenderer: {fileID: 254464356932870656}
   m_TextComponent: {fileID: 8981640651729863607}
   m_materialReferenceIndex: 1
@@ -11507,7 +12171,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 212.74994, y: -351}
+  m_AnchoredPosition: {x: 212.74994, y: -315}
   m_SizeDelta: {x: 650, y: 250}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &7038659042166997515
@@ -11522,7 +12186,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 75f5d3ea048bd1743a3813d88ab062fb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _interactable: {fileID: 11400000, guid: 34c04687d9896064f85f1a216194c672, type: 2}
+  _interactable: {fileID: 0}
   _locked: {fileID: 8351839679713540169}
   _unlocked: {fileID: 6296098259951663319}
 --- !u!1 &3768461086451072949
@@ -11786,10 +12450,10 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: I can't help but feel that something important is missing from the tree...
+  m_text: I can't help but feel that something is missing from the tree...
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: cfab9bcc097433b47a2f09fe93ca47a9, type: 2}
-  m_sharedMaterial: {fileID: 4030978371311828227, guid: cfab9bcc097433b47a2f09fe93ca47a9,
+  m_fontAsset: {fileID: 11400000, guid: 6b88c93e2b6441b45b966c64ad5f36fa, type: 2}
+  m_sharedMaterial: {fileID: 101269190234465363, guid: 6b88c93e2b6441b45b966c64ad5f36fa,
     type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
@@ -11832,7 +12496,7 @@ MonoBehaviour:
   m_enableWordWrapping: 1
   m_wordWrappingRatios: 0.4
   m_overflowMode: 0
-  m_firstOverflowCharacterIndex: -1
+  m_firstOverflowCharacterIndex: 53
   m_linkedTextComponent: {fileID: 0}
   m_isLinkedTextComponent: 0
   m_isTextTruncated: 0
@@ -11856,10 +12520,10 @@ MonoBehaviour:
   m_margin: {x: 0, y: 0, z: 0, w: 0}
   m_textInfo:
     textComponent: {fileID: 2075459837575598200}
-    characterCount: 74
+    characterCount: 64
     spriteCount: 0
-    spaceCount: 12
-    wordCount: 13
+    spaceCount: 11
+    wordCount: 12
     linkCount: 0
     lineCount: 3
     pageCount: 1
@@ -11964,8 +12628,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: Settings
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: cfab9bcc097433b47a2f09fe93ca47a9, type: 2}
-  m_sharedMaterial: {fileID: 4030978371311828227, guid: cfab9bcc097433b47a2f09fe93ca47a9,
+  m_fontAsset: {fileID: 11400000, guid: 6b88c93e2b6441b45b966c64ad5f36fa, type: 2}
+  m_sharedMaterial: {fileID: 101269190234465363, guid: 6b88c93e2b6441b45b966c64ad5f36fa,
     type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
@@ -12008,7 +12672,7 @@ MonoBehaviour:
   m_enableWordWrapping: 1
   m_wordWrappingRatios: 0.4
   m_overflowMode: 0
-  m_firstOverflowCharacterIndex: -1
+  m_firstOverflowCharacterIndex: 0
   m_linkedTextComponent: {fileID: 0}
   m_isLinkedTextComponent: 0
   m_isTextTruncated: 0
@@ -12361,6 +13025,163 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!1 &4016350997197035623
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7993245569371361888}
+  - component: {fileID: 2034238766971274913}
+  - component: {fileID: 8537646414467880912}
+  m_Layer: 5
+  m_Name: Text
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &7993245569371361888
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4016350997197035623}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 5748402703523200672}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 230, y: -25}
+  m_SizeDelta: {x: 420, y: 200}
+  m_Pivot: {x: 0, y: 1}
+--- !u!222 &2034238766971274913
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4016350997197035623}
+  m_CullTransparentMesh: 0
+--- !u!114 &8537646414467880912
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4016350997197035623}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_text: Hopefully they smiled cause of how cheesy that was.
+  m_isRightToLeft: 0
+  m_fontAsset: {fileID: 11400000, guid: 6b88c93e2b6441b45b966c64ad5f36fa, type: 2}
+  m_sharedMaterial: {fileID: 101269190234465363, guid: 6b88c93e2b6441b45b966c64ad5f36fa,
+    type: 2}
+  m_fontSharedMaterials: []
+  m_fontMaterial: {fileID: 0}
+  m_fontMaterials: []
+  m_fontColor32:
+    serializedVersion: 2
+    rgba: 4278190080
+  m_fontColor: {r: 0, g: 0, b: 0, a: 1}
+  m_enableVertexGradient: 0
+  m_colorMode: 3
+  m_fontColorGradient:
+    topLeft: {r: 1, g: 1, b: 1, a: 1}
+    topRight: {r: 1, g: 1, b: 1, a: 1}
+    bottomLeft: {r: 1, g: 1, b: 1, a: 1}
+    bottomRight: {r: 1, g: 1, b: 1, a: 1}
+  m_fontColorGradientPreset: {fileID: 0}
+  m_spriteAsset: {fileID: 0}
+  m_tintAllSprites: 0
+  m_overrideHtmlColors: 0
+  m_faceColor:
+    serializedVersion: 2
+    rgba: 4294967295
+  m_outlineColor:
+    serializedVersion: 2
+    rgba: 4278190080
+  m_fontSize: 45
+  m_fontSizeBase: 45
+  m_fontWeight: 400
+  m_enableAutoSizing: 0
+  m_fontSizeMin: 18
+  m_fontSizeMax: 72
+  m_fontStyle: 1
+  m_textAlignment: 257
+  m_characterSpacing: 0
+  m_wordSpacing: 0
+  m_lineSpacing: 0
+  m_lineSpacingMax: 0
+  m_paragraphSpacing: 0
+  m_charWidthMaxAdj: 0
+  m_enableWordWrapping: 1
+  m_wordWrappingRatios: 0.4
+  m_overflowMode: 0
+  m_firstOverflowCharacterIndex: 31
+  m_linkedTextComponent: {fileID: 0}
+  m_isLinkedTextComponent: 0
+  m_isTextTruncated: 0
+  m_enableKerning: 1
+  m_enableExtraPadding: 0
+  checkPaddingRequired: 0
+  m_isRichText: 1
+  m_parseCtrlCharacters: 1
+  m_isOrthographic: 1
+  m_isCullingEnabled: 0
+  m_ignoreRectMaskCulling: 0
+  m_ignoreCulling: 1
+  m_horizontalMapping: 0
+  m_verticalMapping: 0
+  m_uvLineOffset: 0
+  m_geometrySortingOrder: 0
+  m_VertexBufferAutoSizeReduction: 1
+  m_firstVisibleCharacter: 0
+  m_useMaxVisibleDescender: 1
+  m_pageToDisplay: 1
+  m_margin: {x: 0, y: 0, z: 0, w: 0}
+  m_textInfo:
+    textComponent: {fileID: 8537646414467880912}
+    characterCount: 51
+    spriteCount: 0
+    spaceCount: 8
+    wordCount: 9
+    linkCount: 0
+    lineCount: 4
+    pageCount: 1
+    materialCount: 1
+  m_isUsingLegacyAnimationComponent: 0
+  m_isVolumetricText: 0
+  m_spriteAnimator: {fileID: 0}
+  m_hasFontAssetChanged: 0
+  m_subTextObjects:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  m_baseMaterial: {fileID: 0}
+  m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
 --- !u!1 &4020631449416363566
 GameObject:
   m_ObjectHideFlags: 0
@@ -12395,7 +13216,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -180, y: -118}
+  m_AnchoredPosition: {x: -180, y: -146}
   m_SizeDelta: {x: 200, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &431473213574750357
@@ -12425,11 +13246,11 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Youngest daughter of the Graves family and mother to Nathan Raines. Jaqueline
-    is usually a ray of sunshine, and loves nothing more than helping others.
+  m_text: Younger sister of Valerie and mother to Nathan Raines. A ray of sunshine,
+    and loves nothing more than helping others.
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: cfab9bcc097433b47a2f09fe93ca47a9, type: 2}
-  m_sharedMaterial: {fileID: 4030978371311828227, guid: cfab9bcc097433b47a2f09fe93ca47a9,
+  m_fontAsset: {fileID: 11400000, guid: 6b88c93e2b6441b45b966c64ad5f36fa, type: 2}
+  m_sharedMaterial: {fileID: 101269190234465363, guid: 6b88c93e2b6441b45b966c64ad5f36fa,
     type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
@@ -12472,7 +13293,7 @@ MonoBehaviour:
   m_enableWordWrapping: 1
   m_wordWrappingRatios: 0.4
   m_overflowMode: 0
-  m_firstOverflowCharacterIndex: 60
+  m_firstOverflowCharacterIndex: 98
   m_linkedTextComponent: {fileID: 0}
   m_isLinkedTextComponent: 0
   m_isTextTruncated: 0
@@ -12493,15 +13314,15 @@ MonoBehaviour:
   m_firstVisibleCharacter: 0
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: -44.728706, y: -384.7514, z: 0, w: 138.36359}
+  m_margin: {x: -108.035416, y: -414.88312, z: 0, w: 138.36359}
   m_textInfo:
     textComponent: {fileID: 121161189079964681}
-    characterCount: 151
+    characterCount: 117
     spriteCount: 0
-    spaceCount: 24
-    wordCount: 25
+    spaceCount: 19
+    wordCount: 20
     linkCount: 0
-    lineCount: 14
+    lineCount: 11
     pageCount: 1
     materialCount: 1
   m_isUsingLegacyAnimationComponent: 0
@@ -12590,7 +13411,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 272, y: 157}
-  m_SizeDelta: {x: 1920, y: 1080}
+  m_SizeDelta: {x: 2084.1, y: 1286.6}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &4585064078899538181
 CanvasRenderer:
@@ -12619,7 +13440,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: c12d708df20bdc441a4becab815d27d8, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 1a380bd29db8bda4ea9cc4defe524db6, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -12825,8 +13646,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: Yes
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: cfab9bcc097433b47a2f09fe93ca47a9, type: 2}
-  m_sharedMaterial: {fileID: 4030978371311828227, guid: cfab9bcc097433b47a2f09fe93ca47a9,
+  m_fontAsset: {fileID: 11400000, guid: 6b88c93e2b6441b45b966c64ad5f36fa, type: 2}
+  m_sharedMaterial: {fileID: 101269190234465363, guid: 6b88c93e2b6441b45b966c64ad5f36fa,
     type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
@@ -12916,6 +13737,80 @@ MonoBehaviour:
   - {fileID: 0}
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!1 &4201635774799524467
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8764717666252219845}
+  - component: {fileID: 5320842347491340313}
+  - component: {fileID: 8988829890675017739}
+  m_Layer: 5
+  m_Name: GameObject
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &8764717666252219845
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4201635774799524467}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 515672056852756727}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 264, y: 402}
+  m_SizeDelta: {x: 466.92, y: 127.5}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!222 &5320842347491340313
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4201635774799524467}
+  m_CullTransparentMesh: 0
+--- !u!114 &8988829890675017739
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4201635774799524467}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 0.184, g: 0.184, b: 0.184, a: 1}
+  m_RaycastTarget: 1
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Sprite: {fileID: 21300000, guid: 3a0fbbe6557d1a146894004288eea89f, type: 3}
+  m_Type: 0
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
 --- !u!1 &4237913283762607279
 GameObject:
   m_ObjectHideFlags: 0
@@ -13115,7 +14010,7 @@ MonoBehaviour:
   m_material: {fileID: 0}
   m_sharedMaterial: {fileID: 0}
   m_isDefaultMaterial: 0
-  m_padding: 1.25
+  m_padding: 0
   m_canvasRenderer: {fileID: 8405520005494273302}
   m_TextComponent: {fileID: 2075459837575598200}
   m_materialReferenceIndex: 1
@@ -13228,7 +14123,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 211, y: -137}
+  m_AnchoredPosition: {x: 211, y: -155}
   m_SizeDelta: {x: 650, y: 250}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &8275028757844110978
@@ -13320,6 +14215,80 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!1 &4344392196940249929
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6289406825364630337}
+  - component: {fileID: 3958381290067118888}
+  - component: {fileID: 931452417396769142}
+  m_Layer: 5
+  m_Name: Image
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &6289406825364630337
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4344392196940249929}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 5748402703523200672}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 210, y: 160}
+  m_Pivot: {x: 0, y: 1}
+--- !u!222 &3958381290067118888
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4344392196940249929}
+  m_CullTransparentMesh: 0
+--- !u!114 &931452417396769142
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4344392196940249929}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Sprite: {fileID: 21300000, guid: 51d40785c37b7ef4b9b0fd118c64e89a, type: 3}
+  m_Type: 0
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
 --- !u!1 &4394657263217230929
 GameObject:
   m_ObjectHideFlags: 0
@@ -13384,10 +14353,10 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'I helped Valerie rediscover an interest she shares with her daughter. '
+  m_text: Val and Morgan bonded over an old song.
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: cfab9bcc097433b47a2f09fe93ca47a9, type: 2}
-  m_sharedMaterial: {fileID: 4030978371311828227, guid: cfab9bcc097433b47a2f09fe93ca47a9,
+  m_fontAsset: {fileID: 11400000, guid: 6b88c93e2b6441b45b966c64ad5f36fa, type: 2}
+  m_sharedMaterial: {fileID: 101269190234465363, guid: 6b88c93e2b6441b45b966c64ad5f36fa,
     type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
@@ -13454,12 +14423,12 @@ MonoBehaviour:
   m_margin: {x: 0, y: 0, z: -89.011116, w: 0}
   m_textInfo:
     textComponent: {fileID: 8925155878766819979}
-    characterCount: 70
+    characterCount: 39
     spriteCount: 0
-    spaceCount: 11
-    wordCount: 11
+    spaceCount: 7
+    wordCount: 8
     linkCount: 0
-    lineCount: 4
+    lineCount: 3
     pageCount: 1
     materialCount: 1
   m_isUsingLegacyAnimationComponent: 0
@@ -13596,7 +14565,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4465080474576690245}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 9db057f2fc070ff4eac116b01cc24743, type: 3}
   m_Name: 
@@ -13610,7 +14579,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4465080474576690245}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 9db057f2fc070ff4eac116b01cc24743, type: 3}
   m_Name: 
@@ -13646,7 +14615,8 @@ RectTransform:
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 0.9, z: 1}
-  m_Children: []
+  m_Children:
+  - {fileID: 7750322118053692513}
   m_Father: {fileID: 7550183307426078379}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -13682,11 +14652,10 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: I should try and break up their fight. Maybe I can find a way to distract
-    them.
+  m_text: Maybe there's something in the kitchen to break up their fight.
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: cfab9bcc097433b47a2f09fe93ca47a9, type: 2}
-  m_sharedMaterial: {fileID: 4030978371311828227, guid: cfab9bcc097433b47a2f09fe93ca47a9,
+  m_fontAsset: {fileID: 11400000, guid: 6b88c93e2b6441b45b966c64ad5f36fa, type: 2}
+  m_sharedMaterial: {fileID: 101269190234465363, guid: 6b88c93e2b6441b45b966c64ad5f36fa,
     type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
@@ -13729,7 +14698,7 @@ MonoBehaviour:
   m_enableWordWrapping: 1
   m_wordWrappingRatios: 0.4
   m_overflowMode: 0
-  m_firstOverflowCharacterIndex: -1
+  m_firstOverflowCharacterIndex: 48
   m_linkedTextComponent: {fileID: 0}
   m_isLinkedTextComponent: 0
   m_isTextTruncated: 0
@@ -13753,10 +14722,10 @@ MonoBehaviour:
   m_margin: {x: 0, y: 0, z: 0, w: 0}
   m_textInfo:
     textComponent: {fileID: 3740471194755532180}
-    characterCount: 79
+    characterCount: 63
     spriteCount: 0
-    spaceCount: 16
-    wordCount: 17
+    spaceCount: 10
+    wordCount: 11
     linkCount: 0
     lineCount: 3
     pageCount: 1
@@ -13767,7 +14736,7 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_subTextObjects:
   - {fileID: 0}
-  - {fileID: 0}
+  - {fileID: 4441877212655746707}
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
@@ -13860,10 +14829,10 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "Nathan really enjoyed having an \u201Cimaginary friend\u201D"
+  m_text: Nathan and I had fun playing together.
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: cfab9bcc097433b47a2f09fe93ca47a9, type: 2}
-  m_sharedMaterial: {fileID: 4030978371311828227, guid: cfab9bcc097433b47a2f09fe93ca47a9,
+  m_fontAsset: {fileID: 11400000, guid: 6b88c93e2b6441b45b966c64ad5f36fa, type: 2}
+  m_sharedMaterial: {fileID: 101269190234465363, guid: 6b88c93e2b6441b45b966c64ad5f36fa,
     type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
@@ -13906,7 +14875,7 @@ MonoBehaviour:
   m_enableWordWrapping: 1
   m_wordWrappingRatios: 0.4
   m_overflowMode: 0
-  m_firstOverflowCharacterIndex: -1
+  m_firstOverflowCharacterIndex: 29
   m_linkedTextComponent: {fileID: 0}
   m_isLinkedTextComponent: 0
   m_isTextTruncated: 0
@@ -13930,14 +14899,14 @@ MonoBehaviour:
   m_margin: {x: 0, y: 0, z: 0, w: 0}
   m_textInfo:
     textComponent: {fileID: 2073454829203388387}
-    characterCount: 50
+    characterCount: 38
     spriteCount: 0
     spaceCount: 6
     wordCount: 7
     linkCount: 0
     lineCount: 3
     pageCount: 1
-    materialCount: 2
+    materialCount: 1
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_spriteAnimator: {fileID: 0}
@@ -14001,6 +14970,7 @@ GameObject:
   - component: {fileID: 6869136017015412633}
   - component: {fileID: 6085279223521303677}
   - component: {fileID: 1310549273958152990}
+  - component: {fileID: 5280948791717616743}
   m_Layer: 5
   m_Name: Previous
   m_TagString: Untagged
@@ -14119,6 +15089,34 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+--- !u!114 &5280948791717616743
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4533129028311209501}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0b148fe25e99eb48b9724523833bab1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Delegates:
+  - eventID: 4
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 1310549273958152990}
+          m_MethodName: OnDeselect
+          m_Mode: 0
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
 --- !u!1 &4536509244814986291
 GameObject:
   m_ObjectHideFlags: 0
@@ -14416,8 +15414,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: "The other walkie talkie\u2019s batteries must have died."
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: cfab9bcc097433b47a2f09fe93ca47a9, type: 2}
-  m_sharedMaterial: {fileID: 4030978371311828227, guid: cfab9bcc097433b47a2f09fe93ca47a9,
+  m_fontAsset: {fileID: 11400000, guid: 6b88c93e2b6441b45b966c64ad5f36fa, type: 2}
+  m_sharedMaterial: {fileID: 101269190234465363, guid: 6b88c93e2b6441b45b966c64ad5f36fa,
     type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
@@ -14491,7 +15489,7 @@ MonoBehaviour:
     linkCount: 0
     lineCount: 2
     pageCount: 1
-    materialCount: 2
+    materialCount: 1
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_spriteAnimator: {fileID: 0}
@@ -14591,10 +15589,10 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'I was able to return power to the house. '
+  m_text: Let there be light!
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: cfab9bcc097433b47a2f09fe93ca47a9, type: 2}
-  m_sharedMaterial: {fileID: 4030978371311828227, guid: cfab9bcc097433b47a2f09fe93ca47a9,
+  m_fontAsset: {fileID: 11400000, guid: 6b88c93e2b6441b45b966c64ad5f36fa, type: 2}
+  m_sharedMaterial: {fileID: 101269190234465363, guid: 6b88c93e2b6441b45b966c64ad5f36fa,
     type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
@@ -14661,12 +15659,12 @@ MonoBehaviour:
   m_margin: {x: 0, y: 0, z: 0, w: 0}
   m_textInfo:
     textComponent: {fileID: 929270028800105143}
-    characterCount: 41
+    characterCount: 19
     spriteCount: 0
-    spaceCount: 9
-    wordCount: 9
+    spaceCount: 3
+    wordCount: 4
     linkCount: 0
-    lineCount: 3
+    lineCount: 2
     pageCount: 1
     materialCount: 1
   m_isUsingLegacyAnimationComponent: 0
@@ -14684,6 +15682,76 @@ MonoBehaviour:
   - {fileID: 0}
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!1 &4665559431753175566
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5748402703523200672}
+  - component: {fileID: 5390086186687171297}
+  - component: {fileID: 5687520136117257773}
+  m_Layer: 5
+  m_Name: Unlocked
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &5748402703523200672
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4665559431753175566}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 7993245569371361888}
+  - {fileID: 6289406825364630337}
+  m_Father: {fileID: 3109109288976916420}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 650, y: 250}
+  m_Pivot: {x: 0, y: 1}
+--- !u!225 &5390086186687171297
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4665559431753175566}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
+--- !u!95 &5687520136117257773
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4665559431753175566}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: f1f591780a78f43498c3f4e64f5bfa83, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &4672522723647798826
 GameObject:
   m_ObjectHideFlags: 0
@@ -15144,7 +16212,7 @@ RectTransform:
   - {fileID: 6786696434881334932}
   - {fileID: 1109589907699326632}
   m_Father: {fileID: 2278556733214385605}
-  m_RootOrder: 6
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
@@ -15309,7 +16377,7 @@ MonoBehaviour:
   m_material: {fileID: 0}
   m_sharedMaterial: {fileID: 0}
   m_isDefaultMaterial: 0
-  m_padding: 1.25
+  m_padding: 0
   m_canvasRenderer: {fileID: 2298578819456227448}
   m_TextComponent: {fileID: 3291568866622935255}
   m_materialReferenceIndex: 1
@@ -15452,11 +16520,10 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Morgan has been struggling in school recently. Luckily Jaqueline was a
-    calming presence. '
+  m_text: Jaq really helped reassure Morgan about her grades.
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: cfab9bcc097433b47a2f09fe93ca47a9, type: 2}
-  m_sharedMaterial: {fileID: 4030978371311828227, guid: cfab9bcc097433b47a2f09fe93ca47a9,
+  m_fontAsset: {fileID: 11400000, guid: 6b88c93e2b6441b45b966c64ad5f36fa, type: 2}
+  m_sharedMaterial: {fileID: 101269190234465363, guid: 6b88c93e2b6441b45b966c64ad5f36fa,
     type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
@@ -15499,7 +16566,7 @@ MonoBehaviour:
   m_enableWordWrapping: 1
   m_wordWrappingRatios: 0.4
   m_overflowMode: 0
-  m_firstOverflowCharacterIndex: 71
+  m_firstOverflowCharacterIndex: -1
   m_linkedTextComponent: {fileID: 0}
   m_isLinkedTextComponent: 0
   m_isTextTruncated: 0
@@ -15523,12 +16590,12 @@ MonoBehaviour:
   m_margin: {x: 0, y: 0, z: -46.67649, w: 0}
   m_textInfo:
     textComponent: {fileID: 4438704108766982785}
-    characterCount: 89
+    characterCount: 51
     spriteCount: 0
-    spaceCount: 13
-    wordCount: 13
+    spaceCount: 7
+    wordCount: 8
     linkCount: 0
-    lineCount: 5
+    lineCount: 3
     pageCount: 1
     materialCount: 1
   m_isUsingLegacyAnimationComponent: 0
@@ -15782,11 +16849,11 @@ RectTransform:
   - {fileID: 3462780059922716878}
   - {fileID: 5336527954770904785}
   m_Father: {fileID: 2278556733214385605}
-  m_RootOrder: 3
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 223, y: -590}
+  m_AnchoredPosition: {x: 856, y: -440}
   m_SizeDelta: {x: 650, y: 250}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &5849254701509531044
@@ -16040,8 +17107,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: Cousin Ending
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: cfab9bcc097433b47a2f09fe93ca47a9, type: 2}
-  m_sharedMaterial: {fileID: 4030978371311828227, guid: cfab9bcc097433b47a2f09fe93ca47a9,
+  m_fontAsset: {fileID: 11400000, guid: 6b88c93e2b6441b45b966c64ad5f36fa, type: 2}
+  m_sharedMaterial: {fileID: 101269190234465363, guid: 6b88c93e2b6441b45b966c64ad5f36fa,
     type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
@@ -16469,6 +17536,8 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4024182327231289437}
+  - {fileID: 8764717666252219845}
+  - {fileID: 2660140916653582538}
   m_Father: {fileID: 5395127872929449193}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -16542,10 +17611,10 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "I gifted Morgan her mother\u2019s old childhood toy. "
+  m_text: I gifted the kids Val's old toy.
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: cfab9bcc097433b47a2f09fe93ca47a9, type: 2}
-  m_sharedMaterial: {fileID: 4030978371311828227, guid: cfab9bcc097433b47a2f09fe93ca47a9,
+  m_fontAsset: {fileID: 11400000, guid: 6b88c93e2b6441b45b966c64ad5f36fa, type: 2}
+  m_sharedMaterial: {fileID: 101269190234465363, guid: 6b88c93e2b6441b45b966c64ad5f36fa,
     type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
@@ -16612,14 +17681,14 @@ MonoBehaviour:
   m_margin: {x: 0, y: 0, z: 0, w: 0}
   m_textInfo:
     textComponent: {fileID: 6040517568102436169}
-    characterCount: 48
+    characterCount: 32
     spriteCount: 0
-    spaceCount: 8
-    wordCount: 8
+    spaceCount: 6
+    wordCount: 7
     linkCount: 0
-    lineCount: 3
+    lineCount: 2
     pageCount: 1
-    materialCount: 2
+    materialCount: 1
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_spriteAnimator: {fileID: 0}
@@ -17069,10 +18138,10 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'I turned on the porch lights to invite the kids to trick or treat. '
+  m_text: Now I can see why Val turned the light off.
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: cfab9bcc097433b47a2f09fe93ca47a9, type: 2}
-  m_sharedMaterial: {fileID: 4030978371311828227, guid: cfab9bcc097433b47a2f09fe93ca47a9,
+  m_fontAsset: {fileID: 11400000, guid: 6b88c93e2b6441b45b966c64ad5f36fa, type: 2}
+  m_sharedMaterial: {fileID: 101269190234465363, guid: 6b88c93e2b6441b45b966c64ad5f36fa,
     type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
@@ -17115,7 +18184,7 @@ MonoBehaviour:
   m_enableWordWrapping: 1
   m_wordWrappingRatios: 0.4
   m_overflowMode: 0
-  m_firstOverflowCharacterIndex: 51
+  m_firstOverflowCharacterIndex: 29
   m_linkedTextComponent: {fileID: 0}
   m_isLinkedTextComponent: 0
   m_isTextTruncated: 0
@@ -17139,12 +18208,12 @@ MonoBehaviour:
   m_margin: {x: 0, y: 0, z: 0, w: 0}
   m_textInfo:
     textComponent: {fileID: 7164719754346229682}
-    characterCount: 67
+    characterCount: 43
     spriteCount: 0
-    spaceCount: 14
-    wordCount: 14
+    spaceCount: 9
+    wordCount: 10
     linkCount: 0
-    lineCount: 4
+    lineCount: 3
     pageCount: 1
     materialCount: 1
   m_isUsingLegacyAnimationComponent: 0
@@ -17595,7 +18664,7 @@ MonoBehaviour:
   m_material: {fileID: 0}
   m_sharedMaterial: {fileID: 0}
   m_isDefaultMaterial: 0
-  m_padding: 1.25
+  m_padding: 0
   m_canvasRenderer: {fileID: 3025385068021664743}
   m_TextComponent: {fileID: 6040517568102436169}
   m_materialReferenceIndex: 1
@@ -17665,8 +18734,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: Morgan
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: cfab9bcc097433b47a2f09fe93ca47a9, type: 2}
-  m_sharedMaterial: {fileID: 4030978371311828227, guid: cfab9bcc097433b47a2f09fe93ca47a9,
+  m_fontAsset: {fileID: 11400000, guid: 6b88c93e2b6441b45b966c64ad5f36fa, type: 2}
+  m_sharedMaterial: {fileID: 101269190234465363, guid: 6b88c93e2b6441b45b966c64ad5f36fa,
     type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
@@ -17823,8 +18892,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: Poor kid just wants someone to play with.
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: cfab9bcc097433b47a2f09fe93ca47a9, type: 2}
-  m_sharedMaterial: {fileID: 4030978371311828227, guid: cfab9bcc097433b47a2f09fe93ca47a9,
+  m_fontAsset: {fileID: 11400000, guid: 6b88c93e2b6441b45b966c64ad5f36fa, type: 2}
+  m_sharedMaterial: {fileID: 101269190234465363, guid: 6b88c93e2b6441b45b966c64ad5f36fa,
     type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
@@ -18034,10 +19103,12 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'I sewed up the old jacket so Morgan can wear it again.  '
+  m_text: 'Val fixed my old jacket for Morgan.
+
+'
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: cfab9bcc097433b47a2f09fe93ca47a9, type: 2}
-  m_sharedMaterial: {fileID: 4030978371311828227, guid: cfab9bcc097433b47a2f09fe93ca47a9,
+  m_fontAsset: {fileID: 11400000, guid: 6b88c93e2b6441b45b966c64ad5f36fa, type: 2}
+  m_sharedMaterial: {fileID: 101269190234465363, guid: 6b88c93e2b6441b45b966c64ad5f36fa,
     type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
@@ -18080,7 +19151,7 @@ MonoBehaviour:
   m_enableWordWrapping: 1
   m_wordWrappingRatios: 0.4
   m_overflowMode: 0
-  m_firstOverflowCharacterIndex: -1
+  m_firstOverflowCharacterIndex: 28
   m_linkedTextComponent: {fileID: 0}
   m_isLinkedTextComponent: 0
   m_isTextTruncated: 0
@@ -18104,14 +19175,14 @@ MonoBehaviour:
   m_margin: {x: 0, y: 0, z: 0, w: 0}
   m_textInfo:
     textComponent: {fileID: 6999300150381250351}
-    characterCount: 56
+    characterCount: 36
     spriteCount: 0
-    spaceCount: 13
-    wordCount: 12
+    spaceCount: 7
+    wordCount: 7
     linkCount: 0
     lineCount: 3
     pageCount: 1
-    materialCount: 1
+    materialCount: 2
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_spriteAnimator: {fileID: 0}
@@ -18263,10 +19334,11 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: The sisters ending
+  m_text: Despite their differences, Val and Jaq have grown closer over the past
+    year. Prehaps they have finally started to heal the wounds from past.
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: cfab9bcc097433b47a2f09fe93ca47a9, type: 2}
-  m_sharedMaterial: {fileID: 4030978371311828227, guid: cfab9bcc097433b47a2f09fe93ca47a9,
+  m_fontAsset: {fileID: 11400000, guid: 6b88c93e2b6441b45b966c64ad5f36fa, type: 2}
+  m_sharedMaterial: {fileID: 101269190234465363, guid: 6b88c93e2b6441b45b966c64ad5f36fa,
     type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
@@ -18309,7 +19381,7 @@ MonoBehaviour:
   m_enableWordWrapping: 1
   m_wordWrappingRatios: 0.4
   m_overflowMode: 0
-  m_firstOverflowCharacterIndex: -1
+  m_firstOverflowCharacterIndex: 130
   m_linkedTextComponent: {fileID: 0}
   m_isLinkedTextComponent: 0
   m_isTextTruncated: 0
@@ -18333,12 +19405,12 @@ MonoBehaviour:
   m_margin: {x: -163.62534, y: 0, z: -175.15083, w: -240.66914}
   m_textInfo:
     textComponent: {fileID: 3164316306709039022}
-    characterCount: 18
+    characterCount: 140
     spriteCount: 0
-    spaceCount: 2
-    wordCount: 3
+    spaceCount: 23
+    wordCount: 24
     linkCount: 0
-    lineCount: 1
+    lineCount: 6
     pageCount: 1
     materialCount: 1
   m_isUsingLegacyAnimationComponent: 0
@@ -18542,14 +19614,14 @@ RectTransform:
   m_GameObject: {fileID: 5975966545866454060}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.75, y: 0.75, z: 1}
   m_Children: []
   m_Father: {fileID: 8878131421214716550}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 429, y: 40}
+  m_AnchoredPosition: {x: 452, y: -22}
   m_SizeDelta: {x: 300, y: 500}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &171427785821700445
@@ -18727,8 +19799,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: Sister Ending
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: cfab9bcc097433b47a2f09fe93ca47a9, type: 2}
-  m_sharedMaterial: {fileID: 4030978371311828227, guid: cfab9bcc097433b47a2f09fe93ca47a9,
+  m_fontAsset: {fileID: 11400000, guid: 6b88c93e2b6441b45b966c64ad5f36fa, type: 2}
+  m_sharedMaterial: {fileID: 101269190234465363, guid: 6b88c93e2b6441b45b966c64ad5f36fa,
     type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
@@ -19026,10 +20098,10 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Jaqueline's artistic skill did wonders for Nathan's Halloween costume.
+  m_text: Jaq's artistic skill did wonders for Nathan's costume.
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: cfab9bcc097433b47a2f09fe93ca47a9, type: 2}
-  m_sharedMaterial: {fileID: 4030978371311828227, guid: cfab9bcc097433b47a2f09fe93ca47a9,
+  m_fontAsset: {fileID: 11400000, guid: 6b88c93e2b6441b45b966c64ad5f36fa, type: 2}
+  m_sharedMaterial: {fileID: 101269190234465363, guid: 6b88c93e2b6441b45b966c64ad5f36fa,
     type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
@@ -19072,7 +20144,7 @@ MonoBehaviour:
   m_enableWordWrapping: 1
   m_wordWrappingRatios: 0.4
   m_overflowMode: 0
-  m_firstOverflowCharacterIndex: 62
+  m_firstOverflowCharacterIndex: 37
   m_linkedTextComponent: {fileID: 0}
   m_isLinkedTextComponent: 0
   m_isTextTruncated: 0
@@ -19096,12 +20168,12 @@ MonoBehaviour:
   m_margin: {x: 0, y: 0, z: -46.676857, w: 0}
   m_textInfo:
     textComponent: {fileID: 4913884704010843466}
-    characterCount: 70
+    characterCount: 54
     spriteCount: 0
-    spaceCount: 8
-    wordCount: 9
+    spaceCount: 7
+    wordCount: 8
     linkCount: 0
-    lineCount: 4
+    lineCount: 3
     pageCount: 1
     materialCount: 1
   m_isUsingLegacyAnimationComponent: 0
@@ -19150,11 +20222,11 @@ RectTransform:
   - {fileID: 455403649593145458}
   - {fileID: 7880562604087230758}
   m_Father: {fileID: 2278556733214385605}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 220, y: -316}
+  m_AnchoredPosition: {x: 220, y: -535}
   m_SizeDelta: {x: 625, y: 250}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &8451361413096127993
@@ -19350,7 +20422,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 223, y: -137}
+  m_AnchoredPosition: {x: 223, y: -125}
   m_SizeDelta: {x: 650, y: 250}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &5054776215196090563
@@ -19368,6 +20440,163 @@ MonoBehaviour:
   _interactable: {fileID: 11400000, guid: 16bd7b9754124ad45a3508e6bf1ca513, type: 2}
   _locked: {fileID: 2756141405772496954}
   _unlocked: {fileID: 6020573879584363036}
+--- !u!1 &6103034701078612443
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6162493158349891932}
+  - component: {fileID: 6080415021027856633}
+  - component: {fileID: 9095881881992881267}
+  m_Layer: 5
+  m_Name: Text (TMP) (1)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &6162493158349891932
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6103034701078612443}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 8007561478453852946}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: -386, y: 400}
+  m_SizeDelta: {x: 200, y: 50}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!222 &6080415021027856633
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6103034701078612443}
+  m_CullTransparentMesh: 0
+--- !u!114 &9095881881992881267
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6103034701078612443}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_text: '? ? ? ?'
+  m_isRightToLeft: 0
+  m_fontAsset: {fileID: 11400000, guid: cfab9bcc097433b47a2f09fe93ca47a9, type: 2}
+  m_sharedMaterial: {fileID: 4030978371311828227, guid: cfab9bcc097433b47a2f09fe93ca47a9,
+    type: 2}
+  m_fontSharedMaterials: []
+  m_fontMaterial: {fileID: 0}
+  m_fontMaterials: []
+  m_fontColor32:
+    serializedVersion: 2
+    rgba: 4294967295
+  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
+  m_enableVertexGradient: 0
+  m_colorMode: 3
+  m_fontColorGradient:
+    topLeft: {r: 1, g: 1, b: 1, a: 1}
+    topRight: {r: 1, g: 1, b: 1, a: 1}
+    bottomLeft: {r: 1, g: 1, b: 1, a: 1}
+    bottomRight: {r: 1, g: 1, b: 1, a: 1}
+  m_fontColorGradientPreset: {fileID: 0}
+  m_spriteAsset: {fileID: 0}
+  m_tintAllSprites: 0
+  m_overrideHtmlColors: 0
+  m_faceColor:
+    serializedVersion: 2
+    rgba: 4294967295
+  m_outlineColor:
+    serializedVersion: 2
+    rgba: 4278190080
+  m_fontSize: 50
+  m_fontSizeBase: 50
+  m_fontWeight: 400
+  m_enableAutoSizing: 0
+  m_fontSizeMin: 18
+  m_fontSizeMax: 72
+  m_fontStyle: 1
+  m_textAlignment: 514
+  m_characterSpacing: 0
+  m_wordSpacing: 0
+  m_lineSpacing: 0
+  m_lineSpacingMax: 0
+  m_paragraphSpacing: 0
+  m_charWidthMaxAdj: 0
+  m_enableWordWrapping: 1
+  m_wordWrappingRatios: 0.4
+  m_overflowMode: 0
+  m_firstOverflowCharacterIndex: 0
+  m_linkedTextComponent: {fileID: 0}
+  m_isLinkedTextComponent: 0
+  m_isTextTruncated: 0
+  m_enableKerning: 1
+  m_enableExtraPadding: 0
+  checkPaddingRequired: 0
+  m_isRichText: 1
+  m_parseCtrlCharacters: 1
+  m_isOrthographic: 1
+  m_isCullingEnabled: 0
+  m_ignoreRectMaskCulling: 0
+  m_ignoreCulling: 1
+  m_horizontalMapping: 0
+  m_verticalMapping: 0
+  m_uvLineOffset: 0
+  m_geometrySortingOrder: 0
+  m_VertexBufferAutoSizeReduction: 1
+  m_firstVisibleCharacter: 0
+  m_useMaxVisibleDescender: 1
+  m_pageToDisplay: 1
+  m_margin: {x: 0, y: 0, z: 0, w: 0}
+  m_textInfo:
+    textComponent: {fileID: 9095881881992881267}
+    characterCount: 7
+    spriteCount: 0
+    spaceCount: 3
+    wordCount: 1
+    linkCount: 0
+    lineCount: 1
+    pageCount: 1
+    materialCount: 1
+  m_isUsingLegacyAnimationComponent: 0
+  m_isVolumetricText: 0
+  m_spriteAnimator: {fileID: 0}
+  m_hasFontAssetChanged: 0
+  m_subTextObjects:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  m_baseMaterial: {fileID: 0}
+  m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
 --- !u!1 &6103048561751278154
 GameObject:
   m_ObjectHideFlags: 0
@@ -19403,7 +20632,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 842, y: -539}
+  m_AnchoredPosition: {x: 842, y: -480}
   m_SizeDelta: {x: 650, y: 250}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &1985554416798579857
@@ -19907,8 +21136,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: Quit
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: cfab9bcc097433b47a2f09fe93ca47a9, type: 2}
-  m_sharedMaterial: {fileID: 4030978371311828227, guid: cfab9bcc097433b47a2f09fe93ca47a9,
+  m_fontAsset: {fileID: 11400000, guid: 6b88c93e2b6441b45b966c64ad5f36fa, type: 2}
+  m_sharedMaterial: {fileID: 101269190234465363, guid: 6b88c93e2b6441b45b966c64ad5f36fa,
     type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
@@ -19951,7 +21180,7 @@ MonoBehaviour:
   m_enableWordWrapping: 1
   m_wordWrappingRatios: 0.4
   m_overflowMode: 0
-  m_firstOverflowCharacterIndex: -1
+  m_firstOverflowCharacterIndex: 0
   m_linkedTextComponent: {fileID: 0}
   m_isLinkedTextComponent: 0
   m_isTextTruncated: 0
@@ -20062,10 +21291,10 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: The jacket seemed to mean a lot to Morgan.
+  m_text: I'm glad the jacket helped Morgan calm down.
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: cfab9bcc097433b47a2f09fe93ca47a9, type: 2}
-  m_sharedMaterial: {fileID: 4030978371311828227, guid: cfab9bcc097433b47a2f09fe93ca47a9,
+  m_fontAsset: {fileID: 11400000, guid: 6b88c93e2b6441b45b966c64ad5f36fa, type: 2}
+  m_sharedMaterial: {fileID: 101269190234465363, guid: 6b88c93e2b6441b45b966c64ad5f36fa,
     type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
@@ -20108,7 +21337,7 @@ MonoBehaviour:
   m_enableWordWrapping: 1
   m_wordWrappingRatios: 0.4
   m_overflowMode: 0
-  m_firstOverflowCharacterIndex: 35
+  m_firstOverflowCharacterIndex: 27
   m_linkedTextComponent: {fileID: 0}
   m_isLinkedTextComponent: 0
   m_isTextTruncated: 0
@@ -20132,10 +21361,10 @@ MonoBehaviour:
   m_margin: {x: 0, y: 0, z: 0, w: 0}
   m_textInfo:
     textComponent: {fileID: 8455442141019853631}
-    characterCount: 42
+    characterCount: 44
     spriteCount: 0
-    spaceCount: 8
-    wordCount: 9
+    spaceCount: 7
+    wordCount: 8
     linkCount: 0
     lineCount: 4
     pageCount: 1
@@ -20339,17 +21568,17 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6271940162827252500}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: 0.049203467, w: 0.9987888}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0.3, y: 0.3, z: 1}
   m_Children: []
   m_Father: {fileID: 8007561478453852946}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 5.6410003}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: -366.99994, y: 138.99994}
-  m_SizeDelta: {x: 1920, y: 1080}
+  m_SizeDelta: {x: 1920, y: 1390}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &6707030263938427544
 CanvasRenderer:
@@ -20372,13 +21601,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0, g: 0, b: 0, a: 1}
+  m_Color: {r: 0.092, g: 0.092, b: 0.092, a: 1}
   m_RaycastTarget: 1
   m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 9b293186c3c21ac4f990845489311d2a, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 3a0fbbe6557d1a146894004288eea89f, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -20453,10 +21682,10 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Fixing the walkie talkie let Nathan talk to his mom.
+  m_text: Kzzt. Walkie talkie working now. Over.
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: cfab9bcc097433b47a2f09fe93ca47a9, type: 2}
-  m_sharedMaterial: {fileID: 4030978371311828227, guid: cfab9bcc097433b47a2f09fe93ca47a9,
+  m_fontAsset: {fileID: 11400000, guid: 6b88c93e2b6441b45b966c64ad5f36fa, type: 2}
+  m_sharedMaterial: {fileID: 101269190234465363, guid: 6b88c93e2b6441b45b966c64ad5f36fa,
     type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
@@ -20499,7 +21728,7 @@ MonoBehaviour:
   m_enableWordWrapping: 1
   m_wordWrappingRatios: 0.4
   m_overflowMode: 0
-  m_firstOverflowCharacterIndex: -1
+  m_firstOverflowCharacterIndex: 28
   m_linkedTextComponent: {fileID: 0}
   m_isLinkedTextComponent: 0
   m_isTextTruncated: 0
@@ -20523,10 +21752,10 @@ MonoBehaviour:
   m_margin: {x: 0, y: 0, z: 0, w: 0}
   m_textInfo:
     textComponent: {fileID: 551629731803475921}
-    characterCount: 52
+    characterCount: 38
     spriteCount: 0
-    spaceCount: 9
-    wordCount: 10
+    spaceCount: 5
+    wordCount: 6
     linkCount: 0
     lineCount: 3
     pageCount: 1
@@ -20852,7 +22081,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _season: 3
   _showAfter: {fileID: 11400000, guid: f07b48dae291ee345bf8cf6c56af03bf, type: 2}
-  _showUntil: {fileID: 11400000, guid: 747cdd4d5ed2be1458121823a6cd26d1, type: 2}
+  _showUntil: {fileID: 0}
   _hint: {fileID: 7193679938464678939}
   _debug: 0
 --- !u!114 &3778068412352769178
@@ -21021,7 +22250,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _season: 4
   _showAfter: {fileID: 11400000, guid: 6eacb77bd7b79734e9e1ec3377180650, type: 2}
-  _showUntil: {fileID: 11400000, guid: 34c04687d9896064f85f1a216194c672, type: 2}
+  _showUntil: {fileID: 0}
   _hint: {fileID: 6428384853439803854}
   _debug: 0
 --- !u!114 &3830268951635677997
@@ -21072,7 +22301,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _season: 4
   _showAfter: {fileID: 11400000, guid: 4df1cbabb33d730488766ae1842ee467, type: 2}
-  _showUntil: {fileID: 11400000, guid: e83468d1ce83d5c419d6ca2ef42f625d, type: 2}
+  _showUntil: {fileID: 0}
   _hint: {fileID: 1133387379176678328}
   _debug: 0
 --- !u!114 &7435001416116634825
@@ -21163,7 +22392,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 215, y: -571}
+  m_AnchoredPosition: {x: 215, y: -540}
   m_SizeDelta: {x: 650, y: 250}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &6958520141145462854
@@ -21178,7 +22407,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 75f5d3ea048bd1743a3813d88ab062fb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _interactable: {fileID: 11400000, guid: e83468d1ce83d5c419d6ca2ef42f625d, type: 2}
+  _interactable: {fileID: 0}
   _locked: {fileID: 1466212061823566323}
   _unlocked: {fileID: 4618458922256335793}
 --- !u!1 &6507752168269113311
@@ -21487,10 +22716,11 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: The cousins ending
+  m_text: Morgan and Nathan have developed a close bond with each other this year.
+    I see them playing together frequently now.
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: cfab9bcc097433b47a2f09fe93ca47a9, type: 2}
-  m_sharedMaterial: {fileID: 4030978371311828227, guid: cfab9bcc097433b47a2f09fe93ca47a9,
+  m_fontAsset: {fileID: 11400000, guid: 6b88c93e2b6441b45b966c64ad5f36fa, type: 2}
+  m_sharedMaterial: {fileID: 101269190234465363, guid: 6b88c93e2b6441b45b966c64ad5f36fa,
     type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
@@ -21557,12 +22787,12 @@ MonoBehaviour:
   m_margin: {x: -163.62534, y: 0, z: -175.15083, w: -240.66914}
   m_textInfo:
     textComponent: {fileID: 5228552482174879839}
-    characterCount: 18
+    characterCount: 116
     spriteCount: 0
-    spaceCount: 2
-    wordCount: 3
+    spaceCount: 19
+    wordCount: 20
     linkCount: 0
-    lineCount: 1
+    lineCount: 5
     pageCount: 1
     materialCount: 1
   m_isUsingLegacyAnimationComponent: 0
@@ -21645,10 +22875,10 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: The breaker room has got to be around here somewhere
+  m_text: There has to be a breaker room somewhere.
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: cfab9bcc097433b47a2f09fe93ca47a9, type: 2}
-  m_sharedMaterial: {fileID: 4030978371311828227, guid: cfab9bcc097433b47a2f09fe93ca47a9,
+  m_fontAsset: {fileID: 11400000, guid: 6b88c93e2b6441b45b966c64ad5f36fa, type: 2}
+  m_sharedMaterial: {fileID: 101269190234465363, guid: 6b88c93e2b6441b45b966c64ad5f36fa,
     type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
@@ -21715,10 +22945,10 @@ MonoBehaviour:
   m_margin: {x: 0, y: 0, z: 0, w: 0}
   m_textInfo:
     textComponent: {fileID: 2747679179395040256}
-    characterCount: 52
+    characterCount: 41
     spriteCount: 0
-    spaceCount: 9
-    wordCount: 10
+    spaceCount: 7
+    wordCount: 8
     linkCount: 0
     lineCount: 2
     pageCount: 1
@@ -21879,7 +23109,8 @@ GameObject:
   - component: {fileID: 7124017613260326749}
   - component: {fileID: 7730578394901393002}
   m_Layer: 5
-  m_Name: TMP SubMeshUI [GhostWrite SDF Material + LiberationSans SDF Atlas]
+  m_Name: TMP SubMeshUI [OpenDyslexic3-Regular SDF Material + LiberationSans SDF
+    Atlas]
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -21936,7 +23167,7 @@ MonoBehaviour:
   m_material: {fileID: 0}
   m_sharedMaterial: {fileID: 0}
   m_isDefaultMaterial: 0
-  m_padding: 1.25
+  m_padding: 0
   m_canvasRenderer: {fileID: 7124017613260326749}
   m_TextComponent: {fileID: 312223378243480313}
   m_materialReferenceIndex: 1
@@ -22006,8 +23237,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: Bad Ending
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: cfab9bcc097433b47a2f09fe93ca47a9, type: 2}
-  m_sharedMaterial: {fileID: 4030978371311828227, guid: cfab9bcc097433b47a2f09fe93ca47a9,
+  m_fontAsset: {fileID: 11400000, guid: 6b88c93e2b6441b45b966c64ad5f36fa, type: 2}
+  m_sharedMaterial: {fileID: 101269190234465363, guid: 6b88c93e2b6441b45b966c64ad5f36fa,
     type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
@@ -22199,11 +23430,10 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "There\u2019s a tear in the sleeve. Maybe I can find a way to stitch this
-    thing back up. "
+  m_text: Valerie's sewing stuff must be packed away somewhere.
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: cfab9bcc097433b47a2f09fe93ca47a9, type: 2}
-  m_sharedMaterial: {fileID: 4030978371311828227, guid: cfab9bcc097433b47a2f09fe93ca47a9,
+  m_fontAsset: {fileID: 11400000, guid: 6b88c93e2b6441b45b966c64ad5f36fa, type: 2}
+  m_sharedMaterial: {fileID: 101269190234465363, guid: 6b88c93e2b6441b45b966c64ad5f36fa,
     type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
@@ -22270,14 +23500,14 @@ MonoBehaviour:
   m_margin: {x: 0, y: 0, z: 0, w: 0}
   m_textInfo:
     textComponent: {fileID: 1465343081427224072}
-    characterCount: 83
+    characterCount: 53
     spriteCount: 0
-    spaceCount: 18
-    wordCount: 18
+    spaceCount: 7
+    wordCount: 8
     linkCount: 0
-    lineCount: 3
+    lineCount: 2
     pageCount: 1
-    materialCount: 2
+    materialCount: 1
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_spriteAnimator: {fileID: 0}
@@ -22324,7 +23554,8 @@ GameObject:
   - component: {fileID: 4705431681442534327}
   - component: {fileID: 4226289122947900089}
   m_Layer: 5
-  m_Name: TMP SubMeshUI [GhostWrite SDF Material + LiberationSans SDF Atlas]
+  m_Name: TMP SubMeshUI [OpenDyslexic3-Regular SDF Material + LiberationSans SDF
+    Atlas]
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -22512,6 +23743,42 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!1 &6735104834151541372
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 9017292159582398991}
+  m_Layer: 5
+  m_Name: Locked
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &9017292159582398991
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6735104834151541372}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 7624580231858093814}
+  m_Father: {fileID: 3109109288976916420}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 650, y: 250}
+  m_Pivot: {x: 0, y: 1}
 --- !u!1 &6764416099950946565
 GameObject:
   m_ObjectHideFlags: 0
@@ -22578,8 +23845,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: Winter
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: cfab9bcc097433b47a2f09fe93ca47a9, type: 2}
-  m_sharedMaterial: {fileID: 4030978371311828227, guid: cfab9bcc097433b47a2f09fe93ca47a9,
+  m_fontAsset: {fileID: 11400000, guid: 6b88c93e2b6441b45b966c64ad5f36fa, type: 2}
+  m_sharedMaterial: {fileID: 101269190234465363, guid: 6b88c93e2b6441b45b966c64ad5f36fa,
     type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
@@ -22963,7 +24230,8 @@ RectTransform:
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 0.9, z: 1}
-  m_Children: []
+  m_Children:
+  - {fileID: 1442141826957493520}
   m_Father: {fileID: 873622909207376871}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -22999,10 +24267,10 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Morgan was wearing a jacket in that photo. Maybe it will be of some comfort. '
+  m_text: Didn't Morgan seem happy in the photo in the dining room?
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: cfab9bcc097433b47a2f09fe93ca47a9, type: 2}
-  m_sharedMaterial: {fileID: 4030978371311828227, guid: cfab9bcc097433b47a2f09fe93ca47a9,
+  m_fontAsset: {fileID: 11400000, guid: 6b88c93e2b6441b45b966c64ad5f36fa, type: 2}
+  m_sharedMaterial: {fileID: 101269190234465363, guid: 6b88c93e2b6441b45b966c64ad5f36fa,
     type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
@@ -23045,7 +24313,7 @@ MonoBehaviour:
   m_enableWordWrapping: 1
   m_wordWrappingRatios: 0.4
   m_overflowMode: 0
-  m_firstOverflowCharacterIndex: -1
+  m_firstOverflowCharacterIndex: 41
   m_linkedTextComponent: {fileID: 0}
   m_isLinkedTextComponent: 0
   m_isTextTruncated: 0
@@ -23069,10 +24337,10 @@ MonoBehaviour:
   m_margin: {x: 0, y: 0, z: 0, w: 0}
   m_textInfo:
     textComponent: {fileID: 6834817077737323074}
-    characterCount: 77
+    characterCount: 57
     spriteCount: 0
-    spaceCount: 15
-    wordCount: 15
+    spaceCount: 10
+    wordCount: 11
     linkCount: 0
     lineCount: 3
     pageCount: 1
@@ -23083,7 +24351,7 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_subTextObjects:
   - {fileID: 0}
-  - {fileID: 0}
+  - {fileID: 8731803812559614781}
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
@@ -23216,7 +24484,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 828, y: -438}
+  m_AnchoredPosition: {x: 828, y: -420}
   m_SizeDelta: {x: 650, y: 250}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &4907317346340969821
@@ -23231,9 +24499,166 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 75f5d3ea048bd1743a3813d88ab062fb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _interactable: {fileID: 11400000, guid: 782f7062d468a5444af07132853f0b72, type: 2}
+  _interactable: {fileID: 0}
   _locked: {fileID: 6613431230246027424}
   _unlocked: {fileID: 7807713842012646475}
+--- !u!1 &6891751579524837588
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 212926216912848189}
+  - component: {fileID: 6805417274897068030}
+  - component: {fileID: 6045230089852945232}
+  m_Layer: 5
+  m_Name: Text (TMP) (3)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &212926216912848189
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6891751579524837588}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 7304635708572463266}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 275, y: 388}
+  m_SizeDelta: {x: 200, y: 50}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!222 &6805417274897068030
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6891751579524837588}
+  m_CullTransparentMesh: 0
+--- !u!114 &6045230089852945232
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6891751579524837588}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_text: '? ? ? ?'
+  m_isRightToLeft: 0
+  m_fontAsset: {fileID: 11400000, guid: cfab9bcc097433b47a2f09fe93ca47a9, type: 2}
+  m_sharedMaterial: {fileID: 4030978371311828227, guid: cfab9bcc097433b47a2f09fe93ca47a9,
+    type: 2}
+  m_fontSharedMaterials: []
+  m_fontMaterial: {fileID: 0}
+  m_fontMaterials: []
+  m_fontColor32:
+    serializedVersion: 2
+    rgba: 4294967295
+  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
+  m_enableVertexGradient: 0
+  m_colorMode: 3
+  m_fontColorGradient:
+    topLeft: {r: 1, g: 1, b: 1, a: 1}
+    topRight: {r: 1, g: 1, b: 1, a: 1}
+    bottomLeft: {r: 1, g: 1, b: 1, a: 1}
+    bottomRight: {r: 1, g: 1, b: 1, a: 1}
+  m_fontColorGradientPreset: {fileID: 0}
+  m_spriteAsset: {fileID: 0}
+  m_tintAllSprites: 0
+  m_overrideHtmlColors: 0
+  m_faceColor:
+    serializedVersion: 2
+    rgba: 4294967295
+  m_outlineColor:
+    serializedVersion: 2
+    rgba: 4278190080
+  m_fontSize: 50
+  m_fontSizeBase: 50
+  m_fontWeight: 400
+  m_enableAutoSizing: 0
+  m_fontSizeMin: 18
+  m_fontSizeMax: 72
+  m_fontStyle: 1
+  m_textAlignment: 514
+  m_characterSpacing: 0
+  m_wordSpacing: 0
+  m_lineSpacing: 0
+  m_lineSpacingMax: 0
+  m_paragraphSpacing: 0
+  m_charWidthMaxAdj: 0
+  m_enableWordWrapping: 1
+  m_wordWrappingRatios: 0.4
+  m_overflowMode: 0
+  m_firstOverflowCharacterIndex: 0
+  m_linkedTextComponent: {fileID: 0}
+  m_isLinkedTextComponent: 0
+  m_isTextTruncated: 0
+  m_enableKerning: 1
+  m_enableExtraPadding: 0
+  checkPaddingRequired: 0
+  m_isRichText: 1
+  m_parseCtrlCharacters: 1
+  m_isOrthographic: 1
+  m_isCullingEnabled: 0
+  m_ignoreRectMaskCulling: 0
+  m_ignoreCulling: 1
+  m_horizontalMapping: 0
+  m_verticalMapping: 0
+  m_uvLineOffset: 0
+  m_geometrySortingOrder: 0
+  m_VertexBufferAutoSizeReduction: 1
+  m_firstVisibleCharacter: 0
+  m_useMaxVisibleDescender: 1
+  m_pageToDisplay: 1
+  m_margin: {x: 0, y: 0, z: 0, w: 0}
+  m_textInfo:
+    textComponent: {fileID: 6045230089852945232}
+    characterCount: 7
+    spriteCount: 0
+    spaceCount: 3
+    wordCount: 1
+    linkCount: 0
+    lineCount: 1
+    pageCount: 1
+    materialCount: 1
+  m_isUsingLegacyAnimationComponent: 0
+  m_isVolumetricText: 0
+  m_spriteAnimator: {fileID: 0}
+  m_hasFontAssetChanged: 0
+  m_subTextObjects:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  m_baseMaterial: {fileID: 0}
+  m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
 --- !u!1 &6921816203279085216
 GameObject:
   m_ObjectHideFlags: 0
@@ -23536,7 +24961,7 @@ MonoBehaviour:
   m_material: {fileID: 0}
   m_sharedMaterial: {fileID: 0}
   m_isDefaultMaterial: 0
-  m_padding: 1.25
+  m_padding: 0
   m_canvasRenderer: {fileID: 4795747173727437746}
   m_TextComponent: {fileID: 1279864974710194477}
   m_materialReferenceIndex: 1
@@ -23626,7 +25051,8 @@ GameObject:
   - component: {fileID: 5957770047517929269}
   - component: {fileID: 1931850580712159751}
   m_Layer: 5
-  m_Name: TMP SubMeshUI [GhostWrite SDF Material + LiberationSans SDF Atlas]
+  m_Name: TMP SubMeshUI [OpenDyslexic3-Regular SDF Material + LiberationSans SDF
+    Atlas]
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -23723,6 +25149,80 @@ RectTransform:
   m_AnchoredPosition: {x: 250, y: -2610}
   m_SizeDelta: {x: 500, y: 110}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!1 &7200730551028641559
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 121223736024233031}
+  - component: {fileID: 6365524672866257306}
+  - component: {fileID: 4371758990460379408}
+  m_Layer: 5
+  m_Name: GameObject
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &121223736024233031
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7200730551028641559}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 7304635708572463266}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 263, y: 389}
+  m_SizeDelta: {x: 525.9, y: 125.8}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!222 &6365524672866257306
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7200730551028641559}
+  m_CullTransparentMesh: 0
+--- !u!114 &4371758990460379408
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7200730551028641559}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 0.099, g: 0.099, b: 0.099, a: 1}
+  m_RaycastTarget: 1
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Sprite: {fileID: 21300000, guid: 1a380bd29db8bda4ea9cc4defe524db6, type: 3}
+  m_Type: 0
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
 --- !u!1 &7215006026752372740
 GameObject:
   m_ObjectHideFlags: 0
@@ -23830,11 +25330,10 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'This was Valerie''s old toy, she might like to see it again. Or maybe
-    it can become a hand-me-down. '
+  m_text: I could use Lambie to surprise Val or the kids with a gift.
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: cfab9bcc097433b47a2f09fe93ca47a9, type: 2}
-  m_sharedMaterial: {fileID: 4030978371311828227, guid: cfab9bcc097433b47a2f09fe93ca47a9,
+  m_fontAsset: {fileID: 11400000, guid: 6b88c93e2b6441b45b966c64ad5f36fa, type: 2}
+  m_sharedMaterial: {fileID: 101269190234465363, guid: 6b88c93e2b6441b45b966c64ad5f36fa,
     type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
@@ -23877,7 +25376,7 @@ MonoBehaviour:
   m_enableWordWrapping: 1
   m_wordWrappingRatios: 0.4
   m_overflowMode: 0
-  m_firstOverflowCharacterIndex: 93
+  m_firstOverflowCharacterIndex: 52
   m_linkedTextComponent: {fileID: 0}
   m_isLinkedTextComponent: 0
   m_isTextTruncated: 0
@@ -23901,12 +25400,12 @@ MonoBehaviour:
   m_margin: {x: 0, y: 0, z: 0, w: 0}
   m_textInfo:
     textComponent: {fileID: 2278161203416130321}
-    characterCount: 99
+    characterCount: 59
     spriteCount: 0
-    spaceCount: 19
-    wordCount: 19
+    spaceCount: 12
+    wordCount: 13
     linkCount: 0
-    lineCount: 4
+    lineCount: 3
     pageCount: 1
     materialCount: 1
   m_isUsingLegacyAnimationComponent: 0
@@ -24086,7 +25585,7 @@ MonoBehaviour:
   m_material: {fileID: 0}
   m_sharedMaterial: {fileID: 0}
   m_isDefaultMaterial: 0
-  m_padding: 1.25
+  m_padding: 0
   m_canvasRenderer: {fileID: 1243988278267785546}
   m_TextComponent: {fileID: 8845630989936730765}
   m_materialReferenceIndex: 1
@@ -24156,8 +25655,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: Summer
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: cfab9bcc097433b47a2f09fe93ca47a9, type: 2}
-  m_sharedMaterial: {fileID: 4030978371311828227, guid: cfab9bcc097433b47a2f09fe93ca47a9,
+  m_fontAsset: {fileID: 11400000, guid: 6b88c93e2b6441b45b966c64ad5f36fa, type: 2}
+  m_sharedMaterial: {fileID: 101269190234465363, guid: 6b88c93e2b6441b45b966c64ad5f36fa,
     type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
@@ -24301,7 +25800,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7277042438321990490}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
   m_Name: 
@@ -24313,10 +25812,10 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "No wonder no one\u2019s knocking, the porch lights are off."
+  m_text: "No wonder no one\u2019s knocking; the porch light is off."
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: cfab9bcc097433b47a2f09fe93ca47a9, type: 2}
-  m_sharedMaterial: {fileID: 4030978371311828227, guid: cfab9bcc097433b47a2f09fe93ca47a9,
+  m_fontAsset: {fileID: 11400000, guid: 6b88c93e2b6441b45b966c64ad5f36fa, type: 2}
+  m_sharedMaterial: {fileID: 101269190234465363, guid: 6b88c93e2b6441b45b966c64ad5f36fa,
     type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
@@ -24359,7 +25858,7 @@ MonoBehaviour:
   m_enableWordWrapping: 1
   m_wordWrappingRatios: 0.4
   m_overflowMode: 0
-  m_firstOverflowCharacterIndex: -1
+  m_firstOverflowCharacterIndex: 48
   m_linkedTextComponent: {fileID: 0}
   m_isLinkedTextComponent: 0
   m_isTextTruncated: 0
@@ -24383,14 +25882,14 @@ MonoBehaviour:
   m_margin: {x: 0, y: 0, z: 0, w: 0}
   m_textInfo:
     textComponent: {fileID: 9160567797769842706}
-    characterCount: 54
+    characterCount: 0
     spriteCount: 0
-    spaceCount: 9
-    wordCount: 10
+    spaceCount: 0
+    wordCount: 0
     linkCount: 0
-    lineCount: 2
-    pageCount: 1
-    materialCount: 2
+    lineCount: 0
+    pageCount: 0
+    materialCount: 1
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_spriteAnimator: {fileID: 0}
@@ -24437,7 +25936,8 @@ GameObject:
   - component: {fileID: 3523273945676988798}
   - component: {fileID: 5732403752915604750}
   m_Layer: 5
-  m_Name: TMP SubMeshUI [GhostWrite SDF Material + LiberationSans SDF Atlas]
+  m_Name: TMP SubMeshUI [OpenDyslexic3-Regular SDF Material + LiberationSans SDF
+    Atlas]
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -24494,7 +25994,7 @@ MonoBehaviour:
   m_material: {fileID: 0}
   m_sharedMaterial: {fileID: 0}
   m_isDefaultMaterial: 0
-  m_padding: 1.25
+  m_padding: 0
   m_canvasRenderer: {fileID: 3523273945676988798}
   m_TextComponent: {fileID: 6489998014756642329}
   m_materialReferenceIndex: 1
@@ -24534,6 +26034,80 @@ RectTransform:
   m_AnchoredPosition: {x: 47.99643, y: -183.2316}
   m_SizeDelta: {x: 95.99286, y: 122.1544}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!1 &7310649458914624883
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8327316261808968942}
+  - component: {fileID: 5049464513545923680}
+  - component: {fileID: 2567106858618791866}
+  m_Layer: 5
+  m_Name: GameObject
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &8327316261808968942
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7310649458914624883}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 2420616071513796811}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: -365, y: 395}
+  m_SizeDelta: {x: 507, y: 119.1}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!222 &5049464513545923680
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7310649458914624883}
+  m_CullTransparentMesh: 0
+--- !u!114 &2567106858618791866
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7310649458914624883}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 0.113000005, g: 0.113000005, b: 0.113000005, a: 1}
+  m_RaycastTarget: 1
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Sprite: {fileID: 21300000, guid: 3a0fbbe6557d1a146894004288eea89f, type: 3}
+  m_Type: 0
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
 --- !u!1 &7317587305700937946
 GameObject:
   m_ObjectHideFlags: 0
@@ -24572,6 +26146,80 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!1 &7347080125257894202
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7624580231858093814}
+  - component: {fileID: 3201221702693984003}
+  - component: {fileID: 1340860722269607762}
+  m_Layer: 5
+  m_Name: image
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &7624580231858093814
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7347080125257894202}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 9017292159582398991}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 210, y: 160}
+  m_Pivot: {x: 0, y: 1}
+--- !u!222 &3201221702693984003
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7347080125257894202}
+  m_CullTransparentMesh: 0
+--- !u!114 &1340860722269607762
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7347080125257894202}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 0, g: 0, b: 0, a: 1}
+  m_RaycastTarget: 1
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Sprite: {fileID: 21300000, guid: 51d40785c37b7ef4b9b0fd118c64e89a, type: 3}
+  m_Type: 0
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
 --- !u!1 &7349423913082726057
 GameObject:
   m_ObjectHideFlags: 0
@@ -24637,11 +26285,10 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "I found the family\u2019s cabin keys. I\u2019m sure Valerie appreciated
-    at least one less thing to worry about. "
+  m_text: Finding the keys helped Val worry less.
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: cfab9bcc097433b47a2f09fe93ca47a9, type: 2}
-  m_sharedMaterial: {fileID: 4030978371311828227, guid: cfab9bcc097433b47a2f09fe93ca47a9,
+  m_fontAsset: {fileID: 11400000, guid: 6b88c93e2b6441b45b966c64ad5f36fa, type: 2}
+  m_sharedMaterial: {fileID: 101269190234465363, guid: 6b88c93e2b6441b45b966c64ad5f36fa,
     type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
@@ -24684,7 +26331,7 @@ MonoBehaviour:
   m_enableWordWrapping: 1
   m_wordWrappingRatios: 0.4
   m_overflowMode: 0
-  m_firstOverflowCharacterIndex: 50
+  m_firstOverflowCharacterIndex: 34
   m_linkedTextComponent: {fileID: 0}
   m_isLinkedTextComponent: 0
   m_isTextTruncated: 0
@@ -24708,14 +26355,14 @@ MonoBehaviour:
   m_margin: {x: 0, y: 0, z: -21.782942, w: 0}
   m_textInfo:
     textComponent: {fileID: 3996543913287301061}
-    characterCount: 102
+    characterCount: 39
     spriteCount: 0
-    spaceCount: 18
-    wordCount: 18
+    spaceCount: 6
+    wordCount: 7
     linkCount: 0
-    lineCount: 6
+    lineCount: 3
     pageCount: 1
-    materialCount: 2
+    materialCount: 1
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_spriteAnimator: {fileID: 0}
@@ -24743,7 +26390,8 @@ GameObject:
   - component: {fileID: 3025371014947866542}
   - component: {fileID: 6051522155247619089}
   m_Layer: 5
-  m_Name: TMP SubMeshUI [GhostWrite SDF Material + LiberationSans SDF Atlas]
+  m_Name: TMP SubMeshUI [OpenDyslexic3-Regular SDF Material + LiberationSans SDF
+    Atlas]
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -24800,7 +26448,7 @@ MonoBehaviour:
   m_material: {fileID: 0}
   m_sharedMaterial: {fileID: 0}
   m_isDefaultMaterial: 0
-  m_padding: 0
+  m_padding: 1.25
   m_canvasRenderer: {fileID: 3025371014947866542}
   m_TextComponent: {fileID: 4438704108766982785}
   m_materialReferenceIndex: 1
@@ -25087,14 +26735,14 @@ RectTransform:
   m_GameObject: {fileID: 7548504934265029790}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.75, y: 0.75, z: 1}
   m_Children: []
   m_Father: {fileID: 2526037538213305117}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 289, y: -130}
+  m_AnchoredPosition: {x: 429, y: 134}
   m_SizeDelta: {x: 300, y: 500}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &1347819309547265593
@@ -25305,7 +26953,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 837, y: -631}
+  m_AnchoredPosition: {x: 837, y: -620}
   m_SizeDelta: {x: 650, y: 250}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &2735887857636631315
@@ -25900,8 +27548,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: 'I could use the sticky notes to slip a message into their lunchboxes. '
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: cfab9bcc097433b47a2f09fe93ca47a9, type: 2}
-  m_sharedMaterial: {fileID: 4030978371311828227, guid: cfab9bcc097433b47a2f09fe93ca47a9,
+  m_fontAsset: {fileID: 11400000, guid: 6b88c93e2b6441b45b966c64ad5f36fa, type: 2}
+  m_sharedMaterial: {fileID: 101269190234465363, guid: 6b88c93e2b6441b45b966c64ad5f36fa,
     type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
@@ -25944,7 +27592,7 @@ MonoBehaviour:
   m_enableWordWrapping: 1
   m_wordWrappingRatios: 0.4
   m_overflowMode: 0
-  m_firstOverflowCharacterIndex: -1
+  m_firstOverflowCharacterIndex: 58
   m_linkedTextComponent: {fileID: 0}
   m_isLinkedTextComponent: 0
   m_isTextTruncated: 0
@@ -26393,8 +28041,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: 'The altar might be a way to communicate with Morgan directly. '
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: cfab9bcc097433b47a2f09fe93ca47a9, type: 2}
-  m_sharedMaterial: {fileID: 4030978371311828227, guid: cfab9bcc097433b47a2f09fe93ca47a9,
+  m_fontAsset: {fileID: 11400000, guid: 6b88c93e2b6441b45b966c64ad5f36fa, type: 2}
+  m_sharedMaterial: {fileID: 101269190234465363, guid: 6b88c93e2b6441b45b966c64ad5f36fa,
     type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
@@ -26437,7 +28085,7 @@ MonoBehaviour:
   m_enableWordWrapping: 1
   m_wordWrappingRatios: 0.4
   m_overflowMode: 0
-  m_firstOverflowCharacterIndex: -1
+  m_firstOverflowCharacterIndex: 52
   m_linkedTextComponent: {fileID: 0}
   m_isLinkedTextComponent: 0
   m_isTextTruncated: 0
@@ -26591,7 +28239,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 238, y: -207}
+  m_AnchoredPosition: {x: 238, y: -180}
   m_SizeDelta: {x: 600, y: 250}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &1833740751008787879
@@ -26678,7 +28326,7 @@ MonoBehaviour:
   m_material: {fileID: 0}
   m_sharedMaterial: {fileID: 0}
   m_isDefaultMaterial: 0
-  m_padding: 1.25
+  m_padding: 0
   m_canvasRenderer: {fileID: 5282911601351598584}
   m_TextComponent: {fileID: 1465343081427224072}
   m_materialReferenceIndex: 1
@@ -26785,8 +28433,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: Fall
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: cfab9bcc097433b47a2f09fe93ca47a9, type: 2}
-  m_sharedMaterial: {fileID: 4030978371311828227, guid: cfab9bcc097433b47a2f09fe93ca47a9,
+  m_fontAsset: {fileID: 11400000, guid: 6b88c93e2b6441b45b966c64ad5f36fa, type: 2}
+  m_sharedMaterial: {fileID: 101269190234465363, guid: 6b88c93e2b6441b45b966c64ad5f36fa,
     type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
@@ -26911,7 +28559,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: -368, y: 157}
-  m_SizeDelta: {x: 1920, y: 1080}
+  m_SizeDelta: {x: 2006.7, y: 1411}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &635385576565251819
 CanvasRenderer:
@@ -26934,13 +28582,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0, g: 0, b: 0, a: 1}
+  m_Color: {r: 0.092, g: 0.092, b: 0.092, a: 1}
   m_RaycastTarget: 1
   m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 873b9d584a5623f4caa09597542c59d0, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 57e25c54990a1214cb614d2f0aaaf8e7, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -27084,6 +28732,8 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 6248091093598143197}
+  - {fileID: 121223736024233031}
+  - {fileID: 212926216912848189}
   m_Father: {fileID: 7198255950247861189}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -27578,7 +29228,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 213, y: -123}
+  m_AnchoredPosition: {x: 213, y: -110}
   m_SizeDelta: {x: 650, y: 250}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &6157093542272314724
@@ -28025,8 +29675,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: Cancel
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: cfab9bcc097433b47a2f09fe93ca47a9, type: 2}
-  m_sharedMaterial: {fileID: 4030978371311828227, guid: cfab9bcc097433b47a2f09fe93ca47a9,
+  m_fontAsset: {fileID: 11400000, guid: 6b88c93e2b6441b45b966c64ad5f36fa, type: 2}
+  m_sharedMaterial: {fileID: 101269190234465363, guid: 6b88c93e2b6441b45b966c64ad5f36fa,
     type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
@@ -28341,8 +29991,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: Summer
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: cfab9bcc097433b47a2f09fe93ca47a9, type: 2}
-  m_sharedMaterial: {fileID: 4030978371311828227, guid: cfab9bcc097433b47a2f09fe93ca47a9,
+  m_fontAsset: {fileID: 11400000, guid: 6b88c93e2b6441b45b966c64ad5f36fa, type: 2}
+  m_sharedMaterial: {fileID: 101269190234465363, guid: 6b88c93e2b6441b45b966c64ad5f36fa,
     type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
@@ -28786,10 +30436,10 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: That piece of artwork deserves to be seen.
+  m_text: Perhaps moving this will remind Jaq to finish the painting.
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: cfab9bcc097433b47a2f09fe93ca47a9, type: 2}
-  m_sharedMaterial: {fileID: 4030978371311828227, guid: cfab9bcc097433b47a2f09fe93ca47a9,
+  m_fontAsset: {fileID: 11400000, guid: 6b88c93e2b6441b45b966c64ad5f36fa, type: 2}
+  m_sharedMaterial: {fileID: 101269190234465363, guid: 6b88c93e2b6441b45b966c64ad5f36fa,
     type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
@@ -28832,7 +30482,7 @@ MonoBehaviour:
   m_enableWordWrapping: 1
   m_wordWrappingRatios: 0.4
   m_overflowMode: 0
-  m_firstOverflowCharacterIndex: -1
+  m_firstOverflowCharacterIndex: 50
   m_linkedTextComponent: {fileID: 0}
   m_isLinkedTextComponent: 0
   m_isTextTruncated: 0
@@ -28856,12 +30506,12 @@ MonoBehaviour:
   m_margin: {x: -144.86668, y: -21.298536, z: -147.70546, w: -21.301374}
   m_textInfo:
     textComponent: {fileID: 7562940779266711750}
-    characterCount: 42
+    characterCount: 59
     spriteCount: 0
-    spaceCount: 7
-    wordCount: 8
+    spaceCount: 9
+    wordCount: 10
     linkCount: 0
-    lineCount: 2
+    lineCount: 3
     pageCount: 1
     materialCount: 1
   m_isUsingLegacyAnimationComponent: 0
@@ -28989,6 +30639,80 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!1 &8439346294565976316
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8015398903944885958}
+  - component: {fileID: 8289560461350892308}
+  - component: {fileID: 6816129169075100367}
+  m_Layer: 5
+  m_Name: TMP SubMeshUI [OpenDyslexic3-Regular SDF Material + LiberationSans SDF
+    Atlas]
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &8015398903944885958
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8439346294565976316}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 8844183200267184747}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!222 &8289560461350892308
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8439346294565976316}
+  m_CullTransparentMesh: 0
+--- !u!114 &6816129169075100367
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8439346294565976316}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 058cba836c1846c3aa1c5fd2e28aea77, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_spriteAsset: {fileID: 0}
+  m_material: {fileID: 0}
+  m_sharedMaterial: {fileID: 0}
+  m_isDefaultMaterial: 0
+  m_padding: 0
+  m_canvasRenderer: {fileID: 8289560461350892308}
+  m_TextComponent: {fileID: 8631973971654063735}
+  m_materialReferenceIndex: 1
 --- !u!1 &8440300409907972522
 GameObject:
   m_ObjectHideFlags: 0
@@ -29057,8 +30781,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: Maybe I could use the wrapping paper to occupy the kids somehow.
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: cfab9bcc097433b47a2f09fe93ca47a9, type: 2}
-  m_sharedMaterial: {fileID: 4030978371311828227, guid: cfab9bcc097433b47a2f09fe93ca47a9,
+  m_fontAsset: {fileID: 11400000, guid: 6b88c93e2b6441b45b966c64ad5f36fa, type: 2}
+  m_sharedMaterial: {fileID: 101269190234465363, guid: 6b88c93e2b6441b45b966c64ad5f36fa,
     type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
@@ -29101,7 +30825,7 @@ MonoBehaviour:
   m_enableWordWrapping: 1
   m_wordWrappingRatios: 0.4
   m_overflowMode: 0
-  m_firstOverflowCharacterIndex: -1
+  m_firstOverflowCharacterIndex: 47
   m_linkedTextComponent: {fileID: 0}
   m_isLinkedTextComponent: 0
   m_isTextTruncated: 0
@@ -29179,6 +30903,7 @@ GameObject:
   - component: {fileID: 8449192976708198234}
   - component: {fileID: 8449192976708198233}
   - component: {fileID: 8449192976708198232}
+  - component: {fileID: 1605721297993153824}
   m_Layer: 5
   m_Name: Next
   m_TagString: Untagged
@@ -29297,6 +31022,34 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+--- !u!114 &1605721297993153824
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8449192976708198230}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0b148fe25e99eb48b9724523833bab1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Delegates:
+  - eventID: 4
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 8449192976708198232}
+          m_MethodName: OnDeselect
+          m_Mode: 0
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
 --- !u!1 &8449192977113271060
 GameObject:
   m_ObjectHideFlags: 0
@@ -29461,10 +31214,10 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: I returned an old childhood toy to Valerie.
+  m_text: I returned an old childhood toy to Val.
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: cfab9bcc097433b47a2f09fe93ca47a9, type: 2}
-  m_sharedMaterial: {fileID: 4030978371311828227, guid: cfab9bcc097433b47a2f09fe93ca47a9,
+  m_fontAsset: {fileID: 11400000, guid: 6b88c93e2b6441b45b966c64ad5f36fa, type: 2}
+  m_sharedMaterial: {fileID: 101269190234465363, guid: 6b88c93e2b6441b45b966c64ad5f36fa,
     type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
@@ -29507,7 +31260,7 @@ MonoBehaviour:
   m_enableWordWrapping: 1
   m_wordWrappingRatios: 0.4
   m_overflowMode: 0
-  m_firstOverflowCharacterIndex: -1
+  m_firstOverflowCharacterIndex: 35
   m_linkedTextComponent: {fileID: 0}
   m_isLinkedTextComponent: 0
   m_isTextTruncated: 0
@@ -29531,7 +31284,7 @@ MonoBehaviour:
   m_margin: {x: 0, y: 0, z: 0, w: 0}
   m_textInfo:
     textComponent: {fileID: 3477118078506032066}
-    characterCount: 43
+    characterCount: 39
     spriteCount: 0
     spaceCount: 7
     wordCount: 8
@@ -29620,10 +31373,10 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "The cookies are going to burn if I don\u2019t do something about it. "
+  m_text: I should turn off the oven before the cookies burn.
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: cfab9bcc097433b47a2f09fe93ca47a9, type: 2}
-  m_sharedMaterial: {fileID: 4030978371311828227, guid: cfab9bcc097433b47a2f09fe93ca47a9,
+  m_fontAsset: {fileID: 11400000, guid: 6b88c93e2b6441b45b966c64ad5f36fa, type: 2}
+  m_sharedMaterial: {fileID: 101269190234465363, guid: 6b88c93e2b6441b45b966c64ad5f36fa,
     type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
@@ -29690,14 +31443,14 @@ MonoBehaviour:
   m_margin: {x: 0, y: 0, z: 0, w: 0}
   m_textInfo:
     textComponent: {fileID: 8845630989936730765}
-    characterCount: 64
+    characterCount: 51
     spriteCount: 0
-    spaceCount: 13
-    wordCount: 13
+    spaceCount: 9
+    wordCount: 10
     linkCount: 0
     lineCount: 2
     pageCount: 1
-    materialCount: 2
+    materialCount: 1
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_spriteAnimator: {fileID: 0}
@@ -29837,8 +31590,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: True Ending
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: cfab9bcc097433b47a2f09fe93ca47a9, type: 2}
-  m_sharedMaterial: {fileID: 4030978371311828227, guid: cfab9bcc097433b47a2f09fe93ca47a9,
+  m_fontAsset: {fileID: 11400000, guid: 6b88c93e2b6441b45b966c64ad5f36fa, type: 2}
+  m_sharedMaterial: {fileID: 101269190234465363, guid: 6b88c93e2b6441b45b966c64ad5f36fa,
     type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
@@ -30032,7 +31785,7 @@ RectTransform:
   - {fileID: 8397902110548693615}
   - {fileID: 5747204467744322508}
   m_Father: {fileID: 2278556733214385605}
-  m_RootOrder: 4
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
@@ -30118,10 +31871,11 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: The true ending
+  m_text: Seeing the family gathered around the fireplace spending time together
+    one last time before I move on was wonderful.
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: cfab9bcc097433b47a2f09fe93ca47a9, type: 2}
-  m_sharedMaterial: {fileID: 4030978371311828227, guid: cfab9bcc097433b47a2f09fe93ca47a9,
+  m_fontAsset: {fileID: 11400000, guid: 6b88c93e2b6441b45b966c64ad5f36fa, type: 2}
+  m_sharedMaterial: {fileID: 101269190234465363, guid: 6b88c93e2b6441b45b966c64ad5f36fa,
     type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
@@ -30188,12 +31942,12 @@ MonoBehaviour:
   m_margin: {x: -163.62534, y: 0, z: -175.15083, w: -240.66914}
   m_textInfo:
     textComponent: {fileID: 2467260073310146142}
-    characterCount: 15
+    characterCount: 116
     spriteCount: 0
-    spaceCount: 2
-    wordCount: 3
+    spaceCount: 18
+    wordCount: 19
     linkCount: 0
-    lineCount: 1
+    lineCount: 5
     pageCount: 1
     materialCount: 1
   m_isUsingLegacyAnimationComponent: 0
@@ -30436,8 +32190,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: People
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: cfab9bcc097433b47a2f09fe93ca47a9, type: 2}
-  m_sharedMaterial: {fileID: 4030978371311828227, guid: cfab9bcc097433b47a2f09fe93ca47a9,
+  m_fontAsset: {fileID: 11400000, guid: 6b88c93e2b6441b45b966c64ad5f36fa, type: 2}
+  m_sharedMaterial: {fileID: 101269190234465363, guid: 6b88c93e2b6441b45b966c64ad5f36fa,
     type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
@@ -30690,10 +32444,10 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: I used the crayons to leave a message for the kids.
+  m_text: Hope the writing hooked Nathan's interest.
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: cfab9bcc097433b47a2f09fe93ca47a9, type: 2}
-  m_sharedMaterial: {fileID: 4030978371311828227, guid: cfab9bcc097433b47a2f09fe93ca47a9,
+  m_fontAsset: {fileID: 11400000, guid: 6b88c93e2b6441b45b966c64ad5f36fa, type: 2}
+  m_sharedMaterial: {fileID: 101269190234465363, guid: 6b88c93e2b6441b45b966c64ad5f36fa,
     type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
@@ -30736,7 +32490,7 @@ MonoBehaviour:
   m_enableWordWrapping: 1
   m_wordWrappingRatios: 0.4
   m_overflowMode: 0
-  m_firstOverflowCharacterIndex: -1
+  m_firstOverflowCharacterIndex: 33
   m_linkedTextComponent: {fileID: 0}
   m_isLinkedTextComponent: 0
   m_isTextTruncated: 0
@@ -30760,10 +32514,10 @@ MonoBehaviour:
   m_margin: {x: 0, y: 0, z: 0, w: 0}
   m_textInfo:
     textComponent: {fileID: 3063461174364622772}
-    characterCount: 51
+    characterCount: 42
     spriteCount: 0
-    spaceCount: 10
-    wordCount: 11
+    spaceCount: 5
+    wordCount: 6
     linkCount: 0
     lineCount: 3
     pageCount: 1
@@ -31049,6 +32803,8 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 6758219128913004583}
+  - {fileID: 8327316261808968942}
+  - {fileID: 7662253438997393894}
   m_Father: {fileID: 4727881967389750825}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -31271,8 +33027,8 @@ MonoBehaviour:
   m_text: "I put the family\u2019s most treasured ornament on the top of the Christmas
     tree. "
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: cfab9bcc097433b47a2f09fe93ca47a9, type: 2}
-  m_sharedMaterial: {fileID: 4030978371311828227, guid: cfab9bcc097433b47a2f09fe93ca47a9,
+  m_fontAsset: {fileID: 11400000, guid: 6b88c93e2b6441b45b966c64ad5f36fa, type: 2}
+  m_sharedMaterial: {fileID: 101269190234465363, guid: 6b88c93e2b6441b45b966c64ad5f36fa,
     type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
@@ -31556,7 +33312,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 842, y: -308}
+  m_AnchoredPosition: {x: 842, y: -255}
   m_SizeDelta: {x: 650, y: 250}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &6219954869102846715
@@ -31716,7 +33472,7 @@ MonoBehaviour:
   m_material: {fileID: 0}
   m_sharedMaterial: {fileID: 0}
   m_isDefaultMaterial: 0
-  m_padding: 1.25
+  m_padding: 0
   m_canvasRenderer: {fileID: 4304575300058737661}
   m_TextComponent: {fileID: 2060128832128890676}
   m_materialReferenceIndex: 1
@@ -31902,7 +33658,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 268, y: -228}
+  m_AnchoredPosition: {x: 268, y: -210}
   m_SizeDelta: {x: 625, y: 250}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2626493176762649233
@@ -31984,10 +33740,10 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: I  slipped a note into one of their lunchboxes.
+  m_text: Jaq and Val hopefully felt appreciated.
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: cfab9bcc097433b47a2f09fe93ca47a9, type: 2}
-  m_sharedMaterial: {fileID: 4030978371311828227, guid: cfab9bcc097433b47a2f09fe93ca47a9,
+  m_fontAsset: {fileID: 11400000, guid: 6b88c93e2b6441b45b966c64ad5f36fa, type: 2}
+  m_sharedMaterial: {fileID: 101269190234465363, guid: 6b88c93e2b6441b45b966c64ad5f36fa,
     type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
@@ -32030,7 +33786,7 @@ MonoBehaviour:
   m_enableWordWrapping: 1
   m_wordWrappingRatios: 0.4
   m_overflowMode: 0
-  m_firstOverflowCharacterIndex: -1
+  m_firstOverflowCharacterIndex: 27
   m_linkedTextComponent: {fileID: 0}
   m_isLinkedTextComponent: 0
   m_isTextTruncated: 0
@@ -32054,10 +33810,10 @@ MonoBehaviour:
   m_margin: {x: 0, y: 0, z: 0, w: 0}
   m_textInfo:
     textComponent: {fileID: 7332897815026381904}
-    characterCount: 47
+    characterCount: 39
     spriteCount: 0
-    spaceCount: 9
-    wordCount: 9
+    spaceCount: 5
+    wordCount: 6
     linkCount: 0
     lineCount: 3
     pageCount: 1
@@ -32106,7 +33862,8 @@ RectTransform:
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 0.9, z: 1}
-  m_Children: []
+  m_Children:
+  - {fileID: 5974319062587058478}
   m_Father: {fileID: 9059674068812302131}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -32142,10 +33899,10 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Maybe I can use those crayons to leave a message.
+  m_text: Once I find the crayons, how should I get Nathan's attention?
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: cfab9bcc097433b47a2f09fe93ca47a9, type: 2}
-  m_sharedMaterial: {fileID: 4030978371311828227, guid: cfab9bcc097433b47a2f09fe93ca47a9,
+  m_fontAsset: {fileID: 11400000, guid: 6b88c93e2b6441b45b966c64ad5f36fa, type: 2}
+  m_sharedMaterial: {fileID: 101269190234465363, guid: 6b88c93e2b6441b45b966c64ad5f36fa,
     type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
@@ -32188,7 +33945,7 @@ MonoBehaviour:
   m_enableWordWrapping: 1
   m_wordWrappingRatios: 0.4
   m_overflowMode: 0
-  m_firstOverflowCharacterIndex: -1
+  m_firstOverflowCharacterIndex: 51
   m_linkedTextComponent: {fileID: 0}
   m_isLinkedTextComponent: 0
   m_isTextTruncated: 0
@@ -32212,12 +33969,12 @@ MonoBehaviour:
   m_margin: {x: 0, y: 0, z: 0, w: 0}
   m_textInfo:
     textComponent: {fileID: 9128544708834537335}
-    characterCount: 49
+    characterCount: 61
     spriteCount: 0
-    spaceCount: 9
-    wordCount: 10
+    spaceCount: 10
+    wordCount: 11
     linkCount: 0
-    lineCount: 2
+    lineCount: 3
     pageCount: 1
     materialCount: 1
   m_isUsingLegacyAnimationComponent: 0
@@ -32226,7 +33983,7 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_subTextObjects:
   - {fileID: 0}
-  - {fileID: 0}
+  - {fileID: 2106944258682750451}
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
@@ -32320,8 +34077,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: Jaqueline
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: cfab9bcc097433b47a2f09fe93ca47a9, type: 2}
-  m_sharedMaterial: {fileID: 4030978371311828227, guid: cfab9bcc097433b47a2f09fe93ca47a9,
+  m_fontAsset: {fileID: 11400000, guid: 6b88c93e2b6441b45b966c64ad5f36fa, type: 2}
+  m_sharedMaterial: {fileID: 101269190234465363, guid: 6b88c93e2b6441b45b966c64ad5f36fa,
     type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
@@ -32476,10 +34233,10 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'I stopped Jaqueline from burning the cookies while she was distracted. '
+  m_text: Saved Christmas by turning off the oven.
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: cfab9bcc097433b47a2f09fe93ca47a9, type: 2}
-  m_sharedMaterial: {fileID: 4030978371311828227, guid: cfab9bcc097433b47a2f09fe93ca47a9,
+  m_fontAsset: {fileID: 11400000, guid: 6b88c93e2b6441b45b966c64ad5f36fa, type: 2}
+  m_sharedMaterial: {fileID: 101269190234465363, guid: 6b88c93e2b6441b45b966c64ad5f36fa,
     type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
@@ -32546,12 +34303,12 @@ MonoBehaviour:
   m_margin: {x: 0, y: 0, z: -68.46927, w: 0}
   m_textInfo:
     textComponent: {fileID: 3963189436239195257}
-    characterCount: 71
+    characterCount: 40
     spriteCount: 0
-    spaceCount: 11
-    wordCount: 11
+    spaceCount: 6
+    wordCount: 7
     linkCount: 0
-    lineCount: 4
+    lineCount: 3
     pageCount: 1
     materialCount: 1
   m_isUsingLegacyAnimationComponent: 0
@@ -32569,6 +34326,80 @@ MonoBehaviour:
   - {fileID: 0}
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!1 &9194367314370825775
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2764195055094225145}
+  - component: {fileID: 6981776815187116330}
+  - component: {fileID: 4615705243458627698}
+  m_Layer: 5
+  m_Name: GameObject
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &2764195055094225145
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9194367314370825775}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 8007561478453852946}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: -387, y: 394}
+  m_SizeDelta: {x: 438.3, y: 127.8}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!222 &6981776815187116330
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9194367314370825775}
+  m_CullTransparentMesh: 0
+--- !u!114 &4615705243458627698
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9194367314370825775}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 0.099, g: 0.099, b: 0.099, a: 1}
+  m_RaycastTarget: 1
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Sprite: {fileID: 21300000, guid: 57e25c54990a1214cb614d2f0aaaf8e7, type: 3}
+  m_Type: 0
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
 --- !u!1 &9199169909106887517
 GameObject:
   m_ObjectHideFlags: 0
@@ -32745,25 +34576,25 @@ PrefabInstance:
         type: 3}
       propertyPath: m_fontAsset
       value: 
-      objectReference: {fileID: 11400000, guid: cfab9bcc097433b47a2f09fe93ca47a9,
+      objectReference: {fileID: 11400000, guid: 6b88c93e2b6441b45b966c64ad5f36fa,
         type: 2}
     - target: {fileID: 215156502992424938, guid: 1ab40820d14372148abae8f310b88820,
         type: 3}
       propertyPath: m_sharedMaterial
       value: 
-      objectReference: {fileID: 4030978371311828227, guid: cfab9bcc097433b47a2f09fe93ca47a9,
+      objectReference: {fileID: 101269190234465363, guid: 6b88c93e2b6441b45b966c64ad5f36fa,
         type: 2}
     - target: {fileID: 297369909826946878, guid: 1ab40820d14372148abae8f310b88820,
         type: 3}
       propertyPath: m_fontAsset
       value: 
-      objectReference: {fileID: 11400000, guid: cfab9bcc097433b47a2f09fe93ca47a9,
+      objectReference: {fileID: 11400000, guid: 6b88c93e2b6441b45b966c64ad5f36fa,
         type: 2}
     - target: {fileID: 297369909826946878, guid: 1ab40820d14372148abae8f310b88820,
         type: 3}
       propertyPath: m_sharedMaterial
       value: 
-      objectReference: {fileID: 4030978371311828227, guid: cfab9bcc097433b47a2f09fe93ca47a9,
+      objectReference: {fileID: 101269190234465363, guid: 6b88c93e2b6441b45b966c64ad5f36fa,
         type: 2}
     - target: {fileID: 402235458774394825, guid: 1ab40820d14372148abae8f310b88820,
         type: 3}
@@ -32774,49 +34605,49 @@ PrefabInstance:
         type: 3}
       propertyPath: m_fontAsset
       value: 
-      objectReference: {fileID: 11400000, guid: cfab9bcc097433b47a2f09fe93ca47a9,
+      objectReference: {fileID: 11400000, guid: 6b88c93e2b6441b45b966c64ad5f36fa,
         type: 2}
     - target: {fileID: 529827673777510044, guid: 1ab40820d14372148abae8f310b88820,
         type: 3}
       propertyPath: m_sharedMaterial
       value: 
-      objectReference: {fileID: 4030978371311828227, guid: cfab9bcc097433b47a2f09fe93ca47a9,
+      objectReference: {fileID: 101269190234465363, guid: 6b88c93e2b6441b45b966c64ad5f36fa,
         type: 2}
     - target: {fileID: 797594940521751154, guid: 1ab40820d14372148abae8f310b88820,
         type: 3}
       propertyPath: m_fontAsset
       value: 
-      objectReference: {fileID: 11400000, guid: cfab9bcc097433b47a2f09fe93ca47a9,
+      objectReference: {fileID: 11400000, guid: 6b88c93e2b6441b45b966c64ad5f36fa,
         type: 2}
     - target: {fileID: 797594940521751154, guid: 1ab40820d14372148abae8f310b88820,
         type: 3}
       propertyPath: m_sharedMaterial
       value: 
-      objectReference: {fileID: 4030978371311828227, guid: cfab9bcc097433b47a2f09fe93ca47a9,
+      objectReference: {fileID: 101269190234465363, guid: 6b88c93e2b6441b45b966c64ad5f36fa,
         type: 2}
     - target: {fileID: 1064898570612172931, guid: 1ab40820d14372148abae8f310b88820,
         type: 3}
       propertyPath: m_fontAsset
       value: 
-      objectReference: {fileID: 11400000, guid: cfab9bcc097433b47a2f09fe93ca47a9,
+      objectReference: {fileID: 11400000, guid: 6b88c93e2b6441b45b966c64ad5f36fa,
         type: 2}
     - target: {fileID: 1064898570612172931, guid: 1ab40820d14372148abae8f310b88820,
         type: 3}
       propertyPath: m_sharedMaterial
       value: 
-      objectReference: {fileID: 4030978371311828227, guid: cfab9bcc097433b47a2f09fe93ca47a9,
+      objectReference: {fileID: 101269190234465363, guid: 6b88c93e2b6441b45b966c64ad5f36fa,
         type: 2}
     - target: {fileID: 1104362766016017967, guid: 1ab40820d14372148abae8f310b88820,
         type: 3}
       propertyPath: m_fontAsset
       value: 
-      objectReference: {fileID: 11400000, guid: cfab9bcc097433b47a2f09fe93ca47a9,
+      objectReference: {fileID: 11400000, guid: 6b88c93e2b6441b45b966c64ad5f36fa,
         type: 2}
     - target: {fileID: 1104362766016017967, guid: 1ab40820d14372148abae8f310b88820,
         type: 3}
       propertyPath: m_sharedMaterial
       value: 
-      objectReference: {fileID: 4030978371311828227, guid: cfab9bcc097433b47a2f09fe93ca47a9,
+      objectReference: {fileID: 101269190234465363, guid: 6b88c93e2b6441b45b966c64ad5f36fa,
         type: 2}
     - target: {fileID: 1140755819375925821, guid: 1ab40820d14372148abae8f310b88820,
         type: 3}
@@ -32827,37 +34658,37 @@ PrefabInstance:
         type: 3}
       propertyPath: m_fontAsset
       value: 
-      objectReference: {fileID: 11400000, guid: cfab9bcc097433b47a2f09fe93ca47a9,
+      objectReference: {fileID: 11400000, guid: 6b88c93e2b6441b45b966c64ad5f36fa,
         type: 2}
     - target: {fileID: 1409466696263779565, guid: 1ab40820d14372148abae8f310b88820,
         type: 3}
       propertyPath: m_sharedMaterial
       value: 
-      objectReference: {fileID: 4030978371311828227, guid: cfab9bcc097433b47a2f09fe93ca47a9,
+      objectReference: {fileID: 101269190234465363, guid: 6b88c93e2b6441b45b966c64ad5f36fa,
         type: 2}
     - target: {fileID: 1623016659672383846, guid: 1ab40820d14372148abae8f310b88820,
         type: 3}
       propertyPath: m_fontAsset
       value: 
-      objectReference: {fileID: 11400000, guid: cfab9bcc097433b47a2f09fe93ca47a9,
+      objectReference: {fileID: 11400000, guid: 6b88c93e2b6441b45b966c64ad5f36fa,
         type: 2}
     - target: {fileID: 1623016659672383846, guid: 1ab40820d14372148abae8f310b88820,
         type: 3}
       propertyPath: m_sharedMaterial
       value: 
-      objectReference: {fileID: 4030978371311828227, guid: cfab9bcc097433b47a2f09fe93ca47a9,
+      objectReference: {fileID: 101269190234465363, guid: 6b88c93e2b6441b45b966c64ad5f36fa,
         type: 2}
     - target: {fileID: 1627133912110996098, guid: 1ab40820d14372148abae8f310b88820,
         type: 3}
       propertyPath: m_fontAsset
       value: 
-      objectReference: {fileID: 11400000, guid: cfab9bcc097433b47a2f09fe93ca47a9,
+      objectReference: {fileID: 11400000, guid: 6b88c93e2b6441b45b966c64ad5f36fa,
         type: 2}
     - target: {fileID: 1627133912110996098, guid: 1ab40820d14372148abae8f310b88820,
         type: 3}
       propertyPath: m_sharedMaterial
       value: 
-      objectReference: {fileID: 4030978371311828227, guid: cfab9bcc097433b47a2f09fe93ca47a9,
+      objectReference: {fileID: 101269190234465363, guid: 6b88c93e2b6441b45b966c64ad5f36fa,
         type: 2}
     - target: {fileID: 2158526926450228918, guid: 1ab40820d14372148abae8f310b88820,
         type: 3}
@@ -32888,13 +34719,13 @@ PrefabInstance:
         type: 3}
       propertyPath: m_fontAsset
       value: 
-      objectReference: {fileID: 11400000, guid: cfab9bcc097433b47a2f09fe93ca47a9,
+      objectReference: {fileID: 11400000, guid: 6b88c93e2b6441b45b966c64ad5f36fa,
         type: 2}
     - target: {fileID: 2372340925224529301, guid: 1ab40820d14372148abae8f310b88820,
         type: 3}
       propertyPath: m_sharedMaterial
       value: 
-      objectReference: {fileID: 4030978371311828227, guid: cfab9bcc097433b47a2f09fe93ca47a9,
+      objectReference: {fileID: 101269190234465363, guid: 6b88c93e2b6441b45b966c64ad5f36fa,
         type: 2}
     - target: {fileID: 2426174806625650420, guid: 1ab40820d14372148abae8f310b88820,
         type: 3}
@@ -32910,37 +34741,37 @@ PrefabInstance:
         type: 3}
       propertyPath: m_fontAsset
       value: 
-      objectReference: {fileID: 11400000, guid: cfab9bcc097433b47a2f09fe93ca47a9,
+      objectReference: {fileID: 11400000, guid: 6b88c93e2b6441b45b966c64ad5f36fa,
         type: 2}
     - target: {fileID: 2608811868008496021, guid: 1ab40820d14372148abae8f310b88820,
         type: 3}
       propertyPath: m_sharedMaterial
       value: 
-      objectReference: {fileID: 4030978371311828227, guid: cfab9bcc097433b47a2f09fe93ca47a9,
+      objectReference: {fileID: 101269190234465363, guid: 6b88c93e2b6441b45b966c64ad5f36fa,
         type: 2}
     - target: {fileID: 2663798486524615915, guid: 1ab40820d14372148abae8f310b88820,
         type: 3}
       propertyPath: m_fontAsset
       value: 
-      objectReference: {fileID: 11400000, guid: cfab9bcc097433b47a2f09fe93ca47a9,
+      objectReference: {fileID: 11400000, guid: 6b88c93e2b6441b45b966c64ad5f36fa,
         type: 2}
     - target: {fileID: 2663798486524615915, guid: 1ab40820d14372148abae8f310b88820,
         type: 3}
       propertyPath: m_sharedMaterial
       value: 
-      objectReference: {fileID: 4030978371311828227, guid: cfab9bcc097433b47a2f09fe93ca47a9,
+      objectReference: {fileID: 101269190234465363, guid: 6b88c93e2b6441b45b966c64ad5f36fa,
         type: 2}
     - target: {fileID: 2905873047035503799, guid: 1ab40820d14372148abae8f310b88820,
         type: 3}
       propertyPath: m_fontAsset
       value: 
-      objectReference: {fileID: 11400000, guid: cfab9bcc097433b47a2f09fe93ca47a9,
+      objectReference: {fileID: 11400000, guid: 6b88c93e2b6441b45b966c64ad5f36fa,
         type: 2}
     - target: {fileID: 2905873047035503799, guid: 1ab40820d14372148abae8f310b88820,
         type: 3}
       propertyPath: m_sharedMaterial
       value: 
-      objectReference: {fileID: 4030978371311828227, guid: cfab9bcc097433b47a2f09fe93ca47a9,
+      objectReference: {fileID: 101269190234465363, guid: 6b88c93e2b6441b45b966c64ad5f36fa,
         type: 2}
     - target: {fileID: 2963151698172538146, guid: 1ab40820d14372148abae8f310b88820,
         type: 3}
@@ -32971,25 +34802,25 @@ PrefabInstance:
         type: 3}
       propertyPath: m_fontAsset
       value: 
-      objectReference: {fileID: 11400000, guid: cfab9bcc097433b47a2f09fe93ca47a9,
+      objectReference: {fileID: 11400000, guid: 6b88c93e2b6441b45b966c64ad5f36fa,
         type: 2}
     - target: {fileID: 3599219256714547535, guid: 1ab40820d14372148abae8f310b88820,
         type: 3}
       propertyPath: m_sharedMaterial
       value: 
-      objectReference: {fileID: 4030978371311828227, guid: cfab9bcc097433b47a2f09fe93ca47a9,
+      objectReference: {fileID: 101269190234465363, guid: 6b88c93e2b6441b45b966c64ad5f36fa,
         type: 2}
     - target: {fileID: 3642278687225198111, guid: 1ab40820d14372148abae8f310b88820,
         type: 3}
       propertyPath: m_fontAsset
       value: 
-      objectReference: {fileID: 11400000, guid: cfab9bcc097433b47a2f09fe93ca47a9,
+      objectReference: {fileID: 11400000, guid: 6b88c93e2b6441b45b966c64ad5f36fa,
         type: 2}
     - target: {fileID: 3642278687225198111, guid: 1ab40820d14372148abae8f310b88820,
         type: 3}
       propertyPath: m_sharedMaterial
       value: 
-      objectReference: {fileID: 4030978371311828227, guid: cfab9bcc097433b47a2f09fe93ca47a9,
+      objectReference: {fileID: 101269190234465363, guid: 6b88c93e2b6441b45b966c64ad5f36fa,
         type: 2}
     - target: {fileID: 3677670460499180370, guid: 1ab40820d14372148abae8f310b88820,
         type: 3}
@@ -33000,37 +34831,37 @@ PrefabInstance:
         type: 3}
       propertyPath: m_fontAsset
       value: 
-      objectReference: {fileID: 11400000, guid: cfab9bcc097433b47a2f09fe93ca47a9,
+      objectReference: {fileID: 11400000, guid: 6b88c93e2b6441b45b966c64ad5f36fa,
         type: 2}
     - target: {fileID: 3764023536009795761, guid: 1ab40820d14372148abae8f310b88820,
         type: 3}
       propertyPath: m_sharedMaterial
       value: 
-      objectReference: {fileID: 4030978371311828227, guid: cfab9bcc097433b47a2f09fe93ca47a9,
+      objectReference: {fileID: 101269190234465363, guid: 6b88c93e2b6441b45b966c64ad5f36fa,
         type: 2}
     - target: {fileID: 3942755125918389978, guid: 1ab40820d14372148abae8f310b88820,
         type: 3}
       propertyPath: m_fontAsset
       value: 
-      objectReference: {fileID: 11400000, guid: cfab9bcc097433b47a2f09fe93ca47a9,
+      objectReference: {fileID: 11400000, guid: 6b88c93e2b6441b45b966c64ad5f36fa,
         type: 2}
     - target: {fileID: 3942755125918389978, guid: 1ab40820d14372148abae8f310b88820,
         type: 3}
       propertyPath: m_sharedMaterial
       value: 
-      objectReference: {fileID: 4030978371311828227, guid: cfab9bcc097433b47a2f09fe93ca47a9,
+      objectReference: {fileID: 101269190234465363, guid: 6b88c93e2b6441b45b966c64ad5f36fa,
         type: 2}
     - target: {fileID: 4092473802473733941, guid: 1ab40820d14372148abae8f310b88820,
         type: 3}
       propertyPath: m_fontAsset
       value: 
-      objectReference: {fileID: 11400000, guid: cfab9bcc097433b47a2f09fe93ca47a9,
+      objectReference: {fileID: 11400000, guid: 6b88c93e2b6441b45b966c64ad5f36fa,
         type: 2}
     - target: {fileID: 4092473802473733941, guid: 1ab40820d14372148abae8f310b88820,
         type: 3}
       propertyPath: m_sharedMaterial
       value: 
-      objectReference: {fileID: 4030978371311828227, guid: cfab9bcc097433b47a2f09fe93ca47a9,
+      objectReference: {fileID: 101269190234465363, guid: 6b88c93e2b6441b45b966c64ad5f36fa,
         type: 2}
     - target: {fileID: 4265853985774735867, guid: 1ab40820d14372148abae8f310b88820,
         type: 3}
@@ -33046,13 +34877,13 @@ PrefabInstance:
         type: 3}
       propertyPath: m_fontAsset
       value: 
-      objectReference: {fileID: 11400000, guid: cfab9bcc097433b47a2f09fe93ca47a9,
+      objectReference: {fileID: 11400000, guid: 6b88c93e2b6441b45b966c64ad5f36fa,
         type: 2}
     - target: {fileID: 4879320550090813236, guid: 1ab40820d14372148abae8f310b88820,
         type: 3}
       propertyPath: m_sharedMaterial
       value: 
-      objectReference: {fileID: 4030978371311828227, guid: cfab9bcc097433b47a2f09fe93ca47a9,
+      objectReference: {fileID: 101269190234465363, guid: 6b88c93e2b6441b45b966c64ad5f36fa,
         type: 2}
     - target: {fileID: 4908046325817735320, guid: 1ab40820d14372148abae8f310b88820,
         type: 3}
@@ -33163,13 +34994,13 @@ PrefabInstance:
         type: 3}
       propertyPath: m_fontAsset
       value: 
-      objectReference: {fileID: 11400000, guid: cfab9bcc097433b47a2f09fe93ca47a9,
+      objectReference: {fileID: 11400000, guid: 6b88c93e2b6441b45b966c64ad5f36fa,
         type: 2}
     - target: {fileID: 5179038346907241017, guid: 1ab40820d14372148abae8f310b88820,
         type: 3}
       propertyPath: m_sharedMaterial
       value: 
-      objectReference: {fileID: 4030978371311828227, guid: cfab9bcc097433b47a2f09fe93ca47a9,
+      objectReference: {fileID: 101269190234465363, guid: 6b88c93e2b6441b45b966c64ad5f36fa,
         type: 2}
     - target: {fileID: 5348826735712705949, guid: 1ab40820d14372148abae8f310b88820,
         type: 3}
@@ -33190,25 +35021,25 @@ PrefabInstance:
         type: 3}
       propertyPath: m_fontAsset
       value: 
-      objectReference: {fileID: 11400000, guid: cfab9bcc097433b47a2f09fe93ca47a9,
+      objectReference: {fileID: 11400000, guid: 6b88c93e2b6441b45b966c64ad5f36fa,
         type: 2}
     - target: {fileID: 5633324681393639840, guid: 1ab40820d14372148abae8f310b88820,
         type: 3}
       propertyPath: m_sharedMaterial
       value: 
-      objectReference: {fileID: 4030978371311828227, guid: cfab9bcc097433b47a2f09fe93ca47a9,
+      objectReference: {fileID: 101269190234465363, guid: 6b88c93e2b6441b45b966c64ad5f36fa,
         type: 2}
     - target: {fileID: 5659678732427149827, guid: 1ab40820d14372148abae8f310b88820,
         type: 3}
       propertyPath: m_fontAsset
       value: 
-      objectReference: {fileID: 11400000, guid: cfab9bcc097433b47a2f09fe93ca47a9,
+      objectReference: {fileID: 11400000, guid: 6b88c93e2b6441b45b966c64ad5f36fa,
         type: 2}
     - target: {fileID: 5659678732427149827, guid: 1ab40820d14372148abae8f310b88820,
         type: 3}
       propertyPath: m_sharedMaterial
       value: 
-      objectReference: {fileID: 4030978371311828227, guid: cfab9bcc097433b47a2f09fe93ca47a9,
+      objectReference: {fileID: 101269190234465363, guid: 6b88c93e2b6441b45b966c64ad5f36fa,
         type: 2}
     - target: {fileID: 5695763587210539410, guid: 1ab40820d14372148abae8f310b88820,
         type: 3}
@@ -33224,49 +35055,49 @@ PrefabInstance:
         type: 3}
       propertyPath: m_fontAsset
       value: 
-      objectReference: {fileID: 11400000, guid: cfab9bcc097433b47a2f09fe93ca47a9,
+      objectReference: {fileID: 11400000, guid: 6b88c93e2b6441b45b966c64ad5f36fa,
         type: 2}
     - target: {fileID: 5789097138708034583, guid: 1ab40820d14372148abae8f310b88820,
         type: 3}
       propertyPath: m_sharedMaterial
       value: 
-      objectReference: {fileID: 4030978371311828227, guid: cfab9bcc097433b47a2f09fe93ca47a9,
+      objectReference: {fileID: 101269190234465363, guid: 6b88c93e2b6441b45b966c64ad5f36fa,
         type: 2}
     - target: {fileID: 5930483223400923694, guid: 1ab40820d14372148abae8f310b88820,
         type: 3}
       propertyPath: m_fontAsset
       value: 
-      objectReference: {fileID: 11400000, guid: cfab9bcc097433b47a2f09fe93ca47a9,
+      objectReference: {fileID: 11400000, guid: 6b88c93e2b6441b45b966c64ad5f36fa,
         type: 2}
     - target: {fileID: 5930483223400923694, guid: 1ab40820d14372148abae8f310b88820,
         type: 3}
       propertyPath: m_sharedMaterial
       value: 
-      objectReference: {fileID: 4030978371311828227, guid: cfab9bcc097433b47a2f09fe93ca47a9,
+      objectReference: {fileID: 101269190234465363, guid: 6b88c93e2b6441b45b966c64ad5f36fa,
         type: 2}
     - target: {fileID: 5996966177869592248, guid: 1ab40820d14372148abae8f310b88820,
         type: 3}
       propertyPath: m_fontAsset
       value: 
-      objectReference: {fileID: 11400000, guid: cfab9bcc097433b47a2f09fe93ca47a9,
+      objectReference: {fileID: 11400000, guid: 6b88c93e2b6441b45b966c64ad5f36fa,
         type: 2}
     - target: {fileID: 5996966177869592248, guid: 1ab40820d14372148abae8f310b88820,
         type: 3}
       propertyPath: m_sharedMaterial
       value: 
-      objectReference: {fileID: 4030978371311828227, guid: cfab9bcc097433b47a2f09fe93ca47a9,
+      objectReference: {fileID: 101269190234465363, guid: 6b88c93e2b6441b45b966c64ad5f36fa,
         type: 2}
     - target: {fileID: 6079438088041245204, guid: 1ab40820d14372148abae8f310b88820,
         type: 3}
       propertyPath: m_fontAsset
       value: 
-      objectReference: {fileID: 11400000, guid: cfab9bcc097433b47a2f09fe93ca47a9,
+      objectReference: {fileID: 11400000, guid: 6b88c93e2b6441b45b966c64ad5f36fa,
         type: 2}
     - target: {fileID: 6079438088041245204, guid: 1ab40820d14372148abae8f310b88820,
         type: 3}
       propertyPath: m_sharedMaterial
       value: 
-      objectReference: {fileID: 4030978371311828227, guid: cfab9bcc097433b47a2f09fe93ca47a9,
+      objectReference: {fileID: 101269190234465363, guid: 6b88c93e2b6441b45b966c64ad5f36fa,
         type: 2}
     - target: {fileID: 6487001743961055816, guid: 1ab40820d14372148abae8f310b88820,
         type: 3}
@@ -33302,37 +35133,37 @@ PrefabInstance:
         type: 3}
       propertyPath: m_fontAsset
       value: 
-      objectReference: {fileID: 11400000, guid: cfab9bcc097433b47a2f09fe93ca47a9,
+      objectReference: {fileID: 11400000, guid: 6b88c93e2b6441b45b966c64ad5f36fa,
         type: 2}
     - target: {fileID: 6675179316053956033, guid: 1ab40820d14372148abae8f310b88820,
         type: 3}
       propertyPath: m_sharedMaterial
       value: 
-      objectReference: {fileID: 4030978371311828227, guid: cfab9bcc097433b47a2f09fe93ca47a9,
+      objectReference: {fileID: 101269190234465363, guid: 6b88c93e2b6441b45b966c64ad5f36fa,
         type: 2}
     - target: {fileID: 6898196903453691328, guid: 1ab40820d14372148abae8f310b88820,
         type: 3}
       propertyPath: m_fontAsset
       value: 
-      objectReference: {fileID: 11400000, guid: cfab9bcc097433b47a2f09fe93ca47a9,
+      objectReference: {fileID: 11400000, guid: 6b88c93e2b6441b45b966c64ad5f36fa,
         type: 2}
     - target: {fileID: 6898196903453691328, guid: 1ab40820d14372148abae8f310b88820,
         type: 3}
       propertyPath: m_sharedMaterial
       value: 
-      objectReference: {fileID: 4030978371311828227, guid: cfab9bcc097433b47a2f09fe93ca47a9,
+      objectReference: {fileID: 101269190234465363, guid: 6b88c93e2b6441b45b966c64ad5f36fa,
         type: 2}
     - target: {fileID: 7103010064040069898, guid: 1ab40820d14372148abae8f310b88820,
         type: 3}
       propertyPath: m_fontAsset
       value: 
-      objectReference: {fileID: 11400000, guid: cfab9bcc097433b47a2f09fe93ca47a9,
+      objectReference: {fileID: 11400000, guid: 6b88c93e2b6441b45b966c64ad5f36fa,
         type: 2}
     - target: {fileID: 7103010064040069898, guid: 1ab40820d14372148abae8f310b88820,
         type: 3}
       propertyPath: m_sharedMaterial
       value: 
-      objectReference: {fileID: 4030978371311828227, guid: cfab9bcc097433b47a2f09fe93ca47a9,
+      objectReference: {fileID: 101269190234465363, guid: 6b88c93e2b6441b45b966c64ad5f36fa,
         type: 2}
     - target: {fileID: 7297692847312433283, guid: 1ab40820d14372148abae8f310b88820,
         type: 3}
@@ -33348,13 +35179,13 @@ PrefabInstance:
         type: 3}
       propertyPath: m_fontAsset
       value: 
-      objectReference: {fileID: 11400000, guid: cfab9bcc097433b47a2f09fe93ca47a9,
+      objectReference: {fileID: 11400000, guid: 6b88c93e2b6441b45b966c64ad5f36fa,
         type: 2}
     - target: {fileID: 7616681638666367379, guid: 1ab40820d14372148abae8f310b88820,
         type: 3}
       propertyPath: m_sharedMaterial
       value: 
-      objectReference: {fileID: 4030978371311828227, guid: cfab9bcc097433b47a2f09fe93ca47a9,
+      objectReference: {fileID: 101269190234465363, guid: 6b88c93e2b6441b45b966c64ad5f36fa,
         type: 2}
     - target: {fileID: 7747527807904106307, guid: 1ab40820d14372148abae8f310b88820,
         type: 3}
@@ -33365,13 +35196,13 @@ PrefabInstance:
         type: 3}
       propertyPath: m_fontAsset
       value: 
-      objectReference: {fileID: 11400000, guid: cfab9bcc097433b47a2f09fe93ca47a9,
+      objectReference: {fileID: 11400000, guid: 6b88c93e2b6441b45b966c64ad5f36fa,
         type: 2}
     - target: {fileID: 7846312143977586205, guid: 1ab40820d14372148abae8f310b88820,
         type: 3}
       propertyPath: m_sharedMaterial
       value: 
-      objectReference: {fileID: 4030978371311828227, guid: cfab9bcc097433b47a2f09fe93ca47a9,
+      objectReference: {fileID: 101269190234465363, guid: 6b88c93e2b6441b45b966c64ad5f36fa,
         type: 2}
     - target: {fileID: 7976815510353896826, guid: 1ab40820d14372148abae8f310b88820,
         type: 3}
@@ -33417,31 +35248,31 @@ PrefabInstance:
         type: 3}
       propertyPath: m_fontAsset
       value: 
-      objectReference: {fileID: 11400000, guid: cfab9bcc097433b47a2f09fe93ca47a9,
+      objectReference: {fileID: 11400000, guid: 6b88c93e2b6441b45b966c64ad5f36fa,
         type: 2}
     - target: {fileID: 7994276639160295781, guid: 1ab40820d14372148abae8f310b88820,
         type: 3}
       propertyPath: m_sharedMaterial
       value: 
-      objectReference: {fileID: 4030978371311828227, guid: cfab9bcc097433b47a2f09fe93ca47a9,
+      objectReference: {fileID: 101269190234465363, guid: 6b88c93e2b6441b45b966c64ad5f36fa,
         type: 2}
     - target: {fileID: 8097755211796021116, guid: 1ab40820d14372148abae8f310b88820,
         type: 3}
       propertyPath: m_fontAsset
       value: 
-      objectReference: {fileID: 11400000, guid: cfab9bcc097433b47a2f09fe93ca47a9,
+      objectReference: {fileID: 11400000, guid: 6b88c93e2b6441b45b966c64ad5f36fa,
         type: 2}
     - target: {fileID: 8097755211796021116, guid: 1ab40820d14372148abae8f310b88820,
         type: 3}
       propertyPath: m_sharedMaterial
       value: 
-      objectReference: {fileID: 4030978371311828227, guid: cfab9bcc097433b47a2f09fe93ca47a9,
+      objectReference: {fileID: 101269190234465363, guid: 6b88c93e2b6441b45b966c64ad5f36fa,
         type: 2}
     - target: {fileID: 8590020985308513379, guid: 1ab40820d14372148abae8f310b88820,
         type: 3}
       propertyPath: m_fontAsset
       value: 
-      objectReference: {fileID: 11400000, guid: cfab9bcc097433b47a2f09fe93ca47a9,
+      objectReference: {fileID: 11400000, guid: 6b88c93e2b6441b45b966c64ad5f36fa,
         type: 2}
     - target: {fileID: 8590020985308513379, guid: 1ab40820d14372148abae8f310b88820,
         type: 3}
@@ -33456,9 +35287,9 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1ab40820d14372148abae8f310b88820, type: 3}
---- !u!1 &5345423075980521067 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 2375905184566677305, guid: 1ab40820d14372148abae8f310b88820,
+--- !u!224 &3371730450902112714 stripped
+RectTransform:
+  m_CorrespondingSourceObject: {fileID: 4908046325817735320, guid: 1ab40820d14372148abae8f310b88820,
     type: 3}
   m_PrefabInstance: {fileID: 7698385529869803858}
   m_PrefabAsset: {fileID: 0}
@@ -33480,9 +35311,9 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 7698385529869803858}
   m_PrefabAsset: {fileID: 0}
---- !u!224 &3371730450902112714 stripped
-RectTransform:
-  m_CorrespondingSourceObject: {fileID: 4908046325817735320, guid: 1ab40820d14372148abae8f310b88820,
+--- !u!1 &5345423075980521067 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2375905184566677305, guid: 1ab40820d14372148abae8f310b88820,
     type: 3}
   m_PrefabInstance: {fileID: 7698385529869803858}
   m_PrefabAsset: {fileID: 0}

@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 7606853585903886664}
   - component: {fileID: 7606853585903886665}
   m_Layer: 0
-  m_Name: TransitionManager
+  m_Name: Ending_TransitionManager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -49,6 +49,7 @@ MonoBehaviour:
   _titleBanner: {fileID: 7606853586171212726}
   _raycastBlock: {fileID: 7606853586538656440}
   _spiritPointsForLevel: 3
+  _currentScene: Spring
   _fadeIn: 1
   _fadeInTime: 1
   _showTitleText: 1
@@ -95,7 +96,7 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
-  _dialogueOnStart: Ending_1
+  _interactionOnStart: {fileID: 0}
   _nextScene: Credits
   _fadeOut: 1
   _fadeOutTime: 1
@@ -165,7 +166,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_SizeDelta: {x: 513.49, y: 184.07}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &7606853586171212730
 CanvasRenderer:
@@ -371,7 +372,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &7606853586504509592
 RectTransform:
   m_ObjectHideFlags: 0
@@ -572,10 +573,10 @@ RectTransform:
   m_Father: {fileID: 7606853586171212733}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 256.745, y: -92.035}
+  m_SizeDelta: {x: 213.48999, y: 134.07}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &7606853587426367524
 CanvasRenderer:
