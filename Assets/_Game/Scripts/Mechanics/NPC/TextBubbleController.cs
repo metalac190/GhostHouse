@@ -21,7 +21,6 @@ public class TextBubbleController : MonoBehaviour
     }
 
     public void SetCharacter(string character) {
-        Debug.Log(character);
         if (_validNames.Contains(character)) {
             var obj = FindCharacterTransform(character);
             if (obj != null) {
