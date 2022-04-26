@@ -1,12 +1,15 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 using TMPro;
 using UnityEngine;
 using System.Collections;
+using UnityEngine.SceneManagement;
 
 public class DataManagerDebug : MonoBehaviour
 {
     [SerializeField] private TextMeshProUGUI _text = null;
     [SerializeField] private GameObject _parent = null;
+    [SerializeField] private Season _season = Season.None;
     [SerializeField] private TextMeshProUGUI _timerMain = null;
     [SerializeField] private TextMeshProUGUI _timerMil = null;
 
@@ -20,6 +23,7 @@ public class DataManagerDebug : MonoBehaviour
     private int frames = 0;
     private float timeleft;
     private float startTime;
+    private float split;
 
     private void Start() {
         startTime = Time.time;
@@ -58,15 +62,24 @@ public class DataManagerDebug : MonoBehaviour
             debug += DataManager.Instance.interactions.Aggregate("", (current, interaction) => current + (interaction.Key + " - " + interaction.Value + "\n"));
             debug += "\n<b><u>Journal Unlocks</u></b>\n";
             debug += DataManager.Instance.journalUnlocks.Aggregate("", (current, interaction) => current + (interaction.Key + " - " + interaction.Value + "\n"));
+            debug += "\n<b><u>Speedrunning</u></b>\n";
+            debug += "Spring: " + TimeTotal(DataManager.Instance.SpringSplit) + "\n";
+            debug += "Summer: " + TimeTotal(DataManager.Instance.SummerSplit) + "\n";
+            debug += "Fall: " + TimeTotal(DataManager.Instance.FallSplit) + "\n";
+            debug += "Winter: " + TimeTotal(DataManager.Instance.WinterSplit) + "\n";
+            debug += "Total: " + TimeTotal(DataManager.Instance.SplitTotal) + "\n";
+            debug += "\n<b><u>Best Ever</u></b>\n";
+            debug += "Spring: " + TimeTotal(DataManager.Instance.SpringSplitBest) + "\n";
+            debug += "Summer: " + TimeTotal(DataManager.Instance.SummerSplitBest) + "\n";
+            debug += "Fall: " + TimeTotal(DataManager.Instance.FallSplitBest) + "\n";
+            debug += "Winter: " + TimeTotal(DataManager.Instance.WinterSplitBest) + "\n";
+            debug += "Total: " + TimeTotal(DataManager.Instance.SplitTotalBest) + "\n";
             _text.text = debug;
 
             var currentTime = Time.time - startTime;
-            float hour = Mathf.FloorToInt(currentTime / 3600);
-            float min = Mathf.FloorToInt(currentTime / 60);
-            float sec = Mathf.FloorToInt(currentTime % 60);
-            _timerMain.text = $"{hour:0}:{min:00}:{sec:00}";
-            float ms = (currentTime % 1) * 1000;
-            _timerMil.text = $".{ms:000}";
+            split = currentTime;
+            _timerMain.text = TimeMain(currentTime);
+            _timerMil.text = TimeMil(currentTime);
         }
         timeleft -= Time.deltaTime;
         accum += Time.timeScale / Time.deltaTime;
@@ -78,6 +91,26 @@ public class DataManagerDebug : MonoBehaviour
             accum = 0.0f;
             frames = 0;
         }
+    }
+
+    private static string TimeTotal(float time) {
+        return TimeMain(time) + TimeMil(time);
+    }
+
+    private static string TimeMain(float time) {
+        float hour = Mathf.FloorToInt(time / 3600);
+        float min = Mathf.FloorToInt(time / 60);
+        float sec = Mathf.FloorToInt(time % 60);
+        return $"{hour:0}:{min:00}:{sec:00}";
+    }
+
+    private static string TimeMil(float time) {
+        float ms = (time % 1) * 1000;
+        return $".{ms:000}";
+    }
+
+    private void OnDestroy() {
+        DataManager.Instance.SetSplit(_season, split);
     }
 
     public void GiveSpiritPoint() {

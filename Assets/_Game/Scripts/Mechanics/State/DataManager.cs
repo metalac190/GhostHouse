@@ -463,4 +463,70 @@ public class DataManager : MonoBehaviour
     {
         return System.IO.File.Exists(filePath);
     }
+
+
+
+
+
+    // Speed run splits using player prefs to not break the data manager :)
+    public float SpringSplit { get; set; }
+    public float SpringSplitBest => PlayerPrefs.GetFloat("SpringSplit");
+    public float SummerSplit { get; set; }
+    public float SummerSplitBest => PlayerPrefs.GetFloat("SummerSplit");
+    public float FallSplit { get; set; }
+    public float FallSplitBest => PlayerPrefs.GetFloat("FallSplit");
+    public float WinterSplit { get; set; }
+    public float WinterSplitBest => PlayerPrefs.GetFloat("WinterSplit");
+    public float SplitTotal => SpringSplit + SummerSplit + FallSplit + WinterSplit;
+    public float SplitTotalBest => SpringSplitBest + SummerSplitBest + FallSplitBest + WinterSplitBest;
+
+    private void TestBest() {
+        if (PlayerPrefs.HasKey("SpringSplit")) {
+            PlayerPrefs.SetFloat("SpringSplit", 3600);
+        }
+        if (PlayerPrefs.HasKey("SummerSplit")) {
+            PlayerPrefs.SetFloat("SummerSplit", 3600);
+        }
+        if (PlayerPrefs.HasKey("FallSplit")) {
+            PlayerPrefs.SetFloat("FallSplit", 3600);
+        }
+        if (PlayerPrefs.HasKey("WinterSplit")) {
+            PlayerPrefs.SetFloat("WinterSplit", 3600);
+        }
+    }
+
+    public void SetSplit(Season season, float split)
+    {
+        switch (season)
+        {
+            case Season.Spring:
+                SpringSplit = split;
+                if (split < SpringSplitBest)
+                {
+                    PlayerPrefs.SetFloat("SpringSplit", split);
+                }
+                break;
+            case Season.Summer:
+                SummerSplit = split;
+                if (split < SummerSplitBest)
+                {
+                    PlayerPrefs.SetFloat("SummerSplit", split);
+                }
+                break;
+            case Season.Fall:
+                FallSplit = split;
+                if (split < FallSplitBest)
+                {
+                    PlayerPrefs.SetFloat("FallSplit", split);
+                }
+                break;
+            case Season.Winter:
+                WinterSplit = split;
+                if (split < WinterSplitBest)
+                {
+                    PlayerPrefs.SetFloat("WinterSplit", split);
+                }
+                break;
+        }
+    }
 }
