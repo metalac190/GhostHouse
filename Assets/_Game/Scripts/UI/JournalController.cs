@@ -129,18 +129,14 @@ public class JournalController : MonoBehaviour
 
     // Returns true if Journal should close
     public bool ClosePage() {
-        if (_currentPage == PageEnum.PauseMenu) {
-            if (_quitConfirmation != null && _quitConfirmation.activeSelf) {
-                _quitConfirmation.SetActive(false);
-                return false;
-            }
-            _journalClose.Play();
-            SetJournalAnim("close");
-            _closeRoutine = StartCoroutine(CloseJournal());
-            return true;
+        if (_quitConfirmation != null && _quitConfirmation.activeSelf) {
+            _quitConfirmation.SetActive(false);
+            return false;
         }
-        OpenPauseMenu();
-        return false;
+        _journalClose.Play();
+        SetJournalAnim("close");
+        _closeRoutine = StartCoroutine(CloseJournal());
+        return true;
     }
 
     private IEnumerator CloseJournal() {
