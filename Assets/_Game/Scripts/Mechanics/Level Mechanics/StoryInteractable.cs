@@ -186,7 +186,7 @@ namespace Mechanics.Level_Mechanics
             }
             else if (!_popupWindowOnClick && _interaction != null) {
                 if (_interaction.Cost <= 0 || _interaction.Cost <= DataManager.Instance.remainingSpiritPoints) {
-                    _interaction.Interact();
+                    Interact();
                 }
             }
             if (_moveOnClick) {
@@ -197,9 +197,6 @@ namespace Mechanics.Level_Mechanics
                     connectedAnimators.SetTrigger(_animationsClickTrigger);
                 }
             }
-            if (_openAfterDialogue != null && AfterDialogueInteraction.Singleton != null) {
-                AfterDialogueInteraction.Singleton.SetNextInteraction(_openAfterDialogue);
-            }
 
             //if (_moveOnClick)
             //{
@@ -209,6 +206,10 @@ namespace Mechanics.Level_Mechanics
 
         public void Interact() {
             _interaction.Interact();
+            if (_openAfterDialogue != null && AfterDialogueInteraction.Singleton != null)
+            {
+                AfterDialogueInteraction.Singleton.SetNextInteraction(_openAfterDialogue);
+            }
         }
 
         public void AltInteract() {
