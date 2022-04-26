@@ -51,7 +51,8 @@ namespace Mechanics.Level_Mechanics
         public List<MeshRenderer> ConnectedMeshRenderers { get; set; }
         public List<Animator> ConnectedAnimators { get; set; } = new List<Animator>();
 
-        public Action OnInteracted = delegate {};
+        public Action OnInteracted = delegate { };
+        public Action OnInteractionFinish = delegate { };
 
         public int Cost => _cost;
         public int SisterEndPoints => _sisterEndingPoints;
@@ -112,69 +113,57 @@ namespace Mechanics.Level_Mechanics
                 //Debug.Log("Second Interact " + name);
             }
 
-            if (_fadeToBlack && SimpleFadeToBlack.Singleton != null)
-            {
+            if (_fadeToBlack && SimpleFadeToBlack.Singleton != null) {
                 SimpleFadeToBlack.Singleton.StartCoroutine(FadeToBlack());
             }
-            else
-            {
+            else {
                 InvokeResponses();
                 _sfxOnInteract.Play();
                 PlayDialogue();
+                OnInteractionFinish?.Invoke();
             }
         }
 
-        private IEnumerator FadeToBlack()
-        {
+        private IEnumerator FadeToBlack() {
             yield return SimpleFadeToBlack.Singleton.FadeOut(_fadeOutTime);
             InvokeResponses();
-            for (float t = 0; t < _fadeHoldTime; t += Time.deltaTime)
-            {
+            for (float t = 0; t < _fadeHoldTime; t += Time.deltaTime) {
                 yield return null;
             }
             _sfxOnInteract.Play();
             yield return SimpleFadeToBlack.Singleton.FadeIn(_fadeInTime);
             PlayDialogue();
+            OnInteractionFinish?.Invoke();
         }
 
         private void InvokeResponses() {
-            for (int i = _interactableResponses.Count - 1; i >= 0; i--)
-            {
+            for (int i = _interactableResponses.Count - 1; i >= 0; i--) {
                 _interactableResponses[i].Invoke();
             }
             OnInteracted?.Invoke();
         }
 
-        private void PlayDialogue()
-        {
-            if (!string.IsNullOrEmpty(_dialogeYarnNode))
-            {
-                try
-                {
+        private void PlayDialogue() {
+            if (!string.IsNullOrEmpty(_dialogeYarnNode)) {
+                try {
                     DialogueRunner.Stop();
                     DialogueRunner.StartDialogue(_dialogeYarnNode);
                 }
-                catch (Exception)
-                {
+                catch (Exception) {
                     Debug.LogWarning("Invalid Dialogue Yarn Node (" + _dialogeYarnNode + ") connected to " + name);
                     DialogueRunner.Stop();
                 }
             }
-            else if (_useRandomDialogue)
-            {
-                if (_randomDialoguePool.Count == 0)
-                {
+            else if (_useRandomDialogue) {
+                if (_randomDialoguePool.Count == 0) {
                     Debug.LogWarning("The Random Dialogue Pool has no dialogues in it...");
                 }
-                else
-                {
+                else {
                     var dialogue = _randomDialoguePool[Random.Range(0, _randomDialoguePool.Count)];
-                    try
-                    {
+                    try {
                         DialogueRunner.StartDialogue(dialogue);
                     }
-                    catch (Exception)
-                    {
+                    catch (Exception) {
                         Debug.LogWarning("Invalid Dialogue Yarn Node (" + dialogue + ") connected to " + name);
                         DialogueRunner.Stop();
                     }
@@ -182,8 +171,7 @@ namespace Mechanics.Level_Mechanics
             }
         }
 
-        public void TestResetAnimators()
-        {
+        public void TestResetAnimators() {
             ConnectedAnimators.RemoveAll(item => item == null);
         }
     }
