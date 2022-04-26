@@ -83,6 +83,7 @@ public class EndingsManager : MonoBehaviour
                 end.Visuals?.SetActive(true);
                 _transitionManager._interactionOnStart = end.Dialog;
                 _musicManager.PlayMusic(end.MusicTrack);
+                DataManager.Instance.endingUnlocks[selectedEnding.index] = true;
             }
             else
             {
