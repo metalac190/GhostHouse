@@ -346,6 +346,12 @@ public class DataManager : MonoBehaviour
         }
     }
 
+    public void TestJournalUnlockExists(string unlock) {
+        if (!journalUnlocks.ContainsKey(unlock)) {
+            journalUnlocks.Add(unlock, false);
+        }
+    }
+
     // Save settings from the control settings menu
     public void SaveControlSettings(bool leftClick, bool useWASD, bool useArrows, bool clickDrag, int sensitivity)
     {
