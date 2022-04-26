@@ -22,18 +22,15 @@ public class DataManagerDebug : MonoBehaviour
         SetDebugActive(_debugActive);
     }
 
-    private void OnEnable()
-    {
+    private void OnEnable() {
         Application.logMessageReceived += Log;
     }
 
-    private void OnDisable()
-    {
+    private void OnDisable() {
         Application.logMessageReceived -= Log;
     }
-    
-    private void OnGUI()
-    {
+
+    private void OnGUI() {
         if (_debugActive) {
             myLog = GUI.TextArea(new Rect(10, 400, 320, Screen.height - 410), myLog);
             GUI.Label(new Rect(10, 10, 120, 32), "FPS: " + fps);
@@ -45,7 +42,6 @@ public class DataManagerDebug : MonoBehaviour
             SetDebugActive(!_debugActive);
         }
         if (_debugActive) {
-            var interactions = DataManager.Instance.interactions;
             string debug = "Season: " + DataManager.Instance.level + "\n";
             debug += "\n<b><u>Spirit Points</u></b>\n";
             debug += "Remaining: " + DataManager.Instance.remainingSpiritPoints + "\n";
@@ -55,15 +51,16 @@ public class DataManagerDebug : MonoBehaviour
             debug += "Sisters: " + DataManager.Instance.sistersEndingPoints + "\n";
             debug += "Cousins: " + DataManager.Instance.cousinsEndingPoints + "\n";
             debug += "\n<b><u>Interactions</u></b>\n";
-            debug += interactions.Aggregate("", (current, interaction) => current + (interaction.Key + " - " + interaction.Value + "\n"));
+            debug += DataManager.Instance.interactions.Aggregate("", (current, interaction) => current + (interaction.Key + " - " + interaction.Value + "\n"));
+            debug += "\n<b><u>Journal Unlocks</u></b>\n";
+            debug += DataManager.Instance.journalUnlocks.Aggregate("", (current, interaction) => current + (interaction.Key + " - " + interaction.Value + "\n"));
             _text.text = debug;
         }
         timeleft -= Time.deltaTime;
         accum += Time.timeScale / Time.deltaTime;
         ++frames;
 
-        if (timeleft <= 0.0)
-        {
+        if (timeleft <= 0.0) {
             fps = (accum / frames);
             timeleft = updateInterval;
             accum = 0.0f;
@@ -82,13 +79,11 @@ public class DataManagerDebug : MonoBehaviour
         _parent.SetActive(active);
     }
 
-    public void Log(string logString, string stackTrace, LogType type)
-    {
+    public void Log(string logString, string stackTrace, LogType type) {
         output = logString;
         stack = stackTrace;
         myLog = output + "\n" + myLog;
-        if (myLog.Length > 5000)
-        {
+        if (myLog.Length > 5000) {
             myLog = myLog.Substring(0, 4000);
         }
     }
