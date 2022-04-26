@@ -26,25 +26,24 @@ public class EndingsManager : MonoBehaviour
     [SerializeField]
     Game.TransitionManager _transitionManager = null;
 
-    [SerializeField]
-    MusicManager _musicManager = null;
-    
-
     void Start()
     {
         DataManager data = DataManager.Instance;
         List<EndingPair> possibleChoices = new List<EndingPair>();
 
         // get prioritized list of endings not yet unlocked
-        if (data.journalUnlocks.ContainsKey(_trueEnding.Dialog.name) && !data.journalUnlocks[_trueEnding.Dialog.name] && data.trueEndingPoints >= _trueEnding.Threshold)
+        data.TestJournalUnlockExists(_trueEnding.Dialog.name);
+        data.TestJournalUnlockExists(_sisterEnding.Dialog.name);
+        data.TestJournalUnlockExists(_cousinEnding.Dialog.name);
+        if (!data.journalUnlocks[_trueEnding.Dialog.name] && data.trueEndingPoints >= _trueEnding.Threshold)
         {
             possibleChoices.Add(new EndingPair(_trueEnding, 0));
         }
-        else if (data.journalUnlocks.ContainsKey(_sisterEnding.Dialog.name) && !data.journalUnlocks[_sisterEnding.Dialog.name] && data.sistersEndingPoints >= _sisterEnding.Threshold)
+        else if (!data.journalUnlocks[_sisterEnding.Dialog.name] && data.sistersEndingPoints >= _sisterEnding.Threshold)
         {
             possibleChoices.Add(new EndingPair(_sisterEnding, 3));
         }
-        else if (data.journalUnlocks.ContainsKey(_cousinEnding.Dialog.name) && !data.journalUnlocks[_cousinEnding.Dialog.name] && data.cousinsEndingPoints >= _cousinEnding.Threshold)
+        else if (!data.journalUnlocks[_cousinEnding.Dialog.name] && data.cousinsEndingPoints >= _cousinEnding.Threshold)
         {
             possibleChoices.Add(new EndingPair(_cousinEnding, 2));
         }
@@ -58,15 +57,15 @@ public class EndingsManager : MonoBehaviour
         // follow default priorities
         else
         {
-            if (data.journalUnlocks.ContainsKey(_trueEnding.Dialog.name) && !data.journalUnlocks[_trueEnding.Dialog.name] && data.trueEndingPoints >= _trueEnding.Threshold)
+            if (data.trueEndingPoints >= _trueEnding.Threshold)
             {
                 selectedEnding = new EndingPair(_trueEnding, 0);
             }
-            else if (data.journalUnlocks.ContainsKey(_sisterEnding.Dialog.name) && !data.journalUnlocks[_sisterEnding.Dialog.name] && data.sistersEndingPoints >= _sisterEnding.Threshold)
+            else if (data.sistersEndingPoints >= _sisterEnding.Threshold)
             {
                 selectedEnding = new EndingPair(_sisterEnding, 3);
             }
-            else if (data.journalUnlocks.ContainsKey(_cousinEnding.Dialog.name) && !data.journalUnlocks[_cousinEnding.Dialog.name] && data.cousinsEndingPoints >= _cousinEnding.Threshold)
+            else if (data.cousinsEndingPoints >= _cousinEnding.Threshold)
             {
                 selectedEnding = new EndingPair(_cousinEnding, 2);
             }
@@ -82,7 +81,7 @@ public class EndingsManager : MonoBehaviour
             {
                 end.Visuals?.SetActive(true);
                 _transitionManager._interactionOnStart = end.Dialog;
-                _musicManager.PlayMusic(end.MusicTrack);
+                SoundManager.MusicManager.PlayMusic(end.MusicTrack);
                 data.SetInteraction(selectedEnding.ending.Dialog.name, true);
                 data.WriteFile();
             }
