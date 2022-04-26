@@ -9,6 +9,12 @@ public class InteractionResponseCharacterAnimation : InteractableResponseBase
     [Tooltip("Only Val and Jaq have angry animations")]
     [SerializeField] private bool _angryAnimation = false;
 
+    [Header("For Morgan Only")] 
+    [SerializeField] private bool _sleepAnimation = false;
+
+    [Header("For Val Only")] 
+    [SerializeField] private bool _pianoAnimation = false;
+
     private void Awake() {
         if (_animator == null)
         {
@@ -46,6 +52,9 @@ public class InteractionResponseCharacterAnimation : InteractableResponseBase
     {
         if (_angryAnimation && !_surpriseAnimation) _animator.SetTrigger("angry");
         if (_surpriseAnimation && !_angryAnimation) _animator.SetTrigger("surprise");
+
+        if (!_angryAnimation && !_surpriseAnimation && !_sleepAnimation) _animator.SetTrigger("piano");
+        if (!_angryAnimation && !_surpriseAnimation && !_pianoAnimation) _animator.SetTrigger("sleep");
     }
 
     private Animator GetAnimator()
