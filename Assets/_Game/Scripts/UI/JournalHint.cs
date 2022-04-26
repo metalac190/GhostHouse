@@ -12,6 +12,8 @@ public class JournalHint : MonoBehaviour
     public Interactable InteractableShowAfter => _showAfter;
     public Interactable InteractableShowUntil => _showUntil;
 
+    private bool _first = true;
+
     private void OnEnable() {
         var season = DataManager.Instance.GetSeason();
         bool seasonCheck = _season == season || season == Season.Universal;
@@ -24,8 +26,18 @@ public class JournalHint : MonoBehaviour
             Debug.Log("Journal Hint (" + _hint.name + ") is " + (unlocked ? "" : "not ") + "unlocked");
             Debug.Log("  - Season (" + seasonCheck + " -- Set to " + _season + " and currently in " + season + "), After (" + after + "), Until (" + until + ")");
         }
-        
-        if (_hint != null) _hint.gameObject.SetActive(unlocked);
+
+        if (_hint != null) {
+            _hint.gameObject.SetActive(unlocked);
+
+            if (unlocked) {
+                var anim = _hint.GetComponent<Animator>();
+                if (anim != null) {
+                    anim.SetBool("first", _first);
+                }
+                _first = false;
+            }
+        }
     }
 
     private static bool GetUnlocked(string interaction) {
