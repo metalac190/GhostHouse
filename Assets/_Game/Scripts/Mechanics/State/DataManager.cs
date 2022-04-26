@@ -480,12 +480,21 @@ public class DataManager : MonoBehaviour
     public float WinterSplitBest => PlayerPrefs.GetFloat("WinterSplit");
     public float SplitTotal => SpringSplit + SummerSplit + FallSplit + WinterSplit;
     public float SplitTotalBest => SpringSplitBest + SummerSplitBest + FallSplitBest + WinterSplitBest;
+    public float TrueEndBest => PlayerPrefs.GetFloat("TrueEndTime");
+    public float SisterEndBest => PlayerPrefs.GetFloat("SisterEndTime");
+    public float CousinEndBest => PlayerPrefs.GetFloat("CousinEndTime");
+    public float BadEndBest => PlayerPrefs.GetFloat("BadEndTime");
 
     private static void ResetSplits() {
         PlayerPrefs.SetFloat("SpringSplit", 0);
         PlayerPrefs.SetFloat("SummerSplit", 0);
         PlayerPrefs.SetFloat("FallSplit", 0);
         PlayerPrefs.SetFloat("WinterSplit", 0);
+
+        PlayerPrefs.SetFloat("TrueEndTime", 0);
+        PlayerPrefs.SetFloat("SisterEndTime", 0);
+        PlayerPrefs.SetFloat("CousinEndTime", 0);
+        PlayerPrefs.SetFloat("BadEndTime", 0);
     }
 
     public void SetSplit(Season season, float split)
@@ -520,6 +529,38 @@ public class DataManager : MonoBehaviour
                     PlayerPrefs.SetFloat("WinterSplit", split);
                 }
                 break;
+        }
+    }
+
+    public void SetTrueEnd(float time)
+    {
+        if (time < TrueEndBest || TrueEndBest == 0)
+        {
+            PlayerPrefs.SetFloat("TrueEndTime", time);
+        }
+    }
+
+    public void SetSisterEnd(float time)
+    {
+        if (time < SisterEndBest || SisterEndBest == 0)
+        {
+            PlayerPrefs.SetFloat("SisterEndTime", time);
+        }
+    }
+
+    public void SetCousinEnd(float time)
+    {
+        if (time < CousinEndBest || CousinEndBest == 0)
+        {
+            PlayerPrefs.SetFloat("CousinEndTime", time);
+        }
+    }
+
+    public void SetBadEnd(float time)
+    {
+        if (time < BadEndBest || BadEndBest == 0)
+        {
+            PlayerPrefs.SetFloat("BadEndTime", time);
         }
     }
 }

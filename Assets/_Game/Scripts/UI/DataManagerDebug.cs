@@ -24,6 +24,19 @@ public class DataManagerDebug : MonoBehaviour
     private int frames = 0;
     private float timeleft;
     private float currentTime;
+    private float holdTime = 0;
+
+    private void Awake()
+    {
+        if (_season == Season.End)
+        {
+            var endManager = FindObjectOfType<EndingsManager>();
+            if (endManager != null)
+            {
+                endManager.OnEnd += SetEndTime;
+            }
+        }
+    }
 
     private void Start() {
         currentTime = 0;
@@ -49,8 +62,16 @@ public class DataManagerDebug : MonoBehaviour
 
     private void Update() {
         currentTime += Time.deltaTime;
-        _timerMain.text = TimeMain(currentTime);
-        _timerMil.text = TimeMil(currentTime);
+        if (holdTime == 0)
+        {
+            _timerMain.text = TimeMain(currentTime);
+            _timerMil.text = TimeMil(currentTime);
+        }
+        else
+        {
+            _timerMain.text = TimeMain(holdTime);
+            _timerMil.text = TimeMil(holdTime);
+        }
 
         if (Input.GetKeyDown(KeyCode.End)) {
             SetDebugActive(!_debugActive);
@@ -74,12 +95,16 @@ public class DataManagerDebug : MonoBehaviour
             debug += "Fall: " + TimeTotal(DataManager.Instance.FallSplit) + "\n";
             debug += "Winter: " + TimeTotal(DataManager.Instance.WinterSplit) + "\n";
             debug += "Total: " + TimeTotal(DataManager.Instance.SplitTotal) + "\n";
-            debug += "\n<b><u>Best Ever</u></b>\n";
+            debug += "\n<b><u>Best Splits</u></b>\n";
             debug += "Best Spring: " + TimeTotal(DataManager.Instance.SpringSplitBest) + "\n";
             debug += "Best Summer: " + TimeTotal(DataManager.Instance.SummerSplitBest) + "\n";
             debug += "Best Fall: " + TimeTotal(DataManager.Instance.FallSplitBest) + "\n";
             debug += "Best Winter: " + TimeTotal(DataManager.Instance.WinterSplitBest) + "\n";
-            debug += "Best Total: " + TimeTotal(DataManager.Instance.SplitTotalBest) + "\n";
+            debug += "\n<b><u>Best Endings</u></b>\n";
+            debug += "True: " + TimeTotal(DataManager.Instance.TrueEndBest) + "\n";
+            debug += "Sister: " + TimeTotal(DataManager.Instance.SisterEndBest) + "\n";
+            debug += "Cousin: " + TimeTotal(DataManager.Instance.CousinEndBest) + "\n";
+            debug += "Bad: " + TimeTotal(DataManager.Instance.BadEndBest) + "\n";
             _text.text = debug;
         }
         timeleft -= Time.deltaTime;
@@ -91,6 +116,27 @@ public class DataManagerDebug : MonoBehaviour
             timeleft = updateInterval;
             accum = 0.0f;
             frames = 0;
+        }
+    }
+
+    private void SetEndTime(string end)
+    {
+        holdTime = DataManager.Instance.SplitTotal;
+        end = end.ToLower();
+        if (end.Contains("true"))
+        {
+            DataManager.Instance.SetTrueEnd(holdTime);
+        } else if (end.Contains("sister"))
+        {
+            DataManager.Instance.SetSisterEnd(holdTime);
+        }
+        else if(end.Contains("cousin"))
+        {
+            DataManager.Instance.SetCousinEnd(holdTime);
+        }
+        else if(end.Contains("bad"))
+        {
+            DataManager.Instance.SetBadEnd(holdTime);
         }
     }
 
