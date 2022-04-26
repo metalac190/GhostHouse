@@ -94,7 +94,7 @@ public class EndingsManager : MonoBehaviour
 
     public void GoToScene(string nextScene)
     {
-        SceneManager.LoadScene(nextScene);
+        DataManager.SceneLoader.LoadScene(nextScene);
     }
 
     [System.Serializable]

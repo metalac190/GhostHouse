@@ -1,6 +1,5 @@
 ﻿using System.Collections;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using Yarn.Unity;
 using Mechanics.Level_Mechanics;
@@ -139,7 +138,7 @@ namespace Game
         private void NextScene() {
             DataManager.Instance.level = _nextScene;
             DataManager.Instance.WriteFile();
-            SceneManager.LoadScene(_nextScene);
+            DataManager.SceneLoader.LoadScene(_nextScene);
         }
     }
 }
