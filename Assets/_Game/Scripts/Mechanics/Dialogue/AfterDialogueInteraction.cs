@@ -18,8 +18,10 @@ public class AfterDialogueInteraction : MonoBehaviour
     }
 
     public void OnDialogueFinished() {
-        if (_nextInteraction == null)
-        {
+        if (TextBubbleController.Instance != null) {
+            TextBubbleController.Instance.Disable();
+        }
+        if (_nextInteraction == null) {
             if (_debug) Debug.Log("Dialogue Finished.", gameObject);
             return;
         }
