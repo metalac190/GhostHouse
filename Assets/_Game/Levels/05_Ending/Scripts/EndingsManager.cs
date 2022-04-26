@@ -26,10 +26,6 @@ public class EndingsManager : MonoBehaviour
     [SerializeField]
     Game.TransitionManager _transitionManager = null;
 
-    [SerializeField]
-    MusicManager _musicManager = null;
-    
-
     void Start()
     {
         DataManager data = DataManager.Instance;
@@ -85,7 +81,7 @@ public class EndingsManager : MonoBehaviour
             {
                 end.Visuals?.SetActive(true);
                 _transitionManager._interactionOnStart = end.Dialog;
-                _musicManager.PlayMusic(end.MusicTrack);
+                SoundManager.MusicManager.PlayMusic(end.MusicTrack);
                 data.SetInteraction(selectedEnding.ending.Dialog.name, true);
                 data.WriteFile();
             }
