@@ -480,49 +480,34 @@ public class DataManager : MonoBehaviour
     public float SplitTotal => SpringSplit + SummerSplit + FallSplit + WinterSplit;
     public float SplitTotalBest => SpringSplitBest + SummerSplitBest + FallSplitBest + WinterSplitBest;
 
-    private void TestBest() {
-        if (PlayerPrefs.HasKey("SpringSplit")) {
-            PlayerPrefs.SetFloat("SpringSplit", 3600);
-        }
-        if (PlayerPrefs.HasKey("SummerSplit")) {
-            PlayerPrefs.SetFloat("SummerSplit", 3600);
-        }
-        if (PlayerPrefs.HasKey("FallSplit")) {
-            PlayerPrefs.SetFloat("FallSplit", 3600);
-        }
-        if (PlayerPrefs.HasKey("WinterSplit")) {
-            PlayerPrefs.SetFloat("WinterSplit", 3600);
-        }
-    }
-
     public void SetSplit(Season season, float split)
     {
         switch (season)
         {
             case Season.Spring:
                 SpringSplit = split;
-                if (split < SpringSplitBest)
+                if (split < SpringSplitBest || SpringSplitBest == 0)
                 {
                     PlayerPrefs.SetFloat("SpringSplit", split);
                 }
                 break;
             case Season.Summer:
                 SummerSplit = split;
-                if (split < SummerSplitBest)
+                if (split < SummerSplitBest || SummerSplitBest == 0)
                 {
                     PlayerPrefs.SetFloat("SummerSplit", split);
                 }
                 break;
             case Season.Fall:
                 FallSplit = split;
-                if (split < FallSplitBest)
+                if (split < FallSplitBest || FallSplitBest == 0)
                 {
                     PlayerPrefs.SetFloat("FallSplit", split);
                 }
                 break;
             case Season.Winter:
                 WinterSplit = split;
-                if (split < WinterSplitBest)
+                if (split < WinterSplitBest || WinterSplitBest == 0)
                 {
                     PlayerPrefs.SetFloat("WinterSplit", split);
                 }
