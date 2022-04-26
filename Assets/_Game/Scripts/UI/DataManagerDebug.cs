@@ -7,6 +7,8 @@ public class DataManagerDebug : MonoBehaviour
 {
     [SerializeField] private TextMeshProUGUI _text = null;
     [SerializeField] private GameObject _parent = null;
+    [SerializeField] private TextMeshProUGUI _timerMain = null;
+    [SerializeField] private TextMeshProUGUI _timerMil = null;
 
     private static bool _debugActive;
     static string myLog = "";
@@ -17,8 +19,10 @@ public class DataManagerDebug : MonoBehaviour
     private float accum = 0.0f;
     private int frames = 0;
     private float timeleft;
+    private float startTime;
 
     private void Start() {
+        startTime = Time.time;
         SetDebugActive(_debugActive);
     }
 
@@ -32,7 +36,7 @@ public class DataManagerDebug : MonoBehaviour
 
     private void OnGUI() {
         if (_debugActive) {
-            myLog = GUI.TextArea(new Rect(10, 400, 320, Screen.height - 410), myLog);
+            myLog = GUI.TextArea(new Rect(10, 420, 320, Screen.height - 430), myLog);
             GUI.Label(new Rect(10, 10, 120, 32), "FPS: " + fps);
         }
     }
@@ -55,6 +59,14 @@ public class DataManagerDebug : MonoBehaviour
             debug += "\n<b><u>Journal Unlocks</u></b>\n";
             debug += DataManager.Instance.journalUnlocks.Aggregate("", (current, interaction) => current + (interaction.Key + " - " + interaction.Value + "\n"));
             _text.text = debug;
+
+            var currentTime = Time.time - startTime;
+            float hour = Mathf.FloorToInt(currentTime / 3600);
+            float min = Mathf.FloorToInt(currentTime / 60);
+            float sec = Mathf.FloorToInt(currentTime % 60);
+            _timerMain.text = $"{hour:0}:{min:00}:{sec:00}";
+            float ms = (currentTime % 1) * 1000;
+            _timerMil.text = $".{ms:000}";
         }
         timeleft -= Time.deltaTime;
         accum += Time.timeScale / Time.deltaTime;

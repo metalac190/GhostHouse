@@ -67,7 +67,6 @@ namespace Utility.Audio.Controllers
         [Button(Spacing = 5, Mode = ButtonMode.NotPlaying)]
         public void Enable() {
             if (_areSoundsEnabled) return;
-            Debug.Log("Enable");
             _areSoundsEnabled = true;
             CheckEnabled();
         }
@@ -75,7 +74,6 @@ namespace Utility.Audio.Controllers
         [Button(Mode = ButtonMode.NotPlaying)]
         public void Disable() {
             if (!_areSoundsEnabled) return;
-            Debug.Log("Disable");
             _areSoundsEnabled = false;
             CheckEnabled();
         }
