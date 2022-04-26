@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System.Collections;
+using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
@@ -7,6 +8,10 @@ namespace UI
 {
     public class PlayerHUD : MonoBehaviour
     {
+        [SerializeField] private float _alphaSpeedIn = 5;
+        [SerializeField] private float _alphaSpeedOut = 5;
+        [SerializeField] private CanvasGroup _canvasGroup = null;
+
         [Header("Spirit Lamp")]
         [SerializeField] private GameObject _lampOn = null;
         [SerializeField] private GameObject _lampOff = null;
@@ -18,6 +23,8 @@ namespace UI
         [SerializeField] private GameObject _journalNormal = null;
         [SerializeField] private GameObject _journalNotification = null;
 
+        private Coroutine _alphaRoutine;
+        private float _alpha;
         private int _maxPoints;
 
         private static string SetBright => "add SP";
@@ -36,6 +43,33 @@ namespace UI
             SetJournalNotification(false);
             _lampOn.gameObject.SetActive(true);
             _lampOff.gameObject.SetActive(false);
+        }
+
+        public void Hide(bool hide) {
+            if (_alphaRoutine != null) StopCoroutine(_alphaRoutine);
+            _alphaRoutine = StartCoroutine(HideRoutine(hide));
+        }
+
+        private IEnumerator HideRoutine(bool hide) {
+            if (hide) {
+                while (_alpha > 0) {
+                    _alpha -= Time.deltaTime * _alphaSpeedOut;
+                    _canvasGroup.alpha = _alpha;
+                    yield return null;
+                }
+                _alpha = 0;
+                _canvasGroup.alpha = _alpha;
+            }
+            else {
+                while (_alpha < 1) {
+                    _alpha += Time.deltaTime * _alphaSpeedIn;
+                    _canvasGroup.alpha = _alpha;
+                    yield return null;
+                }
+                _alpha = 1;
+                _canvasGroup.alpha = _alpha;
+            }
+            _alphaRoutine = null;
         }
 
         public void TestMaxSpiritPoints(int newMax) {
