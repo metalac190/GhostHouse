@@ -6907,19 +6907,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8270397987400974889}
   m_CullTransparentMesh: 0
---- !u!114 &8270397987400974887
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8270397987400974889}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4b197bc6cf3cb6e449792303be569ef4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _time: 10
 --- !u!224 &8270397987400974888
 RectTransform:
   m_ObjectHideFlags: 0
@@ -6951,7 +6938,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8270397987400974888}
   - component: {fileID: 8270397987400974886}
-  - component: {fileID: 8270397987400974887}
+  - component: {fileID: 8270397987400974890}
   m_Layer: 5
   m_Name: pnl_SmokeAnimation
   m_TagString: Untagged
@@ -6959,3 +6946,18 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!114 &8270397987400974890
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8270397987400974889}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2af44a1c3c6feb948817d95fc0b2874f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _speed: 0.5
+  _leftBound: 0
+  _rightBound: 1920
