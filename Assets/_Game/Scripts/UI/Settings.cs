@@ -143,7 +143,7 @@ public class Settings : MonoBehaviour
             //Debug.LogWarning("No Camera Controller", gameObject);
             return;
         }
-        CameraController._enableWASDMovement = useWASD;
+        //CameraController._enableWASDMovement = useWASD;
         CameraController._enableClickDragMovement = useClickNDrag;
     }
 
