@@ -14,6 +14,7 @@ public class InteractionResponseCharacterAnimation : InteractableResponseBase
 
     [Header("For Val Only")] 
     [SerializeField] private bool _pianoAnimation = false;
+    [SerializeField] private bool _idleAnimation = false;
 
     private void Awake() {
         if (_animator == null)
@@ -50,11 +51,12 @@ public class InteractionResponseCharacterAnimation : InteractableResponseBase
 
     public override void Invoke()
     {
-        if (_angryAnimation && !_surpriseAnimation) _animator.SetTrigger("angry");
-        if (_surpriseAnimation && !_angryAnimation) _animator.SetTrigger("surprise");
+        if (_angryAnimation) _animator.SetTrigger("angry");
+        else if (_surpriseAnimation) _animator.SetTrigger("surprise");
 
-        if (!_angryAnimation && !_surpriseAnimation && !_sleepAnimation) _animator.SetTrigger("piano");
-        if (!_angryAnimation && !_surpriseAnimation && !_pianoAnimation) _animator.SetTrigger("sleep");
+        else if (_pianoAnimation) _animator.SetTrigger("piano");
+        else if (_sleepAnimation) _animator.SetTrigger("sleep");
+        else if (_idleAnimation) _animator.SetTrigger("idle");
     }
 
     private Animator GetAnimator()
