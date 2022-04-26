@@ -8,9 +8,8 @@ namespace UI
     public class PlayerHUD : MonoBehaviour
     {
         [Header("Spirit Lamp")]
-        [SerializeField] private Image _lamp = null;
-        [SerializeField] private Sprite _lampOn = null;
-        [SerializeField] private Sprite _lampOff = null;
+        [SerializeField] private GameObject _lampOn = null;
+        [SerializeField] private GameObject _lampOff = null;
 
         [Header("Spirit Points")]
         [SerializeField] private List<Image> _spiritPoints = new List<Image>();
@@ -35,6 +34,8 @@ namespace UI
         private void Start() {
             SetMaxSpiritPoints(SpiritPointsStart);
             SetJournalNotification(false);
+            _lampOn.gameObject.SetActive(true);
+            _lampOff.gameObject.SetActive(false);
         }
 
         public void TestMaxSpiritPoints(int newMax) {
@@ -78,7 +79,14 @@ namespace UI
                     _spiritPoints[i].sprite = _spiritPointBright;
                 }
             }
-            _lamp.sprite = points + aboutToSpend > 0 ? _lampOn : _lampOff;
+            if (points + aboutToSpend == 0) {
+                _lampOn.gameObject.SetActive(false);
+                _lampOff.gameObject.SetActive(true);
+            }
+            else if (_lampOff.activeSelf) {
+                _lampOn.gameObject.SetActive(true);
+                _lampOff.gameObject.SetActive(false);
+            }
         }
 
         public void AddJournalNotification() {
