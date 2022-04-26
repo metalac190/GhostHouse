@@ -1,10 +1,12 @@
 ﻿using Mechanics.Level_Mechanics;
 using UnityEngine;
+using Utility.ReadOnly;
 
 public class AfterDialogueInteraction : MonoBehaviour
 {
     public static AfterDialogueInteraction Singleton;
-    private StoryInteractable _nextInteraction;
+    [SerializeField] private bool _debug = false; 
+    [SerializeField, ReadOnly] private StoryInteractable _nextInteraction;
 
     private void Awake() {
         Singleton = this;
@@ -12,11 +14,18 @@ public class AfterDialogueInteraction : MonoBehaviour
 
     public void SetNextInteraction(StoryInteractable interaction) {
         _nextInteraction = interaction;
+        if (_debug) Debug.Log("Set Interaction: " + interaction.Interaction.name, gameObject);
     }
 
     public void OnDialogueFinished() {
-        if (_nextInteraction == null) return;
-        _nextInteraction.OnLeftClick(_nextInteraction.transform.position);
+        if (_nextInteraction == null)
+        {
+            if (_debug) Debug.Log("Dialogue Finished.", gameObject);
+            return;
+        }
+        var interaction = _nextInteraction;
         _nextInteraction = null;
+        if (_debug) Debug.Log("Dialogue Finished. Cleared Interaction", gameObject);
+        interaction.OnLeftClick(interaction.transform.position);
     }
 }
