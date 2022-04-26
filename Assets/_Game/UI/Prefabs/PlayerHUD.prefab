@@ -902,6 +902,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3580106822059816470}
   - component: {fileID: 1461808942535465508}
+  - component: {fileID: 6029041551505443690}
   m_Layer: 5
   m_Name: PlayerHUD
   m_TagString: Untagged
@@ -942,6 +943,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: de961a53537984942b7adc6b240b0bc7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _alphaSpeedIn: 2
+  _alphaSpeedOut: 10
+  _canvasGroup: {fileID: 6029041551505443690}
   _lampOn: {fileID: 3580106821986540689}
   _lampOff: {fileID: 3134194785967196867}
   _spiritPoints:
@@ -957,6 +961,18 @@ MonoBehaviour:
   - {fileID: 7623673223308382714}
   _journalNormal: {fileID: 3580106822549726316}
   _journalNotification: {fileID: 1816783923251830000}
+--- !u!225 &6029041551505443690
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3580106822059816469}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 0
+  m_BlocksRaycasts: 0
+  m_IgnoreParentGroups: 0
 --- !u!1 &3580106822166276708
 GameObject:
   m_ObjectHideFlags: 0

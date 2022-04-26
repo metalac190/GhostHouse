@@ -72,7 +72,8 @@ public class ModalWindowController : MonoBehaviour
         if (_enabled) {
             if (Input.GetKeyDown(KeyCode.Escape)) {
                 DisableModalWindow();
-            } else if ((Input.GetKeyDown(KeyCode.Return) || Input.GetKeyDown(KeyCode.Space)) && _callback != null) {
+            }
+            else if ((Input.GetKeyDown(KeyCode.Return) || Input.GetKeyDown(KeyCode.Space)) && _callback != null) {
                 _callback.Invoke();
                 _callback = null;
                 DisableModalWindow();
@@ -147,6 +148,7 @@ public class ModalWindowController : MonoBehaviour
     }
 
     public void DisableModalWindow() => DisableModalWindow(true);
+
     public void DisableModalWindow(bool playSound, bool updateCanPause = true) {
         if (_playerHud != null) _playerHud.UpdateSpiritPoints();
         OnInteractEnd?.Invoke();
@@ -182,7 +184,7 @@ public class ModalWindowController : MonoBehaviour
     public void HideHudOnPause(bool pause) {
         if (_playerHud == null) return;
         if (pause) _playerHud.ClearJournalNotification();
-        _playerHud.gameObject.SetActive(!pause);
+        _playerHud.Hide(pause);
     }
 
     public void PlaySpiritPointSpentSounds(bool usedAll) {
