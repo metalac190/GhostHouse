@@ -46,6 +46,7 @@ public class SimpleFadeToBlack : MonoBehaviour
     public void FadeOutIn() {
         FadeOutIn(_fadeOutTime, _fadeHoldTime, _fadeInTime);
     }
+
     public Coroutine FadeOutIn(float fadeOutTime, float fadeHoldTime, float fadeInTime) {
         StopCurrentRoutine();
         _currentRoutine = StartCoroutine(FadeToBlack(fadeOutTime, true, fadeHoldTime, fadeInTime));
@@ -56,6 +57,7 @@ public class SimpleFadeToBlack : MonoBehaviour
     public void FadeOut() {
         FadeOut(_fadeOutTime);
     }
+
     public Coroutine FadeOut(float fadeOutTime) {
         StopCurrentRoutine();
         _currentRoutine = StartCoroutine(FadeToBlack(fadeOutTime));
@@ -72,6 +74,7 @@ public class SimpleFadeToBlack : MonoBehaviour
     public void FadeIn() {
         FadeIn(_fadeInTime);
     }
+
     public Coroutine FadeIn(float fadeInTime) {
         StopCurrentRoutine();
         _currentRoutine = StartCoroutine(FadeFromBlack(fadeInTime));
@@ -81,12 +84,12 @@ public class SimpleFadeToBlack : MonoBehaviour
     private void StopCurrentRoutine() {
         if (_currentRoutine != null) {
             StopCoroutine(_currentRoutine);
-            IsometricCameraController.Singleton._fadeToBlackLock = false;
+            LockCameraController(false);
         }
     }
 
     private IEnumerator FadeToBlack(float time, bool fadeFromAfter = false, float waitTime = 0, float fadeFromTime = 0) {
-        IsometricCameraController.Singleton._fadeToBlackLock = true;
+        LockCameraController(true);
         _image.enabled = true;
         SetImageAlpha(0);
         float start = _delta * time;
@@ -97,11 +100,11 @@ public class SimpleFadeToBlack : MonoBehaviour
         }
         SetImageAlpha(1);
         _currentRoutine = fadeFromAfter ? StartCoroutine(FadeHold(waitTime, fadeFromTime)) : null;
-        IsometricCameraController.Singleton._fadeToBlackLock = false;
+        LockCameraController(false);
     }
 
     private IEnumerator FadeHold(float waitTime, float fadeTime) {
-        IsometricCameraController.Singleton._fadeToBlackLock = true;
+        LockCameraController(true);
         for (float t = 0; t < waitTime; t += Time.deltaTime) {
             yield return null;
         }
@@ -109,7 +112,7 @@ public class SimpleFadeToBlack : MonoBehaviour
     }
 
     private IEnumerator FadeFromBlack(float time) {
-        IsometricCameraController.Singleton._fadeToBlackLock = true;
+        LockCameraController(true);
         SetImageAlpha(1);
         float start = (1 - _delta) * time;
         for (float t = start; t < time; t += Time.deltaTime) {
@@ -119,11 +122,16 @@ public class SimpleFadeToBlack : MonoBehaviour
         }
         SetImageAlpha(0);
         _image.enabled = false;
-        IsometricCameraController.Singleton._fadeToBlackLock = false;
+        LockCameraController(false);
         _currentRoutine = null;
     }
 
     private void SetImageAlpha(float delta) {
         _image.color = Color.Lerp(_transparent, _color, Mathf.Clamp01(delta));
+    }
+
+    private static void LockCameraController(bool lockCamera) {
+        if (IsometricCameraController.Singleton == null) return;
+        IsometricCameraController.Singleton._fadeToBlackLock = lockCamera;
     }
 }

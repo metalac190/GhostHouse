@@ -1,7 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using UnityEngine.SceneManagement;
+﻿using UnityEngine;
 
 public class CloseGame : MonoBehaviour
 {
@@ -13,6 +10,6 @@ public class CloseGame : MonoBehaviour
     }
 
     public void ReturnToMenu() {
-        SceneManager.LoadScene(0);
+        DataManager.SceneLoader.LoadScene(0);
     }
 }

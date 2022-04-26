@@ -9,6 +9,8 @@ using Utility.Buttons;
 public class DataManager : MonoBehaviour
 {
     public static DataManager Instance = null;  // Singleton instance
+    [SerializeField] private SceneLoader _sceneLoader = null;
+    public static SceneLoader SceneLoader => Instance._sceneLoader;
     public bool _debug = false;
 
     private string filePath; // save file for saving & loading
@@ -50,7 +52,6 @@ public class DataManager : MonoBehaviour
     // Boolean of what has been unlocked in journal
     [HideInInspector]
     public Dictionary<string, bool> journalUnlocks;
-    public bool[] endingUnlocks;
 
     private void Awake()
     {
@@ -61,7 +62,6 @@ public class DataManager : MonoBehaviour
 
             interactions = new Dictionary<string, bool>();
             journalUnlocks = new Dictionary<string, bool>();
-            endingUnlocks = new bool[4];
 
             saveData = new SaveData();
             filePath = Path.Combine(Application.persistentDataPath, "savedata.json");
@@ -82,6 +82,9 @@ public class DataManager : MonoBehaviour
                     ResetData();
                 }
 #endif
+                if (_sceneLoader == null) {
+                    _sceneLoader = GetComponentInChildren<SceneLoader>();
+                }
             }
         }
         else
@@ -122,6 +125,9 @@ public class DataManager : MonoBehaviour
     {
         level = "Spring";
         remainingSpiritPoints = 3;
+        trueEndingPoints = 0;
+        sistersEndingPoints = 0;
+        cousinsEndingPoints = 0;
         settingsLeftClickInteract = true;
         settingsCameraWASD = true;
         settingsCameraArrowKeys = true;
@@ -190,8 +196,6 @@ public class DataManager : MonoBehaviour
                     journalUnlocks[saveData.journalInteractionNames[i]] = saveData.journalUnlocks[i];
                 }
                 journalUnlocks.Remove("");
-
-                saveData.endingUnlocks.CopyTo(endingUnlocks, 0);
 
                 if (_debug) Debug.Log("Successful read");
             }
@@ -279,8 +283,6 @@ public class DataManager : MonoBehaviour
             saveData.journalInteractionNames[i] = "";
             saveData.journalUnlocks[i] = false;
         }
-
-        endingUnlocks.CopyTo(saveData.endingUnlocks, 0);
 
         // Save data as json string and write to file
         string jsonString = JsonUtility.ToJson(saveData, true);
@@ -419,14 +421,6 @@ public class DataManager : MonoBehaviour
         {
             outstr += "\n\tJournal Entry " + entry.Key + ": " + entry.Value;
         }
-        outstr += "\nEnding Unlocks: ";
-        for (int i = 0; i < endingUnlocks.Length; i++)
-        {
-            if (endingUnlocks[i])
-            {
-                outstr += i.ToString() + " ";
-            }
-        }
         if (_debug) Debug.Log(outstr);
     }
 
@@ -434,11 +428,6 @@ public class DataManager : MonoBehaviour
     public void DumpFileContents()
     {
         if (_debug) Debug.Log(File.ReadAllText(filePath));
-    }
-
-    public void UnlockEnding(int index)
-    {
-        endingUnlocks[index] = true;
     }
 
     // For now, just resets interactions. Will need to clear save file eventually
@@ -449,6 +438,18 @@ public class DataManager : MonoBehaviour
         cousinsEndingPoints = 0;
         sistersEndingPoints = 0;
         trueEndingPoints = 0;
+    }
+
+    public void ResetAllData()
+    {
+        interactions.Clear();
+        journalUnlocks.Clear();
+        level = "Spring";
+        remainingSpiritPoints = 3;
+        trueEndingPoints = 0;
+        sistersEndingPoints = 0;
+        cousinsEndingPoints = 0;
+        WriteFile();
     }
 
     // Return whether or not the save file exists
