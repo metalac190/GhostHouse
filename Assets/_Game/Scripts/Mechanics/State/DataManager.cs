@@ -52,7 +52,6 @@ public class DataManager : MonoBehaviour
     // Boolean of what has been unlocked in journal
     [HideInInspector]
     public Dictionary<string, bool> journalUnlocks;
-    public bool[] endingUnlocks;
 
     private void Awake()
     {
@@ -63,7 +62,6 @@ public class DataManager : MonoBehaviour
 
             interactions = new Dictionary<string, bool>();
             journalUnlocks = new Dictionary<string, bool>();
-            endingUnlocks = new bool[4];
 
             saveData = new SaveData();
             filePath = Path.Combine(Application.persistentDataPath, "savedata.json");
@@ -199,8 +197,6 @@ public class DataManager : MonoBehaviour
                 }
                 journalUnlocks.Remove("");
 
-                saveData.endingUnlocks.CopyTo(endingUnlocks, 0);
-
                 if (_debug) Debug.Log("Successful read");
             }
             catch
@@ -287,8 +283,6 @@ public class DataManager : MonoBehaviour
             saveData.journalInteractionNames[i] = "";
             saveData.journalUnlocks[i] = false;
         }
-
-        endingUnlocks.CopyTo(saveData.endingUnlocks, 0);
 
         // Save data as json string and write to file
         string jsonString = JsonUtility.ToJson(saveData, true);
@@ -427,14 +421,6 @@ public class DataManager : MonoBehaviour
         {
             outstr += "\n\tJournal Entry " + entry.Key + ": " + entry.Value;
         }
-        outstr += "\nEnding Unlocks: ";
-        for (int i = 0; i < endingUnlocks.Length; i++)
-        {
-            if (endingUnlocks[i])
-            {
-                outstr += i.ToString() + " ";
-            }
-        }
         if (_debug) Debug.Log(outstr);
     }
 
@@ -442,12 +428,6 @@ public class DataManager : MonoBehaviour
     public void DumpFileContents()
     {
         if (_debug) Debug.Log(File.ReadAllText(filePath));
-    }
-
-    public void UnlockEnding(int index)
-    {
-        endingUnlocks[index] = true;
-        WriteFile();
     }
 
     // For now, just resets interactions. Will need to clear save file eventually

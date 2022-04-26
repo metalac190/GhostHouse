@@ -378,7 +378,15 @@ namespace Mechanics.Dialog
 
             void StartTypewriter()
             {
-                if (character != null ? character.PlayAudio : true)
+                if (character != null && !character.PlayAudio)
+                {
+                    StartCoroutine(Tweens.SimpleTypewriter(_currentView.Txt_dialog, _typewriterEffectSpeed, interruption: _interruptionFlag,
+                    onComplete: () =>
+                    {
+                        onDialogueLineFinished();
+                    }));
+                }
+                else
                 {
                     OnLineStarted?.Invoke(dialogueLine);
                     StartCoroutine(Tweens.SimpleTypewriter(_currentView.Txt_dialog, _typewriterEffectSpeed, OnCharacterTyped, interruption: _interruptionFlag,
@@ -387,10 +395,6 @@ namespace Mechanics.Dialog
                         OnLineEnd?.Invoke();
                         onDialogueLineFinished();
                     }));
-                }
-                else
-                {
-                    StartCoroutine(Tweens.SimpleTypewriter(_currentView.Txt_dialog, _typewriterEffectSpeed, interruption: _interruptionFlag, onComplete: onDialogueLineFinished));
                 }
             }
         }
