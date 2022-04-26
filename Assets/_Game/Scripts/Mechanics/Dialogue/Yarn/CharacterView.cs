@@ -324,7 +324,10 @@ namespace Mechanics.Dialog
             else
             {
                 _currentView.P_characterName.SetActive(character != null ? character.ShowName : true);
-
+                if (TextBubbleController.Instance != null) {
+                    TextBubbleController.Instance.Disable();
+                    TextBubbleController.Instance.SetCharacter(dialogueLine.CharacterName);
+                }
                 _currentView.Txt_characterName.text = dialogueLine.CharacterName;
                 _currentView.Txt_dialog.text = dialogueLine.TextWithoutCharacterName.Text;
             }
