@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class DisableOnStart : MonoBehaviour
 {
-    [SerializeField] private List<GameObject> _objectsToDisable;
+    [SerializeField] private List<GameObject> _objectsToDisable = new List<GameObject>();
 
     private void Start() {
         foreach (var obj in _objectsToDisable) {

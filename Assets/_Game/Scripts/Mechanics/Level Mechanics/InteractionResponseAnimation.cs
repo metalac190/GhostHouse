@@ -15,6 +15,7 @@ public class InteractionResponseAnimation : InteractableResponseBase
         base.OnEnable();
         if (_interactable != null && _animator != null)
         {
+            _interactable.TestResetAnimators();
             _interactable.ConnectedAnimators.Add(_animator);
         }
     }
