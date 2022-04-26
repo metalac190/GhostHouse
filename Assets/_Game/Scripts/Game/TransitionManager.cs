@@ -127,10 +127,16 @@ namespace Game
 
         private IEnumerator FadeToBlack(float time) {
             if (_raycastBlock != null) _fadeToBlack.gameObject.SetActive(true);
+            if (IsometricCameraController.Singleton != null) {
+                IsometricCameraController.Singleton._fadeToBlackLock = true;
+            }
             for (float t = 0; t < time; t += Time.deltaTime) {
                 float delta = t / time;
                 _fadeToBlack.color = new Color(0, 0, 0, delta);
                 yield return null;
+            }
+            if (IsometricCameraController.Singleton != null) {
+                IsometricCameraController.Singleton._fadeToBlackLock = false;
             }
             NextScene();
         }
