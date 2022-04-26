@@ -3,6 +3,7 @@ using System.Linq;
 using TMPro;
 using UnityEngine;
 using System.Collections;
+using Game;
 using UnityEngine.SceneManagement;
 
 public class DataManagerDebug : MonoBehaviour
@@ -22,20 +23,21 @@ public class DataManagerDebug : MonoBehaviour
     private float accum = 0.0f;
     private int frames = 0;
     private float timeleft;
-    private float startTime;
-    private float split;
+    private float currentTime;
 
     private void Start() {
-        startTime = Time.time;
+        currentTime = 0;
         SetDebugActive(_debugActive);
     }
 
     private void OnEnable() {
         Application.logMessageReceived += Log;
+        TransitionManager.OnLevelComplete += SaveSplit;
     }
 
     private void OnDisable() {
         Application.logMessageReceived -= Log;
+        TransitionManager.OnLevelComplete -= SaveSplit;
     }
 
     private void OnGUI() {
@@ -46,6 +48,10 @@ public class DataManagerDebug : MonoBehaviour
     }
 
     private void Update() {
+        currentTime += Time.deltaTime;
+        _timerMain.text = TimeMain(currentTime);
+        _timerMil.text = TimeMil(currentTime);
+
         if (Input.GetKeyDown(KeyCode.End)) {
             SetDebugActive(!_debugActive);
         }
@@ -69,17 +75,12 @@ public class DataManagerDebug : MonoBehaviour
             debug += "Winter: " + TimeTotal(DataManager.Instance.WinterSplit) + "\n";
             debug += "Total: " + TimeTotal(DataManager.Instance.SplitTotal) + "\n";
             debug += "\n<b><u>Best Ever</u></b>\n";
-            debug += "Spring: " + TimeTotal(DataManager.Instance.SpringSplitBest) + "\n";
-            debug += "Summer: " + TimeTotal(DataManager.Instance.SummerSplitBest) + "\n";
-            debug += "Fall: " + TimeTotal(DataManager.Instance.FallSplitBest) + "\n";
-            debug += "Winter: " + TimeTotal(DataManager.Instance.WinterSplitBest) + "\n";
-            debug += "Total: " + TimeTotal(DataManager.Instance.SplitTotalBest) + "\n";
+            debug += "Best Spring: " + TimeTotal(DataManager.Instance.SpringSplitBest) + "\n";
+            debug += "Best Summer: " + TimeTotal(DataManager.Instance.SummerSplitBest) + "\n";
+            debug += "Best Fall: " + TimeTotal(DataManager.Instance.FallSplitBest) + "\n";
+            debug += "Best Winter: " + TimeTotal(DataManager.Instance.WinterSplitBest) + "\n";
+            debug += "Best Total: " + TimeTotal(DataManager.Instance.SplitTotalBest) + "\n";
             _text.text = debug;
-
-            var currentTime = Time.time - startTime;
-            split = currentTime;
-            _timerMain.text = TimeMain(currentTime);
-            _timerMil.text = TimeMil(currentTime);
         }
         timeleft -= Time.deltaTime;
         accum += Time.timeScale / Time.deltaTime;
@@ -109,8 +110,8 @@ public class DataManagerDebug : MonoBehaviour
         return $".{ms:000}";
     }
 
-    private void OnDestroy() {
-        DataManager.Instance.SetSplit(_season, split);
+    private void SaveSplit() {
+        DataManager.Instance.SetSplit(_season, currentTime);
     }
 
     public void GiveSpiritPoint() {

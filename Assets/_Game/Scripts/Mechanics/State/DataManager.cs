@@ -455,6 +455,7 @@ public class DataManager : MonoBehaviour
         trueEndingPoints = 0;
         sistersEndingPoints = 0;
         cousinsEndingPoints = 0;
+        ResetSplits();
         WriteFile();
     }
 
@@ -479,6 +480,13 @@ public class DataManager : MonoBehaviour
     public float WinterSplitBest => PlayerPrefs.GetFloat("WinterSplit");
     public float SplitTotal => SpringSplit + SummerSplit + FallSplit + WinterSplit;
     public float SplitTotalBest => SpringSplitBest + SummerSplitBest + FallSplitBest + WinterSplitBest;
+
+    private static void ResetSplits() {
+        PlayerPrefs.SetFloat("SpringSplit", 0);
+        PlayerPrefs.SetFloat("SummerSplit", 0);
+        PlayerPrefs.SetFloat("FallSplit", 0);
+        PlayerPrefs.SetFloat("WinterSplit", 0);
+    }
 
     public void SetSplit(Season season, float split)
     {

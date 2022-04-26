@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
 using Yarn.Unity;
@@ -29,6 +30,8 @@ namespace Game
         [SerializeField] private string _nextScene = "MainMenu";
         [SerializeField] private bool _fadeOut = true;
         [SerializeField] private float _fadeOutTime = 1;
+
+        public static Action OnLevelComplete = delegate { };
 
         private static DialogueRunner _dialogueRunner;
         public static DialogueRunner DialogueRunner {
@@ -138,6 +141,7 @@ namespace Game
             if (IsometricCameraController.Singleton != null) {
                 IsometricCameraController.Singleton._fadeToBlackLock = false;
             }
+            OnLevelComplete?.Invoke();
             NextScene();
         }
 
