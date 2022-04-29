@@ -9,6 +9,9 @@ using Utility.Buttons;
 public class DataManager : MonoBehaviour
 {
     public static DataManager Instance = null;  // Singleton instance
+    [SerializeField] private SceneLoader _sceneLoader = null;
+    public static SceneLoader SceneLoader => Instance._sceneLoader;
+    public bool _debug = false;
 
     private string filePath; // save file for saving & loading
 
@@ -17,6 +20,7 @@ public class DataManager : MonoBehaviour
 
     public string level { get; set; }       // Current level season
     public int remainingSpiritPoints { get; set; }  // Current points left to spend
+    public int totalUsedSpiritPoints { get; set; }  // Current points left to spend
 
     // Points earned towards the various endings
     public int cousinsEndingPoints { get; set; }
@@ -42,11 +46,12 @@ public class DataManager : MonoBehaviour
     public bool settingsLargeGUI { get; set; }
     public bool settingsLargeText { get; set; }
     public int settingsTextFont { get; set; }
+    public bool settingsVSync { get; set; }
+    public int settingsGraphicsQuality { get; set; }
 
     // Boolean of what has been unlocked in journal
     [HideInInspector]
     public Dictionary<string, bool> journalUnlocks;
-    public bool[] endingUnlocks;
 
     private void Awake()
     {
@@ -57,7 +62,6 @@ public class DataManager : MonoBehaviour
 
             interactions = new Dictionary<string, bool>();
             journalUnlocks = new Dictionary<string, bool>();
-            endingUnlocks = new bool[4];
 
             saveData = new SaveData();
             filePath = Path.Combine(Application.persistentDataPath, "savedata.json");
@@ -78,6 +82,9 @@ public class DataManager : MonoBehaviour
                     ResetData();
                 }
 #endif
+                if (_sceneLoader == null) {
+                    _sceneLoader = GetComponentInChildren<SceneLoader>();
+                }
             }
         }
         else
@@ -92,7 +99,7 @@ public class DataManager : MonoBehaviour
 
     public void OnContinueGame() {
         // TODO: LOAD ALL INTERACTIONS FROM PREVIOUS ENDING
-        Debug.Log("Continuing from previous save file");
+        if (_debug) Debug.Log("Continuing from previous save file");
         ResetData();
         ReadFile();
     }
@@ -108,7 +115,7 @@ public class DataManager : MonoBehaviour
             case "Winter":
                 return Season.Winter;
             default:
-                Debug.LogWarning("Season accessed on Invalid Level", gameObject);
+                if (_debug) Debug.LogWarning("Season accessed on Invalid Level", gameObject);
                 return Season.Universal;
         }
     }
@@ -118,6 +125,9 @@ public class DataManager : MonoBehaviour
     {
         level = "Spring";
         remainingSpiritPoints = 3;
+        trueEndingPoints = 0;
+        sistersEndingPoints = 0;
+        cousinsEndingPoints = 0;
         settingsLeftClickInteract = true;
         settingsCameraWASD = true;
         settingsCameraArrowKeys = true;
@@ -130,9 +140,11 @@ public class DataManager : MonoBehaviour
         settingsWindowMode = true;
         settingsContrast = 0;
         settingsBrightness = 0;
-        settingsLargeGUI = true;    // placeholder
-        settingsLargeText = true;   // placeholder
-        settingsTextFont = 0;
+        settingsLargeGUI = true;
+        settingsLargeText = true;
+        settingsTextFont = 2;           // open dyslexic
+        settingsVSync = true;
+        settingsGraphicsQuality = 1;    // medium graphics
     }
 
     // Read data from the save file into the game
@@ -141,7 +153,7 @@ public class DataManager : MonoBehaviour
         if (File.Exists(filePath))
         {
             // Unpack file text as JSON
-            Debug.Log("Unpacking file into savedata");
+            if (_debug) Debug.Log("Unpacking file into savedata");
             string fileContents = File.ReadAllText(filePath);
             saveData = new SaveData();
             JsonUtility.FromJsonOverwrite(fileContents, saveData);
@@ -176,6 +188,8 @@ public class DataManager : MonoBehaviour
                 settingsLargeGUI = saveData.settings.largeGUIFont;
                 settingsLargeText = saveData.settings.largeTextFont;
                 settingsTextFont = saveData.settings.textFont;
+                settingsVSync = saveData.settings.vsync;
+                settingsGraphicsQuality = saveData.settings.graphicsQuality;
 
                 for (int i = 0; i < saveData.journalInteractionNames.Length; i++)
                 {
@@ -183,13 +197,11 @@ public class DataManager : MonoBehaviour
                 }
                 journalUnlocks.Remove("");
 
-                saveData.endingUnlocks.CopyTo(endingUnlocks, 0);
-
-                Debug.Log("Successful read");
+                if (_debug) Debug.Log("Successful read");
             }
             catch
             {
-                Debug.Log("Some error loading save file");
+                if (_debug) Debug.Log("Some error loading save file");
                 SetDefaultValues();
                 ResetData();
                 WriteFile();
@@ -197,7 +209,7 @@ public class DataManager : MonoBehaviour
         }
         else
         {
-            Debug.Log("No save file exists");
+            if (_debug) Debug.Log("No save file exists");
         }
     }
 
@@ -218,7 +230,7 @@ public class DataManager : MonoBehaviour
         {
             if(ind >= 160)
             {
-                Debug.Log("Error: Unexpectedly high number of interactions");
+                if (_debug) Debug.Log("Error: Unexpectedly high number of interactions");
             }
             else
             {
@@ -247,6 +259,8 @@ public class DataManager : MonoBehaviour
         saveData.settings.largeGUIFont = settingsLargeGUI;
         saveData.settings.largeTextFont = settingsLargeText;
         saveData.settings.textFont = settingsTextFont;
+        saveData.settings.vsync = settingsVSync;
+        saveData.settings.graphicsQuality = settingsGraphicsQuality;
 
         ind = 0;
         saveData.journalInteractionNames = new string[160];
@@ -255,7 +269,7 @@ public class DataManager : MonoBehaviour
         {
             if (ind >= 160)
             {
-                Debug.Log("Error: Unexpectedly high number of interactions");
+                if (_debug) Debug.Log("Error: Unexpectedly high number of interactions");
             }
             else
             {
@@ -270,11 +284,9 @@ public class DataManager : MonoBehaviour
             saveData.journalUnlocks[i] = false;
         }
 
-        endingUnlocks.CopyTo(saveData.endingUnlocks, 0);
-
         // Save data as json string and write to file
         string jsonString = JsonUtility.ToJson(saveData, true);
-        Debug.Log("File saved to " + filePath);
+        if (_debug) Debug.Log("File saved to " + filePath);
         File.WriteAllText(filePath, jsonString);
     }
 
@@ -295,6 +307,8 @@ public class DataManager : MonoBehaviour
         saveData.settings.largeGUIFont = settingsLargeGUI;
         saveData.settings.largeTextFont = settingsLargeText;
         saveData.settings.textFont = settingsTextFont;
+        saveData.settings.vsync = settingsVSync;
+        saveData.settings.graphicsQuality = settingsGraphicsQuality;
 
         string jsonString = JsonUtility.ToJson(saveData, true);
         File.WriteAllText(filePath, jsonString);
@@ -327,8 +341,14 @@ public class DataManager : MonoBehaviour
         else
         {
             // This shouldn't happen if interactions initialize correctly
-            Debug.Log("Interaction not stored");
+            if (_debug) Debug.Log("Interaction not stored");
             return false;
+        }
+    }
+
+    public void TestJournalUnlockExists(string unlock) {
+        if (!journalUnlocks.ContainsKey(unlock)) {
+            journalUnlocks.Add(unlock, false);
         }
     }
 
@@ -356,7 +376,7 @@ public class DataManager : MonoBehaviour
     }
 
     // Save settings from the visual settings menu
-    public void SaveVisualSettings(bool windowMode, int contrast, int brightness, bool largeGUIFont, bool largeTextFont, int textFont)
+    public void SaveVisualSettings(bool windowMode, int contrast, int brightness, bool largeGUIFont, bool largeTextFont, int textFont, bool vsync, int graphicsQuality)
     {
         settingsWindowMode = windowMode;
         settingsContrast = contrast;
@@ -364,6 +384,8 @@ public class DataManager : MonoBehaviour
         settingsLargeGUI = largeGUIFont;
         settingsLargeText = largeTextFont;
         settingsTextFont = textFont;
+        settingsVSync = vsync;
+        settingsGraphicsQuality = graphicsQuality;
 
         WriteSettings();
     }
@@ -398,31 +420,20 @@ public class DataManager : MonoBehaviour
         outstr += "\n\tLarge GUI Font: " + settingsLargeGUI.ToString();
         outstr += "\n\tLarge Text Font: " + settingsLargeText.ToString();
         outstr += "\n\tText Font Style: " + settingsTextFont.ToString();
+        outstr += "\n\tVSync: " + settingsVSync.ToString();
+        outstr += "\n\tGraphics Quality: " + settingsGraphicsQuality.ToString();
         outstr += "\nJournal Unlocks: ";
         foreach (KeyValuePair<string, bool> entry in journalUnlocks)
         {
             outstr += "\n\tJournal Entry " + entry.Key + ": " + entry.Value;
         }
-        outstr += "\nEnding Unlocks: ";
-        for (int i = 0; i < endingUnlocks.Length; i++)
-        {
-            if (endingUnlocks[i])
-            {
-                outstr += i.ToString() + " ";
-            }
-        }
-        Debug.Log(outstr);
+        if (_debug) Debug.Log(outstr);
     }
 
     // Dump save file contents to the console
     public void DumpFileContents()
     {
-        Debug.Log(File.ReadAllText(filePath));
-    }
-
-    public void UnlockEnding(int index)
-    {
-        endingUnlocks[index] = true;
+        if (_debug) Debug.Log(File.ReadAllText(filePath));
     }
 
     // For now, just resets interactions. Will need to clear save file eventually
@@ -435,9 +446,121 @@ public class DataManager : MonoBehaviour
         trueEndingPoints = 0;
     }
 
+    public void ResetAllData()
+    {
+        interactions.Clear();
+        journalUnlocks.Clear();
+        level = "Spring";
+        remainingSpiritPoints = 3;
+        trueEndingPoints = 0;
+        sistersEndingPoints = 0;
+        cousinsEndingPoints = 0;
+        ResetSplits();
+        WriteFile();
+    }
+
     // Return whether or not the save file exists
     public bool SaveFileExists()
     {
         return System.IO.File.Exists(filePath);
+    }
+
+
+
+
+
+    // Speed run splits using player prefs to not break the data manager :)
+    public float SpringSplit { get; set; }
+    public float SpringSplitBest => PlayerPrefs.GetFloat("SpringSplit");
+    public float SummerSplit { get; set; }
+    public float SummerSplitBest => PlayerPrefs.GetFloat("SummerSplit");
+    public float FallSplit { get; set; }
+    public float FallSplitBest => PlayerPrefs.GetFloat("FallSplit");
+    public float WinterSplit { get; set; }
+    public float WinterSplitBest => PlayerPrefs.GetFloat("WinterSplit");
+    public float SplitTotal => SpringSplit + SummerSplit + FallSplit + WinterSplit;
+    public float SplitTotalBest => SpringSplitBest + SummerSplitBest + FallSplitBest + WinterSplitBest;
+    public float TrueEndBest => PlayerPrefs.GetFloat("TrueEndTime");
+    public float SisterEndBest => PlayerPrefs.GetFloat("SisterEndTime");
+    public float CousinEndBest => PlayerPrefs.GetFloat("CousinEndTime");
+    public float BadEndBest => PlayerPrefs.GetFloat("BadEndTime");
+
+    private static void ResetSplits() {
+        PlayerPrefs.SetFloat("SpringSplit", 0);
+        PlayerPrefs.SetFloat("SummerSplit", 0);
+        PlayerPrefs.SetFloat("FallSplit", 0);
+        PlayerPrefs.SetFloat("WinterSplit", 0);
+
+        PlayerPrefs.SetFloat("TrueEndTime", 0);
+        PlayerPrefs.SetFloat("SisterEndTime", 0);
+        PlayerPrefs.SetFloat("CousinEndTime", 0);
+        PlayerPrefs.SetFloat("BadEndTime", 0);
+    }
+
+    public void SetSplit(Season season, float split)
+    {
+        switch (season)
+        {
+            case Season.Spring:
+                SpringSplit = split;
+                if (split < SpringSplitBest || SpringSplitBest == 0)
+                {
+                    PlayerPrefs.SetFloat("SpringSplit", split);
+                }
+                break;
+            case Season.Summer:
+                SummerSplit = split;
+                if (split < SummerSplitBest || SummerSplitBest == 0)
+                {
+                    PlayerPrefs.SetFloat("SummerSplit", split);
+                }
+                break;
+            case Season.Fall:
+                FallSplit = split;
+                if (split < FallSplitBest || FallSplitBest == 0)
+                {
+                    PlayerPrefs.SetFloat("FallSplit", split);
+                }
+                break;
+            case Season.Winter:
+                WinterSplit = split;
+                if (split < WinterSplitBest || WinterSplitBest == 0)
+                {
+                    PlayerPrefs.SetFloat("WinterSplit", split);
+                }
+                break;
+        }
+    }
+
+    public void SetTrueEnd(float time)
+    {
+        if (time < TrueEndBest || TrueEndBest == 0)
+        {
+            PlayerPrefs.SetFloat("TrueEndTime", time);
+        }
+    }
+
+    public void SetSisterEnd(float time)
+    {
+        if (time < SisterEndBest || SisterEndBest == 0)
+        {
+            PlayerPrefs.SetFloat("SisterEndTime", time);
+        }
+    }
+
+    public void SetCousinEnd(float time)
+    {
+        if (time < CousinEndBest || CousinEndBest == 0)
+        {
+            PlayerPrefs.SetFloat("CousinEndTime", time);
+        }
+    }
+
+    public void SetBadEnd(float time)
+    {
+        if (time < BadEndBest || BadEndBest == 0)
+        {
+            PlayerPrefs.SetFloat("BadEndTime", time);
+        }
     }
 }

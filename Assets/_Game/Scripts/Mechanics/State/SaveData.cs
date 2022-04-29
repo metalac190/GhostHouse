@@ -34,21 +34,21 @@ public class SaveData
         public bool largeGUIFont;
         public bool largeTextFont;
         public int textFont;
+        public bool vsync;
+        public int graphicsQuality;
     }
     public Settings settings;
 
     // Boolean array of journal unlocks
     public string[] journalInteractionNames;
     public bool[] journalUnlocks;
-    public bool[] endingUnlocks;
 
     // Constructor to initialize arrays
     public SaveData()
     {
-        interactionNames = new string[160];
-        interactionStates = new bool[160];
-        journalInteractionNames = new string[160];
-        journalUnlocks = new bool[160];
-        endingUnlocks = new bool[4];
+        interactionNames = new string[200];
+        interactionStates = new bool[200];
+        journalInteractionNames = new string[200];
+        journalUnlocks = new bool[200];
     }
 }

@@ -11,63 +11,71 @@ namespace Utility.Audio.Controllers
 {
     public class AudioSourceController : ASC_Base
     {
-        [SerializeField] private bool _enableSounds = true;
+        [SerializeField] private bool _debug = false;
         [SerializeField] private SfxReference _sfx = new SfxReference();
         [SerializeField] private AudioMixerGroup _overrideMixer = null;
         [SerializeField] private bool _playOnStart = true;
+        [SerializeField] private bool _waitOnStart = true;
         [SerializeField] private bool _looping = true;
         [SerializeField, MinMaxRange(0, 100)] private RangedFloat _loopDelay = new RangedFloat(0, 0);
         [SerializeField, ReadOnly] private float _delay;
+        [SerializeField, ReadOnly] private bool _isPlaying;
 
         private bool _checkLoop;
-        private bool _areSoundsEnabled = true;
+        private bool _areSoundsEnabled;
+
+        private void Awake() {
+            Source.playOnAwake = false;
+            Source.loop = false;
+            Source.Stop();
+        }
 
         private void Start() {
-            InitializeSfx();
+            ResetSfx();
+            if (_playOnStart) {
+                Enable();
+            }
         }
 
         private void Update() {
+            _isPlaying = Source.isPlaying;
             if (_checkLoop && !Source.isPlaying) {
                 Delay();
             }
         }
 
-        private void OnValidate() {
-            CheckEnabled();
-        }
-
-        public void Enable() {
-            _enableSounds = true;
-            CheckEnabled();
-        }
-
-        public void Disable() {
-            _enableSounds = false;
-            CheckEnabled();
-        }
-
-        private void InitializeSfx() {
+        private void ResetSfx()
+        {
             if (_sfx == null) return;
-
             SetSourceProperties(_sfx.GetSourceProperties());
-            if (_overrideMixer != null) {
+            if (_overrideMixer != null)
+            {
                 Source.outputAudioMixerGroup = _overrideMixer;
             }
-            if (_playOnStart) {
-                if (_looping) {
-                    if (_loopDelay.MaxValue > 0) {
-                        _checkLoop = _looping;
-                        Source.loop = false;
-                    }
-                    else {
-                        Source.loop = true;
-                    }
-                    Delay();
-                }
-                else {
-                    Play();
-                }
-            }
+            _areSoundsEnabled = false;
+        }
+
+        [Button(Spacing = 10, Mode = ButtonMode.NotPlaying)]
+        private void ForceUpdateSfxProperties()
+        {
+            Stop();
+            StopAllCoroutines();
+            ResetSfx();
+            CheckEnabled();
+        }
+
+        [Button(Spacing = 5, Mode = ButtonMode.NotPlaying)]
+        public void Enable() {
+            if (_areSoundsEnabled) return;
+            _areSoundsEnabled = true;
+            CheckEnabled();
+        }
+
+        [Button(Mode = ButtonMode.NotPlaying)]
+        public void Disable() {
+            if (!_areSoundsEnabled) return;
+            _areSoundsEnabled = false;
+            CheckEnabled();
         }
 
         private void Delay() {
@@ -81,32 +89,45 @@ namespace Utility.Audio.Controllers
             for (float t = 0; t < _delay; t += Time.deltaTime) {
                 yield return null;
             }
-            Play();
+            if (_debug) Debug.Log("Finish Delay");
+            Enable();
             _checkLoop = true;
         }
 
         private void CheckEnabled() {
-            if (_enableSounds == _areSoundsEnabled) return;
-            _areSoundsEnabled = _enableSounds;
-            if (_enableSounds) {
-                if (_looping) {
-                    Delay();
-                }
-                else {
-                    Play();
-                }
+            if (_areSoundsEnabled && !Source.isPlaying) {
+                PlaySource();
             }
-            else {
-                _checkLoop = false;
-                Stop();
+            else if (!_areSoundsEnabled) {
+                StopSource();
             }
         }
 
-        [Button(Spacing = 10, Mode = ButtonMode.NotPlaying)]
-        private void ForceUpdateSfxProperties() {
+        private void PlaySource() {
+            if (_looping) {
+                if (_loopDelay.MaxValue > 0) {
+                    Source.loop = false;
+                    if (_waitOnStart) {
+                        Delay();
+                        return;
+                    }
+                    _checkLoop = true;
+                }
+                else {
+                    Source.loop = true;
+                }
+                Play();
+            }
+            else {
+                if (_debug) Debug.Log("Play Once");
+                Source.loop = false;
+                Play();
+            }
+        }
+
+        private void StopSource() {
+            _checkLoop = false;
             Stop();
-            StopAllCoroutines();
-            InitializeSfx();
         }
     }
 }

@@ -25,7 +25,8 @@ public class IsometricCameraController : MonoBehaviour
     [SerializeField] public bool _enableWASDMovement = true;
     [SerializeField] public float _cameraMoveSpeed = 10f;
     public bool _interacting = false;
-    bool _clicked = false;
+    public bool _fadeToBlackLock = false;
+    bool _clicked;
 
     [Header("Click And Drag Movement Settings")]
     [SerializeField] public bool _enableClickDragMovement = false;
@@ -66,6 +67,7 @@ public class IsometricCameraController : MonoBehaviour
 
     //Centering on Object Values
     private Vector3 _finalLerpPosition;
+    private bool _lerpToPosition;
     private float _movementTime = 3f;
 
     //Click and Drag Values
@@ -148,7 +150,7 @@ public class IsometricCameraController : MonoBehaviour
     void InteractEnded()
     {
         _interacting = false;
-        _clicked = false;
+        //_clicked = false;
         _elapsedTime = 0f;
         _finalLerpPosition = transform.position;
     }
@@ -257,6 +259,7 @@ public class IsometricCameraController : MonoBehaviour
         #endregion
 
         _finalLerpPosition = new Vector3(finalPosition.x, 0f, finalPosition.z);
+        _lerpToPosition = true;
         //_movementTime = movementTime;+
         _movementTime = 3f;
 
@@ -340,7 +343,7 @@ public class IsometricCameraController : MonoBehaviour
     //Reeee
     private void Update()
     {
-
+        /*
         if (_interacting && !_clicked)
         {
 
@@ -355,10 +358,25 @@ public class IsometricCameraController : MonoBehaviour
 
             }
         }
+        */
+
+        // LERP
+        if (_lerpToPosition)
+        {
+            _elapsedTime += Time.deltaTime;
+            float _movementPercentage = _elapsedTime / _movementTime;
+            transform.position = Vector3.Lerp(transform.position, _finalLerpPosition, _movementPercentage);
+
+            if (transform.position == _finalLerpPosition)
+            {
+                _elapsedTime = 0f;
+                _lerpToPosition = false;
+            }
+            return;
+        }
 
 
-
-        if (!_interacting && !gamePaused)
+        if (!_interacting && !gamePaused && !_fadeToBlackLock)
         {
             if (_enableWASDMovement && !_dialogueRunner.IsDialogueRunning) { HandleInput(); }
 

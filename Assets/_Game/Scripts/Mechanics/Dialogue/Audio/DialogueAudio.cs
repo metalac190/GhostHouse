@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using Utility.Audio.Clips.Base;
 using Utility.Audio.Controllers;
@@ -13,6 +14,8 @@ namespace Mechanics.Dialog
         public bool CanPlay { get; private set; } = false;
 
         #region private variables
+        [SerializeField] private bool _debug = false;
+
         [SerializeField]
         [Tooltip("After playing the primary audio clip, this is the chance of the secondary clip playing and 1-this is the chance of the tertiary clip playing.")]
         float _secondaryChance = .6f;
@@ -181,6 +184,7 @@ namespace Mechanics.Dialog
             }
 
             _timedEffects = new List<TimedEffect>();
+            int colonPosition = line.Text.Text.IndexOf(':') + 1;
             foreach (var attrib in line.Text.Attributes)
             {
                 if (attrib.Name == "sfx")
@@ -188,7 +192,7 @@ namespace Mechanics.Dialog
                     _timedEffects.Add(new TimedEffect(
                         attrib.Properties["sfx"].StringValue,
                         attrib.Properties["active"].BoolValue,
-                        attrib.Position
+                        attrib.Position - colonPosition // Jank fix by Brandon, plz no more bugs <3
                     ));
                 }
             }
@@ -205,23 +209,29 @@ namespace Mechanics.Dialog
                 _nextClip = NextClip.Quaternary;
             }
 
+            //if (_debug && _timedEffects.Count > 0) Debug.Log("Toggleable Sfx Available: " + _timedEffects.Count);
             for (int i = _timedEffects.Count - 1; i >= 0; i--)
             {
                 var effect = _timedEffects[i];
+                //if (_debug) Debug.Log("Toggleable Sfx Potential: " + index + " vs " + effect.Index);
                 if (index > effect.Index)
                 {
+                    //if (_debug) Debug.Log("Toggleable Sfx Found");
                     // toggle effect
                     foreach (var toggleable in _toggleableSfx)
                     {
+                        //if (_debug) Debug.Log("Comparing (" + toggleable.Identifer + ") and (" + effect.Identifer + ")");
                         if (!toggleable.Identifer.ToLower().Equals(effect.Identifer.ToLower())) continue;
 
                         if (effect.Active)
                         {
+                            if (_debug) Debug.Log("Start Toggleable Sfx: " + effect.Identifer);
                             toggleable.Controller.Enable();
                             toggleable.Controller.Play();
                         }
                         else
                         {
+                            if (_debug) Debug.Log("Stop Toggleable Sfx: " + effect.Identifer);
                             toggleable.Controller.Disable();
                         }
                     }

@@ -1,59 +1,93 @@
-﻿using System.Collections;
+﻿using Game;
+using Mechanics.Level_Mechanics;
+using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using Utility.Audio.Clips;
+using Utility.Audio.Managers;
 
 public class EndingsManager : MonoBehaviour
 {
     [SerializeField]
-    Ending trueEnding = null;
+    Ending _trueEnding = null;
 
     [SerializeField]
-    Ending cousinEnding = null;
+    Ending _cousinEnding = null;
 
     [SerializeField]
-    Ending sisterEnding = null;
+    Ending _sisterEnding = null;
 
     [SerializeField]
     [Tooltip("Threshold for this ending is ignored.")]
     Ending badEnding = null;
 
+    [Space]
     [SerializeField]
-    Game.TransitionManager transitionManager = null;
-    
+    Game.TransitionManager _transitionManager = null;
+
+    public event Action<string> OnEnd = delegate { };
 
     void Start()
     {
         DataManager data = DataManager.Instance;
-        Ending selectedEnding;
+        List<EndingPair> possibleChoices = new List<EndingPair>();
 
-        if (data.trueEndingPoints >= trueEnding.Threshold)
+        // get prioritized list of endings not yet unlocked
+        data.TestJournalUnlockExists(_trueEnding.Dialog.name);
+        data.TestJournalUnlockExists(_sisterEnding.Dialog.name);
+        data.TestJournalUnlockExists(_cousinEnding.Dialog.name);
+        if (!data.journalUnlocks[_trueEnding.Dialog.name] && data.trueEndingPoints >= _trueEnding.Threshold)
         {
-            selectedEnding = trueEnding;
-            data.UnlockEnding(0);
+            possibleChoices.Add(new EndingPair(_trueEnding, 0));
         }
-        else if (data.sistersEndingPoints >= sisterEnding.Threshold)
+        else if (!data.journalUnlocks[_sisterEnding.Dialog.name] && data.sistersEndingPoints >= _sisterEnding.Threshold)
         {
-            selectedEnding = sisterEnding;
-            data.UnlockEnding(3);
+            possibleChoices.Add(new EndingPair(_sisterEnding, 3));
         }
-        else if (data.cousinsEndingPoints >= cousinEnding.Threshold)
+        else if (!data.journalUnlocks[_cousinEnding.Dialog.name] && data.cousinsEndingPoints >= _cousinEnding.Threshold)
         {
-            selectedEnding = cousinEnding;
-            data.UnlockEnding(2);
+            possibleChoices.Add(new EndingPair(_cousinEnding, 2));
         }
+
+        EndingPair selectedEnding;
+        // choose from list of endings not done yet, if possible
+        if (possibleChoices.Count > 0)
+        {
+            selectedEnding = possibleChoices[0];
+        }
+        // follow default priorities
         else
         {
-            selectedEnding = badEnding;
-            data.UnlockEnding(1);
+            if (data.trueEndingPoints >= _trueEnding.Threshold)
+            {
+                selectedEnding = new EndingPair(_trueEnding, 0);
+            }
+            else if (data.sistersEndingPoints >= _sisterEnding.Threshold)
+            {
+                selectedEnding = new EndingPair(_sisterEnding, 3);
+            }
+            else if (data.cousinsEndingPoints >= _cousinEnding.Threshold)
+            {
+                selectedEnding = new EndingPair(_cousinEnding, 2);
+            }
+            else
+            {
+                selectedEnding = new EndingPair(badEnding, 1);
+            }
         }
 
-        foreach (Ending end in new List<Ending>() { trueEnding, cousinEnding, sisterEnding, badEnding })
+        foreach (Ending end in new List<Ending>() { _trueEnding, _cousinEnding, _sisterEnding, badEnding })
         {
-            if (end == selectedEnding)
+            if (end == selectedEnding.ending)
             {
                 end.Visuals?.SetActive(true);
-                transitionManager._dialogueOnStart = end.Dialog;
+                _transitionManager._interactionOnStart = end.Dialog;
+                SoundManager.MusicManager.PlayMusic(end.MusicTrack);
+                data.SetInteraction(selectedEnding.ending.Dialog.name, true);
+                data.WriteFile();
+                OnEnd?.Invoke(end.Visuals.name);
             }
             else
             {
@@ -64,23 +98,29 @@ public class EndingsManager : MonoBehaviour
 
     public void GoToScene(string nextScene)
     {
-        SceneManager.LoadScene(nextScene);
+        DataManager.SceneLoader.LoadScene(nextScene);
     }
 
     [System.Serializable]
-    private class Ending
+    class Ending
     {
         [Min(0)]
         public int Threshold = 0;
 
-        public string Dialog = string.Empty;
+        public Interactable Dialog = null;
         public GameObject Visuals = null;
+        public MusicTrack MusicTrack = null;
+    }
 
-        public Ending(int threshold, string dialog, GameObject visuals)
+    class EndingPair
+    {
+        public Ending ending;
+        public int index;
+
+        public EndingPair(Ending ending, int index)
         {
-            Threshold = threshold;
-            Dialog = dialog;
-            Visuals = visuals;
+            this.ending = ending;
+            this.index = index;
         }
     }
 }

@@ -13,4 +13,11 @@ public class DisableContinueButton : MonoBehaviour
         bool buttonAvailable = savedLevel == "Summer" || savedLevel == "Fall" || savedLevel == "Winter";
         if (_button != null) _button.interactable = buttonAvailable;
     }
+
+    public void Disable()
+    {
+        var savedLevel = DataManager.Instance.level;
+        bool buttonAvailable = savedLevel == "Summer" || savedLevel == "Fall" || savedLevel == "Winter";
+        if (_button != null) _button.interactable = buttonAvailable;
+    }
 }

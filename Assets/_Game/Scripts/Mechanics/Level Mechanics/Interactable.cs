@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Utility.Audio.Helper;
@@ -38,11 +39,20 @@ namespace Mechanics.Level_Mechanics
         [SerializeField, Tooltip("Points allocated to the True Ending from this interaction")]
         private int _trueEndingPoints = 0;
 
+        [Header("Fade To Black")]
+        [SerializeField] private bool _fadeToBlack = false;
+        [SerializeField] private float _fadeOutTime = 1;
+        [SerializeField] private float _fadeHoldTime = 0.25f;
+        [SerializeField] private float _fadeInTime = 1;
+
         [Header("Other Settings")]
         [SerializeField] private SfxReference _sfxOnInteract = new SfxReference();
 
         public List<MeshRenderer> ConnectedMeshRenderers { get; set; }
         public List<Animator> ConnectedAnimators { get; set; } = new List<Animator>();
+
+        public Action OnInteracted = delegate { };
+        public Action OnInteractionFinish = delegate { };
 
         public int Cost => _cost;
         public int SisterEndPoints => _sisterEndingPoints;
@@ -86,7 +96,9 @@ namespace Mechanics.Level_Mechanics
             if (!Interacted) {
                 if (_cost > 0) {
                     DataManager.Instance.remainingSpiritPoints -= _cost;
+                    DataManager.Instance.totalUsedSpiritPoints += _cost;
                     ModalWindowController.Singleton.PlaySpiritPointSpentSounds(DataManager.Instance.remainingSpiritPoints <= 0);
+                    ModalWindowController.Singleton.ForceUpdateHudSpiritPoints();
                 }
 
                 DataManager.Instance.trueEndingPoints += _trueEndingPoints;
@@ -95,20 +107,46 @@ namespace Mechanics.Level_Mechanics
 
                 DataManager.Instance.SetInteraction(name, true);
 
-                // Debug.Log("Interacted with " + name);
+                //Debug.Log("Interacted with " + name);
             }
             else {
-                // Debug.Log("Second Interact " + name);
+                //Debug.Log("Second Interact " + name);
             }
 
+            if (_fadeToBlack && SimpleFadeToBlack.Singleton != null) {
+                SimpleFadeToBlack.Singleton.StartCoroutine(FadeToBlack());
+            }
+            else {
+                InvokeResponses();
+                _sfxOnInteract.Play();
+                PlayDialogue();
+                OnInteractionFinish?.Invoke();
+            }
+        }
+
+        private IEnumerator FadeToBlack() {
+            yield return SimpleFadeToBlack.Singleton.FadeOut(_fadeOutTime);
+            InvokeResponses();
+            for (float t = 0; t < _fadeHoldTime; t += Time.deltaTime) {
+                yield return null;
+            }
+            _sfxOnInteract.Play();
+            yield return SimpleFadeToBlack.Singleton.FadeIn(_fadeInTime);
+            PlayDialogue();
+            OnInteractionFinish?.Invoke();
+        }
+
+        private void InvokeResponses() {
             for (int i = _interactableResponses.Count - 1; i >= 0; i--) {
                 _interactableResponses[i].Invoke();
             }
+            OnInteracted?.Invoke();
+        }
 
-            _sfxOnInteract.Play();
-
+        private void PlayDialogue() {
             if (!string.IsNullOrEmpty(_dialogeYarnNode)) {
                 try {
+                    DialogueRunner.Stop();
                     DialogueRunner.StartDialogue(_dialogeYarnNode);
                 }
                 catch (Exception) {
@@ -122,17 +160,19 @@ namespace Mechanics.Level_Mechanics
                 }
                 else {
                     var dialogue = _randomDialoguePool[Random.Range(0, _randomDialoguePool.Count)];
-                    try
-                    {
+                    try {
                         DialogueRunner.StartDialogue(dialogue);
                     }
-                    catch (Exception)
-                    {
+                    catch (Exception) {
                         Debug.LogWarning("Invalid Dialogue Yarn Node (" + dialogue + ") connected to " + name);
                         DialogueRunner.Stop();
                     }
                 }
             }
+        }
+
+        public void TestResetAnimators() {
+            ConnectedAnimators.RemoveAll(item => item == null);
         }
     }
 }

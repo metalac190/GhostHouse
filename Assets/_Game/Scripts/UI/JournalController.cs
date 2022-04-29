@@ -1,6 +1,5 @@
-﻿using System;
+﻿using System.Collections;
 using System.Collections.Generic;
-using Mechanics.Feedback;
 using UnityEngine;
 using UnityEngine.UI;
 using Utility.Audio.Helper;
@@ -9,6 +8,8 @@ using Utility.ReadOnly;
 public class JournalController : MonoBehaviour
 {
     [SerializeField] private TabSwitcher _tabSwitcher = null;
+    [SerializeField] private Animator _journalAnimator = null;
+    [SerializeField] private float _journalCloseTime = 0.1f;
 
     [Header("Main Pages")]
     [SerializeField] private List<GameObject> _settingsPages = new List<GameObject>();
@@ -33,13 +34,15 @@ public class JournalController : MonoBehaviour
 
     [Header("Current")]
     [SerializeField, ReadOnly] private PageEnum _currentPage = PageEnum.PauseMenu;
-    [SerializeField, ReadOnly] private int _currentPageNum = 0;
+    [SerializeField, ReadOnly] private int _currentPageNum;
 
     [Header("Sfx")]
     [SerializeField] private SfxReference _journalOpen = new SfxReference(true);
     [SerializeField] private SfxReference _journalClose = new SfxReference(true);
     [SerializeField] private SfxReference _journalPageLeft = new SfxReference(true);
     [SerializeField] private SfxReference _journalPageRight = new SfxReference(true);
+
+    private Coroutine _closeRoutine;
 
     public void OpenSettings(int pageNum = 0) => OpenPage(PageEnum.Settings, pageNum);
     public void OpenPauseMenu(int pageNum = 0) => OpenPage(PageEnum.PauseMenu, pageNum);
@@ -50,8 +53,17 @@ public class JournalController : MonoBehaviour
     public void OpenCharacters(int pageNum = 0) => OpenPage(PageEnum.Characters, pageNum);
     public void OpenEndings(int pageNum = 0) => OpenPage(PageEnum.Endings, pageNum);
 
+    private void SetJournalAnim(string anim) {
+        if (_journalAnimator == null) return;
+        _journalAnimator.ResetTrigger("open");
+        _journalAnimator.ResetTrigger("close");
+        _journalAnimator.SetTrigger(anim);
+    }
+
     public void OpenJournal() {
         _journalOpen.Play();
+        SetJournalAnim("open");
+        if (_closeRoutine != null) StopCoroutine(_closeRoutine);
         OpenPage(PageEnum.PauseMenu);
     }
 
@@ -117,16 +129,22 @@ public class JournalController : MonoBehaviour
 
     // Returns true if Journal should close
     public bool ClosePage() {
-        if (_currentPage == PageEnum.PauseMenu) {
-            if (_quitConfirmation != null && _quitConfirmation.activeSelf) {
-                _quitConfirmation.SetActive(false);
-                return false;
-            }
-            _journalClose.Play();
-            return true;
+        if (_quitConfirmation != null && _quitConfirmation.activeSelf) {
+            _quitConfirmation.SetActive(false);
+            return false;
         }
-        OpenPauseMenu();
-        return false;
+        _journalClose.Play();
+        SetJournalAnim("close");
+        _closeRoutine = StartCoroutine(CloseJournal());
+        return true;
+    }
+
+    private IEnumerator CloseJournal() {
+        for (float t = 0; t < _journalCloseTime; t += Time.deltaTime) {
+            yield return null;
+        }
+        _closeRoutine = null;
+        gameObject.SetActive(false);
     }
 
     private void SetNavigationButtons() {

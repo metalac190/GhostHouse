@@ -72,7 +72,8 @@ public class ModalWindowController : MonoBehaviour
         if (_enabled) {
             if (Input.GetKeyDown(KeyCode.Escape)) {
                 DisableModalWindow();
-            } else if ((Input.GetKeyDown(KeyCode.Return) || Input.GetKeyDown(KeyCode.Space)) && _callback != null) {
+            }
+            else if ((Input.GetKeyDown(KeyCode.Return) || Input.GetKeyDown(KeyCode.Space)) && _callback != null) {
                 _callback.Invoke();
                 _callback = null;
                 DisableModalWindow();
@@ -97,8 +98,8 @@ public class ModalWindowController : MonoBehaviour
         if (canSpendAltPoints && altPointsToSpend > maxPointsToSpend) {
             maxPointsToSpend = altPointsToSpend;
         }
-        for (var i = 0; i < _spiritPoints.Count; i++) {
-            _spiritPoints[i].sprite = canSpendAltPoints ? _spiritPointSpend : _spiritPointCannotSpend;
+        for (var i = 0; i < _altSpiritPoints.Count; i++) {
+            _altSpiritPoints[i].sprite = canSpendAltPoints ? _spiritPointSpend : _spiritPointCannotSpend;
             _altSpiritPoints[i].transform.parent.gameObject.SetActive(i < pointsToSpend);
         }
 
@@ -108,11 +109,11 @@ public class ModalWindowController : MonoBehaviour
         IsometricCameraController.Singleton._interacting = true;
         OnInteractStart?.Invoke();
 
-        _callback = callback;
         if (callback != null) {
             _mainInteractionButton.gameObject.SetActive(true);
             _mainInteractionButton.interactable = canSpendPoints;
             if (canSpendPoints) {
+                _callback = callback;
                 _mainInteractionButton.onClick.AddListener(callback.Invoke);
                 _mainInteractionButton.onClick.AddListener(InteractionCloseWindow);
             }
@@ -147,6 +148,7 @@ public class ModalWindowController : MonoBehaviour
     }
 
     public void DisableModalWindow() => DisableModalWindow(true);
+
     public void DisableModalWindow(bool playSound, bool updateCanPause = true) {
         if (_playerHud != null) _playerHud.UpdateSpiritPoints();
         OnInteractEnd?.Invoke();
@@ -182,7 +184,7 @@ public class ModalWindowController : MonoBehaviour
     public void HideHudOnPause(bool pause) {
         if (_playerHud == null) return;
         if (pause) _playerHud.ClearJournalNotification();
-        _playerHud.gameObject.SetActive(!pause);
+        _playerHud.Hide(pause);
     }
 
     public void PlaySpiritPointSpentSounds(bool usedAll) {
@@ -198,6 +200,13 @@ public class ModalWindowController : MonoBehaviour
 
     public void MainWorked() {
         Debug.Log("Main Interaction Is Done");
+    }
+
+    public void ForceUpdateHudSpiritPoints() {
+        if (!_enabled && _playerHud != null) {
+            _playerHud.TestMaxSpiritPoints(DataManager.Instance.remainingSpiritPoints);
+            _playerHud.UpdateSpiritPoints();
+        }
     }
 
     #endregion

@@ -15,69 +15,60 @@ public class PauseMenu : MonoBehaviour
     //Menu Panels
     [SerializeField] JournalController journal = null;
 
-    private void Awake()
-    {
+    private void Awake() {
         Singleton = this;
     }
 
     // Start is called before the first frame update
-    void Start()
-    {
+    void Start() {
         IsPaused = false;
         UpdatePaused();
     }
 
     // Update is called once per frame
-    void Update()
-    {
+    void Update() {
         if (Input.GetKeyDown(KeyCode.P) || Input.GetKeyDown(KeyCode.Escape)) {
-            if (IsPaused)
-            {
+            if (IsPaused) {
                 ResumeGame();
             }
-            else
-            {
+            else {
                 PauseGame();
             }
-        } else if (IsPaused) {
-            if (Input.GetKeyDown(KeyCode.LeftArrow))
-            {
+        }
+        else if (IsPaused) {
+            if (Input.GetKeyDown(KeyCode.LeftArrow)) {
                 journal.PreviousPage();
             }
-            else if (Input.GetKeyDown(KeyCode.RightArrow))
-            {
+            else if (Input.GetKeyDown(KeyCode.RightArrow)) {
                 journal.NextPage();
             }
         }
     }
 
-    private void UpdatePaused()
-    {
+    private void UpdatePaused() {
         ModalWindowController.Singleton.HideHudOnPause(IsPaused);
         SoundManager.MusicManager.SetPaused(IsPaused);
         if (canPause) {
             IsometricCameraController.Singleton.gamePaused = IsPaused;
         }
         if (journal != null)
-        {
-            journal.gameObject.SetActive(IsPaused);
             if (IsPaused) {
                 // TODO: Open to Journal Notification!
-                journal.OpenJournal();
+                {
+                    journal.gameObject.SetActive(true);
+                    journal.OpenJournal();
+                }
             }
-        }
         PauseUpdated?.Invoke(IsPaused);
     }
 
-    public void PauseGame()
-    {
+    public void PauseGame() {
         if (!canPause || IsPaused) return;
         IsPaused = true;
         UpdatePaused();
     }
 
-    public void ResumeGame()
-    {
+    public void ResumeGame() {
         if (!IsPaused) return;
         if (journal.ClosePage()) {
             IsPaused = false;
@@ -85,8 +76,7 @@ public class PauseMenu : MonoBehaviour
         }
     }
 
-    public void PreventPausing(bool updateCanPause)
-    {
+    public void PreventPausing(bool updateCanPause) {
         // If no longer able to pause but also currently paused, resume
         if (!updateCanPause && IsPaused) {
             ResumeGame();
