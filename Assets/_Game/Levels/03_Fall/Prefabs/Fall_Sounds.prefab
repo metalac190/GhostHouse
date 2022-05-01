@@ -185,7 +185,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6b301a30b7c2f894cb7fdc4d6828f3a8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _enableSounds: 1
+  _debug: 0
   _sfx:
     UseConstant: 0
     Clip: {fileID: 8300000, guid: 2552bb673d1fd5948a00b2e1d7316613, type: 3}
@@ -198,6 +198,7 @@ MonoBehaviour:
     MinValue: 49.64031
     MaxValue: 100
   _delay: 0
+  _isPlaying: 0
 --- !u!1 &3719917103723304826
 GameObject:
   m_ObjectHideFlags: 0
@@ -243,6 +244,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5b55028014c993b4287e41af4ec39d1b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _debug: 0
   _secondaryChance: 0.6
   _characterAudioPool: {fileID: 11400000, guid: c2243cf9098257e48ae420f46d648e7c,
     type: 2}
@@ -261,7 +263,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6b301a30b7c2f894cb7fdc4d6828f3a8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _enableSounds: 1
+  _debug: 0
   _sfx:
     UseConstant: 0
     Clip: {fileID: 0}
@@ -275,6 +277,7 @@ MonoBehaviour:
     MinValue: 0
     MaxValue: 0
   _delay: 0
+  _isPlaying: 0
 --- !u!82 &440119069775441254
 AudioSource:
   m_ObjectHideFlags: 0
@@ -461,7 +464,7 @@ AudioSource:
   MinDistance: 1
   MaxDistance: 500
   Pan2D: 0
-  rolloffMode: 0
+  rolloffMode: 2
   BypassEffects: 0
   BypassListenerEffects: 0
   BypassReverbZones: 0
@@ -470,13 +473,13 @@ AudioSource:
     m_Curve:
     - serializedVersion: 3
       time: 0
-      value: 1
-      inSlope: 0
-      outSlope: 0
+      value: 0.8533325
+      inSlope: -0.24359573
+      outSlope: -0.24359573
       tangentMode: 0
       weightedMode: 0
       inWeight: 0.33333334
-      outWeight: 0.33333334
+      outWeight: 0.19157088
     - serializedVersion: 3
       time: 1
       value: 0
@@ -494,7 +497,7 @@ AudioSource:
     m_Curve:
     - serializedVersion: 3
       time: 0
-      value: 0
+      value: 1
       inSlope: 0
       outSlope: 0
       tangentMode: 0
@@ -546,7 +549,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6b301a30b7c2f894cb7fdc4d6828f3a8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _enableSounds: 1
+  _debug: 0
   _sfx:
     UseConstant: 0
     Clip: {fileID: 0}
@@ -554,11 +557,12 @@ MonoBehaviour:
   _overrideMixer: {fileID: 0}
   _playOnStart: 0
   _waitOnStart: 1
-  _looping: 0
+  _looping: 1
   _loopDelay:
     MinValue: 0
     MaxValue: 0
   _delay: 0
+  _isPlaying: 0
 --- !u!1 &4971093195136971473
 GameObject:
   m_ObjectHideFlags: 0
@@ -603,7 +607,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6b301a30b7c2f894cb7fdc4d6828f3a8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _enableSounds: 1
+  _debug: 0
   _sfx:
     UseConstant: 1
     Clip: {fileID: 0}
@@ -616,6 +620,7 @@ MonoBehaviour:
     MinValue: 0
     MaxValue: 0
   _delay: 0
+  _isPlaying: 0
 --- !u!82 &734164219916949305
 AudioSource:
   m_ObjectHideFlags: 0
@@ -853,7 +858,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6b301a30b7c2f894cb7fdc4d6828f3a8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _enableSounds: 1
+  _debug: 0
   _sfx:
     UseConstant: 0
     Clip: {fileID: 8300000, guid: 2552bb673d1fd5948a00b2e1d7316613, type: 3}
@@ -866,6 +871,7 @@ MonoBehaviour:
     MinValue: 0
     MaxValue: 0
   _delay: 0
+  _isPlaying: 0
 --- !u!1 &8164566991702640439
 GameObject:
   m_ObjectHideFlags: 0
