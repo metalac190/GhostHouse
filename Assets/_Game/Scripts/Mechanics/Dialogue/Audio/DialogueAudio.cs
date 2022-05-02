@@ -46,6 +46,7 @@ namespace Mechanics.Dialog
         SOCharacterAudio _speaker = null;
         List<TimedEffect> _timedEffects = new List<TimedEffect>();
         int _indexOfLastWord = -1;
+        int _currentIndex;
 
         NextClip _nextClip = NextClip.None;
         float _waitLength = 0;
@@ -74,6 +75,7 @@ namespace Mechanics.Dialog
 
             _characterView.OnLineStarted += OnLineStart;
             _characterView.OnCharacterTyped += OnLineUpdate;
+            _characterView.OnLineInterrupted += OnLineInterrupted;
             _characterView.OnLineEnd += OnLineEnd;
             PauseMenu.PauseUpdated += Pause;
         }
@@ -86,6 +88,7 @@ namespace Mechanics.Dialog
             {
                 _characterView.OnLineStarted -= OnLineStart;
                 _characterView.OnCharacterTyped -= OnLineUpdate;
+                _characterView.OnLineInterrupted -= OnLineInterrupted;
                 _characterView.OnLineEnd -= OnLineEnd;
             }
 
@@ -158,6 +161,7 @@ namespace Mechanics.Dialog
         /// <param name="line"> Line of dialogue being played. </param>
         void OnLineStart(Yarn.Unity.LocalizedLine line)
         {
+            if (_debug) Debug.Log("Dialogue Started");
             CanPlay = true;
             _speaker = _characterAudioPool.GetCharacter(line.CharacterName);
             _nextClip = NextClip.Primary;
@@ -171,6 +175,7 @@ namespace Mechanics.Dialog
                 return;
             }
 
+            _currentIndex = 0;
             _indexOfLastWord = line.TextWithoutCharacterName.Text.TrimEnd().LastIndexOf(" ");
             if (_indexOfLastWord < 0)
             {
@@ -204,6 +209,7 @@ namespace Mechanics.Dialog
         /// <param name="index"></param>
         void OnLineUpdate(int index)
         {
+            _currentIndex = index;
             if (index > _indexOfLastWord && _nextClip != NextClip.Quaternary)
             {
                 _nextClip = NextClip.Quaternary;
@@ -213,8 +219,8 @@ namespace Mechanics.Dialog
             for (int i = _timedEffects.Count - 1; i >= 0; i--)
             {
                 var effect = _timedEffects[i];
-                //if (_debug) Debug.Log("Toggleable Sfx Potential: " + index + " vs " + effect.Index);
-                if (index > effect.Index)
+                if (_debug) Debug.Log("Check Toggleable Sfx (" + effect.Identifer + ", index: " + effect.Index +  ") at index " + index);
+                if (index >= effect.Index)
                 {
                     //if (_debug) Debug.Log("Toggleable Sfx Found");
                     // toggle effect
@@ -232,6 +238,36 @@ namespace Mechanics.Dialog
                         else
                         {
                             if (_debug) Debug.Log("Stop Toggleable Sfx: " + effect.Identifer);
+                            toggleable.Controller.Disable();
+                        }
+                    }
+
+                    _timedEffects.RemoveAt(i);
+                }
+            }
+        }
+
+        void OnLineInterrupted()
+        {
+            for (int i = _timedEffects.Count - 1; i >= 0; i--)
+            {
+                var effect = _timedEffects[i];
+                if (_debug) Debug.Log("Check Interrupted Toggleable Sfx (" + effect.Identifer + ") after index " + _currentIndex);
+                if (_currentIndex < effect.Index)
+                {
+                    foreach (var toggleable in _toggleableSfx)
+                    {
+                        if (!toggleable.Identifer.ToLower().Equals(effect.Identifer.ToLower())) continue;
+
+                        if (effect.Active)
+                        {
+                            if (_debug) Debug.Log("Force Start Toggleable Sfx: " + effect.Identifer);
+                            toggleable.Controller.Enable();
+                            toggleable.Controller.Play();
+                        }
+                        else
+                        {
+                            if (_debug) Debug.Log("Force Stop Toggleable Sfx: " + effect.Identifer);
                             toggleable.Controller.Disable();
                         }
                     }

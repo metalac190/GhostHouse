@@ -185,7 +185,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6b301a30b7c2f894cb7fdc4d6828f3a8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _enableSounds: 1
+  _debug: 0
   _sfx:
     UseConstant: 0
     Clip: {fileID: 8300000, guid: 2552bb673d1fd5948a00b2e1d7316613, type: 3}
@@ -198,6 +198,11 @@ MonoBehaviour:
     MinValue: 49.64031
     MaxValue: 100
   _delay: 0
+  _isPlaying: 0
+  _fadeMusicWhenPlaying: 0
+  _musicVolumeTime: 0.5
+  _musicVolumeLevel: 0.5
+  _isMusicFaded: 0
 --- !u!1 &3719917103723304826
 GameObject:
   m_ObjectHideFlags: 0
@@ -243,12 +248,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5b55028014c993b4287e41af4ec39d1b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _debug: 0
   _secondaryChance: 0.6
   _characterAudioPool: {fileID: 11400000, guid: c2243cf9098257e48ae420f46d648e7c,
     type: 2}
   _toggleableSfx:
   - Identifer: spooks
     Controller: {fileID: 5270401202619518642}
+  - Identifer: Clair
+    Controller: {fileID: 8487168025028988683}
 --- !u!114 &7143684981078785395
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -261,7 +269,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6b301a30b7c2f894cb7fdc4d6828f3a8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _enableSounds: 1
+  _debug: 0
   _sfx:
     UseConstant: 0
     Clip: {fileID: 0}
@@ -275,6 +283,11 @@ MonoBehaviour:
     MinValue: 0
     MaxValue: 0
   _delay: 0
+  _isPlaying: 0
+  _fadeMusicWhenPlaying: 0
+  _musicVolumeTime: 0.5
+  _musicVolumeLevel: 0.5
+  _isMusicFaded: 0
 --- !u!82 &440119069775441254
 AudioSource:
   m_ObjectHideFlags: 0
@@ -403,6 +416,7 @@ Transform:
   - {fileID: 6574410114058747202}
   - {fileID: 2098600715958031099}
   - {fileID: 4897348642419866717}
+  - {fileID: 5917403783448419270}
   m_Father: {fileID: 2013633617981662356}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -461,7 +475,7 @@ AudioSource:
   MinDistance: 1
   MaxDistance: 500
   Pan2D: 0
-  rolloffMode: 0
+  rolloffMode: 2
   BypassEffects: 0
   BypassListenerEffects: 0
   BypassReverbZones: 0
@@ -470,13 +484,13 @@ AudioSource:
     m_Curve:
     - serializedVersion: 3
       time: 0
-      value: 1
-      inSlope: 0
-      outSlope: 0
+      value: 0.8533325
+      inSlope: -0.24359573
+      outSlope: -0.24359573
       tangentMode: 0
       weightedMode: 0
       inWeight: 0.33333334
-      outWeight: 0.33333334
+      outWeight: 0.19157088
     - serializedVersion: 3
       time: 1
       value: 0
@@ -494,7 +508,7 @@ AudioSource:
     m_Curve:
     - serializedVersion: 3
       time: 0
-      value: 0
+      value: 1
       inSlope: 0
       outSlope: 0
       tangentMode: 0
@@ -546,7 +560,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6b301a30b7c2f894cb7fdc4d6828f3a8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _enableSounds: 1
+  _debug: 0
   _sfx:
     UseConstant: 0
     Clip: {fileID: 0}
@@ -554,11 +568,16 @@ MonoBehaviour:
   _overrideMixer: {fileID: 0}
   _playOnStart: 0
   _waitOnStart: 1
-  _looping: 0
+  _looping: 1
   _loopDelay:
     MinValue: 0
     MaxValue: 0
   _delay: 0
+  _isPlaying: 0
+  _fadeMusicWhenPlaying: 0
+  _musicVolumeTime: 0.5
+  _musicVolumeLevel: 0.5
+  _isMusicFaded: 0
 --- !u!1 &4971093195136971473
 GameObject:
   m_ObjectHideFlags: 0
@@ -603,7 +622,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6b301a30b7c2f894cb7fdc4d6828f3a8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _enableSounds: 1
+  _debug: 0
   _sfx:
     UseConstant: 1
     Clip: {fileID: 0}
@@ -616,6 +635,11 @@ MonoBehaviour:
     MinValue: 0
     MaxValue: 0
   _delay: 0
+  _isPlaying: 0
+  _fadeMusicWhenPlaying: 0
+  _musicVolumeTime: 0.5
+  _musicVolumeLevel: 0.5
+  _isMusicFaded: 0
 --- !u!82 &734164219916949305
 AudioSource:
   m_ObjectHideFlags: 0
@@ -853,7 +877,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6b301a30b7c2f894cb7fdc4d6828f3a8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _enableSounds: 1
+  _debug: 0
   _sfx:
     UseConstant: 0
     Clip: {fileID: 8300000, guid: 2552bb673d1fd5948a00b2e1d7316613, type: 3}
@@ -866,6 +890,169 @@ MonoBehaviour:
     MinValue: 0
     MaxValue: 0
   _delay: 0
+  _isPlaying: 0
+  _fadeMusicWhenPlaying: 0
+  _musicVolumeTime: 0.5
+  _musicVolumeLevel: 0.5
+  _isMusicFaded: 0
+--- !u!1 &7207280591739152451
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5917403783448419270}
+  - component: {fileID: 7281206836917989252}
+  - component: {fileID: 8487168025028988683}
+  m_Layer: 0
+  m_Name: ClarinetMusic
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5917403783448419270
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7207280591739152451}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 8946112904226502429}
+  m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!82 &7281206836917989252
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7207280591739152451}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 0}
+  m_PlayOnAwake: 1
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+--- !u!114 &8487168025028988683
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7207280591739152451}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6b301a30b7c2f894cb7fdc4d6828f3a8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _debug: 0
+  _sfx:
+    UseConstant: 0
+    Clip: {fileID: 0}
+    Base: {fileID: 11400000, guid: c9d591c8a478abf43ae5dd7a4079b43a, type: 2}
+  _overrideMixer: {fileID: 0}
+  _playOnStart: 0
+  _waitOnStart: 1
+  _looping: 0
+  _loopDelay:
+    MinValue: 0
+    MaxValue: 0
+  _delay: 0
+  _isPlaying: 0
+  _fadeMusicWhenPlaying: 1
+  _musicVolumeTime: 2.5
+  _musicVolumeLevel: 0
+  _isMusicFaded: 0
 --- !u!1 &8164566991702640439
 GameObject:
   m_ObjectHideFlags: 0
