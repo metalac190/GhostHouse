@@ -3,6 +3,7 @@ using UnityEngine;
 using UnityEngine.Audio;
 using Utility.Audio.Controllers.Base;
 using Utility.Audio.Helper;
+using Utility.Audio.Managers;
 using Utility.Buttons;
 using Utility.RangedFloats;
 using Utility.ReadOnly;
@@ -20,6 +21,12 @@ namespace Utility.Audio.Controllers
         [SerializeField, MinMaxRange(0, 100)] private RangedFloat _loopDelay = new RangedFloat(0, 0);
         [SerializeField, ReadOnly] private float _delay;
         [SerializeField, ReadOnly] private bool _isPlaying;
+
+        [Header("Fade Music")]
+        [SerializeField] private bool _fadeMusicWhenPlaying = false;
+        [SerializeField] private float _musicVolumeTime = 0.5f;
+        [SerializeField, Range(0f, 1f)] private float _musicVolumeLevel = 0.5f;
+        [SerializeField, ReadOnly] private bool _isMusicFaded;
 
         private bool _checkLoop;
         private bool _areSoundsEnabled;
@@ -41,6 +48,16 @@ namespace Utility.Audio.Controllers
             _isPlaying = Source.isPlaying;
             if (_checkLoop && !Source.isPlaying) {
                 Delay();
+            }
+            if (_isPlaying && _fadeMusicWhenPlaying && !_isMusicFaded) {
+                // Start faded music
+                _isMusicFaded = true;
+                SoundManager.MusicManager.SetVolumeMultiplierFade(_musicVolumeLevel, _musicVolumeTime);
+            }
+            if (_isMusicFaded && !_isPlaying) {
+                // Stop faded music
+                _isMusicFaded = false;
+                SoundManager.MusicManager.SetVolumeMultiplierFade(1, _musicVolumeTime);
             }
         }
 
