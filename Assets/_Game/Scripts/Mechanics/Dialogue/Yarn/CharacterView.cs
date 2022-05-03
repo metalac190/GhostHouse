@@ -4,6 +4,7 @@ using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
 using System.Linq;
+using Yarn.Unity;
 
 namespace Mechanics.Dialog
 {
@@ -32,6 +33,8 @@ namespace Mechanics.Dialog
         /// Fires when at the end of a line of dialogue if <see cref="_useTypewriterEffect"/> is true.
         /// </summary>
         public event Action OnLineEnd = null;
+
+        public event Action OnLineInterrupted; 
         #endregion
 
         #region serialized variables
@@ -170,6 +173,7 @@ namespace Mechanics.Dialog
                 case Yarn.Unity.LineStatus.Interrupted:
                     // We have been interrupted. Set our interruption flag,
                     // so that any animations get skipped.
+                    OnLineInterrupted?.Invoke();
                     _interruptionFlag.Set();
                     break;
                 case Yarn.Unity.LineStatus.FinishedPresenting:
@@ -411,8 +415,7 @@ namespace Mechanics.Dialog
             OnContinueClicked();
         }
 
-        public void OnContinueClicked()
-        {
+        public void OnContinueClicked() {
             if (_currentLine == null)
             {
                 // We're not actually displaying a line. No-op.

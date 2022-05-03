@@ -1,12 +1,16 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 using TMPro;
 using UnityEngine;
 using System.Collections;
+using Game;
+using UnityEngine.SceneManagement;
 
 public class DataManagerDebug : MonoBehaviour
 {
     [SerializeField] private TextMeshProUGUI _text = null;
     [SerializeField] private GameObject _parent = null;
+    [SerializeField] private Season _season = Season.None;
     [SerializeField] private TextMeshProUGUI _timerMain = null;
     [SerializeField] private TextMeshProUGUI _timerMil = null;
 
@@ -19,19 +23,34 @@ public class DataManagerDebug : MonoBehaviour
     private float accum = 0.0f;
     private int frames = 0;
     private float timeleft;
-    private float startTime;
+    private float currentTime;
+    private float holdTime = 0;
+
+    private void Awake()
+    {
+        if (_season == Season.End)
+        {
+            var endManager = FindObjectOfType<EndingsManager>();
+            if (endManager != null)
+            {
+                endManager.OnEnd += SetEndTime;
+            }
+        }
+    }
 
     private void Start() {
-        startTime = Time.time;
+        currentTime = 0;
         SetDebugActive(_debugActive);
     }
 
     private void OnEnable() {
         Application.logMessageReceived += Log;
+        TransitionManager.OnLevelComplete += SaveSplit;
     }
 
     private void OnDisable() {
         Application.logMessageReceived -= Log;
+        TransitionManager.OnLevelComplete -= SaveSplit;
     }
 
     private void OnGUI() {
@@ -42,6 +61,18 @@ public class DataManagerDebug : MonoBehaviour
     }
 
     private void Update() {
+        currentTime += Time.deltaTime;
+        if (holdTime == 0)
+        {
+            _timerMain.text = TimeMain(currentTime);
+            _timerMil.text = TimeMil(currentTime);
+        }
+        else
+        {
+            _timerMain.text = TimeMain(holdTime);
+            _timerMil.text = TimeMil(holdTime);
+        }
+
         if (Input.GetKeyDown(KeyCode.End)) {
             SetDebugActive(!_debugActive);
         }
@@ -54,19 +85,27 @@ public class DataManagerDebug : MonoBehaviour
             debug += "True: " + DataManager.Instance.trueEndingPoints + "\n";
             debug += "Sisters: " + DataManager.Instance.sistersEndingPoints + "\n";
             debug += "Cousins: " + DataManager.Instance.cousinsEndingPoints + "\n";
+            debug += "\n<b><u>Current Run</u></b>\n";
+            debug += "Spring: " + TimeTotal(DataManager.Instance.SpringSplit) + "\n";
+            debug += "Summer: " + TimeTotal(DataManager.Instance.SummerSplit) + "\n";
+            debug += "Fall: " + TimeTotal(DataManager.Instance.FallSplit) + "\n";
+            debug += "Winter: " + TimeTotal(DataManager.Instance.WinterSplit) + "\n";
+            debug += "Total: " + TimeTotal(DataManager.Instance.SplitTotal) + "\n";
+            debug += "\n<b><u>Best Endings</u></b>\n";
+            debug += "True: " + TimeTotal(DataManager.Instance.TrueEndBest) + "\n";
+            debug += "Sister: " + TimeTotal(DataManager.Instance.SisterEndBest) + "\n";
+            debug += "Cousin: " + TimeTotal(DataManager.Instance.CousinEndBest) + "\n";
+            debug += "Bad: " + TimeTotal(DataManager.Instance.BadEndBest) + "\n";
+            debug += "\n<b><u>Best Splits</u></b>\n";
+            debug += "Best Spring: " + TimeTotal(DataManager.Instance.SpringSplitBest) + "\n";
+            debug += "Best Summer: " + TimeTotal(DataManager.Instance.SummerSplitBest) + "\n";
+            debug += "Best Fall: " + TimeTotal(DataManager.Instance.FallSplitBest) + "\n";
+            debug += "Best Winter: " + TimeTotal(DataManager.Instance.WinterSplitBest) + "\n";
             debug += "\n<b><u>Interactions</u></b>\n";
             debug += DataManager.Instance.interactions.Aggregate("", (current, interaction) => current + (interaction.Key + " - " + interaction.Value + "\n"));
             debug += "\n<b><u>Journal Unlocks</u></b>\n";
             debug += DataManager.Instance.journalUnlocks.Aggregate("", (current, interaction) => current + (interaction.Key + " - " + interaction.Value + "\n"));
             _text.text = debug;
-
-            var currentTime = Time.time - startTime;
-            float hour = Mathf.FloorToInt(currentTime / 3600);
-            float min = Mathf.FloorToInt(currentTime / 60);
-            float sec = Mathf.FloorToInt(currentTime % 60);
-            _timerMain.text = $"{hour:0}:{min:00}:{sec:00}";
-            float ms = (currentTime % 1) * 1000;
-            _timerMil.text = $".{ms:000}";
         }
         timeleft -= Time.deltaTime;
         accum += Time.timeScale / Time.deltaTime;
@@ -78,6 +117,47 @@ public class DataManagerDebug : MonoBehaviour
             accum = 0.0f;
             frames = 0;
         }
+    }
+
+    private void SetEndTime(string end)
+    {
+        holdTime = DataManager.Instance.SplitTotal;
+        end = end.ToLower();
+        if (end.Contains("true"))
+        {
+            DataManager.Instance.SetTrueEnd(holdTime);
+        } else if (end.Contains("sister"))
+        {
+            DataManager.Instance.SetSisterEnd(holdTime);
+        }
+        else if(end.Contains("cousin"))
+        {
+            DataManager.Instance.SetCousinEnd(holdTime);
+        }
+        else if(end.Contains("bad"))
+        {
+            DataManager.Instance.SetBadEnd(holdTime);
+        }
+    }
+
+    private static string TimeTotal(float time) {
+        return TimeMain(time) + TimeMil(time);
+    }
+
+    private static string TimeMain(float time) {
+        float hour = Mathf.FloorToInt(time / 3600);
+        float min = Mathf.FloorToInt(time / 60);
+        float sec = Mathf.FloorToInt(time % 60);
+        return $"{hour:0}:{min:00}:{sec:00}";
+    }
+
+    private static string TimeMil(float time) {
+        float ms = (time % 1) * 1000;
+        return $".{ms:000}";
+    }
+
+    private void SaveSplit() {
+        DataManager.Instance.SetSplit(_season, currentTime);
     }
 
     public void GiveSpiritPoint() {

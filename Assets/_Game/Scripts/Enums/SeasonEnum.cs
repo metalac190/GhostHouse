@@ -5,5 +5,6 @@
     Summer,
     Winter,
     Fall,
-    Universal
+    Universal,
+    End
 }

@@ -455,6 +455,7 @@ public class DataManager : MonoBehaviour
         trueEndingPoints = 0;
         sistersEndingPoints = 0;
         cousinsEndingPoints = 0;
+        ResetSplits();
         WriteFile();
     }
 
@@ -462,5 +463,104 @@ public class DataManager : MonoBehaviour
     public bool SaveFileExists()
     {
         return System.IO.File.Exists(filePath);
+    }
+
+
+
+
+
+    // Speed run splits using player prefs to not break the data manager :)
+    public float SpringSplit { get; set; }
+    public float SpringSplitBest => PlayerPrefs.GetFloat("SpringSplit");
+    public float SummerSplit { get; set; }
+    public float SummerSplitBest => PlayerPrefs.GetFloat("SummerSplit");
+    public float FallSplit { get; set; }
+    public float FallSplitBest => PlayerPrefs.GetFloat("FallSplit");
+    public float WinterSplit { get; set; }
+    public float WinterSplitBest => PlayerPrefs.GetFloat("WinterSplit");
+    public float SplitTotal => SpringSplit + SummerSplit + FallSplit + WinterSplit;
+    public float SplitTotalBest => SpringSplitBest + SummerSplitBest + FallSplitBest + WinterSplitBest;
+    public float TrueEndBest => PlayerPrefs.GetFloat("TrueEndTime");
+    public float SisterEndBest => PlayerPrefs.GetFloat("SisterEndTime");
+    public float CousinEndBest => PlayerPrefs.GetFloat("CousinEndTime");
+    public float BadEndBest => PlayerPrefs.GetFloat("BadEndTime");
+
+    private static void ResetSplits() {
+        PlayerPrefs.SetFloat("SpringSplit", 0);
+        PlayerPrefs.SetFloat("SummerSplit", 0);
+        PlayerPrefs.SetFloat("FallSplit", 0);
+        PlayerPrefs.SetFloat("WinterSplit", 0);
+
+        PlayerPrefs.SetFloat("TrueEndTime", 0);
+        PlayerPrefs.SetFloat("SisterEndTime", 0);
+        PlayerPrefs.SetFloat("CousinEndTime", 0);
+        PlayerPrefs.SetFloat("BadEndTime", 0);
+    }
+
+    public void SetSplit(Season season, float split)
+    {
+        switch (season)
+        {
+            case Season.Spring:
+                SpringSplit = split;
+                if (split < SpringSplitBest || SpringSplitBest == 0)
+                {
+                    PlayerPrefs.SetFloat("SpringSplit", split);
+                }
+                break;
+            case Season.Summer:
+                SummerSplit = split;
+                if (split < SummerSplitBest || SummerSplitBest == 0)
+                {
+                    PlayerPrefs.SetFloat("SummerSplit", split);
+                }
+                break;
+            case Season.Fall:
+                FallSplit = split;
+                if (split < FallSplitBest || FallSplitBest == 0)
+                {
+                    PlayerPrefs.SetFloat("FallSplit", split);
+                }
+                break;
+            case Season.Winter:
+                WinterSplit = split;
+                if (split < WinterSplitBest || WinterSplitBest == 0)
+                {
+                    PlayerPrefs.SetFloat("WinterSplit", split);
+                }
+                break;
+        }
+    }
+
+    public void SetTrueEnd(float time)
+    {
+        if (time < TrueEndBest || TrueEndBest == 0)
+        {
+            PlayerPrefs.SetFloat("TrueEndTime", time);
+        }
+    }
+
+    public void SetSisterEnd(float time)
+    {
+        if (time < SisterEndBest || SisterEndBest == 0)
+        {
+            PlayerPrefs.SetFloat("SisterEndTime", time);
+        }
+    }
+
+    public void SetCousinEnd(float time)
+    {
+        if (time < CousinEndBest || CousinEndBest == 0)
+        {
+            PlayerPrefs.SetFloat("CousinEndTime", time);
+        }
+    }
+
+    public void SetBadEnd(float time)
+    {
+        if (time < BadEndBest || BadEndBest == 0)
+        {
+            PlayerPrefs.SetFloat("BadEndTime", time);
+        }
     }
 }
